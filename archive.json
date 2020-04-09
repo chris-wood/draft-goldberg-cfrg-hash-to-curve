@@ -1,6 +1,6 @@
 {
   "magic": "B8n2c@e8kvfx",
-  "timestamp": "2020-04-08T22:51:40.859485+00:00",
+  "timestamp": "2020-04-09T15:57:06.213253+00:00",
   "repo": "cfrg/draft-irtf-cfrg-hash-to-curve",
   "labels": [
     {
@@ -4063,9 +4063,9 @@
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
-      "body": "Right now we have only the P-256, curve/edwards25519, and curve/edwards448.\r\n\r\nTODO: add others\r\n\r\n- [x] P-384\r\n- [x] P-521\r\n- [x] SECP256k1\r\n- [x] BLS12-381 G1\r\n- [ ] BLS12-381 G2\r\n- [ ] SSWU for p = 5 mod 8 --- e.g., for M-221\r\n\r\nThe potential optimizations for Shallue-van de Woestijne are pretty minimal, so I am assuming that for all of the above we would give straight-line impls only of Simplified SWU. Glad to consider doing otherwise, though.",
+      "body": "Right now we have only the P-256, curve/edwards25519, and curve/edwards448.\r\n\r\nTODO: add others\r\n\r\n- [x] P-384\r\n- [x] P-521\r\n- [x] SECP256k1\r\n- [x] BLS12-381 G1\r\n- [ ] BLS12-381 G2\r\n- [ ] SSWU for p = 5 mod 8 --- no specific curves in mind, but in principle they could exist (e.g., M-221 converted to short Weierstrass)\r\n\r\nThe potential optimizations for Shallue-van de Woestijne are pretty minimal, so I am assuming that for all of the above we would give straight-line impls only of Simplified SWU. Glad to consider doing otherwise, though.",
       "createdAt": "2019-10-27T06:13:12Z",
-      "updatedAt": "2020-04-08T18:56:47Z",
+      "updatedAt": "2020-04-09T15:41:14Z",
       "closedAt": null,
       "comments": [
         {
@@ -5261,7 +5261,7 @@
       "labels": [],
       "body": "Congrats for the amazing work that has been and keeps being made on this document!\r\n\r\nJust a general observation: do so many suites have to be defined?\r\n\r\n`edwards25519_XMD:SHA-256_ELL2_RO_` is identical to `edwards25519_XMD:SHA_512_ELL2_RO_`, except that `H` is SHA-256 instead of SHA-512. Are both really needed?\r\n\r\nFor the same curve, should a new protocol opt for the suite using SVDW or its counterpart using Simplified SWU? It might be useful for the document to make a recommendation.\r\n\r\nIn order to facilitate interoperability, increase code reuse and provide guidance to protocol designers, would it make sense to slightly reduce the list, or make one recommendation per curve?\r\n\r\nPlease apologize if this has been discussed before. ",
       "createdAt": "2020-03-30T21:30:08Z",
-      "updatedAt": "2020-04-03T07:52:51Z",
+      "updatedAt": "2020-04-09T01:12:16Z",
       "closedAt": null,
       "comments": [
         {
@@ -5284,6 +5284,13 @@
           "body": "> Or maybe, \"for best performance\" vs \"for simplicity of implementation\"?\r\n> For a library [...]  it makes sense to just support SvdW.  But for a protocol, it makes sense to pick SSWU.\r\n\r\nLibraries making a choice, and protocols making a different choice is a thing a standard can help avoid.\r\n\r\nRecommendations cannot be optimal for every case. The proposed suites may not be optimal anyway (ex: 384 vs 255 bit input for a 2^255-19 field size), so we can't prevent protocol designers from going off track if they really want to.\r\n\r\nBut having one recommended suite per curve can greatly limit fragmentation, and protocols that cannot be implemented due to incompatible libraries.",
           "createdAt": "2020-04-03T07:52:51Z",
           "updatedAt": "2020-04-03T07:52:51Z"
+        },
+        {
+          "author": "davidben",
+          "authorAssociation": "NONE",
+          "body": "As a library author who recently wrote an implementation, please default to [removing options](https://www.imperialviolet.org/2016/05/16/agility.html). The job of a specification is to make decisions so we have common primitives. Every choice point in the spec is a failure to make a decision. Sometimes that's necessary, but it usually isn't. Where it is, definitely include a recommended one, but that's a baseline expectation. The preferred option is to not define the extra ones in the first place.\r\n\r\nThe worst outcome would be for different systems to make different choices and implementations are forced to support many variations to cover them all. We should pick as few as possible so everyone's very limited cryptographic testing and implementation efforts can be concentrated on the things that matter.",
+          "createdAt": "2020-04-09T01:12:16Z",
+          "updatedAt": "2020-04-09T01:12:16Z"
         }
       ]
     },
@@ -5299,7 +5306,7 @@
       "labels": [],
       "body": "As pointed out by David Benjamin, Step 6 of expand_message_xmd is not injective! Here's two inputs that will produce the same output (b_0 = H(Z_pad + [0, 16, 0, 4, 0, 16, 0, 0])): \r\n\r\nexpand_message_xmd(msg=[], DST=[0, 16, 0, 0], len_in_bytes=16)\r\nexpand_message_xmd(msg=[0, 16, 0, 4], DST=[], len_in_bytes=16) \r\n\r\nWe should probably address this, though it's not clear what is the best way.",
       "createdAt": "2020-04-07T20:47:49Z",
-      "updatedAt": "2020-04-08T18:09:49Z",
+      "updatedAt": "2020-04-09T00:48:01Z",
       "closedAt": null,
       "comments": [
         {
@@ -5319,9 +5326,44 @@
         {
           "author": "davidben",
           "authorAssociation": "NONE",
-          "body": "`expand_message_xof` seems to have the same issue in the computation of `msg_prime`. I think the same fix to `DST_prime` addresses it.\r\n\r\nIt probably doesn't matter here, but this construction also has inconsistent block alignment of `msg` in `expand_message_xmd`. It sometimes follows a block-size prefix and sometimes a hash-sized prefix. (But it is injective with the `DST_prime` fix to align it all at the end rather than the start.) For comparison, HMAC (and thus HKDF-Extract) and the AD constructions in [AES-GCM](https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-38d.pdf), [AES-GCM-SIV](https://tools.ietf.org/html/rfc8452#section-4), and [ChaCha20-Poly1305](https://tools.ietf.org/html/rfc7539#section-2.8) are all sensitive to the block size, with the AEADs even padding AD and ciphertext up so they both consistently start at block boundaries. (Then they add both lengths to be injective.) This is handy if, e.g., you've got `iovec`s floating around.\r\n\r\nBut this probably doesn't matter here. Fiddling with unaligned or partial blocks is negligible compared to the cost of field operations and presumably you aren't hashing bulk data.",
+          "body": "`expand_message_xof` seems to have the same issue in the computation of `msg_prime`. I think the same fix to `DST_prime` addresses it.\r\n\r\n~~It probably doesn't matter here, but this construction also has inconsistent block alignment of `msg` in `expand_message_xmd`. It sometimes follows a block-size prefix and sometimes a hash-sized prefix. (But it is injective with the `DST_prime` fix to align it all at the end rather than the start.) For comparison, HMAC (and thus HKDF-Extract) and the AD constructions in [AES-GCM](https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-38d.pdf), [AES-GCM-SIV](https://tools.ietf.org/html/rfc8452#section-4), and [ChaCha20-Poly1305](https://tools.ietf.org/html/rfc7539#section-2.8) are all sensitive to the block size, with the AEADs even padding AD and ciphertext up so they both consistently start at block boundaries. (Then they add both lengths to be injective.) This is handy if, e.g., you've got `iovec`s floating around.~~\r\n\r\n~~But this probably doesn't matter here. Fiddling with unaligned or partial blocks is negligible compared to the cost of field operations and presumably you aren't hashing bulk data.~~\r\n\r\n(Ignore this; I missed that `msg` was not in the `b_i` calculations, only `b_0`.)",
           "createdAt": "2020-04-08T18:07:48Z",
-          "updatedAt": "2020-04-08T18:09:49Z"
+          "updatedAt": "2020-04-09T00:48:01Z"
+        },
+        {
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> (Out of curiosity, any reason not to use HKDF? Different requirements?)\r\n\r\nThis is a great question. We discussed at some length in #202.\r\n\r\n> Does `DST_prime` need to be in a matching location between `b_0` and `b_i` computations?\r\n\r\nNo, the alignment doesn't really matter per the CDMP05 analysis.\r\n\r\n> To that end, if we're lining everything up at the tail end, I think it'd work to just redefine `DST_prime` to `DST || I2OSP(len(DST), 1)`.\r\n\r\nThis is a great suggestion! Thank you.",
+          "createdAt": "2020-04-09T00:27:34Z",
+          "updatedAt": "2020-04-09T00:32:04Z"
+        },
+        {
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> `H(Z_pad || l_i_b_str || I2OSP(0, 1) || DST_prime || msg)`?\r\n\r\nUnfortunately, this doesn't work. We're enforcing domain separation with a trailing DST, and this would break that.",
+          "createdAt": "2020-04-09T00:32:43Z",
+          "updatedAt": "2020-04-09T00:32:43Z"
+        },
+        {
+          "author": "davidben",
+          "authorAssociation": "NONE",
+          "body": "(I clearly didn't phrase \"Does `DST_prime` need to be in a matching location between `b_0` and `b_i` computations?\" very well. That was confirming whether DST needed to be consistently trailing, because the https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/issues/236#issuecomment-610813374 suggestion broke this properly. Sounds like the answer is yes.)",
+          "createdAt": "2020-04-09T00:40:35Z",
+          "updatedAt": "2020-04-09T00:40:35Z"
+        },
+        {
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> It probably doesn't matter here, but this construction also has inconsistent block alignment of `msg` in `expand_message_xmd`\r\n\r\nWait, I don't get it. `msg` is only an input for the b_0 computation, and it's always exactly one block offset from the start, no? Do you mean block offset from the end? Or are you talking about the offset of b_0 in the b_i's? Sorry to be slow...\r\n\r\nIt occurs to me: we would have avoided the injectivity issue entirely if we'd encoded the length of the message in the hash. I suppose we might still consider doing this if we change the input for b_0 anyway (though we'd then have to decide what the longest `msg` we can support is... I worry that the embedded folks might complain if we add another 8 bytes to the input...)",
+          "createdAt": "2020-04-09T00:44:53Z",
+          "updatedAt": "2020-04-09T00:44:53Z"
+        },
+        {
+          "author": "davidben",
+          "authorAssociation": "NONE",
+          "body": "> Wait, I don't get it. msg is only an input for the b_0 computation, and it's always exactly one block offset from the start, no? Do you mean block offset from the end? Or are you talking about the offset of b_0 in the b_i's? Sorry to be slow...\r\n\r\nEr, yes. Ignore me, I can't read and missed that b_i's don't have msg in them.",
+          "createdAt": "2020-04-09T00:47:08Z",
+          "updatedAt": "2020-04-09T00:47:08Z"
         }
       ]
     },
@@ -23732,7 +23774,7 @@
       "labels": [],
       "body": "Changes:\r\n - L parameter was set to L=96, the correct value is 98.\r\n\r\nFixes #237 ",
       "createdAt": "2020-04-08T22:40:37Z",
-      "updatedAt": "2020-04-08T22:51:20Z",
+      "updatedAt": "2020-04-08T22:52:12Z",
       "closedAt": "2020-04-08T22:51:14Z",
       "mergedAt": "2020-04-08T22:51:14Z",
       "mergedBy": "chris-wood",
@@ -23743,6 +23785,13 @@
           "body": "It needs to update the test vectors in the main document.",
           "createdAt": "2020-04-08T22:51:20Z",
           "updatedAt": "2020-04-08T22:51:20Z"
+        },
+        {
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "body": "We can do that in a separate PR!",
+          "createdAt": "2020-04-08T22:52:12Z",
+          "updatedAt": "2020-04-08T22:52:12Z"
         }
       ],
       "reviews": [
@@ -23757,6 +23806,39 @@
           "body": "",
           "createdAt": "2020-04-08T22:51:08Z",
           "updatedAt": "2020-04-08T22:51:08Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 239,
+      "id": "MDExOlB1bGxSZXF1ZXN0NDAxMTMzNDE5",
+      "title": "Updates test vectors in the main document.",
+      "url": "https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/pull/239",
+      "state": "MERGED",
+      "author": "armfazh",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Updates test vectors in the main document after correcting the L parameter in P521 suites.",
+      "createdAt": "2020-04-08T23:42:43Z",
+      "updatedAt": "2020-04-09T15:56:39Z",
+      "closedAt": "2020-04-09T15:56:39Z",
+      "mergedAt": "2020-04-09T15:56:39Z",
+      "mergedBy": "chris-wood",
+      "comments": [],
+      "reviews": [
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzkwOTIyODk1",
+          "commit": {
+            "abbreviatedOid": "18b383d"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2020-04-09T15:56:33Z",
+          "updatedAt": "2020-04-09T15:56:33Z",
           "comments": []
         }
       ]
