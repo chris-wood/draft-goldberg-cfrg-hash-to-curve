@@ -5,14 +5,14 @@
 CFRG                                                    A. Faz-Hernandez
 Internet-Draft                                                Cloudflare
 Intended status: Informational                                  S. Scott
-Expires: 11 October 2020                                    Cornell Tech
+Expires: 18 October 2020                                    Cornell Tech
                                                              N. Sullivan
                                                               Cloudflare
                                                               R.S. Wahby
                                                      Stanford University
                                                                C.A. Wood
                                                               Apple Inc.
-                                                            9 April 2020
+                                                           16 April 2020
 
 
                        Hashing to Elliptic Curves
@@ -38,7 +38,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 11 October 2020.
+   This Internet-Draft will expire on 18 October 2020.
 
 Copyright Notice
 
@@ -53,7 +53,7 @@ Copyright Notice
 
 
 
-Faz-Hernandez, et al.    Expires 11 October 2020                [Page 1]
+Faz-Hernandez, et al.    Expires 18 October 2020                [Page 1]
 
 Internet-Draft                hash-to-curve                   April 2020
 
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Faz-Hernandez, et al.    Expires 11 October 2020                [Page 2]
+Faz-Hernandez, et al.    Expires 18 October 2020                [Page 2]
 
 Internet-Draft                hash-to-curve                   April 2020
 
@@ -153,75 +153,75 @@ Internet-Draft                hash-to-curve                   April 2020
      E.1.  Finding Z for the Shallue and van de Woestijne map  . . .  78
      E.2.  Finding Z for Simplified SWU  . . . . . . . . . . . . . .  78
      E.3.  Finding Z for Elligator 2 . . . . . . . . . . . . . . . .  79
-   Appendix F.  sqrt functions . . . . . . . . . . . . . . . . . . .  79
+   Appendix F.  sqrt and is_square functions . . . . . . . . . . . .  79
      F.1.  q = 3 (mod 4) . . . . . . . . . . . . . . . . . . . . . .  80
      F.2.  q = 5 (mod 8) . . . . . . . . . . . . . . . . . . . . . .  80
      F.3.  q = 9 (mod 16)  . . . . . . . . . . . . . . . . . . . . .  80
      F.4.  Constant-time Tonelli-Shanks algorithm  . . . . . . . . .  81
-   Appendix G.  Test vectors . . . . . . . . . . . . . . . . . . . .  82
-     G.1.  NIST P-256  . . . . . . . . . . . . . . . . . . . . . . .  82
-       G.1.1.  P256_XMD:SHA-256_SSWU_RO_ . . . . . . . . . . . . . .  82
-       G.1.2.  P256_XMD:SHA-256_SSWU_NU_ . . . . . . . . . . . . . .  84
+     F.5.  is_square for F = GF(p^2) . . . . . . . . . . . . . . . .  82
+   Appendix G.  Test vectors . . . . . . . . . . . . . . . . . . . .  83
+     G.1.  NIST P-256  . . . . . . . . . . . . . . . . . . . . . . .  83
+       G.1.1.  P256_XMD:SHA-256_SSWU_RO_ . . . . . . . . . . . . . .  83
 
 
 
-Faz-Hernandez, et al.    Expires 11 October 2020                [Page 3]
+Faz-Hernandez, et al.    Expires 18 October 2020                [Page 3]
 
 Internet-Draft                hash-to-curve                   April 2020
 
 
+       G.1.2.  P256_XMD:SHA-256_SSWU_NU_ . . . . . . . . . . . . . .  85
        G.1.3.  P256_XMD:SHA-256_SVDW_RO_ . . . . . . . . . . . . . .  86
-       G.1.4.  P256_XMD:SHA-256_SVDW_NU_ . . . . . . . . . . . . . .  87
+       G.1.4.  P256_XMD:SHA-256_SVDW_NU_ . . . . . . . . . . . . . .  88
      G.2.  NIST P-384  . . . . . . . . . . . . . . . . . . . . . . .  89
        G.2.1.  P384_XMD:SHA-512_SSWU_RO_ . . . . . . . . . . . . . .  89
-       G.2.2.  P384_XMD:SHA-512_SSWU_NU_ . . . . . . . . . . . . . .  90
-       G.2.3.  P384_XMD:SHA-512_SVDW_RO_ . . . . . . . . . . . . . .  92
+       G.2.2.  P384_XMD:SHA-512_SSWU_NU_ . . . . . . . . . . . . . .  91
+       G.2.3.  P384_XMD:SHA-512_SVDW_RO_ . . . . . . . . . . . . . .  93
        G.2.4.  P384_XMD:SHA-512_SVDW_NU_ . . . . . . . . . . . . . .  94
-     G.3.  NIST P-521  . . . . . . . . . . . . . . . . . . . . . . .  95
-       G.3.1.  P521_XMD:SHA-512_SSWU_RO_ . . . . . . . . . . . . . .  95
-       G.3.2.  P521_XMD:SHA-512_SSWU_NU_ . . . . . . . . . . . . . .  97
-       G.3.3.  P521_XMD:SHA-512_SVDW_RO_ . . . . . . . . . . . . . .  99
+     G.3.  NIST P-521  . . . . . . . . . . . . . . . . . . . . . . .  96
+       G.3.1.  P521_XMD:SHA-512_SSWU_RO_ . . . . . . . . . . . . . .  96
+       G.3.2.  P521_XMD:SHA-512_SSWU_NU_ . . . . . . . . . . . . . .  98
+       G.3.3.  P521_XMD:SHA-512_SVDW_RO_ . . . . . . . . . . . . . . 100
        G.3.4.  P521_XMD:SHA-512_SVDW_NU_ . . . . . . . . . . . . . . 102
-     G.4.  curve25519  . . . . . . . . . . . . . . . . . . . . . . . 103
-       G.4.1.  curve25519_XMD:SHA-256_ELL2_RO_ . . . . . . . . . . . 103
-       G.4.2.  curve25519_XMD:SHA-256_ELL2_NU_ . . . . . . . . . . . 105
-       G.4.3.  curve25519_XMD:SHA-512_ELL2_RO_ . . . . . . . . . . . 106
-       G.4.4.  curve25519_XMD:SHA-512_ELL2_NU_ . . . . . . . . . . . 108
-     G.5.  edwards25519  . . . . . . . . . . . . . . . . . . . . . . 109
-       G.5.1.  edwards25519_XMD:SHA-256_ELL2_RO_ . . . . . . . . . . 109
-       G.5.2.  edwards25519_XMD:SHA-256_ELL2_NU_ . . . . . . . . . . 111
+     G.4.  curve25519  . . . . . . . . . . . . . . . . . . . . . . . 104
+       G.4.1.  curve25519_XMD:SHA-256_ELL2_RO_ . . . . . . . . . . . 104
+       G.4.2.  curve25519_XMD:SHA-256_ELL2_NU_ . . . . . . . . . . . 106
+       G.4.3.  curve25519_XMD:SHA-512_ELL2_RO_ . . . . . . . . . . . 107
+       G.4.4.  curve25519_XMD:SHA-512_ELL2_NU_ . . . . . . . . . . . 109
+     G.5.  edwards25519  . . . . . . . . . . . . . . . . . . . . . . 110
+       G.5.1.  edwards25519_XMD:SHA-256_ELL2_RO_ . . . . . . . . . . 110
+       G.5.2.  edwards25519_XMD:SHA-256_ELL2_NU_ . . . . . . . . . . 112
        G.5.3.  edwards25519_XMD:SHA-512_ELL2_RO_ . . . . . . . . . . 113
-       G.5.4.  edwards25519_XMD:SHA-512_ELL2_NU_ . . . . . . . . . . 114
+       G.5.4.  edwards25519_XMD:SHA-512_ELL2_NU_ . . . . . . . . . . 115
      G.6.  curve448  . . . . . . . . . . . . . . . . . . . . . . . . 116
        G.6.1.  curve448_XMD:SHA-512_ELL2_RO_ . . . . . . . . . . . . 116
-       G.6.2.  curve448_XMD:SHA-512_ELL2_NU_ . . . . . . . . . . . . 118
-     G.7.  edwards448  . . . . . . . . . . . . . . . . . . . . . . . 120
-       G.7.1.  edwards448_XMD:SHA-512_ELL2_RO_ . . . . . . . . . . . 120
-       G.7.2.  edwards448_XMD:SHA-512_ELL2_NU_ . . . . . . . . . . . 122
-     G.8.  secp256k1 . . . . . . . . . . . . . . . . . . . . . . . . 124
-       G.8.1.  secp256k1_XMD:SHA-256_SSWU_RO_  . . . . . . . . . . . 124
-       G.8.2.  secp256k1_XMD:SHA-256_SSWU_NU_  . . . . . . . . . . . 126
-       G.8.3.  secp256k1_XMD:SHA-256_SVDW_RO_  . . . . . . . . . . . 127
-       G.8.4.  secp256k1_XMD:SHA-256_SVDW_NU_  . . . . . . . . . . . 129
-     G.9.  BLS12-381 G1  . . . . . . . . . . . . . . . . . . . . . . 130
-       G.9.1.  BLS12381G1_XMD:SHA-256_SSWU_RO_ . . . . . . . . . . . 130
-       G.9.2.  BLS12381G1_XMD:SHA-256_SSWU_NU_ . . . . . . . . . . . 132
-       G.9.3.  BLS12381G1_XMD:SHA-256_SVDW_RO_ . . . . . . . . . . . 133
-       G.9.4.  BLS12381G1_XMD:SHA-256_SVDW_NU_ . . . . . . . . . . . 135
+       G.6.2.  curve448_XMD:SHA-512_ELL2_NU_ . . . . . . . . . . . . 119
+     G.7.  edwards448  . . . . . . . . . . . . . . . . . . . . . . . 121
+       G.7.1.  edwards448_XMD:SHA-512_ELL2_RO_ . . . . . . . . . . . 121
+       G.7.2.  edwards448_XMD:SHA-512_ELL2_NU_ . . . . . . . . . . . 123
+     G.8.  secp256k1 . . . . . . . . . . . . . . . . . . . . . . . . 125
+       G.8.1.  secp256k1_XMD:SHA-256_SSWU_RO_  . . . . . . . . . . . 125
+       G.8.2.  secp256k1_XMD:SHA-256_SSWU_NU_  . . . . . . . . . . . 127
+       G.8.3.  secp256k1_XMD:SHA-256_SVDW_RO_  . . . . . . . . . . . 128
+       G.8.4.  secp256k1_XMD:SHA-256_SVDW_NU_  . . . . . . . . . . . 130
+     G.9.  BLS12-381 G1  . . . . . . . . . . . . . . . . . . . . . . 131
+       G.9.1.  BLS12381G1_XMD:SHA-256_SSWU_RO_ . . . . . . . . . . . 131
+       G.9.2.  BLS12381G1_XMD:SHA-256_SSWU_NU_ . . . . . . . . . . . 133
+       G.9.3.  BLS12381G1_XMD:SHA-256_SVDW_RO_ . . . . . . . . . . . 134
+       G.9.4.  BLS12381G1_XMD:SHA-256_SVDW_NU_ . . . . . . . . . . . 136
      G.10. BLS12-381 G2  . . . . . . . . . . . . . . . . . . . . . . 137
        G.10.1.  BLS12381G2_XMD:SHA-256_SSWU_RO_  . . . . . . . . . . 137
        G.10.2.  BLS12381G2_XMD:SHA-256_SSWU_NU_  . . . . . . . . . . 140
-       G.10.3.  BLS12381G2_XMD:SHA-256_SVDW_RO_  . . . . . . . . . . 142
-       G.10.4.  BLS12381G2_XMD:SHA-256_SVDW_NU_  . . . . . . . . . . 145
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . . 147
+       G.10.3.  BLS12381G2_XMD:SHA-256_SVDW_RO_  . . . . . . . . . . 143
+       G.10.4.  BLS12381G2_XMD:SHA-256_SVDW_NU_  . . . . . . . . . . 146
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . . 148
 
 
 
 
 
 
-
-Faz-Hernandez, et al.    Expires 11 October 2020                [Page 4]
+Faz-Hernandez, et al.    Expires 18 October 2020                [Page 4]
 
 Internet-Draft                hash-to-curve                   April 2020
 
@@ -277,7 +277,7 @@ Internet-Draft                hash-to-curve                   April 2020
 
 
 
-Faz-Hernandez, et al.    Expires 11 October 2020                [Page 5]
+Faz-Hernandez, et al.    Expires 18 October 2020                [Page 5]
 
 Internet-Draft                hash-to-curve                   April 2020
 
@@ -333,7 +333,7 @@ Internet-Draft                hash-to-curve                   April 2020
 
 
 
-Faz-Hernandez, et al.    Expires 11 October 2020                [Page 6]
+Faz-Hernandez, et al.    Expires 18 October 2020                [Page 6]
 
 Internet-Draft                hash-to-curve                   April 2020
 
@@ -389,7 +389,7 @@ Internet-Draft                hash-to-curve                   April 2020
 
 
 
-Faz-Hernandez, et al.    Expires 11 October 2020                [Page 7]
+Faz-Hernandez, et al.    Expires 18 October 2020                [Page 7]
 
 Internet-Draft                hash-to-curve                   April 2020
 
@@ -445,7 +445,7 @@ Internet-Draft                hash-to-curve                   April 2020
 
 
 
-Faz-Hernandez, et al.    Expires 11 October 2020                [Page 8]
+Faz-Hernandez, et al.    Expires 18 October 2020                [Page 8]
 
 Internet-Draft                hash-to-curve                   April 2020
 
@@ -501,7 +501,7 @@ Internet-Draft                hash-to-curve                   April 2020
 
 
 
-Faz-Hernandez, et al.    Expires 11 October 2020                [Page 9]
+Faz-Hernandez, et al.    Expires 18 October 2020                [Page 9]
 
 Internet-Draft                hash-to-curve                   April 2020
 
@@ -557,7 +557,7 @@ Internet-Draft                hash-to-curve                   April 2020
 
 
 
-Faz-Hernandez, et al.    Expires 11 October 2020               [Page 10]
+Faz-Hernandez, et al.    Expires 18 October 2020               [Page 10]
 
 Internet-Draft                hash-to-curve                   April 2020
 
@@ -613,7 +613,7 @@ Internet-Draft                hash-to-curve                   April 2020
 
 
 
-Faz-Hernandez, et al.    Expires 11 October 2020               [Page 11]
+Faz-Hernandez, et al.    Expires 18 October 2020               [Page 11]
 
 Internet-Draft                hash-to-curve                   April 2020
 
@@ -662,20 +662,25 @@ Internet-Draft                hash-to-curve                   April 2020
       least one bit of C is 1.
 
    *  is_square(x): This function returns True whenever the value x is a
-      square in the field F.  Due to Euler's criterion, this function
-      can be calculated in constant time as
+      square in the field F.  By Euler's criterion, this function can be
+      calculated in constant time as
 
 
 
 
 
-Faz-Hernandez, et al.    Expires 11 October 2020               [Page 12]
+Faz-Hernandez, et al.    Expires 18 October 2020               [Page 12]
 
 Internet-Draft                hash-to-curve                   April 2020
 
 
    is_square(x) := { True,  if x^((q - 1) / 2) is 0 or 1 in F;
                    { False, otherwise.
+
+   In certain extension fields, is\_square can be computed in constant
+   time more quickly than by the above exponentiation.
+   {{AR13}} and {{S85}} describe optimized methods for extension fields.
+   {{appx-sqrt-issq}} gives an optimized straight-line method for GF(p^2).
 
    *  sqrt(x): The sqrt operation is a multi-valued function, i.e. there
       exist two roots of x in the field F whenever x is square.  To
@@ -716,19 +721,21 @@ Internet-Draft                hash-to-curve                   April 2020
    *  len(str): for a byte string str, this function returns the length
       of str in bytes.  For example, len("ABC") == 3.
 
+
+
+
+
+Faz-Hernandez, et al.    Expires 18 October 2020               [Page 13]
+
+Internet-Draft                hash-to-curve                   April 2020
+
+
    *  strxor(str1, str2): for byte strings str1 and str2, strxor(str1,
       str2) returns the bitwise XOR of the two strings.  For example,
       strxor("abc", "XYZ") == "9;9" (the strings in this example are
       ASCII literals, but strxor is defined for arbitrary byte strings).
       In this document, strxor is only applied to inputs of equal
       length.
-
-
-
-Faz-Hernandez, et al.    Expires 11 October 2020               [Page 13]
-
-Internet-Draft                hash-to-curve                   April 2020
-
 
 4.1.  The sgn0 function
 
@@ -772,19 +779,14 @@ Internet-Draft                hash-to-curve                   April 2020
    A similar argument applies to any entry of the vector representation
    of x.
 
-   When m == 1, sgn0 can be significantly simplified:
 
 
-
-
-
-
-
-
-Faz-Hernandez, et al.    Expires 11 October 2020               [Page 14]
+Faz-Hernandez, et al.    Expires 18 October 2020               [Page 14]
 
 Internet-Draft                hash-to-curve                   April 2020
 
+
+   When m == 1, sgn0 can be significantly simplified:
 
    sgn0_m_eq_1(x)
 
@@ -835,9 +837,7 @@ Internet-Draft                hash-to-curve                   April 2020
 
 
 
-
-
-Faz-Hernandez, et al.    Expires 11 October 2020               [Page 15]
+Faz-Hernandez, et al.    Expires 18 October 2020               [Page 15]
 
 Internet-Draft                hash-to-curve                   April 2020
 
@@ -893,7 +893,7 @@ Internet-Draft                hash-to-curve                   April 2020
 
 
 
-Faz-Hernandez, et al.    Expires 11 October 2020               [Page 16]
+Faz-Hernandez, et al.    Expires 18 October 2020               [Page 16]
 
 Internet-Draft                hash-to-curve                   April 2020
 
@@ -949,7 +949,7 @@ Internet-Draft                hash-to-curve                   April 2020
 
 
 
-Faz-Hernandez, et al.    Expires 11 October 2020               [Page 17]
+Faz-Hernandez, et al.    Expires 18 October 2020               [Page 17]
 
 Internet-Draft                hash-to-curve                   April 2020
 
@@ -1005,7 +1005,7 @@ Internet-Draft                hash-to-curve                   April 2020
 
 
 
-Faz-Hernandez, et al.    Expires 11 October 2020               [Page 18]
+Faz-Hernandez, et al.    Expires 18 October 2020               [Page 18]
 
 Internet-Draft                hash-to-curve                   April 2020
 
@@ -1061,7 +1061,7 @@ Internet-Draft                hash-to-curve                   April 2020
 
 
 
-Faz-Hernandez, et al.    Expires 11 October 2020               [Page 19]
+Faz-Hernandez, et al.    Expires 18 October 2020               [Page 19]
 
 Internet-Draft                hash-to-curve                   April 2020
 
@@ -1117,7 +1117,7 @@ Internet-Draft                hash-to-curve                   April 2020
 
 
 
-Faz-Hernandez, et al.    Expires 11 October 2020               [Page 20]
+Faz-Hernandez, et al.    Expires 18 October 2020               [Page 20]
 
 Internet-Draft                hash-to-curve                   April 2020
 
@@ -1173,7 +1173,7 @@ Internet-Draft                hash-to-curve                   April 2020
 
 
 
-Faz-Hernandez, et al.    Expires 11 October 2020               [Page 21]
+Faz-Hernandez, et al.    Expires 18 October 2020               [Page 21]
 
 Internet-Draft                hash-to-curve                   April 2020
 
@@ -1229,7 +1229,7 @@ Internet-Draft                hash-to-curve                   April 2020
 
 
 
-Faz-Hernandez, et al.    Expires 11 October 2020               [Page 22]
+Faz-Hernandez, et al.    Expires 18 October 2020               [Page 22]
 
 Internet-Draft                hash-to-curve                   April 2020
 
@@ -1285,7 +1285,7 @@ Internet-Draft                hash-to-curve                   April 2020
 
 
 
-Faz-Hernandez, et al.    Expires 11 October 2020               [Page 23]
+Faz-Hernandez, et al.    Expires 18 October 2020               [Page 23]
 
 Internet-Draft                hash-to-curve                   April 2020
 
@@ -1341,7 +1341,7 @@ Internet-Draft                hash-to-curve                   April 2020
 
 
 
-Faz-Hernandez, et al.    Expires 11 October 2020               [Page 24]
+Faz-Hernandez, et al.    Expires 18 October 2020               [Page 24]
 
 Internet-Draft                hash-to-curve                   April 2020
 
@@ -1397,7 +1397,7 @@ Internet-Draft                hash-to-curve                   April 2020
 
 
 
-Faz-Hernandez, et al.    Expires 11 October 2020               [Page 25]
+Faz-Hernandez, et al.    Expires 18 October 2020               [Page 25]
 
 Internet-Draft                hash-to-curve                   April 2020
 
@@ -1453,7 +1453,7 @@ Internet-Draft                hash-to-curve                   April 2020
 
 
 
-Faz-Hernandez, et al.    Expires 11 October 2020               [Page 26]
+Faz-Hernandez, et al.    Expires 18 October 2020               [Page 26]
 
 Internet-Draft                hash-to-curve                   April 2020
 
@@ -1509,7 +1509,7 @@ Internet-Draft                hash-to-curve                   April 2020
 
 
 
-Faz-Hernandez, et al.    Expires 11 October 2020               [Page 27]
+Faz-Hernandez, et al.    Expires 18 October 2020               [Page 27]
 
 Internet-Draft                hash-to-curve                   April 2020
 
@@ -1565,7 +1565,7 @@ Internet-Draft                hash-to-curve                   April 2020
 
 
 
-Faz-Hernandez, et al.    Expires 11 October 2020               [Page 28]
+Faz-Hernandez, et al.    Expires 18 October 2020               [Page 28]
 
 Internet-Draft                hash-to-curve                   April 2020
 
@@ -1621,7 +1621,7 @@ Internet-Draft                hash-to-curve                   April 2020
 
 
 
-Faz-Hernandez, et al.    Expires 11 October 2020               [Page 29]
+Faz-Hernandez, et al.    Expires 18 October 2020               [Page 29]
 
 Internet-Draft                hash-to-curve                   April 2020
 
@@ -1677,7 +1677,7 @@ Internet-Draft                hash-to-curve                   April 2020
 
 
 
-Faz-Hernandez, et al.    Expires 11 October 2020               [Page 30]
+Faz-Hernandez, et al.    Expires 18 October 2020               [Page 30]
 
 Internet-Draft                hash-to-curve                   April 2020
 
@@ -1733,7 +1733,7 @@ Internet-Draft                hash-to-curve                   April 2020
 
 
 
-Faz-Hernandez, et al.    Expires 11 October 2020               [Page 31]
+Faz-Hernandez, et al.    Expires 18 October 2020               [Page 31]
 
 Internet-Draft                hash-to-curve                   April 2020
 
@@ -1789,7 +1789,7 @@ Internet-Draft                hash-to-curve                   April 2020
 
 
 
-Faz-Hernandez, et al.    Expires 11 October 2020               [Page 32]
+Faz-Hernandez, et al.    Expires 18 October 2020               [Page 32]
 
 Internet-Draft                hash-to-curve                   April 2020
 
@@ -1845,7 +1845,7 @@ Internet-Draft                hash-to-curve                   April 2020
 
 
 
-Faz-Hernandez, et al.    Expires 11 October 2020               [Page 33]
+Faz-Hernandez, et al.    Expires 18 October 2020               [Page 33]
 
 Internet-Draft                hash-to-curve                   April 2020
 
@@ -1901,7 +1901,7 @@ Internet-Draft                hash-to-curve                   April 2020
 
 
 
-Faz-Hernandez, et al.    Expires 11 October 2020               [Page 34]
+Faz-Hernandez, et al.    Expires 18 October 2020               [Page 34]
 
 Internet-Draft                hash-to-curve                   April 2020
 
@@ -1957,7 +1957,7 @@ Internet-Draft                hash-to-curve                   April 2020
 
 
 
-Faz-Hernandez, et al.    Expires 11 October 2020               [Page 35]
+Faz-Hernandez, et al.    Expires 18 October 2020               [Page 35]
 
 Internet-Draft                hash-to-curve                   April 2020
 
@@ -2013,7 +2013,7 @@ Internet-Draft                hash-to-curve                   April 2020
 
 
 
-Faz-Hernandez, et al.    Expires 11 October 2020               [Page 36]
+Faz-Hernandez, et al.    Expires 18 October 2020               [Page 36]
 
 Internet-Draft                hash-to-curve                   April 2020
 
@@ -2069,7 +2069,7 @@ Internet-Draft                hash-to-curve                   April 2020
 
 
 
-Faz-Hernandez, et al.    Expires 11 October 2020               [Page 37]
+Faz-Hernandez, et al.    Expires 18 October 2020               [Page 37]
 
 Internet-Draft                hash-to-curve                   April 2020
 
@@ -2125,7 +2125,7 @@ Internet-Draft                hash-to-curve                   April 2020
 
 
 
-Faz-Hernandez, et al.    Expires 11 October 2020               [Page 38]
+Faz-Hernandez, et al.    Expires 18 October 2020               [Page 38]
 
 Internet-Draft                hash-to-curve                   April 2020
 
@@ -2181,7 +2181,7 @@ Internet-Draft                hash-to-curve                   April 2020
 
 
 
-Faz-Hernandez, et al.    Expires 11 October 2020               [Page 39]
+Faz-Hernandez, et al.    Expires 18 October 2020               [Page 39]
 
 Internet-Draft                hash-to-curve                   April 2020
 
@@ -2237,7 +2237,7 @@ Internet-Draft                hash-to-curve                   April 2020
 
 
 
-Faz-Hernandez, et al.    Expires 11 October 2020               [Page 40]
+Faz-Hernandez, et al.    Expires 18 October 2020               [Page 40]
 
 Internet-Draft                hash-to-curve                   April 2020
 
@@ -2293,7 +2293,7 @@ Internet-Draft                hash-to-curve                   April 2020
 
 
 
-Faz-Hernandez, et al.    Expires 11 October 2020               [Page 41]
+Faz-Hernandez, et al.    Expires 18 October 2020               [Page 41]
 
 Internet-Draft                hash-to-curve                   April 2020
 
@@ -2349,7 +2349,7 @@ Internet-Draft                hash-to-curve                   April 2020
 
 
 
-Faz-Hernandez, et al.    Expires 11 October 2020               [Page 42]
+Faz-Hernandez, et al.    Expires 18 October 2020               [Page 42]
 
 Internet-Draft                hash-to-curve                   April 2020
 
@@ -2405,7 +2405,7 @@ Internet-Draft                hash-to-curve                   April 2020
 
 
 
-Faz-Hernandez, et al.    Expires 11 October 2020               [Page 43]
+Faz-Hernandez, et al.    Expires 18 October 2020               [Page 43]
 
 Internet-Draft                hash-to-curve                   April 2020
 
@@ -2461,7 +2461,7 @@ Internet-Draft                hash-to-curve                   April 2020
 
 
 
-Faz-Hernandez, et al.    Expires 11 October 2020               [Page 44]
+Faz-Hernandez, et al.    Expires 18 October 2020               [Page 44]
 
 Internet-Draft                hash-to-curve                   April 2020
 
@@ -2517,7 +2517,7 @@ Internet-Draft                hash-to-curve                   April 2020
 
 
 
-Faz-Hernandez, et al.    Expires 11 October 2020               [Page 45]
+Faz-Hernandez, et al.    Expires 18 October 2020               [Page 45]
 
 Internet-Draft                hash-to-curve                   April 2020
 
@@ -2573,7 +2573,7 @@ Internet-Draft                hash-to-curve                   April 2020
 
 
 
-Faz-Hernandez, et al.    Expires 11 October 2020               [Page 46]
+Faz-Hernandez, et al.    Expires 18 October 2020               [Page 46]
 
 Internet-Draft                hash-to-curve                   April 2020
 
@@ -2629,7 +2629,7 @@ Internet-Draft                hash-to-curve                   April 2020
 
 
 
-Faz-Hernandez, et al.    Expires 11 October 2020               [Page 47]
+Faz-Hernandez, et al.    Expires 18 October 2020               [Page 47]
 
 Internet-Draft                hash-to-curve                   April 2020
 
@@ -2685,7 +2685,7 @@ Internet-Draft                hash-to-curve                   April 2020
 
 
 
-Faz-Hernandez, et al.    Expires 11 October 2020               [Page 48]
+Faz-Hernandez, et al.    Expires 18 October 2020               [Page 48]
 
 Internet-Draft                hash-to-curve                   April 2020
 
@@ -2741,7 +2741,7 @@ Internet-Draft                hash-to-curve                   April 2020
 
 
 
-Faz-Hernandez, et al.    Expires 11 October 2020               [Page 49]
+Faz-Hernandez, et al.    Expires 18 October 2020               [Page 49]
 
 Internet-Draft                hash-to-curve                   April 2020
 
@@ -2797,7 +2797,7 @@ Internet-Draft                hash-to-curve                   April 2020
 
 
 
-Faz-Hernandez, et al.    Expires 11 October 2020               [Page 50]
+Faz-Hernandez, et al.    Expires 18 October 2020               [Page 50]
 
 Internet-Draft                hash-to-curve                   April 2020
 
@@ -2853,7 +2853,7 @@ Internet-Draft                hash-to-curve                   April 2020
 
 
 
-Faz-Hernandez, et al.    Expires 11 October 2020               [Page 51]
+Faz-Hernandez, et al.    Expires 18 October 2020               [Page 51]
 
 Internet-Draft                hash-to-curve                   April 2020
 
@@ -2909,7 +2909,7 @@ Internet-Draft                hash-to-curve                   April 2020
 
 
 
-Faz-Hernandez, et al.    Expires 11 October 2020               [Page 52]
+Faz-Hernandez, et al.    Expires 18 October 2020               [Page 52]
 
 Internet-Draft                hash-to-curve                   April 2020
 
@@ -2965,7 +2965,7 @@ Internet-Draft                hash-to-curve                   April 2020
 
 
 
-Faz-Hernandez, et al.    Expires 11 October 2020               [Page 53]
+Faz-Hernandez, et al.    Expires 18 October 2020               [Page 53]
 
 Internet-Draft                hash-to-curve                   April 2020
 
@@ -3021,7 +3021,7 @@ Internet-Draft                hash-to-curve                   April 2020
 
 
 
-Faz-Hernandez, et al.    Expires 11 October 2020               [Page 54]
+Faz-Hernandez, et al.    Expires 18 October 2020               [Page 54]
 
 Internet-Draft                hash-to-curve                   April 2020
 
@@ -3077,7 +3077,7 @@ Internet-Draft                hash-to-curve                   April 2020
 
 
 
-Faz-Hernandez, et al.    Expires 11 October 2020               [Page 55]
+Faz-Hernandez, et al.    Expires 18 October 2020               [Page 55]
 
 Internet-Draft                hash-to-curve                   April 2020
 
@@ -3133,7 +3133,7 @@ Internet-Draft                hash-to-curve                   April 2020
 
 
 
-Faz-Hernandez, et al.    Expires 11 October 2020               [Page 56]
+Faz-Hernandez, et al.    Expires 18 October 2020               [Page 56]
 
 Internet-Draft                hash-to-curve                   April 2020
 
@@ -3189,7 +3189,7 @@ Internet-Draft                hash-to-curve                   April 2020
 
 
 
-Faz-Hernandez, et al.    Expires 11 October 2020               [Page 57]
+Faz-Hernandez, et al.    Expires 18 October 2020               [Page 57]
 
 Internet-Draft                hash-to-curve                   April 2020
 
@@ -3245,7 +3245,7 @@ Internet-Draft                hash-to-curve                   April 2020
 
 
 
-Faz-Hernandez, et al.    Expires 11 October 2020               [Page 58]
+Faz-Hernandez, et al.    Expires 18 October 2020               [Page 58]
 
 Internet-Draft                hash-to-curve                   April 2020
 
@@ -3301,7 +3301,7 @@ Internet-Draft                hash-to-curve                   April 2020
 
 
 
-Faz-Hernandez, et al.    Expires 11 October 2020               [Page 59]
+Faz-Hernandez, et al.    Expires 18 October 2020               [Page 59]
 
 Internet-Draft                hash-to-curve                   April 2020
 
@@ -3357,7 +3357,7 @@ Appendix A.  Related Work
 
 
 
-Faz-Hernandez, et al.    Expires 11 October 2020               [Page 60]
+Faz-Hernandez, et al.    Expires 18 October 2020               [Page 60]
 
 Internet-Draft                hash-to-curve                   April 2020
 
@@ -3413,7 +3413,7 @@ Internet-Draft                hash-to-curve                   April 2020
 
 
 
-Faz-Hernandez, et al.    Expires 11 October 2020               [Page 61]
+Faz-Hernandez, et al.    Expires 18 October 2020               [Page 61]
 
 Internet-Draft                hash-to-curve                   April 2020
 
@@ -3469,7 +3469,7 @@ B.1.  Twisted Edwards to Montgomery curves
 
 
 
-Faz-Hernandez, et al.    Expires 11 October 2020               [Page 62]
+Faz-Hernandez, et al.    Expires 18 October 2020               [Page 62]
 
 Internet-Draft                hash-to-curve                   April 2020
 
@@ -3525,7 +3525,7 @@ B.2.  Montgomery to Weierstrass curves
 
 
 
-Faz-Hernandez, et al.    Expires 11 October 2020               [Page 63]
+Faz-Hernandez, et al.    Expires 18 October 2020               [Page 63]
 
 Internet-Draft                hash-to-curve                   April 2020
 
@@ -3581,7 +3581,7 @@ C.1.  3-isogeny map for secp256k1
 
 
 
-Faz-Hernandez, et al.    Expires 11 October 2020               [Page 64]
+Faz-Hernandez, et al.    Expires 18 October 2020               [Page 64]
 
 Internet-Draft                hash-to-curve                   April 2020
 
@@ -3637,7 +3637,7 @@ C.2.  11-isogeny map for BLS12-381 G1
 
 
 
-Faz-Hernandez, et al.    Expires 11 October 2020               [Page 65]
+Faz-Hernandez, et al.    Expires 18 October 2020               [Page 65]
 
 Internet-Draft                hash-to-curve                   April 2020
 
@@ -3693,7 +3693,7 @@ Internet-Draft                hash-to-curve                   April 2020
 
 
 
-Faz-Hernandez, et al.    Expires 11 October 2020               [Page 66]
+Faz-Hernandez, et al.    Expires 18 October 2020               [Page 66]
 
 Internet-Draft                hash-to-curve                   April 2020
 
@@ -3749,7 +3749,7 @@ Internet-Draft                hash-to-curve                   April 2020
 
 
 
-Faz-Hernandez, et al.    Expires 11 October 2020               [Page 67]
+Faz-Hernandez, et al.    Expires 18 October 2020               [Page 67]
 
 Internet-Draft                hash-to-curve                   April 2020
 
@@ -3805,7 +3805,7 @@ Internet-Draft                hash-to-curve                   April 2020
 
 
 
-Faz-Hernandez, et al.    Expires 11 October 2020               [Page 68]
+Faz-Hernandez, et al.    Expires 18 October 2020               [Page 68]
 
 Internet-Draft                hash-to-curve                   April 2020
 
@@ -3861,7 +3861,7 @@ C.3.  3-isogeny map for BLS12-381 G2
 
 
 
-Faz-Hernandez, et al.    Expires 11 October 2020               [Page 69]
+Faz-Hernandez, et al.    Expires 18 October 2020               [Page 69]
 
 Internet-Draft                hash-to-curve                   April 2020
 
@@ -3917,7 +3917,7 @@ Internet-Draft                hash-to-curve                   April 2020
 
 
 
-Faz-Hernandez, et al.    Expires 11 October 2020               [Page 70]
+Faz-Hernandez, et al.    Expires 18 October 2020               [Page 70]
 
 Internet-Draft                hash-to-curve                   April 2020
 
@@ -3973,7 +3973,7 @@ D.1.  Interface and projective coordinate systems
 
 
 
-Faz-Hernandez, et al.    Expires 11 October 2020               [Page 71]
+Faz-Hernandez, et al.    Expires 18 October 2020               [Page 71]
 
 Internet-Draft                hash-to-curve                   April 2020
 
@@ -4029,7 +4029,7 @@ D.2.  Simplified SWU for p = 3 (mod 4)
 
 
 
-Faz-Hernandez, et al.    Expires 11 October 2020               [Page 72]
+Faz-Hernandez, et al.    Expires 18 October 2020               [Page 72]
 
 Internet-Draft                hash-to-curve                   April 2020
 
@@ -4085,7 +4085,7 @@ Internet-Draft                hash-to-curve                   April 2020
 
 
 
-Faz-Hernandez, et al.    Expires 11 October 2020               [Page 73]
+Faz-Hernandez, et al.    Expires 18 October 2020               [Page 73]
 
 Internet-Draft                hash-to-curve                   April 2020
 
@@ -4141,7 +4141,7 @@ D.3.  curve25519 (Elligator 2)
 
 
 
-Faz-Hernandez, et al.    Expires 11 October 2020               [Page 74]
+Faz-Hernandez, et al.    Expires 18 October 2020               [Page 74]
 
 Internet-Draft                hash-to-curve                   April 2020
 
@@ -4197,7 +4197,7 @@ D.5.  curve448 (Elligator 2)
 
 
 
-Faz-Hernandez, et al.    Expires 11 October 2020               [Page 75]
+Faz-Hernandez, et al.    Expires 18 October 2020               [Page 75]
 
 Internet-Draft                hash-to-curve                   April 2020
 
@@ -4253,7 +4253,7 @@ D.6.  edwards448 (Elligator 2)
 
 
 
-Faz-Hernandez, et al.    Expires 11 October 2020               [Page 76]
+Faz-Hernandez, et al.    Expires 18 October 2020               [Page 76]
 
 Internet-Draft                hash-to-curve                   April 2020
 
@@ -4309,7 +4309,7 @@ Internet-Draft                hash-to-curve                   April 2020
 
 
 
-Faz-Hernandez, et al.    Expires 11 October 2020               [Page 77]
+Faz-Hernandez, et al.    Expires 18 October 2020               [Page 77]
 
 Internet-Draft                hash-to-curve                   April 2020
 
@@ -4365,7 +4365,7 @@ E.2.  Finding Z for Simplified SWU
 
 
 
-Faz-Hernandez, et al.    Expires 11 October 2020               [Page 78]
+Faz-Hernandez, et al.    Expires 18 October 2020               [Page 78]
 
 Internet-Draft                hash-to-curve                   April 2020
 
@@ -4410,18 +4410,18 @@ E.3.  Finding Z for Elligator 2
                return Z_cand
            ctr += 1
 
-Appendix F.  sqrt functions
+Appendix F.  sqrt and is_square functions
 
    This section defines special-purpose sqrt functions for the three
-   most common cases, q = 3 (mod 4), q = 5 (mod 8), and q = 9 (mod 16).
-   In addition, it gives a generic constant-time algorithm that works
-   for any prime modulus.
+   most common cases, q = 3 (mod 4), q = 5 (mod 8), and q = 9 (mod 16),
+   plus a generic constant-time algorithm that works for any prime
+   modulus.
 
-   [AR13] and [S85] describe optimized methods for extension fields.
+   In addition, it gives an optimized is_square method for GF(p^2).
 
 
 
-Faz-Hernandez, et al.    Expires 11 October 2020               [Page 79]
+Faz-Hernandez, et al.    Expires 18 October 2020               [Page 79]
 
 Internet-Draft                hash-to-curve                   April 2020
 
@@ -4477,7 +4477,7 @@ F.3.  q = 9 (mod 16)
 
 
 
-Faz-Hernandez, et al.    Expires 11 October 2020               [Page 80]
+Faz-Hernandez, et al.    Expires 18 October 2020               [Page 80]
 
 Internet-Draft                hash-to-curve                   April 2020
 
@@ -4533,7 +4533,7 @@ F.4.  Constant-time Tonelli-Shanks algorithm
 
 
 
-Faz-Hernandez, et al.    Expires 11 October 2020               [Page 81]
+Faz-Hernandez, et al.    Expires 18 October 2020               [Page 81]
 
 Internet-Draft                hash-to-curve                   April 2020
 
@@ -4568,6 +4568,53 @@ Internet-Draft                hash-to-curve                   April 2020
    12.     b = t
    13. return z
 
+F.5.  is_square for F = GF(p^2)
+
+   The following is_square method applies to any field F = GF(p^2) with
+   basis (1, I) represented as described in Section 2.1, i.e., an
+   element x = (x_1, x_2) = x_1 + x_2 * I.
+
+   Other optimizations of this type are possible in other even-order
+   extension fields; see [AR13].
+
+
+
+
+
+
+
+
+
+
+
+
+
+Faz-Hernandez, et al.    Expires 18 October 2020               [Page 82]
+
+Internet-Draft                hash-to-curve                   April 2020
+
+
+   is_square(x)
+
+   Parameters:
+   - F, an extension field of characteristic p and order q = p^2
+     with basis (1, I).
+
+   Input: x, an element of F.
+   Output: True if x is square in F, and False otherwise.
+
+   Constants:
+   1. c1 = (p - 1) / 2         # Integer arithmetic
+
+   Procedure:
+   1. tv1 = x_1^2
+   2. tv2 = I * x_2
+   3. tv2 = tv2^2
+   4. tv1 = tv1 - tv2
+   5. tv1 = tv1^c1
+   6.  e1 = tv1 != -1          # Note: -1 in F
+   7. return e1
+
 Appendix G.  Test vectors
 
    This section gives test vectors for each suite defined in Section 8.
@@ -4584,16 +4631,6 @@ G.1.  NIST P-256
 
 G.1.1.  P256_XMD:SHA-256_SSWU_RO_
 
-
-
-
-
-
-Faz-Hernandez, et al.    Expires 11 October 2020               [Page 82]
-
-Internet-Draft                hash-to-curve                   April 2020
-
-
    suite   = P256_XMD:SHA-256_SSWU_RO_
    dst     = P256_XMD:SHA-256_SSWU_RO_TESTGEN
 
@@ -4605,6 +4642,14 @@ Internet-Draft                hash-to-curve                   April 2020
    u[0]    = 54b82282b0ca2fadc1d3aaca8b3749a6f626a0db55c1a71683e532
              1b0ca167ac
    u[1]    = 12217139110a50ffb097ef02eec754aa0848d1ffc2dab783271e26
+
+
+
+Faz-Hernandez, et al.    Expires 18 October 2020               [Page 83]
+
+Internet-Draft                hash-to-curve                   April 2020
+
+
              2f525a5c02
    Q0.x    = 06ecc4e1f2e89279dfd197abcd9452d2ad41686960cd9fdd109d99
              5e797fd5f9
@@ -4642,14 +4687,6 @@ Internet-Draft                hash-to-curve                   April 2020
              78b16e818e
    u[1]    = 38216f3c99e9cc00602d92652e8149fcfe9cde6d3d742db9f8604f
              5be29e3a56
-
-
-
-Faz-Hernandez, et al.    Expires 11 October 2020               [Page 83]
-
-Internet-Draft                hash-to-curve                   April 2020
-
-
    Q0.x    = e90130ab063fa8915f7b40d87dc844cb17615fbca777a8786dfa92
              0f7d64de18
    Q0.y    = 3ed7e73dcb859ff29ee8c03c2fee155593e9bfa350108597823b52
@@ -4661,6 +4698,14 @@ Internet-Draft                hash-to-curve                   April 2020
 
    msg     = a512_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+
+
+
+Faz-Hernandez, et al.    Expires 18 October 2020               [Page 84]
+
+Internet-Draft                hash-to-curve                   April 2020
+
+
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -4698,14 +4743,6 @@ G.1.2.  P256_XMD:SHA-256_SSWU_NU_
              3d467caddc
    u[0]    = 84bc3167da0939bc7130e749558acfa0001eaf26990b6f9565a882
              72edb162a6
-
-
-
-Faz-Hernandez, et al.    Expires 11 October 2020               [Page 84]
-
-Internet-Draft                hash-to-curve                   April 2020
-
-
    Q.x     = 2b1b6eb1989d3fb644a4d2962e5adab24444abf37963e3ee5c3a47
              aa864c0899
    Q.y     = 6b49f459088caf7588cde4650fba46f72870fe5bde98d170153bd8
@@ -4717,6 +4754,14 @@ Internet-Draft                hash-to-curve                   April 2020
    P.y     = d023fd86e73e383327ebb25b1fc3980d0048c2c31a9927a6585ffb
              127f8b4262
    u[0]    = 03f880f3c4b02f3afdfbb79f5a68f52a52dda11bb18bc615693cc3
+
+
+
+Faz-Hernandez, et al.    Expires 18 October 2020               [Page 85]
+
+Internet-Draft                hash-to-curve                   April 2020
+
+
              9e88eaef0e
    Q.x     = 3a7c9353213d23c67286117b783863d0fcf0741df89680eb8678dc
              3482aa4294
@@ -4754,14 +4799,6 @@ Internet-Draft                hash-to-curve                   April 2020
    Q.x     = bdff5810ac42130719752d50ccc5f79e169e90a90cda984c311f6b
              ad8e77fb44
    Q.y     = 73aa23cfb08dd1ed92d770152d59b7e2b63176ceb664bdcae8153d
-
-
-
-Faz-Hernandez, et al.    Expires 11 October 2020               [Page 85]
-
-Internet-Draft                hash-to-curve                   April 2020
-
-
              83609dd2e5
 
 G.1.3.  P256_XMD:SHA-256_SVDW_RO_
@@ -4773,6 +4810,14 @@ G.1.3.  P256_XMD:SHA-256_SVDW_RO_
    P.x     = be9400f16f7a1ec3fb526872919f4f9af94c6ac3e8fe5787c0f415
              e9def825ff
    P.y     = d14b462afed314ca7c20b1f6f3e501a610b79e0ca8adfce841b9c6
+
+
+
+Faz-Hernandez, et al.    Expires 18 October 2020               [Page 86]
+
+Internet-Draft                hash-to-curve                   April 2020
+
+
              804cfbe419
    u[0]    = 4ad57c89ca3a6dbff76ce5a844aec126d7e4e58646403b3df08f32
              6676d8c8b4
@@ -4810,14 +4855,6 @@ G.1.3.  P256_XMD:SHA-256_SVDW_RO_
              e7fde6f269
    P.y     = 8c6424f339a34fcd937d7aa9234f8545bbed9b070e8f52f3893bfc
              21e121f0ba
-
-
-
-Faz-Hernandez, et al.    Expires 11 October 2020               [Page 86]
-
-Internet-Draft                hash-to-curve                   April 2020
-
-
    u[0]    = 04adbdf1097d6637a52c955ba18f286337e3c7570195983a294aa5
              21d232cb1c
    u[1]    = d9eebe468d34e0000da1de381f30e96caa582155b4baa0f078879c
@@ -4829,6 +4866,14 @@ Internet-Draft                hash-to-curve                   April 2020
    Q1.x    = 34147e925ff536360e70fb6093dff185d11937eaaf03a7c27fe0c8
              347e0368ca
    Q1.y    = 613746d811d1cfeb76632f0da3be81ef9ba86d4aa7459c0b21711a
+
+
+
+Faz-Hernandez, et al.    Expires 18 October 2020               [Page 87]
+
+Internet-Draft                hash-to-curve                   April 2020
+
+
              282abca3b3
 
    msg     = a512_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -4866,14 +4911,6 @@ G.1.4.  P256_XMD:SHA-256_SVDW_NU_
    msg     =
    P.x     = 8501dd0a6f2313cbe3adea8991bc7ce09400fe0ed9fe4ab2930bf6
              325cdb35f1
-
-
-
-Faz-Hernandez, et al.    Expires 11 October 2020               [Page 87]
-
-Internet-Draft                hash-to-curve                   April 2020
-
-
    P.y     = fe28c7d2476ab1464e7b097d77ad527c3ef7265759bbb01bd690f0
              6542beb4d5
    u[0]    = aacf70475184d6532779d2e7b1b148130dd280fdf07eb82bfb3bfd
@@ -4885,6 +4922,14 @@ Internet-Draft                hash-to-curve                   April 2020
 
    msg     = abc
    P.x     = 2873efb7a560eab63c93e1e35e25c4867d9565279b2954a72f7e68
+
+
+
+Faz-Hernandez, et al.    Expires 18 October 2020               [Page 88]
+
+Internet-Draft                hash-to-curve                   April 2020
+
+
              e5cb398714
    P.y     = ae5f67e81613340d0e19238c055d51dc181e740267acdc85285608
              00fb5a1661
@@ -4922,14 +4967,6 @@ Internet-Draft                hash-to-curve                   April 2020
    P.y     = eab90502eb73fc640ef054f108cb40c9e89bbaf3b1cbe35735200a
              371e823e90
    u[0]    = 68dd1e91ec38fb8638dd718d82f437658b815c7f57a74ca6d9afcd
-
-
-
-Faz-Hernandez, et al.    Expires 11 October 2020               [Page 88]
-
-Internet-Draft                hash-to-curve                   April 2020
-
-
              e5f18244cc
    Q.x     = 54e8999525538c4c067ade8e68979a4299a0b4e11328a1bc7a7849
              7bd007273a
@@ -4939,6 +4976,15 @@ Internet-Draft                hash-to-curve                   April 2020
 G.2.  NIST P-384
 
 G.2.1.  P384_XMD:SHA-512_SSWU_RO_
+
+
+
+
+
+Faz-Hernandez, et al.    Expires 18 October 2020               [Page 89]
+
+Internet-Draft                hash-to-curve                   April 2020
+
 
    suite   = P384_XMD:SHA-512_SSWU_RO_
    dst     = P384_XMD:SHA-512_SSWU_RO_TESTGEN
@@ -4979,13 +5025,6 @@ G.2.1.  P384_XMD:SHA-512_SSWU_RO_
    Q1.y    = 73ab89802e651825e77a99361bb2cbd365bcc5301207e99be0a954
              d49628dda943dd0c3f41d8775405c987bff62486ab
 
-
-
-Faz-Hernandez, et al.    Expires 11 October 2020               [Page 89]
-
-Internet-Draft                hash-to-curve                   April 2020
-
-
    msg     = abcdef0123456789
    P.x     = d1f4bdd7ef9ee1c2d57ccd2b3b80123ccf3eb64b2f0a3ad26b8cd1
              a8a8e411aadb9922d0e66a89ef0e78dba1489e23ea
@@ -4995,6 +5034,14 @@ Internet-Draft                hash-to-curve                   April 2020
              6e12b141251d1aec9b5d597d01ef7093199ed0c67f
    u[1]    = 611ef2efe2da7beb61ed2158e2db03f06fb3d4ce485c7e30575920
              07a91053c22d496ba112645f2145d4b1bd7bf98a2c
+
+
+
+Faz-Hernandez, et al.    Expires 18 October 2020               [Page 90]
+
+Internet-Draft                hash-to-curve                   April 2020
+
+
    Q0.x    = 455d7359198a678bf4de0a6dafbe7929acb93e7dc5b50a260e5998
              0828038247c22a88b73a517bdbcb0b90671037ea84
    Q0.y    = c4737acffcf31b97bccb55923fd5629d896a636f50f46ab01aaf55
@@ -5033,15 +5080,6 @@ Internet-Draft                hash-to-curve                   April 2020
 
 G.2.2.  P384_XMD:SHA-512_SSWU_NU_
 
-
-
-
-
-Faz-Hernandez, et al.    Expires 11 October 2020               [Page 90]
-
-Internet-Draft                hash-to-curve                   April 2020
-
-
    suite   = P384_XMD:SHA-512_SSWU_NU_
    dst     = P384_XMD:SHA-512_SSWU_NU_TESTGEN
 
@@ -5052,6 +5090,14 @@ Internet-Draft                hash-to-curve                   April 2020
              163b065258ed1323a35eeea5cb1ea86355ba31b9f9
    u[0]    = ec21664b5b562ca14c6e3d882e1d688a6565985c8486af3c4d8951
              8ce283f9f2b7cc8a5b55968c62f85b420678821e83
+
+
+
+Faz-Hernandez, et al.    Expires 18 October 2020               [Page 91]
+
+Internet-Draft                hash-to-curve                   April 2020
+
+
    Q.x     = e301de73b2aa0d7d10916a1c96fbb5b257a763e07af63b5070eeae
              a5b5802e95e8dbe2d781bb2b071393d7076dd05ddd
    Q.y     = 54fc88309ad1877a0161d3306248f79b740f10f10006b05a47f81a
@@ -5090,14 +5136,6 @@ Internet-Draft                hash-to-curve                   April 2020
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-
-
-
-Faz-Hernandez, et al.    Expires 11 October 2020               [Page 91]
-
-Internet-Draft                hash-to-curve                   April 2020
-
-
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
    P.x     = 28c7dafb30a83e5cf3c984eeb191ebe742954f87963c91fc717b9e
              bf3880cf40837a8c5ccc734846ae98ad6096462459
@@ -5108,6 +5146,14 @@ Internet-Draft                hash-to-curve                   April 2020
    Q.x     = 28c7dafb30a83e5cf3c984eeb191ebe742954f87963c91fc717b9e
              bf3880cf40837a8c5ccc734846ae98ad6096462459
    Q.y     = 32e3251f9869e546ef37311696fa047c8e45e60a809de166ecda3c
+
+
+
+Faz-Hernandez, et al.    Expires 18 October 2020               [Page 92]
+
+Internet-Draft                hash-to-curve                   April 2020
+
+
              23d95cf8532248dfd87e4e50b3eaa1e3d704d5ce53
 
 G.2.3.  P384_XMD:SHA-512_SVDW_RO_
@@ -5146,14 +5192,6 @@ G.2.3.  P384_XMD:SHA-512_SVDW_RO_
              a4816f508d060c3a85d34b885ddf77955fd5917df3
    Q0.y    = 2d5a3486cf641336a92617d4a22a502dfe8791b13849488520b309
              f7fb1916b5338c24a883147bbfcd34093244efc788
-
-
-
-Faz-Hernandez, et al.    Expires 11 October 2020               [Page 92]
-
-Internet-Draft                hash-to-curve                   April 2020
-
-
    Q1.x    = 2112ebec9794ee455a30d3dc1a7e00b4d48eda6585ee5bb6b7c569
              96a1ecfbdcbe744d3da5c10965422f4f979e69caca
    Q1.y    = a3cb85d19867d48195da52305b0e02dae32c8a396aa6e28f25edb2
@@ -5164,6 +5202,14 @@ Internet-Draft                hash-to-curve                   April 2020
              cb2cc9f74cd9fa492fd158c7587d5d0e1aea9c4b15
    P.y     = 332a94ff5101e3cfcd55a1449e8a99376c5985ece155079e498085
              4ae9be1c2e93d5d2643600480d7b693046bd2b4b79
+
+
+
+Faz-Hernandez, et al.    Expires 18 October 2020               [Page 93]
+
+Internet-Draft                hash-to-curve                   April 2020
+
+
    u[0]    = cd1ef357a816a8e353c6cf37023067226bdec751b30855abc440d4
              fa7ab6e65a0c20ce04fa1e4af21e40725d6705aa87
    u[1]    = 7d9982d89b869fe5fd0712be092f426c9ae4d92d9c53d6c8955310
@@ -5202,14 +5248,6 @@ Internet-Draft                hash-to-curve                   April 2020
    Q1.x    = ddde570972e875a0e40e6e6e277341d38a3a0af0d52bd9575293d0
              d9a90b7f2c60b1568c34c1b0720369203e580bcec1
    Q1.y    = fa7df2fb5c0b9e462b237e75749842ffadc43f0cd57fcd9b863716
-
-
-
-Faz-Hernandez, et al.    Expires 11 October 2020               [Page 93]
-
-Internet-Draft                hash-to-curve                   April 2020
-
-
              a1aecec0cef768562af664d10bbb92008bdb00aaed
 
 G.2.4.  P384_XMD:SHA-512_SVDW_NU_
@@ -5220,6 +5258,14 @@ G.2.4.  P384_XMD:SHA-512_SVDW_NU_
    msg     =
    P.x     = a2c7fd2c9097273267214a8031b0fdc7c5e3475a08ad27940ce6da
              329f55ceeb19046cd9f3f3dc2043ed1e0633f848aa
+
+
+
+Faz-Hernandez, et al.    Expires 18 October 2020               [Page 94]
+
+Internet-Draft                hash-to-curve                   April 2020
+
+
    P.y     = 4c6d2e0a28bb0b2c68c4116a11896b235eba951f222e7966b86e3a
              709df700d10a338eef31180cc8ed084d5c962d04c0
    u[0]    = 63956551cf429ada10d0caaf0834dfc7147bac3cafe8562b3f8327
@@ -5258,14 +5304,6 @@ G.2.4.  P384_XMD:SHA-512_SVDW_NU_
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-
-
-
-Faz-Hernandez, et al.    Expires 11 October 2020               [Page 94]
-
-Internet-Draft                hash-to-curve                   April 2020
-
-
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -5276,6 +5314,14 @@ Internet-Draft                hash-to-curve                   April 2020
    P.y     = 2f59cbe11b24e0c13c5318ef52438576d7109079ca0590e923cdbb
              76de4f692ff250cc46a4cf06316804e680f964365b
    u[0]    = aad065adfec6745b83223ebb23f9769cd8457ec1857479d3d01eb2
+
+
+
+Faz-Hernandez, et al.    Expires 18 October 2020               [Page 95]
+
+Internet-Draft                hash-to-curve                   April 2020
+
+
              ac6f709a5a19033d67373d30f3054c3a4f43f94ef3
    Q.x     = 277012d7c8638c070e7b04672a3e56c4150acc31616461d6429b56
              e21f8824952e0194fcd2dc9858a4f915dc3dea61ec
@@ -5315,13 +5361,6 @@ G.3.1.  P521_XMD:SHA-512_SSWU_RO_
              a5f253bd6b0290e111e1786fabf7e8a10ba92a753a9fa47d11283a
              aa0952f366c3cf6ac2c99f3d
 
-
-
-Faz-Hernandez, et al.    Expires 11 October 2020               [Page 95]
-
-Internet-Draft                hash-to-curve                   April 2020
-
-
    msg     = abc
    P.x     = 00dcec1a83b676247293e96b1672f67aa5d041a4ded49f542a971a
              60603dd39194f4d8e587f640563a9ab57dcc69af638129b220683f
@@ -5331,6 +5370,14 @@ Internet-Draft                hash-to-curve                   April 2020
              d11e7fc96e068276ad1319c2
    u[0]    = 01a6690248c6ef08ec5d44c0575d44f5765566499588e1045e758a
              47f570cf6c1de50150b7af602456c4f760e2fa45d14ac7fb34c6e6
+
+
+
+Faz-Hernandez, et al.    Expires 18 October 2020               [Page 96]
+
+Internet-Draft                hash-to-curve                   April 2020
+
+
              d95073dc0c702e5bd91e7bbb
    u[1]    = 01da78c8dd0af9fa8829197bc20e5e21b6062233ccc08de4bb2874
              9be38edc6d3379dd08ffeeb4fd7cd578ba70db97f970e29c92209a
@@ -5370,14 +5417,6 @@ Internet-Draft                hash-to-curve                   April 2020
    Q1.x    = 00d7e1b5b264815c8a2369aea5bb661bbdbabc9dbbbd76ee233d94
              9b5cecc6df31421f5d8ab0f883008f57cb9c52b00f98e2868c1cd9
              8def8f936a6eabbfdcf6417a
-
-
-
-Faz-Hernandez, et al.    Expires 11 October 2020               [Page 96]
-
-Internet-Draft                hash-to-curve                   April 2020
-
-
    Q1.y    = 01bd3775c515c159b697cf472f4d79357daf0a9513164cdc8ff2cb
              3078f6fc29dcff42c4c140fab6686b8345511fbe42b58b48bde38c
              1ac19a6cd7f4702f9f01d1d9
@@ -5387,6 +5426,14 @@ Internet-Draft                hash-to-curve                   April 2020
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+
+
+
+Faz-Hernandez, et al.    Expires 18 October 2020               [Page 97]
+
+Internet-Draft                hash-to-curve                   April 2020
+
+
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -5426,14 +5473,6 @@ G.3.2.  P521_XMD:SHA-512_SSWU_NU_
    P.x     = 019a3f7c090d30f6d743e9e36cff15d19d783409e6f0c3319cd88a
              82a0d85082121aaa0c64019b62b0ba3dc7a2d8b9d4fe6c4efdd04c
              5496a5741cbb264d82fdc117
-
-
-
-Faz-Hernandez, et al.    Expires 11 October 2020               [Page 97]
-
-Internet-Draft                hash-to-curve                   April 2020
-
-
    P.y     = 014b3da70eced4d7a0d8c4d218707d5cf4ed280fd6faea35f41527
              76ce84e74b7e06a9278e8b4c900ef01739c496c6d406c2c94c9328
              9f64e852617e75f4705c77eb
@@ -5443,6 +5482,14 @@ Internet-Draft                hash-to-curve                   April 2020
    Q.x     = 019a3f7c090d30f6d743e9e36cff15d19d783409e6f0c3319cd88a
              82a0d85082121aaa0c64019b62b0ba3dc7a2d8b9d4fe6c4efdd04c
              5496a5741cbb264d82fdc117
+
+
+
+Faz-Hernandez, et al.    Expires 18 October 2020               [Page 98]
+
+Internet-Draft                hash-to-curve                   April 2020
+
+
    Q.y     = 014b3da70eced4d7a0d8c4d218707d5cf4ed280fd6faea35f41527
              76ce84e74b7e06a9278e8b4c900ef01739c496c6d406c2c94c9328
              9f64e852617e75f4705c77eb
@@ -5482,14 +5529,6 @@ Internet-Draft                hash-to-curve                   April 2020
              0ea9b904ba1689daa0b4e152
 
    msg     = a512_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-
-
-
-Faz-Hernandez, et al.    Expires 11 October 2020               [Page 98]
-
-Internet-Draft                hash-to-curve                   April 2020
-
-
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -5499,6 +5538,14 @@ Internet-Draft                hash-to-curve                   April 2020
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+
+
+
+Faz-Hernandez, et al.    Expires 18 October 2020               [Page 99]
+
+Internet-Draft                hash-to-curve                   April 2020
+
+
    P.x     = 018787d70cc75cb6ea20b5b3375a7ef0da589e87d3479b86b0c0ed
              dfb97f89fdd6b365f913354e2866fd93d713c65596c09f9098cf4d
              0a4446c1b44f3c81282cd436
@@ -5538,14 +5585,6 @@ G.3.3.  P521_XMD:SHA-512_SVDW_RO_
              c4fc9e85ccb6e7283933c9dd
    Q0.y    = 01c78d5b0eb535f6f45f230428d689e7e0128a1c188236ab8d8c7a
              18485c57b8268ab2b397d0c86478abaabe0ed74612680b2a151cc8
-
-
-
-Faz-Hernandez, et al.    Expires 11 October 2020               [Page 99]
-
-Internet-Draft                hash-to-curve                   April 2020
-
-
              83a8f58069b1122448e939a4
    Q1.x    = 014c6b2c3d9fe9ff072dff67421ef46b418a22014f631f933d83e6
              f9e201f4336cbd37331956f830517b7e4fcd60d9651bb69cd54091
@@ -5555,6 +5594,14 @@ Internet-Draft                hash-to-curve                   April 2020
              d8098f0ea723c41e43a2ebfa
 
    msg     = abc
+
+
+
+Faz-Hernandez, et al.    Expires 18 October 2020              [Page 100]
+
+Internet-Draft                hash-to-curve                   April 2020
+
+
    P.x     = 01862ddce0e7cc152035d791552f1987f2fe2ce329719fcf518331
              68ad3ea547d779db26c3df4aa4d49dea84060b1db9dd73edb068c5
              9fa8bbc10a953fc204ba1bac
@@ -5594,14 +5641,6 @@ Internet-Draft                hash-to-curve                   April 2020
              33ead7b10220be451fd9f73c0b76b41107d3f7a34b106019066fb1
              dce62d01bb159c28ca522635
    Q0.x    = 015f0a1551dab034361ac6d169b22c5b791bc37115a8c1963914ec
-
-
-
-Faz-Hernandez, et al.    Expires 11 October 2020              [Page 100]
-
-Internet-Draft                hash-to-curve                   April 2020
-
-
              bc88831ba7b0783a88d2cc5a74dd15cfae4853626547317e241168
              9c2ccf485ee1c3d77f02a8fc
    Q0.y    = 018cbe38b428a3d99b7cd8d3ac106f192d7f1339acc6f607df34a7
@@ -5611,6 +5650,14 @@ Internet-Draft                hash-to-curve                   April 2020
              ff448daa37d9ceced9e1f1d04961315186785a7b18338c553f68db
              99ba6c2685be430e34df2b56
    Q1.y    = 01e9b6eebd22dec4b2f7d9390f27b1bb272208158d8c7310f87d95
+
+
+
+Faz-Hernandez, et al.    Expires 18 October 2020              [Page 101]
+
+Internet-Draft                hash-to-curve                   April 2020
+
+
              f2adf5cbeee01abf2d57ac7c87f4371c4e3d5101d2bd969173c732
              4d2dc67a0ed335ab78316fcf
 
@@ -5649,15 +5696,6 @@ Internet-Draft                hash-to-curve                   April 2020
              051ab79e3848a51f12ef52761eaf5bac5a446a7b672004f359dc58
              ea7802ef42885fc91be92673
 
-
-
-
-
-Faz-Hernandez, et al.    Expires 11 October 2020              [Page 101]
-
-Internet-Draft                hash-to-curve                   April 2020
-
-
 G.3.4.  P521_XMD:SHA-512_SVDW_NU_
 
    suite   = P521_XMD:SHA-512_SVDW_NU_
@@ -5668,6 +5706,14 @@ G.3.4.  P521_XMD:SHA-512_SVDW_NU_
              c3bd592df65b173853099516c95038e72533948c000925270362d5
              3d0fad01fa6aec9c78762388
    P.y     = 00278bb05790e3dd7ed51a8278e9f2640fba8f43ea86a69ee27824
+
+
+
+Faz-Hernandez, et al.    Expires 18 October 2020              [Page 102]
+
+Internet-Draft                hash-to-curve                   April 2020
+
+
              1ab5bf81484bebc99dfe86d030b313645cde7c3370cf59eef266cd
              41d4b1c78d6438aa25ecfe98
    u[0]    = 0077f213e8ad0559e9033873e49cea8675207f9888bef708176656
@@ -5706,14 +5752,6 @@ G.3.4.  P521_XMD:SHA-512_SVDW_NU_
              082e2cf5eed1dcac31f2b824
    u[0]    = 01b3d3dac2106736a290ed6ea746887edc4ea2e0e3a8e3f0be231f
              499ef11cd71f3526c7aefe471c3c5d713639addf78528a75e3e7f2
-
-
-
-Faz-Hernandez, et al.    Expires 11 October 2020              [Page 102]
-
-Internet-Draft                hash-to-curve                   April 2020
-
-
              07b96fc435620577bf3c2600
    Q.x     = 003751fc6b4c758ccf3559237f9a24782b073482fa0d0e847b344f
              b234d4acf782fa474d8fc71e94a90882703e52580e6d4fc33713a6
@@ -5724,6 +5762,14 @@ Internet-Draft                hash-to-curve                   April 2020
 
    msg     = a512_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+
+
+
+Faz-Hernandez, et al.    Expires 18 October 2020              [Page 103]
+
+Internet-Draft                hash-to-curve                   April 2020
+
+
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -5762,14 +5808,6 @@ G.4.1.  curve25519_XMD:SHA-256_ELL2_RO_
              952aadde1c
    u[0]    = 029d51ce5a9f1e92ccfb4f9992a833f46680893d8214cc3cc39fbe
              0dc21ec4d3
-
-
-
-Faz-Hernandez, et al.    Expires 11 October 2020              [Page 103]
-
-Internet-Draft                hash-to-curve                   April 2020
-
-
    u[1]    = 34dd938d1a410ae0463069873b482282d0a148bf39c5c5cd00a06c
              deeb053ae0
    Q0.x    = 5e97e35ce155f1a9d2d1480b04aa2033fa47de7f193674810da0aa
@@ -5780,6 +5818,13 @@ Internet-Draft                hash-to-curve                   April 2020
              4a652ee2b8
    Q1.y    = 1f02d73bad67e92ca65c93e8806cbac16ea852126cd37eb44a1bf5
              c0ca195c46
+
+
+
+Faz-Hernandez, et al.    Expires 18 October 2020              [Page 104]
+
+Internet-Draft                hash-to-curve                   April 2020
+
 
    msg     = abc
    P.x     = 5dbca64b6e5b1d52a14834a1d27318c9027cdedd9f2b3f0e043831
@@ -5818,14 +5863,6 @@ Internet-Draft                hash-to-curve                   April 2020
              94021551af
 
    msg     = a512_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-
-
-
-Faz-Hernandez, et al.    Expires 11 October 2020              [Page 104]
-
-Internet-Draft                hash-to-curve                   April 2020
-
-
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -5837,6 +5874,14 @@ Internet-Draft                hash-to-curve                   April 2020
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
    P.x     = 3e5bfe6e86c7d42722fef7a41de5e89334652578e88c882a262094
              2d35d9b5cb
+
+
+
+Faz-Hernandez, et al.    Expires 18 October 2020              [Page 105]
+
+Internet-Draft                hash-to-curve                   April 2020
+
+
    P.y     = 14dd0ff480b0b00f3f59eb3c229e9f6583e4eb79a357881532378d
              c5b434bee3
    u[0]    = 26e9ad5f584bd6bb708eee63cdd5f3cf9f88d36b129c89f8d54180
@@ -5874,14 +5919,6 @@ G.4.2.  curve25519_XMD:SHA-256_ELL2_NU_
              97acaabec0
    P.y     = 288ccd99f3bb33b62dfdd62f17f800f39e9f89877a325c9f873669
              0474f0f900
-
-
-
-Faz-Hernandez, et al.    Expires 11 October 2020              [Page 105]
-
-Internet-Draft                hash-to-curve                   April 2020
-
-
    u[0]    = 4ed68e01a4912df4088e77ae8a22cc47a44943b9ac2e6e23218bdb
              9f67416742
    Q.x     = 282ff81ffae65d15ad359823e471d986c3d9e9db12b9ed081e221c
@@ -5893,6 +5930,14 @@ Internet-Draft                hash-to-curve                   April 2020
    P.x     = 0cec9c2220c2968db5922a249306d3e5671feaa8940a345ba90f29
              5f1a4b7dfd
    P.y     = 467885e1292df27c09a5a686566d70010ca91910350d8127c62f9e
+
+
+
+Faz-Hernandez, et al.    Expires 18 October 2020              [Page 106]
+
+Internet-Draft                hash-to-curve                   April 2020
+
+
              5db1a59dd6
    u[0]    = 334a59d8fef7f1f7ec781e5ebcc43f0675ffabd33e472c8156f121
              9063558153
@@ -5930,14 +5975,6 @@ G.4.3.  curve25519_XMD:SHA-512_ELL2_RO_
    msg     =
    P.x     = 145f1a4a2cdbb00f721af9fc0720755d082dd3309d585413bdc57b
              79deed66a4
-
-
-
-Faz-Hernandez, et al.    Expires 11 October 2020              [Page 106]
-
-Internet-Draft                hash-to-curve                   April 2020
-
-
    P.y     = 265318a216a4eaed4db4dd4e27abe71b94d558e1b60a0363f8194d
              6cad7502c3
    u[0]    = 60dee63d38dba6095eeb95ea343132b6f33d84e809d92a64ba6f34
@@ -5949,6 +5986,14 @@ Internet-Draft                hash-to-curve                   April 2020
    Q0.y    = 1aa11a09488c7ee589a232d7b57c3836de0f0b389f2eaf39114e5c
              691ccf6ee5
    Q1.x    = 2a263d203c2c54af0205dae921d2f8a24fe3e7aee9f6e401eb385b
+
+
+
+Faz-Hernandez, et al.    Expires 18 October 2020              [Page 107]
+
+Internet-Draft                hash-to-curve                   April 2020
+
+
              81412aa964
    Q1.y    = 5a8ea52fd22c0727ba4a52bd52ff51a6ab9bb70c666e79a1015e03
              9b66654467
@@ -5986,14 +6031,6 @@ Internet-Draft                hash-to-curve                   April 2020
              ea34431881
    Q1.x    = 48ed35ddea926f8b2a55bd20b18c3d22bf737767c7261d1ab3efe4
              123c4cb7a9
-
-
-
-Faz-Hernandez, et al.    Expires 11 October 2020              [Page 107]
-
-Internet-Draft                hash-to-curve                   April 2020
-
-
    Q1.y    = 0099c457a4a9c6ab32d5a89a1f35f6e54d684e58a74fe62442a39c
              2934425955
 
@@ -6005,6 +6042,14 @@ Internet-Draft                hash-to-curve                   April 2020
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+
+
+
+Faz-Hernandez, et al.    Expires 18 October 2020              [Page 108]
+
+Internet-Draft                hash-to-curve                   April 2020
+
+
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
    P.x     = 6cff0ffff35c1bf2f342153245740fbcb008e46640688f9aca30cf
@@ -6042,14 +6087,6 @@ G.4.4.  curve25519_XMD:SHA-512_ELL2_NU_
              97fc374c79
 
    msg     = abc
-
-
-
-Faz-Hernandez, et al.    Expires 11 October 2020              [Page 108]
-
-Internet-Draft                hash-to-curve                   April 2020
-
-
    P.x     = 17591a1748995feb03b4184f6abf0361dfe9bc64fc461bec862581
              137f146812
    P.y     = 70825eeb8f20888be50833e1401511464ee7ddecd6294266177fb7
@@ -6060,6 +6097,14 @@ Internet-Draft                hash-to-curve                   April 2020
              a70253cfba
    Q.y     = 55108cb5971fb8c68e2bd2d869ea52495e8056075857c8656cb580
              3a1c42ee89
+
+
+
+
+Faz-Hernandez, et al.    Expires 18 October 2020              [Page 109]
+
+Internet-Draft                hash-to-curve                   April 2020
+
 
    msg     = abcdef0123456789
    P.x     = 7ccf1faaeb988112434274c401de53e74f14c9afb17c07ce1942a0
@@ -6098,14 +6143,6 @@ G.5.  edwards25519
 
 G.5.1.  edwards25519_XMD:SHA-256_ELL2_RO_
 
-
-
-
-Faz-Hernandez, et al.    Expires 11 October 2020              [Page 109]
-
-Internet-Draft                hash-to-curve                   April 2020
-
-
    suite   = edwards25519_XMD:SHA-256_ELL2_RO_
    dst     = edwards25519_XMD:SHA-256_ELL2_RO_TESTGEN
 
@@ -6117,6 +6154,14 @@ Internet-Draft                hash-to-curve                   April 2020
    u[0]    = 181ac326893428d453e8dc058bc62a11d82c6a8c205749184abee3
              c94ea43a3d
    u[1]    = 715cbdfc73cc240655c96e503b6afedbb675de116847afa7c22f97
+
+
+
+Faz-Hernandez, et al.    Expires 18 October 2020              [Page 110]
+
+Internet-Draft                hash-to-curve                   April 2020
+
+
              71fdf8b70a
    Q0.x    = 3903bb757a7e768049f8f0a08b96ad3c034eb694cfae969fb732be
              0996df3caf
@@ -6154,14 +6199,6 @@ Internet-Draft                hash-to-curve                   April 2020
              ed7b6bbf4b
    u[1]    = 7d224f3cf3cedd36bcb6edb33c28e932d6af67cfa7d84499674990
              e5fb8cade1
-
-
-
-Faz-Hernandez, et al.    Expires 11 October 2020              [Page 110]
-
-Internet-Draft                hash-to-curve                   April 2020
-
-
    Q0.x    = 240dbda5cb37d8f621b22229b02491800cb37f89fe54f14e83d1a2
              7e55a6c277
    Q0.y    = 476ae78a0c17dbb5bd75fa7b16d12f1600bad9fb764329bf50ec17
@@ -6173,6 +6210,14 @@ Internet-Draft                hash-to-curve                   April 2020
 
    msg     = a512_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+
+
+
+Faz-Hernandez, et al.    Expires 18 October 2020              [Page 111]
+
+Internet-Draft                hash-to-curve                   April 2020
+
+
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -6210,14 +6255,6 @@ G.5.2.  edwards25519_XMD:SHA-256_ELL2_NU_
              7c3d8a25d4
    u[0]    = 596f2044f5405f877cf98ae8e5550d449ddd57272f19cc07e8f035
              6e8548d383
-
-
-
-Faz-Hernandez, et al.    Expires 11 October 2020              [Page 111]
-
-Internet-Draft                hash-to-curve                   April 2020
-
-
    Q.x     = 28b50697900178d1a2451b09cc1c573c13da4d9b2afe3be423cd4c
              1bcd39dc2b
    Q.y     = 57e58c8840f2e7dbc594ccf45b8663833e34317ae2d956135c5c01
@@ -6229,6 +6266,14 @@ Internet-Draft                hash-to-curve                   April 2020
    P.y     = 0ff9bb8cdde0ecf76699e1b5ee3e373e1303e468c736af5517b090
              874e01298c
    u[0]    = 22649b4f1cda6266d740d8d546d10fa453af8b8b047945221b4e98
+
+
+
+Faz-Hernandez, et al.    Expires 18 October 2020              [Page 112]
+
+Internet-Draft                hash-to-curve                   April 2020
+
+
              3ea28f7b37
    Q.x     = 7e9989153c21a1fa25580ceebf4793230abf6fd049a4710a20fc4d
              73e61c56b6
@@ -6266,14 +6311,6 @@ Internet-Draft                hash-to-curve                   April 2020
    Q.x     = 5100fa3465951cc6a7eadafde16a43dfcee775505bdd05ccddb3f0
              9e26102d9d
    Q.y     = 4a3846b73f87fa9e46c4aae0bf2634699adcd324d85d0478989aa8
-
-
-
-Faz-Hernandez, et al.    Expires 11 October 2020              [Page 112]
-
-Internet-Draft                hash-to-curve                   April 2020
-
-
              2a3bbd1d00
 
 G.5.3.  edwards25519_XMD:SHA-512_ELL2_RO_
@@ -6285,6 +6322,14 @@ G.5.3.  edwards25519_XMD:SHA-512_ELL2_RO_
    P.x     = 355199593026fae01f068dcf79adb8dbf2da7b1f040bde080723fe
              aa94b65042
    P.y     = 1af40833bed99ac42f445e9494dbcc489561b3995a40e3864a1b1b
+
+
+
+Faz-Hernandez, et al.    Expires 18 October 2020              [Page 113]
+
+Internet-Draft                hash-to-curve                   April 2020
+
+
              db6ed6ecd0
    u[0]    = 5561279bae7b4bffa30d2249dd56904af4e9b5844770979ae0b2c9
              8f8af24082
@@ -6322,14 +6367,6 @@ G.5.3.  edwards25519_XMD:SHA-512_ELL2_RO_
              96a0b2b3a4
    P.y     = 2dd85e9585fba5ab3c22a07cf07b2cf4a19b10dcab49e1a4c8f952
              461e644bbc
-
-
-
-Faz-Hernandez, et al.    Expires 11 October 2020              [Page 113]
-
-Internet-Draft                hash-to-curve                   April 2020
-
-
    u[0]    = 13058c758c796708365f21094f489345f4e30e49b1d380ed064e9b
              7b8d107cad
    u[1]    = 319be66d0491de283eeab5f2745e6ab9b19eec8c13e6c8b7069e2e
@@ -6341,6 +6378,14 @@ Internet-Draft                hash-to-curve                   April 2020
    Q1.x    = 220a2fcbd88a7fbe61f263ba6b12d37aee8bdfb5a40e6a4fe89ad7
              e438643432
    Q1.y    = 1ad7fb8388761fdcb8cc206d87cb5bd1bd6a316e66ce782e7a10ea
+
+
+
+Faz-Hernandez, et al.    Expires 18 October 2020              [Page 114]
+
+Internet-Draft                hash-to-curve                   April 2020
+
+
              fc5284f412
 
    msg     = a512_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -6378,14 +6423,6 @@ G.5.4.  edwards25519_XMD:SHA-512_ELL2_NU_
    msg     =
    P.x     = 34110392cf2797c527e790379df1a910afa14ae2c368b246a26b9d
              9925ac0c71
-
-
-
-Faz-Hernandez, et al.    Expires 11 October 2020              [Page 114]
-
-Internet-Draft                hash-to-curve                   April 2020
-
-
    P.y     = 115fe9c145cec75332210f75537f89a5af2e9e81928ab63225fcf0
              db4b9f0b41
    u[0]    = 50d07fff97e9f2984a1763dab82e1da8bf6628f4bcbd8a5a8b3bc2
@@ -6397,6 +6434,14 @@ Internet-Draft                hash-to-curve                   April 2020
 
    msg     = abc
    P.x     = 4a3cd9eca424168031e7c2ef6ea8872919ee1d109e9ca6e2f1dfd1
+
+
+
+Faz-Hernandez, et al.    Expires 18 October 2020              [Page 115]
+
+Internet-Draft                hash-to-curve                   April 2020
+
+
              9563ff63eb
    P.y     = 2a78994752306e4a4eb1c629b3c8625cc26f143f1fe35fc728d295
              222eba7890
@@ -6434,14 +6479,6 @@ Internet-Draft                hash-to-curve                   April 2020
    P.y     = 511dee3fcc3a422738c453a58acdeafc08fc76f862e97d678adb26
              f03d0963b5
    u[0]    = 6b143c02ab4a45c6a7e71b6a97a71a1fc8a089f7fb83164256518f
-
-
-
-Faz-Hernandez, et al.    Expires 11 October 2020              [Page 115]
-
-Internet-Draft                hash-to-curve                   April 2020
-
-
              40f15d96d3
    Q.x     = 3408ca8aad2b2f343a498ce85bc6e56cccf391bdfbac0b7c178250
              3d3b3b0a1d
@@ -6451,6 +6488,15 @@ Internet-Draft                hash-to-curve                   April 2020
 G.6.  curve448
 
 G.6.1.  curve448_XMD:SHA-512_ELL2_RO_
+
+
+
+
+
+Faz-Hernandez, et al.    Expires 18 October 2020              [Page 116]
+
+Internet-Draft                hash-to-curve                   April 2020
+
 
    suite   = curve448_XMD:SHA-512_ELL2_RO_
    dst     = curve448_XMD:SHA-512_ELL2_RO_TESTGEN
@@ -6490,14 +6536,6 @@ G.6.1.  curve448_XMD:SHA-512_ELL2_RO_
              fb4f
    u[0]    = ed9f4bb9bc0253536c45d34688b3096725db693f5af1659ba48ca0
              67aab8ca495594d9d94d3cd8bd394b79c566c57baa16cb330db3ac
-
-
-
-Faz-Hernandez, et al.    Expires 11 October 2020              [Page 116]
-
-Internet-Draft                hash-to-curve                   April 2020
-
-
              e7ed
    u[1]    = 2fca5d5201399fab882009d46078874a17337843a86a64863ef931
              6a3ef293395c4de2b306dab0002169295fe2dcbd973a8210c6b63a
@@ -6508,6 +6546,14 @@ Internet-Draft                hash-to-curve                   April 2020
    Q0.y    = 6aad2e7445bb01f43797bf6b24efe796f6925b162f97b29addab33
              24fb6b5556158a73c9b2c32463ffc1de536cd65d1ca49fa064621a
              e503
+
+
+
+Faz-Hernandez, et al.    Expires 18 October 2020              [Page 117]
+
+Internet-Draft                hash-to-curve                   April 2020
+
+
    Q1.x    = 9f8608ff76d7f998ad3376f1dfb7a3441bec0ec6d4f9950dcd16eb
              84894a271e547781249f59c25c82535eb07fb103f4088eac45aa01
              5bff
@@ -6546,14 +6592,6 @@ Internet-Draft                hash-to-curve                   April 2020
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-
-
-
-Faz-Hernandez, et al.    Expires 11 October 2020              [Page 117]
-
-Internet-Draft                hash-to-curve                   April 2020
-
-
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -6564,6 +6602,14 @@ Internet-Draft                hash-to-curve                   April 2020
              af4f
    P.y     = cfe11f4cb36327bfbd1c711b53b839eed8a71947c1209439608523
              3f815703afe136c85a93ee527308b30270c4085147a2e652dfa102
+
+
+
+Faz-Hernandez, et al.    Expires 18 October 2020              [Page 118]
+
+Internet-Draft                hash-to-curve                   April 2020
+
+
              f742
    u[0]    = b63a92b6bdd618be51a73c6bd34af23975c73dbe9962be502c08a7
              563feb81710a798034c70d9ed7bbe25d81b1c8c27c2f850c258447
@@ -6602,14 +6648,6 @@ G.6.2.  curve448_XMD:SHA-512_ELL2_NU_
    Q.x     = db4e79e5d711e6c82d9aec2c3d8ab7f41148a7fe1fb6d7ff586214
              ee9f752b3f331627a2f258f289c5fe38536e8e213a9ea06695c051
              0a38
-
-
-
-Faz-Hernandez, et al.    Expires 11 October 2020              [Page 118]
-
-Internet-Draft                hash-to-curve                   April 2020
-
-
    Q.y     = 491f677655e9bcefcda66b92cdb02d41b73604ef7dc23a69af993c
              eca5841ff33312b9b844a02f3054056ab2811da3ff1fc34251b6d5
              f80b
@@ -6620,6 +6658,14 @@ Internet-Draft                hash-to-curve                   April 2020
              2c80
    P.y     = b6565ca3d04f50d8d22511af542a55118f8cac4c6235ff42e0c3ca
              066c2f98d5038022fe42009bf5435e8c049027ce3cb9592784f3ec
+
+
+
+Faz-Hernandez, et al.    Expires 18 October 2020              [Page 119]
+
+Internet-Draft                hash-to-curve                   April 2020
+
+
              4449
    u[0]    = 801a7cdf6b9926e3617df4617178487dbb92a7ef310170316664a6
              4f878a20214af859bf691e1e50499dd937e09f5e7b040c22a521ca
@@ -6658,14 +6704,6 @@ Internet-Draft                hash-to-curve                   April 2020
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-
-
-
-Faz-Hernandez, et al.    Expires 11 October 2020              [Page 119]
-
-Internet-Draft                hash-to-curve                   April 2020
-
-
    P.x     = 5e8679afb70fe836ab83577840234764b9879ddd9509bd3fa6894f
              111bc21b18718a3b2fb4faab519cd3096bbb9c9ffe828c8702f770
              0c95
@@ -6676,6 +6714,14 @@ Internet-Draft                hash-to-curve                   April 2020
              2ff361e33f9eb0b4dd89b30b1a7b79a756cdd611b4c2d1e416c621
              cec1
    Q.x     = a9757d017a87fc07ed43268cacac61c3bdad1e1b73c7fa8c816fca
+
+
+
+Faz-Hernandez, et al.    Expires 18 October 2020              [Page 120]
+
+Internet-Draft                hash-to-curve                   April 2020
+
+
              1343b05d051eeb66650a114422a1554905fafbc866cbb8f5ae13e1
              5c18
    Q.y     = 1fdc90b44483cc5a5c90e83954366456a2762938b7e88b3c8dd09a
@@ -6715,13 +6761,6 @@ G.7.1.  edwards448_XMD:SHA-512_ELL2_RO_
              17ed33f2dcd85176759845b957d35f32b9c56b1396796e33439b4c
              6a54
 
-
-
-Faz-Hernandez, et al.    Expires 11 October 2020              [Page 120]
-
-Internet-Draft                hash-to-curve                   April 2020
-
-
    msg     = abc
    P.x     = f583e90dcba4b48f7b0a510bcf5e3b1ef4a73e4280ab8836480335
              177cf251299ef33fed2c7492082f5a443297dd79dd4bdf7f30b1bb
@@ -6731,6 +6770,14 @@ Internet-Draft                hash-to-curve                   April 2020
              9d84
    u[0]    = 18ea51720224486cad1aecd722b5748a4e6297df7603f264983ce1
              519a471097d328e7871c694b57e83de0cfec01629f9b1c36a66478
+
+
+
+Faz-Hernandez, et al.    Expires 18 October 2020              [Page 121]
+
+Internet-Draft                hash-to-curve                   April 2020
+
+
              a949
    u[1]    = 0c9de3b0e748d03e3c914ddecca5d4507a11860ed73abc2c953ed6
              2811fca4fe3f154e8da9520c019d9c8389eff12936e09c2e0f8e8b
@@ -6770,14 +6817,6 @@ Internet-Draft                hash-to-curve                   April 2020
    Q1.x    = 8c8ca5ae4be432d0d27d0eecd4acde82c555a4be4b297c6255b954
              4af4567c03ed07eb1f71f119f5083dfe69773e72c873ddfe1f0cf0
              3cbf
-
-
-
-Faz-Hernandez, et al.    Expires 11 October 2020              [Page 121]
-
-Internet-Draft                hash-to-curve                   April 2020
-
-
    Q1.y    = 6b8ad4dcb2ff061a9b6f94da5e13c6443e0bb596f22d1a9320f06b
              094a6a4253f02d224c05717bdebb477c33537dc3d1c1a2a840596a
              ba73
@@ -6787,6 +6826,14 @@ Internet-Draft                hash-to-curve                   April 2020
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+
+
+
+Faz-Hernandez, et al.    Expires 18 October 2020              [Page 122]
+
+Internet-Draft                hash-to-curve                   April 2020
+
+
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -6826,14 +6873,6 @@ G.7.2.  edwards448_XMD:SHA-512_ELL2_NU_
    P.x     = 47fb0126fc722d16fc3d7bfc3b0b801571f058290408ecae2bf8c8
              cc35e0fd702d0a169f6d9cb0cbe24ad226ae78aaf2f77dd906806d
              3de3
-
-
-
-Faz-Hernandez, et al.    Expires 11 October 2020              [Page 122]
-
-Internet-Draft                hash-to-curve                   April 2020
-
-
    P.y     = 4f8aec8c3c24ab883ad2f8a7803f74f72a0ec20daefd63c96e89ff
              eac238436b27316569ca3885fd3a694e9d7337b3335564ae27db78
              5bb4
@@ -6843,6 +6882,14 @@ Internet-Draft                hash-to-curve                   April 2020
    Q.x     = 2f37119d6f0854731f013563fc174fcb93b0099adfed722cb988e7
              6a597b05d489ae3f559485b0400997369a851f0385673633cb8811
              360f
+
+
+
+Faz-Hernandez, et al.    Expires 18 October 2020              [Page 123]
+
+Internet-Draft                hash-to-curve                   April 2020
+
+
    Q.y     = 7ca637e249804a7cbe2c07f339e6996a29c612a4b95fa3462335ef
              3f87b44f8a700c33839e1abdb455abd6434c01b24ccee7b62179ec
              b165
@@ -6882,14 +6929,6 @@ Internet-Draft                hash-to-curve                   April 2020
              04e0
 
    msg     = a512_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-
-
-
-Faz-Hernandez, et al.    Expires 11 October 2020              [Page 123]
-
-Internet-Draft                hash-to-curve                   April 2020
-
-
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -6899,6 +6938,14 @@ Internet-Draft                hash-to-curve                   April 2020
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+
+
+
+Faz-Hernandez, et al.    Expires 18 October 2020              [Page 124]
+
+Internet-Draft                hash-to-curve                   April 2020
+
+
    P.x     = bd4fe82690a62897671e2cbdf5f9dee5b42e0d33e7fc300233a594
              a1e0cd296ad9f001962a0988d68815dd919c85236061f7945d7f94
              0fa9
@@ -6938,14 +6985,6 @@ G.8.1.  secp256k1_XMD:SHA-256_SSWU_RO_
    Q1.x    = 5201629b2ad52b0ca37aee01a1e13b7e2ecc91ce3c279a6667293f
              c1afe06c5c
    Q1.y    = d8ad74bd3f93081816e48cf21a5d5f3a8bae7dd426c901384f88a9
-
-
-
-Faz-Hernandez, et al.    Expires 11 October 2020              [Page 124]
-
-Internet-Draft                hash-to-curve                   April 2020
-
-
              f5cc0bf1a9
 
    msg     = abc
@@ -6955,6 +6994,14 @@ Internet-Draft                hash-to-curve                   April 2020
              bff9903e66
    u[0]    = b2567533bc95dbc88e637fbcb9a748a8786708194d31c8df97f79d
              171838272b
+
+
+
+Faz-Hernandez, et al.    Expires 18 October 2020              [Page 125]
+
+Internet-Draft                hash-to-curve                   April 2020
+
+
    u[1]    = 99bb9aa261e47e4bea6e7c8d0f37ff62ab8ad9ad8ef0bb11784a97
              28446f9069
    Q0.x    = 3c894e4fdf3cba59f70e3f9c900d3900e9a0526ad278c5fb007c62
@@ -6994,14 +7041,6 @@ Internet-Draft                hash-to-curve                   April 2020
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-
-
-
-Faz-Hernandez, et al.    Expires 11 October 2020              [Page 125]
-
-Internet-Draft                hash-to-curve                   April 2020
-
-
    P.x     = ab878eaae0e759a225f472c09a201c29be494f648a25f6ec1e1196
              fc87258749
    P.y     = 5e4942b57b11bbae42d4a889019d1a54813905e5178c44d7cdbe46
@@ -7011,6 +7050,14 @@ Internet-Draft                hash-to-curve                   April 2020
    u[1]    = 934f2e766b69d419308ec93a709c16470344aaf9101440bc05e074
              ed6cbe3e3d
    Q0.x    = c96b220ac2d34570de856340a6146b4942f54424ec1bc1e05b63d0
+
+
+
+Faz-Hernandez, et al.    Expires 18 October 2020              [Page 126]
+
+Internet-Draft                hash-to-curve                   April 2020
+
+
              c756066e9a
    Q0.y    = b204aaeeb0fe9139e8c8dd64cbbe37208449a5613e081e12c2709e
              685899f200
@@ -7050,14 +7097,6 @@ G.8.2.  secp256k1_XMD:SHA-256_SSWU_NU_
 
    msg     = abcdef0123456789
    P.x     = a505dac19323f3ec71aa84a5984146923c59b0720634e7667d675e
-
-
-
-Faz-Hernandez, et al.    Expires 11 October 2020              [Page 126]
-
-Internet-Draft                hash-to-curve                   April 2020
-
-
              506994bb52
    P.y     = 24c8166d66e7fb737696f37e818ce8656e7d32acf6d24ecddefe0e
              d15dde620d
@@ -7067,6 +7106,13 @@ Internet-Draft                hash-to-curve                   April 2020
              506994bb52
    Q.y     = 24c8166d66e7fb737696f37e818ce8656e7d32acf6d24ecddefe0e
              d15dde620d
+
+
+
+Faz-Hernandez, et al.    Expires 18 October 2020              [Page 127]
+
+Internet-Draft                hash-to-curve                   April 2020
+
 
    msg     = a512_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -7106,14 +7152,6 @@ G.8.3.  secp256k1_XMD:SHA-256_SVDW_RO_
    Q0.x    = 31d9cec3b1cd1f46c0e777f61b4974296f2f78644bf03d6c723cc0
              75a371b608
    Q0.y    = 8b50c0b855f66f608c01bb24d3c4d14998e7c95c73cd6da727c752
-
-
-
-Faz-Hernandez, et al.    Expires 11 October 2020              [Page 127]
-
-Internet-Draft                hash-to-curve                   April 2020
-
-
              01eb4258ee
    Q1.x    = 35536a1bfee29f3aa387c69cbff2077c33b391c3dc9ec63a4e129b
              ef5f771721
@@ -7124,6 +7162,14 @@ Internet-Draft                hash-to-curve                   April 2020
    P.x     = df5fdf0c1ab9ad2519e04b17f3c31fc521209f95302d6ea3f48e32
              eba3aa2fc1
    P.y     = d253f780074bcd75b013920fad69d47643fbd1755cae12b4c160ae
+
+
+
+Faz-Hernandez, et al.    Expires 18 October 2020              [Page 128]
+
+Internet-Draft                hash-to-curve                   April 2020
+
+
              adb23cd34f
    u[0]    = aeb022d4b701a2fc0adc5a8996c9e81581744a2f7c286f92560d0c
              8b5680608f
@@ -7162,14 +7208,6 @@ Internet-Draft                hash-to-curve                   April 2020
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-
-
-
-Faz-Hernandez, et al.    Expires 11 October 2020              [Page 128]
-
-Internet-Draft                hash-to-curve                   April 2020
-
-
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -7180,6 +7218,14 @@ Internet-Draft                hash-to-curve                   April 2020
              1f1994dc9a
    u[0]    = d13ba9f2012fa3b19fc1aeaa35b7eefed4389909491a05e2c88dc8
              e81f847d08
+
+
+
+Faz-Hernandez, et al.    Expires 18 October 2020              [Page 129]
+
+Internet-Draft                hash-to-curve                   April 2020
+
+
    u[1]    = e99cbb84be75005216494eb95979e7567fdf9c257d8305e146597b
              056195a5d4
    Q0.x    = 010aa437bb197d03387fb57756f9fda7e9e73f3a8b38bba8a11965
@@ -7218,14 +7264,6 @@ G.8.4.  secp256k1_XMD:SHA-256_SVDW_NU_
    Q.x     = 7617367b4d893c4f7a0286cde9c5b92d828244a3d19fb8c17cecd2
              5cd08ff439
    Q.y     = d129b568725160c2af879746d2a9087a07f94e526ed3ee5b2b1d5d
-
-
-
-Faz-Hernandez, et al.    Expires 11 October 2020              [Page 129]
-
-Internet-Draft                hash-to-curve                   April 2020
-
-
              bb1cc0bd33
 
    msg     = abcdef0123456789
@@ -7236,6 +7274,14 @@ Internet-Draft                hash-to-curve                   April 2020
    u[0]    = 11db2699d5241142e8afd619ea3ba174033b0b5fbc15d197fd7759
              7237b7851b
    Q.x     = 27e97147da349e94eff05e11f816d97eae95bfb4b37d1656266219
+
+
+
+Faz-Hernandez, et al.    Expires 18 October 2020              [Page 130]
+
+Internet-Draft                hash-to-curve                   April 2020
+
+
              99780cfea4
    Q.y     = 9fdb96f46863ae060cc05b1b36478e28d97c1e33ac743715c2d36c
              7feece408d
@@ -7274,14 +7320,6 @@ G.9.1.  BLS12381G1_XMD:SHA-256_SSWU_RO_
    P.y     = 079cb66d890e5264194b450416a5924d2684a2c74736a2f23b186e
              6203365d6571b48f308888fe370e09129c2e5e0f58
    u[0]    = 14700e34d15178550475044b044b4e41ca8d52a655c34f8afea856
-
-
-
-Faz-Hernandez, et al.    Expires 11 October 2020              [Page 130]
-
-Internet-Draft                hash-to-curve                   April 2020
-
-
              d21d499f48c9370d2bae4ae8351305493e48d36ab5
    u[1]    = 17e2da57f6fd3f11dba6119db4cd26b03e63e67b4e42db678d9c41
              fdfcaff00ba336d8563abcd9da6c17d2e1784ee858
@@ -7292,6 +7330,14 @@ Internet-Draft                hash-to-curve                   April 2020
    Q1.x    = 1357bddd2bc6c8e752f3cf498ffe29ae87d8ff933701ae76f82d28
              39b0d9aee5229d4fff54dfb8223be0d88fa4485863
    Q1.y    = 1047032671f2f4b3f7eb3596cbd05a3c754ff7eeb0c176de47eb41
+
+
+
+Faz-Hernandez, et al.    Expires 18 October 2020              [Page 131]
+
+Internet-Draft                hash-to-curve                   April 2020
+
+
              9a3e2009c56a09e3a11ccba9fbd1dc30589ae8a254
 
    msg     = abc
@@ -7330,14 +7376,6 @@ Internet-Draft                hash-to-curve                   April 2020
    Q1.y    = 1878f926302468949ef290b4fee621d1172e072eda1b42e366df68
              fc87f53c35583dbc043009e0b38a04a9b1ff617efe
 
-
-
-
-Faz-Hernandez, et al.    Expires 11 October 2020              [Page 131]
-
-Internet-Draft                hash-to-curve                   April 2020
-
-
    msg     = a512_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -7348,6 +7386,14 @@ Internet-Draft                hash-to-curve                   April 2020
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+
+
+
+Faz-Hernandez, et al.    Expires 18 October 2020              [Page 132]
+
+Internet-Draft                hash-to-curve                   April 2020
+
+
    P.x     = 0a81ca09b6a8c05712396801e6432a87b14ab1f764fa519e9f5158
              16607283fe2a653a191fc1c8fee89cd30195e7a8e1
    P.y     = 083920349dca94312892cd50eb79f7103a32ca82f88fa4eb54d34e
@@ -7386,14 +7432,6 @@ G.9.2.  BLS12381G1_XMD:SHA-256_SSWU_NU_
    P.x     = 04a7a63d24439ade3cd16eaab22583c95b061136bd5013cf109d92
              983f902c31f49c95cbeb97222577e571e97a68a32e
    P.y     = 09a8aa8d6e4b409bbe9a6976c016688269024d6e9d378ed25e8b49
-
-
-
-Faz-Hernandez, et al.    Expires 11 October 2020              [Page 132]
-
-Internet-Draft                hash-to-curve                   April 2020
-
-
              86194511f479228fa011ec88b8f4c57a621fc12187
    u[0]    = 08accd9a1bd4b75bb2e9f014ac354a198cbf607f0061d00a6286f5
              544cf4f9ecc1439e3194f570cbbc7b96d1a754f231
@@ -7404,6 +7442,14 @@ Internet-Draft                hash-to-curve                   April 2020
 
    msg     = abcdef0123456789
    P.x     = 05c59faaf88187f51cd9cc6c20ca47ac66cc38d99af88aef2e82d7
+
+
+
+Faz-Hernandez, et al.    Expires 18 October 2020              [Page 133]
+
+Internet-Draft                hash-to-curve                   April 2020
+
+
              f35104168916f200a79562e64bc843f83cdc8a4675
    P.y     = 0ef0cac938db3bf3e52848b1f8370aa2ab8001f3f982748196c62c
              95d3811c61ec55b31003c7248d115ecdf03ef89266
@@ -7442,14 +7488,6 @@ G.9.3.  BLS12381G1_XMD:SHA-256_SVDW_RO_
 
    msg     =
    P.x     = 16585794bf1d38f6d4652ea760ec454f0da43fdba33782cda8f9bc
-
-
-
-Faz-Hernandez, et al.    Expires 11 October 2020              [Page 133]
-
-Internet-Draft                hash-to-curve                   April 2020
-
-
              ddb46b2ff01155db0eba2b6f4da30743274fc8c539
    P.y     = 0dac22dea5a99d4c983a0d97e1b7a6a3d14265f11298645a619eb9
              6c35bb95bb95e6200dcd100927b08b218f65a5b2ae
@@ -7460,6 +7498,14 @@ Internet-Draft                hash-to-curve                   April 2020
    Q0.x    = 0d8deaf1a9fe87c5710466d0cd554b243a041a97c15228f1c65be6
              244b5e1a575f4ab2762a1cc9ff18d45d4f1494e2c6
    Q0.y    = 10f34398a670e72e7e1f2af3b13c94cb2aec40edeb2518dae31d6a
+
+
+
+Faz-Hernandez, et al.    Expires 18 October 2020              [Page 134]
+
+Internet-Draft                hash-to-curve                   April 2020
+
+
              b9f510039e07ed0ac79116d84f548fc4811ad0c9ff
    Q1.x    = 0a36d0d4051eb32d253b069d1d15c5b69cefbb75bf38d66d43b374
              32b34f88b2553bf063c6533ca87112c3e95c295ebf
@@ -7498,14 +7544,6 @@ Internet-Draft                hash-to-curve                   April 2020
    Q0.y    = 077cc4c8f74f33a0e6036d32c4407b3021b0be82e0eba80a1fc119
              f69a071c52f25764dbd72f2cafb420264c079b7691
    Q1.x    = 06a856de4eb5651a21c68c7e85796c16e417d7d97cb3e1b74bbc40
-
-
-
-Faz-Hernandez, et al.    Expires 11 October 2020              [Page 134]
-
-Internet-Draft                hash-to-curve                   April 2020
-
-
              42b340e647fc41cc570bd160fe9917d32a47bc8b5e
    Q1.y    = 15c4e89949bbdb253d333018a1417150f8a78187c343f5bbdf25d9
              62c513df1d96ee1059facab028549ebe7716164466
@@ -7516,6 +7554,14 @@ Internet-Draft                hash-to-curve                   April 2020
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+
+
+
+Faz-Hernandez, et al.    Expires 18 October 2020              [Page 135]
+
+Internet-Draft                hash-to-curve                   April 2020
+
+
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -7554,14 +7600,6 @@ G.9.4.  BLS12381G1_XMD:SHA-256_SVDW_NU_
    Q.y     = 114963eba7ffc5e3bc4c86a1dbf73b4952bfd60fa94449b2adc81d
              ee0e974e4afd228a1af4fb1d4ede14cdc727deed0c
 
-
-
-
-Faz-Hernandez, et al.    Expires 11 October 2020              [Page 135]
-
-Internet-Draft                hash-to-curve                   April 2020
-
-
    msg     = abc
    P.x     = 03929609010843a52432b815cb5fb90d6a5ee8a10cc75c70d6f1bd
              64642a0057d2e69187ea3fff0a34e7e72b1cef5948
@@ -7572,6 +7610,14 @@ Internet-Draft                hash-to-curve                   April 2020
    Q.x     = 0f5b63a00bd63757fab41dbc9b47b679650d903a83934eb920a130
              97d58dd5f82068c059bf1de52971373c3cc83c427e
    Q.y     = 03f2547ce0337e25a9fad27335f499b054cc1ab3e1c29366959599
+
+
+
+Faz-Hernandez, et al.    Expires 18 October 2020              [Page 136]
+
+Internet-Draft                hash-to-curve                   April 2020
+
+
              b5d362602bedcce56c0e039c4ec0fbbdf041564892
 
    msg     = abcdef0123456789
@@ -7607,17 +7653,6 @@ Internet-Draft                hash-to-curve                   April 2020
    Q.y     = 04d0dbee266de33d9bee538d188e209476ebe3b34e58a19d0ea6ae
              542219b3f3549685ef3eef82991feb23ddde098285
 
-
-
-
-
-
-
-Faz-Hernandez, et al.    Expires 11 October 2020              [Page 136]
-
-Internet-Draft                hash-to-curve                   April 2020
-
-
 G.10.  BLS12-381 G2
 
 G.10.1.  BLS12381G2_XMD:SHA-256_SSWU_RO_
@@ -7631,6 +7666,14 @@ G.10.1.  BLS12381G2_XMD:SHA-256_SSWU_RO_
        + I * 047b256db45b23e13635cddd67072cf7f369314e096fc723c264a1
              e88dc3d336552d66aed5ae67543d50c92ff4978cf5
    P.y     = 0a177145767bccfe5fdd1d67a4a708d402fe136c7bd8f95fafb00d
+
+
+
+Faz-Hernandez, et al.    Expires 18 October 2020              [Page 137]
+
+Internet-Draft                hash-to-curve                   April 2020
+
+
              10129d19bdf69680a99ff621b473247ebd35fa703a
        + I * 181d143dd817317258a3e7726f47baf1da1034c22c6a4d7ca30b57
              1ed2c681da8b699daa69e209f57f7915f32b64e734
@@ -7666,14 +7709,6 @@ G.10.1.  BLS12381G2_XMD:SHA-256_SSWU_RO_
              38bd529d8b12f8246c2a0549d201cad8c0d4f5b0dd
    P.y     = 183830c4c8cc2e47b6e24e98450f58f7f75fa95d5e090851625056
              816ae0c9e7d318f37598b2a7d4245ca90d21769594
-
-
-
-Faz-Hernandez, et al.    Expires 11 October 2020              [Page 137]
-
-Internet-Draft                hash-to-curve                   April 2020
-
-
        + I * 0108655de744d0dfba2bc80a9071c9785798dc20e88597afb14387
              c0cdf8b62983483b4c01bee671330c20778505c133
    u[0]    = 0b7b2d371fc970671ddf7bc9ca4a70a1bd286af4487b497e460c0b
@@ -7687,6 +7722,14 @@ Internet-Draft                hash-to-curve                   April 2020
    Q0.x    = 198d5f5fad8e1594ed98ee3d5f5b24b58e6cb8ae37372f6028e7be
              ffa0e7a16b0958e13f92f322f513b85eacdd88d0c2
        + I * 09288d195828e46e7c058b22115af5c1bde20cb7462a3f9d648818
+
+
+
+Faz-Hernandez, et al.    Expires 18 October 2020              [Page 138]
+
+Internet-Draft                hash-to-curve                   April 2020
+
+
              8fa937e2c0bee3aa188622312f87e12b48660a66d2
    Q0.y    = 16a0916a0c42492649701f0520c075d4cc66d74cd8fb4f9c6d2631
              cac1bb48e357bae0b97bb7f87f1b08539ac944f46a
@@ -7722,14 +7765,6 @@ Internet-Draft                hash-to-curve                   April 2020
              73bd682ef45a51e691d7c884965fb530cc85d6476d
        + I * 07fd016eb7f3785362f75a0150d9e73d5ae13631c491075d73eab5
              c3b6ceb8391d909926d0c519fb83fbe889dae667eb
-
-
-
-Faz-Hernandez, et al.    Expires 11 October 2020              [Page 138]
-
-Internet-Draft                hash-to-curve                   April 2020
-
-
    Q0.y    = 0412f055892cdf7d79479c0988255c2203ea28b3c5a627d56c1f40
              82af50f77d4cebf7027844dce518b976c9a39672e4
        + I * 04ccba6481c5c8e37bacddbff06cce8f9c0be34d40c0d384c8c74d
@@ -7742,6 +7777,14 @@ Internet-Draft                hash-to-curve                   April 2020
              cfd4d13dbb68734001417d0c1587b9082b593ab9ca
        + I * 0ac81f1093f8be742b331c1c04e9cb0fb75ac72e87ae5da9fa395b
              043fb83fbdabe9e54331ec3a3a754f845939b118f6
+
+
+
+
+Faz-Hernandez, et al.    Expires 18 October 2020              [Page 139]
+
+Internet-Draft                hash-to-curve                   April 2020
+
 
    msg     = a512_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -7778,14 +7821,6 @@ Internet-Draft                hash-to-curve                   April 2020
        + I * 0f34f279582a5599f062ead9c83092f3a30cdc9e2be395d72886ab
              2f5f9ea165ea3994d8454c954503454b881086a84a
    Q1.x    = 0cabb5826e6bf948e30cbb094b72685aa1d93ea49fdd9d54828b7f
-
-
-
-Faz-Hernandez, et al.    Expires 11 October 2020              [Page 139]
-
-Internet-Draft                hash-to-curve                   April 2020
-
-
              fb9df582e3d9405f33b9ae3ad3b6fd51863ff68c56
        + I * 0604d687830b1dba2cd28c644709475c7a5427aa15278df2db06f5
              9a48bcfb52061f77b6f5b637fc345e2bc64aa7e5ba
@@ -7795,6 +7830,17 @@ Internet-Draft                hash-to-curve                   April 2020
              c2f1975c513965b7556ee44db2f74202ac178c72e4
 
 G.10.2.  BLS12381G2_XMD:SHA-256_SSWU_NU_
+
+
+
+
+
+
+
+Faz-Hernandez, et al.    Expires 18 October 2020              [Page 140]
+
+Internet-Draft                hash-to-curve                   April 2020
+
 
    suite   = BLS12381G2_XMD:SHA-256_SSWU_NU_
    dst     = BLS12381G2_XMD:SHA-256_SSWU_NU_TESTGEN
@@ -7834,14 +7880,6 @@ G.10.2.  BLS12381G2_XMD:SHA-256_SSWU_NU_
              ca7d4e3c975bce0d28510c442e9a932be5880ee5b1
        + I * 0f105595e14847cc9a41fd70deb3240337678b266304100ec261ad
              d2585b991c7268bb1a325d2f871b327e8d04fd579b
-
-
-
-Faz-Hernandez, et al.    Expires 11 October 2020              [Page 140]
-
-Internet-Draft                hash-to-curve                   April 2020
-
-
    Q.x     = 0f4c4441758b65035fab9adeb84dc4fcbf48e218085111cbc9e329
              4dde67ba93411d747d090fbc5aa144900df054ed32
        + I * 0bcf59db7917f351264cbc8825c04e88885b01f8228ecef238e39c
@@ -7852,6 +7890,14 @@ Internet-Draft                hash-to-curve                   April 2020
              7eeebf046d4d9f3bdaff6f9c7d6c80e0700018b86e
 
    msg     = abcdef0123456789
+
+
+
+Faz-Hernandez, et al.    Expires 18 October 2020              [Page 141]
+
+Internet-Draft                hash-to-curve                   April 2020
+
+
    P.x     = 1498937f0ed18c49ebbcdee579b58ce235f3ab03be5dc809e1df25
              e2e0b4eb4c672f4eaf26df91f3755d6367df55d5be
        + I * 0910b2d55e210122fab2d2dae81e6a440fd22e925e422aaf16a8fd
@@ -7890,14 +7936,6 @@ Internet-Draft                hash-to-curve                   April 2020
    P.y     = 0cc46cea229960bfbe25831162c27f96cf8bb14c017938e35b6369
              87a306521915456fbd40633c6d5a30f61bce52a3f5
        + I * 166c1abec65af593d291dbd05e5d7d28f1a9ffb73751d65f49d760
-
-
-
-Faz-Hernandez, et al.    Expires 11 October 2020              [Page 141]
-
-Internet-Draft                hash-to-curve                   April 2020
-
-
              84493f3da707ee2bbf54cf6de5bbaac2ffa0028c31
    u[0]    = 0cda6b874f8c41862c078099aa76d607be51d913a2e3f997539a09
              93bda31892292818c74aa9be035f234df2576fe49a
@@ -7908,6 +7946,14 @@ Internet-Draft                hash-to-curve                   April 2020
        + I * 0b80a0dee7817f29f8bf3374a3c033586d695391dc95280b2143d3
              98817bbf9b76547c54b81fd2b8ad24a6afa1dd8524
    Q.y     = 07bba42c7be028acf9111e51cfa6d98f2949f12635847e938b0f79
+
+
+
+Faz-Hernandez, et al.    Expires 18 October 2020              [Page 142]
+
+Internet-Draft                hash-to-curve                   April 2020
+
+
              80705da9abd1d77bbdaf86f90512e0139ac0e57a6b
        + I * 0266340a1aaaf26dd5ec892f33dcb6a217dcde9b8d39dff5d277d9
              3130ee3e33e43a2cb83665fee8648d610da2967fa5
@@ -7946,14 +7992,6 @@ G.10.3.  BLS12381G2_XMD:SHA-256_SVDW_RO_
              054691835c6f45e3a8218ed67c68a2c492b35a89b6
        + I * 196e511b97c1f3802e37478224bb5ce12082cee5dd8e5630ff194d
              8537c7b30ace746d39c051cf3f6a836a861f0fca71
-
-
-
-Faz-Hernandez, et al.    Expires 11 October 2020              [Page 142]
-
-Internet-Draft                hash-to-curve                   April 2020
-
-
    Q1.y    = 16860436cd82bd22c166a92a38bae79036e357ce185ddcc481cef4
              6edf398d377b5d85f38325be63270cf09c31329583
        + I * 067e5d9c24201fa688bb9101b96fff337625778d0a6cb00495fa5a
@@ -7964,6 +8002,14 @@ Internet-Draft                hash-to-curve                   April 2020
              c887a260aa4606b7d98e5c33dfd851c663414ad3c3
        + I * 079f8af3f253f0666f1064b17ed3410fdc939df8f9d88e315b6779
              aed6a4ddc04ded7964a27609c3d7a863aedf7bc4a6
+
+
+
+Faz-Hernandez, et al.    Expires 18 October 2020              [Page 143]
+
+Internet-Draft                hash-to-curve                   April 2020
+
+
    P.y     = 174bd837996c0011d9c6c52ba32f42c4deed087d4b92892ff2fc52
              d5e7cd9376c908e9d3c1bca6bd8c1ae0fc3d55270f
        + I * 1217b2bf7749930a3a61a7146556d29873f184ac244f64293bfbbe
@@ -8002,14 +8048,6 @@ Internet-Draft                hash-to-curve                   April 2020
              438a7a2ded8b20cd301eb0b90a99680780e58e9b67
        + I * 1614bd193043568c4c143204157dd0f66b4887885663e6e4fd5004
              460e7b8e16aa6866eb233a2d64554feb454cccbe38
-
-
-
-Faz-Hernandez, et al.    Expires 11 October 2020              [Page 143]
-
-Internet-Draft                hash-to-curve                   April 2020
-
-
    u[0]    = 15788d0f014f083f4a6bad1e3ec01905fb81328fac060d575f9220
              ddb7fc495f6cca48e8f46c69153ef0152caa692bbe
        + I * 0c50eaf8096785caee1e08ff3d9d46b8e4c1a1600406d4ab8c9c96
@@ -8020,6 +8058,14 @@ Internet-Draft                hash-to-curve                   April 2020
              3f9b45cbe16d3003dd28fcaaa4558f8f8f261a654a
    Q0.x    = 0f28fbb84bb1f17f8a3c238f9d771b453207b760a58bd72fce2535
              7d33b390d88f7af572f0a2c94970d7e5d12a66fbf4
+
+
+
+Faz-Hernandez, et al.    Expires 18 October 2020              [Page 144]
+
+Internet-Draft                hash-to-curve                   April 2020
+
+
        + I * 0996946bb4b5561b224db4d397b3083a10ccda8fe0d551f80232d2
              b97db1c0eb8586b91fe20bebd540f7ff391119cf3a
    Q0.y    = 1895d19145cb256a3458e5c5ca0de5f372f19363e27fb438f9716b
@@ -8058,14 +8104,6 @@ Internet-Draft                hash-to-curve                   April 2020
        + I * 011de2ac3ddd0fce82f81ff1506a4da615a545f5f1a38d76493489
              d043dec0298423741a607fd45b57526b2dbf7c0512
    u[1]    = 054e5964345b7e40826826b6c0773ae205596eed3f430649873afb
-
-
-
-Faz-Hernandez, et al.    Expires 11 October 2020              [Page 144]
-
-Internet-Draft                hash-to-curve                   April 2020
-
-
              7ff36a0a4583d947b5e1dcaaf64b62067814724329
        + I * 0c022493d6de52b27b95ba1097b803e2834ce69555e25bda8df9a6
              0bbd7cb8ef2d11eea6ea85856626a1f35c2ccccb95
@@ -8076,6 +8114,14 @@ Internet-Draft                hash-to-curve                   April 2020
    Q0.y    = 19d7a9d430474d353c6ccf18db52263cd2fa4685e0194b3ec55672
              dfea3645c08feb3643dc8a4e995406e3b1108e7275
        + I * 03ac4fde5674418babfbbc6bad412d789f018ad49135ef84e6cbb1
+
+
+
+Faz-Hernandez, et al.    Expires 18 October 2020              [Page 145]
+
+Internet-Draft                hash-to-curve                   April 2020
+
+
              b63eb9fb61d7d12caa9ccb4e710d1badff2fe47515
    Q1.x    = 08d580532d837ce1cd78df4e3668b123eafd519b93e359ba64e028
              1740742649b76c960e5390e1fd4ea4abcc84afcaca
@@ -8114,14 +8160,6 @@ G.10.4.  BLS12381G2_XMD:SHA-256_SVDW_NU_
              473525f58bef08bbf1c09ad153628f2d3ca9f44bdc
 
    msg     = abc
-
-
-
-Faz-Hernandez, et al.    Expires 11 October 2020              [Page 145]
-
-Internet-Draft                hash-to-curve                   April 2020
-
-
    P.x     = 14662fda486645b71a497576120b99cd0c8fd72c52ade4b13ce4de
              57ca05acba0facf6bdc1a230539a96e97fbfdef9fd
        + I * 0646f0fb608d82ba68075d6af75c61b762c5b47de2c620822e88ac
@@ -8132,6 +8170,14 @@ Internet-Draft                hash-to-curve                   April 2020
              c9743b0b39c6b9be5b5bf6d224f7eff946b3c4a149
    u[0]    = 108fd37b239357d783a30c9aeea3129316f236cfa8e279bbd921ea
              7c642ffbb69e4f731cbee57b2df7b17e9ec19c8c91
+
+
+
+Faz-Hernandez, et al.    Expires 18 October 2020              [Page 146]
+
+Internet-Draft                hash-to-curve                   April 2020
+
+
        + I * 110587325ae905e360ad84368fe6aed5b8636bab77eaac3921c046
              8154c5d72ddd3ca2e9d57d393d55929344a34215c2
    Q.x     = 065cca134296b189b4587c38490d674900cac3cb7a6e14ff96f415
@@ -8170,14 +8216,6 @@ Internet-Draft                hash-to-curve                   April 2020
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-
-
-
-Faz-Hernandez, et al.    Expires 11 October 2020              [Page 146]
-
-Internet-Draft                hash-to-curve                   April 2020
-
-
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -8188,6 +8226,14 @@ Internet-Draft                hash-to-curve                   April 2020
        + I * 04049cf80dd5f3a2734402d6ef6ce67f35189a4ace622dae7cf02b
              8b9662cd58f05dde5b6920fb93c6126c5895e9a3a5
    P.y     = 17d3e820f7bbe21882d2386b2551b166e373886de4eb12db4dedeb
+
+
+
+Faz-Hernandez, et al.    Expires 18 October 2020              [Page 147]
+
+Internet-Draft                hash-to-curve                   April 2020
+
+
              040e0012c550ddf16c2f799f59344401f806597504
        + I * 17c4ba04067afa10b378f45b8bc17fd1547966e50361c2666754e1
              77624a833f05f0ceae45002525f15bf48ae49e28ec
@@ -8226,14 +8272,6 @@ Authors' Addresses
 
    Nick Sullivan
    Cloudflare
-
-
-
-Faz-Hernandez, et al.    Expires 11 October 2020              [Page 147]
-
-Internet-Draft                hash-to-curve                   April 2020
-
-
    101 Townsend St
    San Francisco,
    United States of America
@@ -8243,6 +8281,14 @@ Internet-Draft                hash-to-curve                   April 2020
 
    Riad S. Wahby
    Stanford University
+
+
+
+
+Faz-Hernandez, et al.    Expires 18 October 2020              [Page 148]
+
+Internet-Draft                hash-to-curve                   April 2020
+
 
    Email: rsw@cs.stanford.edu
 
@@ -8285,4 +8331,14 @@ Internet-Draft                hash-to-curve                   April 2020
 
 
 
-Faz-Hernandez, et al.    Expires 11 October 2020              [Page 148]
+
+
+
+
+
+
+
+
+
+
+Faz-Hernandez, et al.    Expires 18 October 2020              [Page 149]
