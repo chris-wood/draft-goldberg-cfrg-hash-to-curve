@@ -1,6 +1,6 @@
 {
   "magic": "B8n2c@e8kvfx",
-  "timestamp": "2020-04-09T15:57:06.213253+00:00",
+  "timestamp": "2020-04-16T12:59:20.682382+00:00",
   "repo": "cfrg/draft-irtf-cfrg-hash-to-curve",
   "labels": [
     {
@@ -4063,9 +4063,9 @@
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
-      "body": "Right now we have only the P-256, curve/edwards25519, and curve/edwards448.\r\n\r\nTODO: add others\r\n\r\n- [x] P-384\r\n- [x] P-521\r\n- [x] SECP256k1\r\n- [x] BLS12-381 G1\r\n- [ ] BLS12-381 G2\r\n- [ ] SSWU for p = 5 mod 8 --- no specific curves in mind, but in principle they could exist (e.g., M-221 converted to short Weierstrass)\r\n\r\nThe potential optimizations for Shallue-van de Woestijne are pretty minimal, so I am assuming that for all of the above we would give straight-line impls only of Simplified SWU. Glad to consider doing otherwise, though.",
+      "body": "Right now we have only the P-256, curve/edwards25519, and curve/edwards448.\r\n\r\nTODO: add others\r\n\r\n- [x] P-384\r\n- [x] P-521\r\n- [x] SECP256k1\r\n- [x] BLS12-381 G1\r\n- [x] BLS12-381 G2\r\n- [x] SSWU for p = 5 mod 8 --- no specific curves in mind, but in principle they could exist (e.g., M-221 converted to short Weierstrass)\r\n\r\nThe potential optimizations for Shallue-van de Woestijne are pretty minimal, so I am assuming that for all of the above we would give straight-line impls only of Simplified SWU. Glad to consider doing otherwise, though.",
       "createdAt": "2019-10-27T06:13:12Z",
-      "updatedAt": "2020-04-09T15:41:14Z",
+      "updatedAt": "2020-04-10T06:22:47Z",
       "closedAt": null,
       "comments": [
         {
@@ -4089,7 +4089,7 @@
       "id": "MDU6SXNzdWU1MTgxMTU3MzI=",
       "title": "is_square for field extensions",
       "url": "https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/issues/190",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "kwantam",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
@@ -4098,8 +4098,8 @@
       ],
       "body": "Michael Scott points out (citing El Mrabet and Joye's book, which cites [Adj and Rodriguez-Henriquez](https://eprint.iacr.org/2012/685)) that is_square can be computed more cheaply than an exponentiation in extension fields.\r\n\r\nThe idea is that, for (a0, a1) = a in F(p^2), is_square(a) = is_square(|a|) over F(p), where |a| = a0^2 + a1^2. For an extension tower at least, one assumes this can be done recursively.\r\n\r\nAt the very least we should cite the AR-H12 paper when discussing is_square().",
       "createdAt": "2019-11-05T23:15:36Z",
-      "updatedAt": "2019-11-05T23:15:43Z",
-      "closedAt": null,
+      "updatedAt": "2020-04-16T12:58:34Z",
+      "closedAt": "2020-04-16T12:58:34Z",
       "comments": []
     },
     {
@@ -5261,7 +5261,7 @@
       "labels": [],
       "body": "Congrats for the amazing work that has been and keeps being made on this document!\r\n\r\nJust a general observation: do so many suites have to be defined?\r\n\r\n`edwards25519_XMD:SHA-256_ELL2_RO_` is identical to `edwards25519_XMD:SHA_512_ELL2_RO_`, except that `H` is SHA-256 instead of SHA-512. Are both really needed?\r\n\r\nFor the same curve, should a new protocol opt for the suite using SVDW or its counterpart using Simplified SWU? It might be useful for the document to make a recommendation.\r\n\r\nIn order to facilitate interoperability, increase code reuse and provide guidance to protocol designers, would it make sense to slightly reduce the list, or make one recommendation per curve?\r\n\r\nPlease apologize if this has been discussed before. ",
       "createdAt": "2020-03-30T21:30:08Z",
-      "updatedAt": "2020-04-09T01:12:16Z",
+      "updatedAt": "2020-04-14T22:33:09Z",
       "closedAt": null,
       "comments": [
         {
@@ -5291,6 +5291,13 @@
           "body": "As a library author who recently wrote an implementation, please default to [removing options](https://www.imperialviolet.org/2016/05/16/agility.html). The job of a specification is to make decisions so we have common primitives. Every choice point in the spec is a failure to make a decision. Sometimes that's necessary, but it usually isn't. Where it is, definitely include a recommended one, but that's a baseline expectation. The preferred option is to not define the extra ones in the first place.\r\n\r\nThe worst outcome would be for different systems to make different choices and implementations are forced to support many variations to cover them all. We should pick as few as possible so everyone's very limited cryptographic testing and implementation efforts can be concentrated on the things that matter.",
           "createdAt": "2020-04-09T01:12:16Z",
           "updatedAt": "2020-04-09T01:12:16Z"
+        },
+        {
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Well said, @davidben! We'd all benefit from more input from folks implementing and using these in protocols before nailing down a minimal set of options. I'll take this to the list to see if we can get some of that feedback!",
+          "createdAt": "2020-04-14T22:33:09Z",
+          "updatedAt": "2020-04-14T22:33:09Z"
         }
       ]
     },
@@ -5304,9 +5311,9 @@
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
-      "body": "As pointed out by David Benjamin, Step 6 of expand_message_xmd is not injective! Here's two inputs that will produce the same output (b_0 = H(Z_pad + [0, 16, 0, 4, 0, 16, 0, 0])): \r\n\r\nexpand_message_xmd(msg=[], DST=[0, 16, 0, 0], len_in_bytes=16)\r\nexpand_message_xmd(msg=[0, 16, 0, 4], DST=[], len_in_bytes=16) \r\n\r\nWe should probably address this, though it's not clear what is the best way.",
+      "body": "As pointed out by David Benjamin, Step 6 of expand_message_xmd is not injective! Here are two inputs that will produce the same output (b_0 = H(Z_pad + [0, 16, 0, 4, 0, 16, 0, 0])): \r\n\r\nexpand_message_xmd(msg=[], DST=[0, 16, 0, 0], len_in_bytes=16)\r\nexpand_message_xmd(msg=[0, 16, 0, 4], DST=[], len_in_bytes=16) \r\n\r\nWe should probably address this, though it's not clear what is the best way.",
       "createdAt": "2020-04-07T20:47:49Z",
-      "updatedAt": "2020-04-09T00:48:01Z",
+      "updatedAt": "2020-04-10T15:41:03Z",
       "closedAt": null,
       "comments": [
         {
@@ -20655,7 +20662,7 @@
       "labels": [],
       "body": "This pull request fixes #166 specifying the algorithm of [BP18] for a fast cofactor clearing.",
       "createdAt": "2019-11-07T19:14:41Z",
-      "updatedAt": "2020-03-29T03:50:01Z",
+      "updatedAt": "2020-04-11T10:09:48Z",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -20715,6 +20722,13 @@
           "body": "OK, I reformatted the code samples to better match the rest of the document, moved this section into the sample code appendix, and added a sage file to test the code. See #232.\r\n\r\nPlease let me know if anything there looks amiss, and thank you again for documenting this!",
           "createdAt": "2020-03-29T03:50:00Z",
           "updatedAt": "2020-03-29T03:50:00Z"
+        },
+        {
+          "author": "mmaker",
+          "authorAssociation": "NONE",
+          "body": "Hey, \r\n\r\nthanks a lot for the additional edits, overall it looks much better now!\r\n\r\n> Ah, but just to make sure I understand correctly: the pseudocode assumes homogeneous projective coordinates, right? In other words, the projective point (X : Y : Z) corresponds to the affine point (X/Z, Y/Z), yes?\r\n\r\n\r\nYes, I tested this code on jacobian coordinates (used by zkcrypto/bls12_381) and homogeneous projective coordinates  (used by sage).\r\n\r\nPerhaps you want to mention in `#clear-cofactor-bls12381-g2` that those coordinates are called \"homogeneous\" and that it is also applicable to \"jacobian coordinates\"? The SWE that will implement those will probably already know those names from the addition formulas.\r\n\r\nThe code seems fine too! \r\n(Although maybe using python's unittests module and `range(ntests)` would be a bit more pythonic :P)",
+          "createdAt": "2020-04-11T10:09:48Z",
+          "updatedAt": "2020-04-11T10:09:48Z"
         }
       ],
       "reviews": [
@@ -23839,6 +23853,133 @@
           "body": "",
           "createdAt": "2020-04-09T15:56:33Z",
           "updatedAt": "2020-04-09T15:56:33Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 240,
+      "id": "MDExOlB1bGxSZXF1ZXN0NDAxNzc3MjE2",
+      "title": "add the remaining optimized impls",
+      "url": "https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/pull/240",
+      "state": "OPEN",
+      "author": "kwantam",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "This finishes off the remaining optimized impls in the appendix, does a slight reorg and generalization, and very slightly improves the Curve25519 and Curve448 maps.\r\n\r\ncloses #181",
+      "createdAt": "2020-04-10T06:28:49Z",
+      "updatedAt": "2020-04-14T20:04:28Z",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzkzMjU0NDk5",
+          "commit": {
+            "abbreviatedOid": "47eec81"
+          },
+          "author": "armfazh",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2020-04-14T20:04:28Z",
+          "updatedAt": "2020-04-14T20:04:28Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 241,
+      "id": "MDExOlB1bGxSZXF1ZXN0NDAxNzgyMjkw",
+      "title": "convert DST encoding to suffix free",
+      "url": "https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/pull/241",
+      "state": "OPEN",
+      "author": "kwantam",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "This implements @davidben's suggestion in #236.\r\n\r\ncloses #236",
+      "createdAt": "2020-04-10T06:48:38Z",
+      "updatedAt": "2020-04-14T22:21:02Z",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "comments": [
+        {
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "body": "ping @armfazh @chris-wood should we move forward with this? Would be nice to get -07 out and update BLS in the next few days.\r\n\r\n(Same goes for the other open PRs, but I'd guess this one wants the most scrutiny.)",
+          "createdAt": "2020-04-14T16:07:54Z",
+          "updatedAt": "2020-04-14T16:07:54Z"
+        },
+        {
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "body": "ACKing for now -- I'll try to get to this today!",
+          "createdAt": "2020-04-14T18:08:34Z",
+          "updatedAt": "2020-04-14T18:08:34Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzkzMzM2MjYw",
+          "commit": {
+            "abbreviatedOid": "793a849"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Sorry for the delay! It took me longer than I hoped to work through this :-) Previously, it was possible to find a pair of (`msg`, `DST`) tuples T1 = (`msg_1`, `DST_1`) and T2 = (`msg_2`, `DST_2`) such that H(T1) = H(T2). There's four cases: \r\n\r\n(hand waving over notation for now)\r\n\r\n1. `msg_1` = `msg_2` and `DST_1` = `DST_2`: We expect this to produce the same output, so it's fine.\r\n\r\n2. `msg_1` = `msg_2` and `DST_1` != `DST_2`: If `|DST_1|` != `|DST_2|`, then the internal suffix (`DST_prime`) differs, so the output is different. Otherwise, if the lengths are the same and the values are different, then the hashes are different, as expected.\r\n\r\n3. `msg_1` != `msg_2` and `DST_1` = `DST_2`: The prefix `Z_pad || msg` differs, so the hashes are different, as expected.\r\n\r\n4.`msg_1` != `msg_2` and `DST_1` != `DST_2`: Assume by way of contradiction that such a pair exists. If `|DST_1|` != `|DST_2|`, then the internal suffix and resulting hash differs, which is a contradiction. Otherwise, if the lengths are different, then it must be that `DST_1 = DST_2`, which is a contradiction. \r\n\r\n(Did I get that right?)",
+          "createdAt": "2020-04-14T22:21:02Z",
+          "updatedAt": "2020-04-14T22:21:02Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 242,
+      "id": "MDExOlB1bGxSZXF1ZXN0NDAxOTM5Nzg3",
+      "title": "example code for is_square in quadratic extensions",
+      "url": "https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/pull/242",
+      "state": "MERGED",
+      "author": "kwantam",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "closes #190",
+      "createdAt": "2020-04-10T14:52:02Z",
+      "updatedAt": "2020-04-16T12:58:34Z",
+      "closedAt": "2020-04-16T12:58:34Z",
+      "mergedAt": "2020-04-16T12:58:34Z",
+      "mergedBy": "chris-wood",
+      "comments": [],
+      "reviews": [
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzkzMjQzNzY2",
+          "commit": {
+            "abbreviatedOid": "72ec99c"
+          },
+          "author": "armfazh",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2020-04-14T19:48:49Z",
+          "updatedAt": "2020-04-14T19:48:49Z",
+          "comments": []
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3Mzk0NjA1NDEx",
+          "commit": {
+            "abbreviatedOid": "72ec99c"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2020-04-16T12:58:27Z",
+          "updatedAt": "2020-04-16T12:58:27Z",
           "comments": []
         }
       ]
