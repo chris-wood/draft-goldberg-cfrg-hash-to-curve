@@ -1,6 +1,6 @@
 {
   "magic": "B8n2c@e8kvfx",
-  "timestamp": "2020-04-16T12:59:20.682382+00:00",
+  "timestamp": "2020-04-17T23:05:02.803664+00:00",
   "repo": "cfrg/draft-irtf-cfrg-hash-to-curve",
   "labels": [
     {
@@ -5306,15 +5306,15 @@
       "id": "MDU6SXNzdWU1OTYxNDI0Mjg=",
       "title": "expand_message_xmd injectivity",
       "url": "https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/issues/236",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "chris-wood",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "As pointed out by David Benjamin, Step 6 of expand_message_xmd is not injective! Here are two inputs that will produce the same output (b_0 = H(Z_pad + [0, 16, 0, 4, 0, 16, 0, 0])): \r\n\r\nexpand_message_xmd(msg=[], DST=[0, 16, 0, 0], len_in_bytes=16)\r\nexpand_message_xmd(msg=[0, 16, 0, 4], DST=[], len_in_bytes=16) \r\n\r\nWe should probably address this, though it's not clear what is the best way.",
       "createdAt": "2020-04-07T20:47:49Z",
-      "updatedAt": "2020-04-10T15:41:03Z",
-      "closedAt": null,
+      "updatedAt": "2020-04-16T17:33:17Z",
+      "closedAt": "2020-04-16T17:33:17Z",
       "comments": [
         {
           "author": "jedisct1",
@@ -20655,21 +20655,21 @@
       "id": "MDExOlB1bGxSZXF1ZXN0MzM4MTk3OTIz",
       "title": "Add appendix section for `clear_cofactor` in BLS12-381 G2.",
       "url": "https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/pull/191",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "mmaker",
-      "authorAssociation": "FIRST_TIME_CONTRIBUTOR",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "This pull request fixes #166 specifying the algorithm of [BP18] for a fast cofactor clearing.",
       "createdAt": "2019-11-07T19:14:41Z",
-      "updatedAt": "2020-04-11T10:09:48Z",
-      "closedAt": null,
+      "updatedAt": "2020-04-17T23:04:31Z",
+      "closedAt": "2020-04-17T23:04:31Z",
       "mergedAt": null,
       "mergedBy": null,
       "comments": [
         {
           "author": "mmaker",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "body": "Hello @chris-wood  and @kwantam! I doublechecked the code in the pull request and the analogous rust implementation is now in https://github.com/zkcrypto/bls12_381. What do you think?",
           "createdAt": "2019-12-17T11:06:38Z",
           "updatedAt": "2019-12-17T11:06:38Z"
@@ -20690,14 +20690,14 @@
         },
         {
           "author": "mmaker",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "body": "Hey @kwantam, thanks a lot for this review! I updated the pull request integrating your comments, and rebasing it all on master to keep the git log tidied up :). What do you think?",
           "createdAt": "2020-03-11T13:25:26Z",
           "updatedAt": "2020-03-11T13:26:29Z"
         },
         {
           "author": "mmaker",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "body": "hello @kwantam ! any updates on this?\r\n\r\n(hope you're doing fine during these crazy days!)",
           "createdAt": "2020-03-23T08:18:00Z",
           "updatedAt": "2020-03-23T08:18:00Z"
@@ -20725,7 +20725,7 @@
         },
         {
           "author": "mmaker",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "body": "Hey, \r\n\r\nthanks a lot for the additional edits, overall it looks much better now!\r\n\r\n> Ah, but just to make sure I understand correctly: the pseudocode assumes homogeneous projective coordinates, right? In other words, the projective point (X : Y : Z) corresponds to the affine point (X/Z, Y/Z), yes?\r\n\r\n\r\nYes, I tested this code on jacobian coordinates (used by zkcrypto/bls12_381) and homogeneous projective coordinates  (used by sage).\r\n\r\nPerhaps you want to mention in `#clear-cofactor-bls12381-g2` that those coordinates are called \"homogeneous\" and that it is also applicable to \"jacobian coordinates\"? The SWE that will implement those will probably already know those names from the addition formulas.\r\n\r\nThe code seems fine too! \r\n(Although maybe using python's unittests module and `range(ntests)` would be a bit more pythonic :P)",
           "createdAt": "2020-04-11T10:09:48Z",
           "updatedAt": "2020-04-11T10:09:48Z"
@@ -20812,7 +20812,7 @@
             "abbreviatedOid": "41ed1e1"
           },
           "author": "mmaker",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2020-03-11T10:00:00Z",
@@ -23608,19 +23608,365 @@
       "id": "MDExOlB1bGxSZXF1ZXN0Mzk1MTkxMDg3",
       "title": "merge @mmaker's g2 cofactor clearing code",
       "url": "https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/pull/232",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "kwantam",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "This PR merges the code from #191, does some slight reformatting, and adds tests.\r\n\r\nAlso adds @mmaker as a contributor.\r\n\r\ncloses #191",
       "createdAt": "2020-03-29T03:43:34Z",
-      "updatedAt": "2020-03-29T21:59:14Z",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "comments": [],
-      "reviews": []
+      "updatedAt": "2020-04-17T23:04:32Z",
+      "closedAt": "2020-04-17T23:04:32Z",
+      "mergedAt": "2020-04-17T23:04:31Z",
+      "mergedBy": "kwantam",
+      "comments": [
+        {
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "body": "(rebased onto master)",
+          "createdAt": "2020-04-17T23:04:16Z",
+          "updatedAt": "2020-04-17T23:04:16Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3Mzk0NjEwNTM3",
+          "commit": {
+            "abbreviatedOid": "a601779"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2020-04-16T13:04:38Z",
+          "updatedAt": "2020-04-16T13:16:12Z",
+          "comments": [
+            {
+              "originalPosition": 85,
+              "body": "```suggestion\r\nthe denominators (xd == 1 and yd == 1).\r\n```",
+              "createdAt": "2020-04-16T13:04:38Z",
+              "updatedAt": "2020-04-17T23:04:04Z"
+            },
+            {
+              "originalPosition": 126,
+              "body": "```suggestion\r\nThe following function efficiently computes psi(psi(P)).\r\n```\r\n\r\n(as opposed to literally invoking `psi` twice!)",
+              "createdAt": "2020-04-16T13:07:28Z",
+              "updatedAt": "2020-04-17T23:04:04Z"
+            },
+            {
+              "originalPosition": 157,
+              "body": "Can we reference draft-yonezawa-pairing-friendly-curves for this constant? (Oddly, I don't see it in the RG version of that document.)",
+              "createdAt": "2020-04-16T13:16:03Z",
+              "updatedAt": "2020-04-17T23:04:04Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3Mzk0OTQyODU2",
+          "commit": {
+            "abbreviatedOid": "a601779"
+          },
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-04-16T19:38:59Z",
+          "updatedAt": "2020-04-16T19:39:00Z",
+          "comments": [
+            {
+              "originalPosition": 157,
+              "body": "Looks like it's in Appx C of the current RG draft. They demoted BLS12-381, I think...",
+              "createdAt": "2020-04-16T19:38:59Z",
+              "updatedAt": "2020-04-17T23:04:04Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3Mzk1NjcwNTkx",
+          "commit": {
+            "abbreviatedOid": "c1dc822"
+          },
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-04-17T18:11:53Z",
+          "updatedAt": "2020-04-17T18:11:54Z",
+          "comments": [
+            {
+              "originalPosition": 157,
+              "body": "Added a link in the {{suites}} section where we introduce BLS12-381. The appendix backrefs to there. Cool?",
+              "createdAt": "2020-04-17T18:11:53Z",
+              "updatedAt": "2020-04-17T23:04:04Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3Mzk1NzE2MDc4",
+          "commit": {
+            "abbreviatedOid": "c1dc822"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-04-17T19:25:12Z",
+          "updatedAt": "2020-04-17T19:25:13Z",
+          "comments": [
+            {
+              "originalPosition": 157,
+              "body": "Yep, works for me!",
+              "createdAt": "2020-04-17T19:25:12Z",
+              "updatedAt": "2020-04-17T23:04:04Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3Mzk1NzI1NTA5",
+          "commit": {
+            "abbreviatedOid": "c1dc822"
+          },
+          "author": "armfazh",
+          "authorAssociation": "COLLABORATOR",
+          "state": "CHANGES_REQUESTED",
+          "body": "Let's make the distinction between the named BLS12-381 curve and its twist",
+          "createdAt": "2020-04-17T19:41:17Z",
+          "updatedAt": "2020-04-17T20:12:20Z",
+          "comments": [
+            {
+              "originalPosition": 157,
+              "body": "It might be good to put this constant in hex (in the comments) as found in many other sources.",
+              "createdAt": "2020-04-17T19:41:17Z",
+              "updatedAt": "2020-04-17T23:04:04Z"
+            },
+            {
+              "originalPosition": 140,
+              "body": "I think we should specify that the point is on the twist of the BLS12-381, since the twist is a different curve.\r\n ",
+              "createdAt": "2020-04-17T20:10:15Z",
+              "updatedAt": "2020-04-17T23:04:04Z"
+            },
+            {
+              "originalPosition": 113,
+              "body": "`psi` acts on points of the twist of BLS12-381.",
+              "createdAt": "2020-04-17T20:11:02Z",
+              "updatedAt": "2020-04-17T23:04:04Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3Mzk1NzQ0MTgy",
+          "commit": {
+            "abbreviatedOid": "c1dc822"
+          },
+          "author": "armfazh",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-04-17T20:13:38Z",
+          "updatedAt": "2020-04-17T20:13:39Z",
+          "comments": [
+            {
+              "originalPosition": 69,
+              "body": "use the variable `bls12381_x` ",
+              "createdAt": "2020-04-17T20:13:38Z",
+              "updatedAt": "2020-04-17T23:04:04Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3Mzk1NzQ2MjEx",
+          "commit": {
+            "abbreviatedOid": "c1dc822"
+          },
+          "author": "armfazh",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-04-17T20:17:17Z",
+          "updatedAt": "2020-04-17T20:17:17Z",
+          "comments": [
+            {
+              "originalPosition": 92,
+              "body": "it might be good to test the characteristic equation\r\n``` \u03c8\u00b2 (P ) \u2212 t \u03c8(P ) + q P = \u221e ```",
+              "createdAt": "2020-04-17T20:17:17Z",
+              "updatedAt": "2020-04-17T23:04:04Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3Mzk1Nzk0Mzgz",
+          "commit": {
+            "abbreviatedOid": "c1dc822"
+          },
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-04-17T21:53:00Z",
+          "updatedAt": "2020-04-17T21:53:01Z",
+          "comments": [
+            {
+              "originalPosition": 140,
+              "body": "I think it's a great idea to make clear that this is a different curve. But the term \"twist\" isn't used anywhere in the document, and it seems like a shame to either use it undefined or need to add a definition here. It would be precise to say \"the curve containing the subgroup G2\"---would that work for you?",
+              "createdAt": "2020-04-17T21:53:01Z",
+              "updatedAt": "2020-04-17T23:04:04Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3Mzk1ODAxMjUx",
+          "commit": {
+            "abbreviatedOid": "c1dc822"
+          },
+          "author": "armfazh",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-04-17T22:09:19Z",
+          "updatedAt": "2020-04-17T22:09:20Z",
+          "comments": [
+            {
+              "originalPosition": 140,
+              "body": "The term doesn't need to be defined as long as the appropriate references to pairing draft are made.\r\n\r\n>  \"the curve containing the subgroup G2\"\r\n\r\nIn fact, G2 lives in the original curve but over Fp12 (which also satisfies that sentence)\r\n\r\n",
+              "createdAt": "2020-04-17T22:09:19Z",
+              "updatedAt": "2020-04-17T23:04:04Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3Mzk1ODA2MDEz",
+          "commit": {
+            "abbreviatedOid": "c1dc822"
+          },
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-04-17T22:23:01Z",
+          "updatedAt": "2020-04-17T22:23:01Z",
+          "comments": [
+            {
+              "originalPosition": 140,
+              "body": "> In fact, G2 lives in the original curve but over Fp12 (which also satisfies that sentence)\r\n\r\nHmm, that does not seem to be how G2 is defined anywhere. It's certainly true that this subgroup is isomorphic to a subgroup of the curve defined over Fp12, but in all usage I have seen (including in this draft) elements of the group G2 are points on a curve defined over Fp2.\r\n\r\nAs further support, Budroni and Pintore also use G2 to mean points on the curve defined over Fp2, as does prior work in this line.\r\n\r\nIt is better, in my opinion, to use a slightly longer description that is easily understood rather than a description that the reader may not grok without consulting other references.",
+              "createdAt": "2020-04-17T22:23:01Z",
+              "updatedAt": "2020-04-17T23:04:04Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3Mzk1ODA2NzI0",
+          "commit": {
+            "abbreviatedOid": "c1dc822"
+          },
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-04-17T22:25:08Z",
+          "updatedAt": "2020-04-17T22:25:08Z",
+          "comments": [
+            {
+              "originalPosition": 140,
+              "body": "But actually I believe there's an easy way to avoid this issue entirely, just by talking directly about the curve we mean rather than some description of that curve. I'll push a proposed edit in a moment and we can discuss further.",
+              "createdAt": "2020-04-17T22:25:08Z",
+              "updatedAt": "2020-04-17T23:04:04Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3Mzk1ODExMjA4",
+          "commit": {
+            "abbreviatedOid": "d5694b0"
+          },
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-04-17T22:39:10Z",
+          "updatedAt": "2020-04-17T22:39:10Z",
+          "comments": [
+            {
+              "originalPosition": 69,
+              "body": "The idea here is that the code is copy-and-pasted verbatim from the document, to make sure that what we've written there is correct. (This is why we assert that bls12381_x == c1.)",
+              "createdAt": "2020-04-17T22:39:10Z",
+              "updatedAt": "2020-04-17T23:04:04Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3Mzk1ODEzMjAy",
+          "commit": {
+            "abbreviatedOid": "801af0c"
+          },
+          "author": "armfazh",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-04-17T22:45:51Z",
+          "updatedAt": "2020-04-17T22:45:51Z",
+          "comments": [
+            {
+              "originalPosition": 69,
+              "body": "ok",
+              "createdAt": "2020-04-17T22:45:51Z",
+              "updatedAt": "2020-04-17T23:04:04Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3Mzk1ODE0ODI4",
+          "commit": {
+            "abbreviatedOid": "801af0c"
+          },
+          "author": "armfazh",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-04-17T22:51:29Z",
+          "updatedAt": "2020-04-17T22:51:29Z",
+          "comments": [
+            {
+              "originalPosition": 140,
+              "body": "The formal definition of G2 is the r-torsion points in the original curve over Fp^k.\r\nFor implementation purposes, it is common to use a degree-d twist of the curve over Fp^(k/d).\r\nYou will be agree with all this.\r\n\r\n\r\n",
+              "createdAt": "2020-04-17T22:51:29Z",
+              "updatedAt": "2020-04-17T23:04:04Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3Mzk1ODE1MzU2",
+          "commit": {
+            "abbreviatedOid": "801af0c"
+          },
+          "author": "armfazh",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2020-04-17T22:53:14Z",
+          "updatedAt": "2020-04-17T22:53:14Z",
+          "comments": []
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3Mzk1ODE3NDU2",
+          "commit": {
+            "abbreviatedOid": "801af0c"
+          },
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-04-17T23:00:52Z",
+          "updatedAt": "2020-04-17T23:00:52Z",
+          "comments": [
+            {
+              "originalPosition": 140,
+              "body": "For sure, what you say is absolutely right with respect to the way the pairing operation is defined, etc.! It's only a question of notation what we call elements of G2. But I'm sure that readers of this document don't need to worry about this technicality; it is least confusing, in my mind, to stick with the common usage of \"G2\".",
+              "createdAt": "2020-04-17T23:00:52Z",
+              "updatedAt": "2020-04-17T23:04:04Z"
+            }
+          ]
+        }
+      ]
     },
     {
       "number": 233,
@@ -23869,11 +24215,19 @@
       "labels": [],
       "body": "This finishes off the remaining optimized impls in the appendix, does a slight reorg and generalization, and very slightly improves the Curve25519 and Curve448 maps.\r\n\r\ncloses #181",
       "createdAt": "2020-04-10T06:28:49Z",
-      "updatedAt": "2020-04-14T20:04:28Z",
+      "updatedAt": "2020-04-16T13:16:52Z",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
-      "comments": [],
+      "comments": [
+        {
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "body": "ACKing here, too. This one will take some time to get through.",
+          "createdAt": "2020-04-16T13:16:51Z",
+          "updatedAt": "2020-04-16T13:16:51Z"
+        }
+      ],
       "reviews": [
         {
           "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzkzMjU0NDk5",
@@ -23895,17 +24249,17 @@
       "id": "MDExOlB1bGxSZXF1ZXN0NDAxNzgyMjkw",
       "title": "convert DST encoding to suffix free",
       "url": "https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/pull/241",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "kwantam",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "This implements @davidben's suggestion in #236.\r\n\r\ncloses #236",
       "createdAt": "2020-04-10T06:48:38Z",
-      "updatedAt": "2020-04-14T22:21:02Z",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
+      "updatedAt": "2020-04-16T19:40:21Z",
+      "closedAt": "2020-04-16T17:33:17Z",
+      "mergedAt": "2020-04-16T17:33:17Z",
+      "mergedBy": "chris-wood",
       "comments": [
         {
           "author": "kwantam",
@@ -23920,6 +24274,20 @@
           "body": "ACKing for now -- I'll try to get to this today!",
           "createdAt": "2020-04-14T18:08:34Z",
           "updatedAt": "2020-04-14T18:08:34Z"
+        },
+        {
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Looks right to me. I suppose there's another input to the function that one needs to consider (len_in_bytes), but the argument holds there, too.\r\n\r\nAnother way to make the argument is: for both XOF and XMD, any valid input to the hash function (either to the XOF or to H when generating b_0) can be uniquely parsed into msg, DST, len_in_bytes, as follows:\r\n\r\n(the following reads the input from back to front)\r\n\r\n1. Read the last byte, interpret as an integer, and read that many more bytes from the end. This is DST.\r\n\r\n2. (XMD only) read a single 0\r\n\r\n3. read two bytes, which are len_in_bytes\r\n\r\n4. (XOF only) read the remaining bytes. This is msg\r\n\r\n5. (XMD only) read all except block-length bytes. This is msg. The remaining block-length bytes should be 0.\r\n\r\nSince the parser is deterministic, there is exactly one (msg, DST, len_in_bytes) tuple that can produce any valid input to XOF/H. By the assumption that XOF/H is collision resistant, the outputs must be different.",
+          "createdAt": "2020-04-16T17:26:16Z",
+          "updatedAt": "2020-04-16T18:58:35Z"
+        },
+        {
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "body": "That looks good, too. Thanks!",
+          "createdAt": "2020-04-16T17:33:13Z",
+          "updatedAt": "2020-04-16T17:33:13Z"
         }
       ],
       "reviews": [
@@ -23931,9 +24299,9 @@
           "author": "chris-wood",
           "authorAssociation": "COLLABORATOR",
           "state": "APPROVED",
-          "body": "Sorry for the delay! It took me longer than I hoped to work through this :-) Previously, it was possible to find a pair of (`msg`, `DST`) tuples T1 = (`msg_1`, `DST_1`) and T2 = (`msg_2`, `DST_2`) such that H(T1) = H(T2). There's four cases: \r\n\r\n(hand waving over notation for now)\r\n\r\n1. `msg_1` = `msg_2` and `DST_1` = `DST_2`: We expect this to produce the same output, so it's fine.\r\n\r\n2. `msg_1` = `msg_2` and `DST_1` != `DST_2`: If `|DST_1|` != `|DST_2|`, then the internal suffix (`DST_prime`) differs, so the output is different. Otherwise, if the lengths are the same and the values are different, then the hashes are different, as expected.\r\n\r\n3. `msg_1` != `msg_2` and `DST_1` = `DST_2`: The prefix `Z_pad || msg` differs, so the hashes are different, as expected.\r\n\r\n4.`msg_1` != `msg_2` and `DST_1` != `DST_2`: Assume by way of contradiction that such a pair exists. If `|DST_1|` != `|DST_2|`, then the internal suffix and resulting hash differs, which is a contradiction. Otherwise, if the lengths are different, then it must be that `DST_1 = DST_2`, which is a contradiction. \r\n\r\n(Did I get that right?)",
+          "body": "Sorry for the delay! It took me longer than I hoped to work through this :-) Previously, it was possible to find a pair of (`msg`, `DST`) tuples T1 = (`msg_1`, `DST_1`) and T2 = (`msg_2`, `DST_2`) such that H(T1) = H(T2). There's four cases: \r\n\r\n(hand waving over notation for now)\r\n\r\n1. `msg_1` = `msg_2` and `DST_1` = `DST_2`: We expect this to produce the same output, so it's fine.\r\n\r\n2. `msg_1` = `msg_2` and `DST_1` != `DST_2`: If `|DST_1|` != `|DST_2|`, then the internal suffix (`DST_prime`) differs, so the output is different. Otherwise, if the lengths are the same and the values are different, then the hashes are different, as expected.\r\n\r\n3. `msg_1` != `msg_2` and `DST_1` = `DST_2`: The prefix `Z_pad || msg` differs, so the hashes are different, as expected.\r\n\r\n4.`msg_1` != `msg_2` and `DST_1` != `DST_2`: Assume by way of contradiction that such a pair exists. If `|DST_1|` != `|DST_2|`, then the internal suffix and resulting hash differs, which is a contradiction. Otherwise, if the lengths are different, then it must be that `DST_1 = DST_2`, which is a contradiction. \r\n\r\n(Did I get that right, @kwantam?)",
           "createdAt": "2020-04-14T22:21:02Z",
-          "updatedAt": "2020-04-14T22:21:02Z",
+          "updatedAt": "2020-04-16T13:00:03Z",
           "comments": []
         }
       ]
@@ -23950,7 +24318,7 @@
       "labels": [],
       "body": "closes #190",
       "createdAt": "2020-04-10T14:52:02Z",
-      "updatedAt": "2020-04-16T12:58:34Z",
+      "updatedAt": "2020-04-16T19:40:15Z",
       "closedAt": "2020-04-16T12:58:34Z",
       "mergedAt": "2020-04-16T12:58:34Z",
       "mergedBy": "chris-wood",
