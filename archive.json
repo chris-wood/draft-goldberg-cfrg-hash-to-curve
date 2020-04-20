@@ -1,6 +1,6 @@
 {
   "magic": "B8n2c@e8kvfx",
-  "timestamp": "2020-04-17T23:05:02.803664+00:00",
+  "timestamp": "2020-04-20T18:12:46.985696+00:00",
   "repo": "cfrg/draft-irtf-cfrg-hash-to-curve",
   "labels": [
     {
@@ -3790,7 +3790,7 @@
       "id": "MDU6SXNzdWU0ODI0NDMyOTQ=",
       "title": "cofactor clearing pseudocode",
       "url": "https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/issues/166",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "kwantam",
       "authorAssociation": "COLLABORATOR",
       "assignees": [
@@ -3799,8 +3799,8 @@
       "labels": [],
       "body": "I ran into @mmaker at CRYPTO, who suggested that including pseudocode for fast cofactor clearing for BLS12-381 would be a nice addition to the document and probably wouldn't be all that complicated.\r\n\r\nI tend to agree---certainly if we're going to have optimized pcode in the appendix, there's a good argument for including this...\r\n\r\nThoughts?",
       "createdAt": "2019-08-19T17:46:24Z",
-      "updatedAt": "2019-10-24T20:20:50Z",
-      "closedAt": null,
+      "updatedAt": "2020-04-17T23:13:07Z",
+      "closedAt": "2020-04-17T23:13:07Z",
       "comments": [
         {
           "author": "kirk-baird",
@@ -3811,7 +3811,7 @@
         },
         {
           "author": "mmaker",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "body": "In an attempt of helping you guys out, here's how I would personally do it:\r\n```sage\r\nq = 0x1a0111ea397fe69a4b1ba7b6434bacd764774b84f38512bf6730d2a0f6b0f6241eabfffeb153ffffb9feffffffffaaab\r\nr = 0x73eda753299d7d483339d80809a1d80553bda402fffe5bfeffffffff00000001\r\nx = -0xd201000000010000\r\n\r\nZq = GF(q)\r\nZq2.<i> = GF(q^2, modulus=[1, 0, 1])\r\nu = i+1\r\n\r\nE2 = EllipticCurve(Zq2, [0, 4*u])\r\nE1 = EllipticCurve(Zq, [0, 4])\r\n```\r\n\r\nHere I define the map \u03c8:\r\n```sage\r\ndef psi(P):\r\n    x, y = P.xy()\r\n    return E2(x.frobenius()/(u^((q-1)/3)), y.frobenius()/u^((q-1)/2))\r\n\r\ndef psi2(P):\r\n    # return psi(psi(P))\r\n    x, y = P.xy()\r\n    return E2(x.frobenius(2)/Zq(2)^((q-1)/3), -y.frobenius(2))\r\n```\r\nHere is Scott: \r\n```sage\r\ndef mul_cofactor_s(P):\r\n    return (x^3-x^2-x+4)*P + (x^3-x^2-x+1)*psi(P) + (-x^2+2*x-1)*psi2(P)\r\n```\r\n\r\nHere is budroni-pintore:\r\n```sage\r\ndef mul_cofactor_bp(P):\r\n    return (x^2-x-1)*P + (x-1)*psi(P) + 2*psi2(P)\r\n```\r\n\r\nThen I guess most software developers will notice themselves that, if willing, one can precompute all those constants. lmk if there's any way I can help you out integrating this to the draft!",
           "createdAt": "2019-09-02T20:21:02Z",
           "updatedAt": "2019-09-02T23:36:46Z"
@@ -3825,14 +3825,14 @@
         },
         {
           "author": "mmaker",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "body": "Hi @kwantam ! \r\nI tried to sketch a cofactor multiplication section in the appendix, see: https://github.com/mmaker/draft-irtf-cfrg-hash-to-curve/commit/43bd8fc7a4310115e6accc19b2f9f1360a0778b4.\r\nI encountered a couple difficulties you might help me out resolve: \r\n\r\n- inconsistencies: \r\n   - citation sometimes are separated by \\n\\n, sometimes by \\n. Sometimes indentation is different. Which one should I use? Mind if I make them all uniform in separate pull request? Also editorial keys seem inconsistent sometimes. \r\n  -  the code is standard python, while I'm using sage. The example implementation (i.e. `poc/`) uses sage. What should I use? The RFC is not going to be more clear if we add add finite field extensions and Frobenius mapping in pure python.\r\n- there's no place where BLS12-381 constants are defined. Actually, at this stage of the draft curve BLS12-381 is just mentioned. Wouldn't it be more appropriate to move this to the BLS draft where hashing to BLS12-381 is defined, at this point? \r\n- after some thinking, I don't see any reason for adopting Scott's method given there's a much better method. Are you okay with me not reporting it?",
           "createdAt": "2019-09-08T21:45:52Z",
           "updatedAt": "2019-09-08T21:46:10Z"
         },
         {
           "author": "mmaker",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "body": "ping?\r\n(the BLS draft uses hashing into G1, so\u2026 that was a bad idea. But the issue remains.)\r\n",
           "createdAt": "2019-10-02T13:54:17Z",
           "updatedAt": "2019-10-02T13:55:08Z"
@@ -3846,7 +3846,7 @@
         },
         {
           "author": "mmaker",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "body": "ping?\r\n\r\n(No worries :P)",
           "createdAt": "2019-10-14T14:29:29Z",
           "updatedAt": "2019-10-14T14:29:49Z"
@@ -3860,7 +3860,7 @@
         },
         {
           "author": "mmaker",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "body": "Hi Riad: thanks for the partial answer: \r\n\r\n1. alright\r\n2. I see some python for defining prime field operations. If this chunk of code is executed in sage, there's more appropriate data structures! e.g in my code above I am able to do mod p operations, but I don't have to define them all over again like in here:\r\nhttps://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/blob/master/poc/fouquetibouchi_hacspec.py\r\nhence, I thought this was meant for execution outside sage? (the file extension is also different) \r\n3. Yes, I mean that \"[SBCDK09]\" is not relevant for the spec. I'm proposing we just explain Fuentes et al.'s method as presented in Budroni-Pintore",
           "createdAt": "2019-10-16T14:51:53Z",
           "updatedAt": "2019-10-16T14:53:15Z"
@@ -3871,6 +3871,13 @@
           "body": "Ah, right. It's safe to regard the hacpsec stuff as legacy. We might get back to using it eventually, but I'd say just go with sage and we'll deal with porting if/when we decide to use hacspec again.",
           "createdAt": "2019-10-16T14:58:12Z",
           "updatedAt": "2019-10-16T14:58:47Z"
+        },
+        {
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "body": "closing since we merged #232",
+          "createdAt": "2020-04-17T23:13:03Z",
+          "updatedAt": "2020-04-17T23:13:03Z"
         }
       ]
     },
@@ -4058,15 +4065,15 @@
       "id": "MDU6SXNzdWU1MTI5MjYwNTY=",
       "title": "suites: optimized impls in appendix",
       "url": "https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/issues/181",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "kwantam",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Right now we have only the P-256, curve/edwards25519, and curve/edwards448.\r\n\r\nTODO: add others\r\n\r\n- [x] P-384\r\n- [x] P-521\r\n- [x] SECP256k1\r\n- [x] BLS12-381 G1\r\n- [x] BLS12-381 G2\r\n- [x] SSWU for p = 5 mod 8 --- no specific curves in mind, but in principle they could exist (e.g., M-221 converted to short Weierstrass)\r\n\r\nThe potential optimizations for Shallue-van de Woestijne are pretty minimal, so I am assuming that for all of the above we would give straight-line impls only of Simplified SWU. Glad to consider doing otherwise, though.",
       "createdAt": "2019-10-27T06:13:12Z",
-      "updatedAt": "2020-04-10T06:22:47Z",
-      "closedAt": null,
+      "updatedAt": "2020-04-20T18:12:04Z",
+      "closedAt": "2020-04-20T18:12:04Z",
       "comments": [
         {
           "author": "kwantam",
@@ -5397,6 +5404,51 @@
           "body": "Thanks for pointing out this inconsistency, I will prepare the changes to fix this. ",
           "createdAt": "2020-04-08T18:25:48Z",
           "updatedAt": "2020-04-08T18:26:14Z"
+        }
+      ]
+    },
+    {
+      "number": 243,
+      "id": "MDU6SXNzdWU2MDI1NjA1MjA=",
+      "title": "potential optimization for Edwards to Montgomery map",
+      "url": "https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/issues/243",
+      "state": "OPEN",
+      "author": "kwantam",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Michael Scott wrote to observe that the generic Edwards to Montgomery map can be simplified in some cases.\r\n\r\nConsider the Edwards curve\r\n\r\n    a * v^2 + w^2 = 1 + d * v^2 * w^2\r\n\r\nAssuming that there is no corresponding standardized Montgomery curve, the document currently suggests mapping to the following curve\r\n\r\n    K * t^2 = s^3 + J * s^2 + s\r\n    J = 2 * (a + d) / (a - d)\r\n    K = 4 / (a - d)\r\n\r\nand then mapping back to the Edwards curve via\r\n\r\n    v = s / t\r\n    w = (s - 1) / (s + 1)\r\n\r\nThe j-invariant of a Montgomery curve depends only on the J coefficient, meaning that for all Montgomery curves given above, the curve\r\n\r\n    t^2 = s^3 + J * s^2 + s\r\n\r\nis isomorphic to either the curve or its quadratic twist. Most interestingly, to us, when K is a quadratic residue, then the above two Montgomery curves are isomorphic via\r\n\r\n    (s, t) \u21a6 (s, t \u221aK)\r\n\r\nand therefore we can map back from the curve with K = 1 to the Edwards curve via\r\n\r\n    v = (s \u221aK) / t\r\n    w = (s - 1) / (s + 1)\r\n\r\nNote that this is exactly the map that RFC7748 specifies from edwards25519 to curve25519.\r\n\r\n(See https://eprint.iacr.org/2017/212.pdf for more info on the above.)\r\n\r\n---\r\n\r\nAlong the same lines, when K is non-square we could map from\r\n\r\n    Z * t^2 = s^3 + J * s^2 + s\r\n\r\nto the Edwards curve, where Z is the distinguished non-square in F used to map to Montgomery. The Montgomery to Edwards map would then be\r\n\r\n    v = (s \u221a(K/Z)) / t\r\n    w = (s - 1) / (s + 1)\r\n\r\nThe advantage is that this lets us use a very small value (Z) in place of K (which is likely much larger) when evaluating Elligator.\r\n\r\n---\r\n\r\nOK, so what does this mean to us? It means that we can, in principle, specify a somewhat better optimized map from Edwards to Montgomery. In particular, keeping the definitions above,\r\n\r\n    if is_square(K):\r\n        // map from t^2 = s^3 + J * s^2 + s\r\n    else:\r\n        // map from Z * t^2 = s^3 + J * s^2 + s\r\n\r\nSo: question: do we think this is would be a reasonable optimization to add?",
+      "createdAt": "2020-04-18T21:55:37Z",
+      "updatedAt": "2020-04-20T16:10:27Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "body": "My two cents: the difference in cost among these options is pretty well spelled out in the latest optimized pseudocode. That difference is not huge---a few multiplications. So the upside is in my mind somewhat limited.\r\n\r\nOn the other hand, the downside is that we're adding additional complexity to the document. It's not a ton of complexity, but we have a lot of opportunities to add small extra bits of complexity and we've done a good job recently of avoiding them. I'm generally in favor of continuing that trend.\r\n\r\n(edit to add:)\r\n\r\nThe other upside of this change is that it eliminates the special case for edwards25519. Unfortunately, we still need a special case for edwards448. If it eliminated both I'd probably be more excited to make this change...",
+          "createdAt": "2020-04-18T22:21:07Z",
+          "updatedAt": "2020-04-18T22:33:47Z"
+        },
+        {
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "body": "(cc @armfazh @chris-wood)",
+          "createdAt": "2020-04-18T22:24:31Z",
+          "updatedAt": "2020-04-18T22:24:31Z"
+        },
+        {
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I'm not inclined to take this change. Folks such as MIRACL and RELIC can implement it if they like, though pushing that complexity into the document feels like it'd do more harm than good. (We probably need to go through and ruthlessly trim unnecessary optimizations in the future before shipping, anyway.)",
+          "createdAt": "2020-04-20T13:50:53Z",
+          "updatedAt": "2020-04-20T13:50:53Z"
+        },
+        {
+          "author": "armfazh",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Agree with you. Nice trick indeed. ",
+          "createdAt": "2020-04-20T16:10:27Z",
+          "updatedAt": "2020-04-20T16:10:27Z"
         }
       ]
     }
@@ -23615,7 +23667,7 @@
       "labels": [],
       "body": "This PR merges the code from #191, does some slight reformatting, and adds tests.\r\n\r\nAlso adds @mmaker as a contributor.\r\n\r\ncloses #191",
       "createdAt": "2020-03-29T03:43:34Z",
-      "updatedAt": "2020-04-17T23:04:32Z",
+      "updatedAt": "2020-04-17T23:05:20Z",
       "closedAt": "2020-04-17T23:04:32Z",
       "mergedAt": "2020-04-17T23:04:31Z",
       "mergedBy": "kwantam",
@@ -24208,17 +24260,17 @@
       "id": "MDExOlB1bGxSZXF1ZXN0NDAxNzc3MjE2",
       "title": "add the remaining optimized impls",
       "url": "https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/pull/240",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "kwantam",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "This finishes off the remaining optimized impls in the appendix, does a slight reorg and generalization, and very slightly improves the Curve25519 and Curve448 maps.\r\n\r\ncloses #181",
       "createdAt": "2020-04-10T06:28:49Z",
-      "updatedAt": "2020-04-16T13:16:52Z",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
+      "updatedAt": "2020-04-20T18:12:04Z",
+      "closedAt": "2020-04-20T18:12:04Z",
+      "mergedAt": "2020-04-20T18:12:03Z",
+      "mergedBy": "kwantam",
       "comments": [
         {
           "author": "chris-wood",
@@ -24226,6 +24278,13 @@
           "body": "ACKing here, too. This one will take some time to get through.",
           "createdAt": "2020-04-16T13:16:51Z",
           "updatedAt": "2020-04-16T13:16:51Z"
+        },
+        {
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "body": "(@kwantam you should feel free to merge this without my approval, for what it's worth.)",
+          "createdAt": "2020-04-20T13:53:29Z",
+          "updatedAt": "2020-04-20T13:53:29Z"
         }
       ],
       "reviews": [
