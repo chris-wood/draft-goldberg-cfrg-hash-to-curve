@@ -1,6 +1,6 @@
 {
   "magic": "B8n2c@e8kvfx",
-  "timestamp": "2020-04-20T18:12:46.985696+00:00",
+  "timestamp": "2020-04-27T16:55:35.256336+00:00",
   "repo": "cfrg/draft-irtf-cfrg-hash-to-curve",
   "labels": [
     {
@@ -5419,7 +5419,7 @@
       "labels": [],
       "body": "Michael Scott wrote to observe that the generic Edwards to Montgomery map can be simplified in some cases.\r\n\r\nConsider the Edwards curve\r\n\r\n    a * v^2 + w^2 = 1 + d * v^2 * w^2\r\n\r\nAssuming that there is no corresponding standardized Montgomery curve, the document currently suggests mapping to the following curve\r\n\r\n    K * t^2 = s^3 + J * s^2 + s\r\n    J = 2 * (a + d) / (a - d)\r\n    K = 4 / (a - d)\r\n\r\nand then mapping back to the Edwards curve via\r\n\r\n    v = s / t\r\n    w = (s - 1) / (s + 1)\r\n\r\nThe j-invariant of a Montgomery curve depends only on the J coefficient, meaning that for all Montgomery curves given above, the curve\r\n\r\n    t^2 = s^3 + J * s^2 + s\r\n\r\nis isomorphic to either the curve or its quadratic twist. Most interestingly, to us, when K is a quadratic residue, then the above two Montgomery curves are isomorphic via\r\n\r\n    (s, t) \u21a6 (s, t \u221aK)\r\n\r\nand therefore we can map back from the curve with K = 1 to the Edwards curve via\r\n\r\n    v = (s \u221aK) / t\r\n    w = (s - 1) / (s + 1)\r\n\r\nNote that this is exactly the map that RFC7748 specifies from edwards25519 to curve25519.\r\n\r\n(See https://eprint.iacr.org/2017/212.pdf for more info on the above.)\r\n\r\n---\r\n\r\nAlong the same lines, when K is non-square we could map from\r\n\r\n    Z * t^2 = s^3 + J * s^2 + s\r\n\r\nto the Edwards curve, where Z is the distinguished non-square in F used to map to Montgomery. The Montgomery to Edwards map would then be\r\n\r\n    v = (s \u221a(K/Z)) / t\r\n    w = (s - 1) / (s + 1)\r\n\r\nThe advantage is that this lets us use a very small value (Z) in place of K (which is likely much larger) when evaluating Elligator.\r\n\r\n---\r\n\r\nOK, so what does this mean to us? It means that we can, in principle, specify a somewhat better optimized map from Edwards to Montgomery. In particular, keeping the definitions above,\r\n\r\n    if is_square(K):\r\n        // map from t^2 = s^3 + J * s^2 + s\r\n    else:\r\n        // map from Z * t^2 = s^3 + J * s^2 + s\r\n\r\nSo: question: do we think this is would be a reasonable optimization to add?",
       "createdAt": "2020-04-18T21:55:37Z",
-      "updatedAt": "2020-04-20T16:10:27Z",
+      "updatedAt": "2020-04-20T21:35:40Z",
       "closedAt": null,
       "comments": [
         {
@@ -5449,6 +5449,20 @@
           "body": "Agree with you. Nice trick indeed. ",
           "createdAt": "2020-04-20T16:10:27Z",
           "updatedAt": "2020-04-20T16:10:27Z"
+        },
+        {
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Here's an alternative: since the rational map is part of the suite definition, we don't have to make the generic mapping a MUST. Instead, we can make it a SHOULD, and add an appendix that spells out the optimized alternative. I'll write this up and we can decide whether we want to include it or not.",
+          "createdAt": "2020-04-20T18:25:51Z",
+          "updatedAt": "2020-04-20T18:25:51Z"
+        },
+        {
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Thoughts on #244 @armfazh @chris-wood ?",
+          "createdAt": "2020-04-20T21:35:39Z",
+          "updatedAt": "2020-04-20T21:35:39Z"
         }
       ]
     }
@@ -24267,7 +24281,7 @@
       "labels": [],
       "body": "This finishes off the remaining optimized impls in the appendix, does a slight reorg and generalization, and very slightly improves the Curve25519 and Curve448 maps.\r\n\r\ncloses #181",
       "createdAt": "2020-04-10T06:28:49Z",
-      "updatedAt": "2020-04-20T18:12:04Z",
+      "updatedAt": "2020-04-20T18:14:54Z",
       "closedAt": "2020-04-20T18:12:04Z",
       "mergedAt": "2020-04-20T18:12:03Z",
       "mergedBy": "kwantam",
@@ -24410,6 +24424,33 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 244,
+      "id": "MDExOlB1bGxSZXF1ZXN0NDA2MzE1Mzkx",
+      "title": "clarifications: k and Edwards map",
+      "url": "https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/pull/244",
+      "state": "OPEN",
+      "author": "kwantam",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "This PR makes a tiny clarification in Section 5, and some more extensive changes in Section 6 and Appx B in response to #243.\r\n\r\nSpecifically, it moves the definition of the generic Montgomery to twisted Edwards rational map to Appx B, and it adds the optimized Monty->Edw map for square K. It also clarifies that the map is specified as part of the suite and updates the discussion of sign for standardized mappings.\r\n\r\nWe don't have to make this change, but in some ways I think it's slightly nicer because it makes Section 6 a bit more focused.\r\n\r\nThoughts?",
+      "createdAt": "2020-04-20T21:35:18Z",
+      "updatedAt": "2020-04-20T21:53:06Z",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "comments": [
+        {
+          "author": "armfazh",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I will review it and post my comments later. ",
+          "createdAt": "2020-04-20T21:53:05Z",
+          "updatedAt": "2020-04-20T21:53:05Z"
+        }
+      ],
+      "reviews": []
     }
   ]
 }
