@@ -1,6 +1,6 @@
 {
   "magic": "B8n2c@e8kvfx",
-  "timestamp": "2020-04-27T16:55:35.256336+00:00",
+  "timestamp": "2020-04-29T00:08:47.467396+00:00",
   "repo": "cfrg/draft-irtf-cfrg-hash-to-curve",
   "labels": [
     {
@@ -5463,6 +5463,51 @@
           "body": "Thoughts on #244 @armfazh @chris-wood ?",
           "createdAt": "2020-04-20T21:35:39Z",
           "updatedAt": "2020-04-20T21:35:39Z"
+        }
+      ]
+    },
+    {
+      "number": 245,
+      "id": "MDU6SXNzdWU2MDgxMzExMDY=",
+      "title": "Request for release of v7",
+      "url": "https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/issues/245",
+      "state": "CLOSED",
+      "author": "CarlBeek",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "Many important changes have been made to this H2C curve spec since v6. As [the authors are well aware](https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/pull/230#issuecomment-604822461), Ethereum's eth2 is planning on launching soon, and we'd like to implement H2C v7.\r\n\r\nWe have reached the point where this spec is one of, if not the primary bottleneck to launch. What is the timeline for H2C v7 release and are there any expected changes further than #230, & #241?\r\n\r\nThanks in advance!",
+      "createdAt": "2020-04-28T08:37:49Z",
+      "updatedAt": "2020-04-28T20:34:40Z",
+      "closedAt": "2020-04-28T15:48:25Z",
+      "comments": [
+        {
+          "author": "nikkolasg",
+          "authorAssociation": "NONE",
+          "body": "Just want to highlight here that there are other projects that would like to align on the RFC but find it difficult due to the number of breaking changes in H2C over versions - so any stability & timelines on this would be very much appreciated !",
+          "createdAt": "2020-04-28T13:21:48Z",
+          "updatedAt": "2020-04-28T13:21:48Z"
+        },
+        {
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "body": "-07 came out yesterday! Closing.",
+          "createdAt": "2020-04-28T15:48:25Z",
+          "updatedAt": "2020-04-28T15:48:25Z"
+        },
+        {
+          "author": "CarlBeek",
+          "authorAssociation": "NONE",
+          "body": "Apologies, @chris-wood, I missed that. Thanks for cutting the release!",
+          "createdAt": "2020-04-28T16:07:16Z",
+          "updatedAt": "2020-04-28T16:07:16Z"
+        },
+        {
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "body": "No worries, @CarlBeek! I appreciate nudges towards forward progress. ",
+          "createdAt": "2020-04-28T20:34:39Z",
+          "updatedAt": "2020-04-28T20:34:39Z"
         }
       ]
     }
@@ -24430,17 +24475,17 @@
       "id": "MDExOlB1bGxSZXF1ZXN0NDA2MzE1Mzkx",
       "title": "clarifications: k and Edwards map",
       "url": "https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/pull/244",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "kwantam",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
-      "body": "This PR makes a tiny clarification in Section 5, and some more extensive changes in Section 6 and Appx B in response to #243.\r\n\r\nSpecifically, it moves the definition of the generic Montgomery to twisted Edwards rational map to Appx B, and it adds the optimized Monty->Edw map for square K. It also clarifies that the map is specified as part of the suite and updates the discussion of sign for standardized mappings.\r\n\r\nWe don't have to make this change, but in some ways I think it's slightly nicer because it makes Section 6 a bit more focused.\r\n\r\nThoughts?",
+      "body": "This PR makes a tiny clarification in Section 5, and some more extensive changes in Section 6 and Appx B in response to #243.\r\n\r\nSpecifically, it moves the definition of the generic Montgomery to twisted Edwards rational map to Appx B ~~and it adds the optimized Monty->Edw map for square K~~. It also clarifies that the map is specified as part of the suite and updates the discussion of sign for standardized mappings.\r\n\r\nEDIT: I removed the optimized Monty->Edw map for square K. Per a conversation with @chris-wood, best to discuss the clarifications in this PR separately from the question of adding another mapping.",
       "createdAt": "2020-04-20T21:35:18Z",
-      "updatedAt": "2020-04-20T21:53:06Z",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
+      "updatedAt": "2020-04-29T00:07:48Z",
+      "closedAt": "2020-04-29T00:07:48Z",
+      "mergedAt": "2020-04-29T00:07:48Z",
+      "mergedBy": "chris-wood",
       "comments": [
         {
           "author": "armfazh",
@@ -24448,9 +24493,110 @@
           "body": "I will review it and post my comments later. ",
           "createdAt": "2020-04-20T21:53:05Z",
           "updatedAt": "2020-04-20T21:53:05Z"
+        },
+        {
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@armfazh @chris-wood I removed the k=1 mapping from this PR, so now it is just an exercise in reorg and clarification. I'll open a separate PR for the k=1 mapping that builds on this one, and we can separately decide whether to add it or not.",
+          "createdAt": "2020-04-28T21:20:29Z",
+          "updatedAt": "2020-04-28T21:20:29Z"
+        },
+        {
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@armfazh are you OK with this given that it just shuffles things around?",
+          "createdAt": "2020-04-28T23:04:25Z",
+          "updatedAt": "2020-04-28T23:04:25Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDAyMjIwODY4",
+          "commit": {
+            "abbreviatedOid": "66a4d7e"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Thanks! This looks good to me. ",
+          "createdAt": "2020-04-28T21:20:59Z",
+          "updatedAt": "2020-04-28T21:20:59Z",
+          "comments": []
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDAyMjk0OTUz",
+          "commit": {
+            "abbreviatedOid": "dc83098"
+          },
+          "author": "armfazh",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2020-04-29T00:07:19Z",
+          "updatedAt": "2020-04-29T00:07:19Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 246,
+      "id": "MDExOlB1bGxSZXF1ZXN0NDEwMzY5NTMw",
+      "title": "add special mapping for k=1 in appendix",
+      "url": "https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/pull/246",
+      "state": "OPEN",
+      "author": "kwantam",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "This PR adds a section to the appendix that specifies a slightly more optimized Montgomery->Edwards mapping for the case that `4 / (a - d)` is square in F (`a` and `d` are the coefficients of the twisted Edwards curve). This is the mapping that's specified in RFC7748 for Curve25519.\r\n\r\nThe idea here is to help readers pick a better mapping when defining suites for Edwards curves that don't have a standardized Montgomery counterpart.\r\n\r\n**Note** that this PR builds on #244. The differences are all in [this commit](https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/pull/246/commits/cc8db5e928a93e4eec37a3793bdf1b8b4119abb6), to make it easier to see what's going on. If we decide to add this, I'll rebase after we land #244.",
+      "createdAt": "2020-04-28T21:24:17Z",
+      "updatedAt": "2020-04-28T21:33:13Z",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "comments": [
+        {
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I'm ambivalent about adding this. On the one hand, it's might be nice to include this info to help folks design better suites for twisted Edwards curves that don't have a standardized Montgomery counterpart, which I suppose is good.\r\n\r\nOn the other hand, it only applies to a restricted class of curves---and looking at the Edwards curves listed on [SafeCurves](https://safecurves.cr.yp.to), it looks like this map only applies to Curve41417. And even when it does apply, it only saves a small handful of multiplications---it would be tough to squeeze even a 1% performance boost from this \"optimization.\"\r\n\r\nSo in the end I'm OK just leaving it out. Folks who are defining new curves are of course welcome to define whatever super-optimized Montgomery->Edwards mapping they want regardless of what we say in the appendix...",
+          "createdAt": "2020-04-28T21:33:13Z",
+          "updatedAt": "2020-04-28T21:33:13Z"
         }
       ],
       "reviews": []
+    },
+    {
+      "number": 247,
+      "id": "MDExOlB1bGxSZXF1ZXN0NDEwMzg3ODA3",
+      "title": "move straight-line impls from Section 6 to Appx",
+      "url": "https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/pull/247",
+      "state": "OPEN",
+      "author": "kwantam",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "This PR moves all of the generic straight-line code from Section 6 to a new appx.\r\n\r\nThe reason to make this a new appx is that the existing \"optimized sample code\" appx has a different interface---all of the mappings use projective coordinates and return ratios. Keeping this in its own appx gets rid of confusion about which sample code uses which interface.",
+      "createdAt": "2020-04-28T22:11:50Z",
+      "updatedAt": "2020-04-28T23:03:27Z",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDAyMjcxODEw",
+          "commit": {
+            "abbreviatedOid": "f4804f4"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "You are quick!",
+          "createdAt": "2020-04-28T23:03:27Z",
+          "updatedAt": "2020-04-28T23:03:27Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
