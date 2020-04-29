@@ -833,7 +833,7 @@ table.left {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Faz-Hernandez, et al.</td>
-<td class="center">Expires 29 October 2020</td>
+<td class="center">Expires 31 October 2020</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -846,12 +846,12 @@ table.left {
 <dd class="internet-draft">draft-irtf-cfrg-hash-to-curve-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2020-04-27" class="published">27 April 2020</time>
+<time datetime="2020-04-29" class="published">29 April 2020</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2020-10-29">29 October 2020</time></dd>
+<dd class="expires"><time datetime="2020-10-31">31 October 2020</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -902,7 +902,7 @@ arbitrary string to a point on an elliptic curve.<a href="#section-abstract-1" c
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 29 October 2020.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 31 October 2020.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1151,10 +1151,10 @@ arbitrary string to a point on an elliptic curve.<a href="#section-abstract-1" c
             <p id="section-toc.1-1.15.1" class="keepWithNext"><a href="#section-appendix.b" class="xref">Appendix B</a>.  <a href="#name-rational-maps" class="xref">Rational maps</a><a href="#section-toc.1-1.15.1" class="pilcrow">¶</a></p>
 <ul class="toc ulEmpty">
 <li class="toc ulEmpty" id="section-toc.1-1.15.2.1">
-                <p id="section-toc.1-1.15.2.1.1" class="keepWithNext"><a href="#section-b.1" class="xref">B.1</a>.  <a href="#name-twisted-edwards-to-montgome" class="xref">Twisted Edwards to Montgomery curves</a><a href="#section-toc.1-1.15.2.1.1" class="pilcrow">¶</a></p>
+                <p id="section-toc.1-1.15.2.1.1" class="keepWithNext"><a href="#section-b.1" class="xref">B.1</a>.  <a href="#name-generic-montgomery-to-twist" class="xref">Generic Montgomery to twisted Edwards map</a><a href="#section-toc.1-1.15.2.1.1" class="pilcrow">¶</a></p>
 </li>
 <li class="toc ulEmpty" id="section-toc.1-1.15.2.2">
-                <p id="section-toc.1-1.15.2.2.1" class="keepWithNext"><a href="#section-b.2" class="xref">B.2</a>.  <a href="#name-montgomery-to-weierstrass-c" class="xref">Montgomery to Weierstrass curves</a><a href="#section-toc.1-1.15.2.2.1" class="pilcrow">¶</a></p>
+                <p id="section-toc.1-1.15.2.2.1" class="keepWithNext"><a href="#section-b.2" class="xref">B.2</a>.  <a href="#name-weierstrass-to-montgomery-m" class="xref">Weierstrass to Montgomery map</a><a href="#section-toc.1-1.15.2.2.1" class="pilcrow">¶</a></p>
 </li>
 </ul>
 </li>
@@ -2014,16 +2014,19 @@ Reducing a random 256-bit integer modulo this p yields a value that is in
 the range [0, p / 3] with probability roughly 1/2, meaning that this value
 is statistically far from uniform in [0, p - 1].<a href="#section-5.1-1" class="pilcrow">¶</a></p>
 <p id="section-5.1-2">To control bias, hash_to_field instead uses pseudorandom integers whose
-length is at least ceil(log2(p)) + k bits, where k is the target security level
-for the suite in bits. (Note that k is an upper bound on the security level for
-the corresponding curve. See <a href="#security-considerations-targets" class="xref">Section 10.3</a> for more details.)
+length is at least ceil(log2(p)) + k bits, where k is the target security
+level for the suite in bits.
 Reducing such integers mod p gives bias at most 2^-k for any p; this bias
 is appropriate when targeting k-bit security.
-To obtain such integers, hash_to_field uses expand_message to obtain
+For each such integer, hash_to_field uses expand_message to obtain
 L pseudorandom bytes, where L = ceil((ceil(log2(p)) + k) / 8); this
 byte string is then interpreted as an integer via OS2IP <span>[<a href="#RFC8017" class="xref">RFC8017</a>]</span>.
 For example, for a 255-bit prime p, and k = 128-bit security,
 L = ceil((255 + 128) / 8) = 48 bytes.<a href="#section-5.1-2" class="pilcrow">¶</a></p>
+<p id="section-5.1-3">Note that k is an upper bound on the security level for the
+corresponding curve.
+See <a href="#security-considerations-targets" class="xref">Section 10.3</a> for more details, and
+<a href="#new-suite" class="xref">Section 8.9</a> for guidelines on choosing k for a given curve.<a href="#section-5.1-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="hashtofield-impl">
@@ -2835,93 +2838,34 @@ We describe how to identify such a curve and map immediately below.<a href="#sec
           <h4 id="name-rational-maps-from-montgome">
 <a href="#section-6.8.1" class="section-number selfRef">6.8.1. </a><a href="#name-rational-maps-from-montgome" class="section-name selfRef">Rational maps from Montgomery to twisted Edwards curves</a>
           </h4>
-<p id="section-6.8.1-1">There are two ways to identify the correct Montgomery curve and
-rational map for use when hashing to a given twisted Edwards curve.<a href="#section-6.8.1-1" class="pilcrow">¶</a></p>
-<p id="section-6.8.1-2">When hashing to a standardized twisted Edwards curve for which a corresponding
+<p id="section-6.8.1-1">There are two ways to select a Montgomery curve and rational map
+for use when hashing to a given twisted Edwards curve.
+The selected Montgomery curve and rational map MUST be specified as part of
+the hash-to-curve suite for a given twisted Edwards curve; see <a href="#suites" class="xref">Section 8</a>.<a href="#section-6.8.1-1" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="normal type-1" id="section-6.8.1-2">
+            <li id="section-6.8.1-2.1">
+              <p id="section-6.8.1-2.1.1">When hashing to a standardized twisted Edwards curve for which a corresponding
 Montgomery form and rational map are also standardized, the standard
-Montgomery form and rational map MUST be used to ensure compatibility
-with existing software.
-Two such standardized curves are the edwards25519 and edwards448 curves,
-which correspond to the Montgomery curves curve25519 and curve448, respectively.
-For both of these curves, <span>[<a href="#RFC7748" class="xref">RFC7748</a>]</span> lists both the Montgomery and twisted Edwards
-forms and gives the corresponding rational maps.<a href="#section-6.8.1-2" class="pilcrow">¶</a></p>
-<p id="section-6.8.1-3">The rational map for edwards25519 (<span>[<a href="#RFC7748" class="xref">RFC7748</a>]</span>, Section 4.1)
-uses the constant sqrt_neg_486664 = sqrt(-486664) (mod 2^255 - 19).
-To ensure compatibility, this constant MUST be chosen such that
-sgn0(sqrt_neg_486664) == 0.
-Analogous ambiguities in other standardized rational maps MUST be
-resolved in the same way: for any constant c whose sign is ambiguous,
-c MUST be chosen such that sgn0(c) == 0.<a href="#section-6.8.1-3" class="pilcrow">¶</a></p>
-<p id="section-6.8.1-4">The 4-isogeny map from curve448 to edwards448 (<span>[<a href="#RFC7748" class="xref">RFC7748</a>]</span>, Section 4.2)
-is unambiguous with respect to sign.<a href="#section-6.8.1-4" class="pilcrow">¶</a></p>
-<p id="section-6.8.1-5">When defining new twisted Edwards curves, a Montgomery equivalent and rational
-map SHOULD be specified, and the sign of the rational map SHOULD be stated
-unambiguously.<a href="#section-6.8.1-5" class="pilcrow">¶</a></p>
-<p id="section-6.8.1-6">When hashing to a twisted Edwards curve that does not have a standardized
-Montgomery form or rational map, the following procedure MUST be
-used to derive them.
-For a twisted Edwards curve given by<a href="#section-6.8.1-6" class="pilcrow">¶</a></p>
-<div class="artwork art-text alignLeft" id="section-6.8.1-7">
-<pre>
-    a * v^2 + w^2 = 1 + d * v^2 * w^2
-</pre><a href="#section-6.8.1-7" class="pilcrow">¶</a>
-</div>
-<p id="section-6.8.1-8">first compute J and K, the parameters of the equivalent Montgomery
-curve given by<a href="#section-6.8.1-8" class="pilcrow">¶</a></p>
-<div class="artwork art-text alignLeft" id="section-6.8.1-9">
-<pre>
-    K * t^2 = s^3 + J * s^2 + s
-</pre><a href="#section-6.8.1-9" class="pilcrow">¶</a>
-</div>
-<p id="section-6.8.1-10">as follows:<a href="#section-6.8.1-10" class="pilcrow">¶</a></p>
-<ul>
-<li id="section-6.8.1-11.1">J = 2 * (a + d) / (a - d)<a href="#section-6.8.1-11.1" class="pilcrow">¶</a>
+Montgomery form and rational map SHOULD be used to ensure compatibility
+with existing software.<a href="#section-6.8.1-2.1.1" class="pilcrow">¶</a></p>
+<p id="section-6.8.1-2.1.2">
+In certain cases, e.g., edwards25519 <span>[<a href="#RFC7748" class="xref">RFC7748</a>]</span>, the sign of the rational
+ map from the twisted Edwards curve to its corresponding Montgomery curve
+ is not given explicitly.
+ In this case, the sign MUST be fixed such that applying the rational map
+ to the twisted Edwards curve's base point yields the Montgomery curve's
+ base point with correct sign.
+ (For edwards25519, see <span>[<a href="#RFC7748" class="xref">RFC7748</a>]</span> and <span>[<a href="#EID4730" class="xref">EID4730</a>]</span>.)<a href="#section-6.8.1-2.1.2" class="pilcrow">¶</a></p>
+<p id="section-6.8.1-2.1.3">
+When defining new twisted Edwards curves, a Montgomery equivalent and rational
+ map SHOULD also be specified, and the sign of the rational map SHOULD be stated
+ explicitly.<a href="#section-6.8.1-2.1.3" class="pilcrow">¶</a></p>
 </li>
-<li id="section-6.8.1-11.2">K = 4 / (a - d)<a href="#section-6.8.1-11.2" class="pilcrow">¶</a>
+<li id="section-6.8.1-2.2">When hashing to a twisted Edwards curve that does not have a standardized
+Montgomery form or rational map, the map given in <a href="#appx-rational-map" class="xref">Appendix B</a>
+SHOULD be used.<a href="#section-6.8.1-2.2" class="pilcrow">¶</a>
 </li>
-</ul>
-<p id="section-6.8.1-12">Note that this curve has the form required by the Elligator 2
-mapping of <a href="#elligator2" class="xref">Section 6.7.1</a>.
-The rational map from the point (s, t) on this Montgomery curve
-to the point (v, w) on the twisted Edwards curve is given by<a href="#section-6.8.1-12" class="pilcrow">¶</a></p>
-<ul>
-<li id="section-6.8.1-13.1">v = s / t<a href="#section-6.8.1-13.1" class="pilcrow">¶</a>
-</li>
-<li id="section-6.8.1-13.2">w = (s - 1) / (s + 1)<a href="#section-6.8.1-13.2" class="pilcrow">¶</a>
-</li>
-</ul>
-<p id="section-6.8.1-14">(For completeness, we give the inverse map in <a href="#appx-rational-map-edw" class="xref">Appendix B.1</a>.
-Note that the inverse map is not used when hashing to a twisted Edwards curve.)<a href="#section-6.8.1-14" class="pilcrow">¶</a></p>
-<p id="section-6.8.1-15">Rational maps may be undefined on certain inputs, e.g., when the
-denominator of one of the rational functions is zero.
-In the map described above, the exceptional cases are t == 0 or s == -1.
-Implementations MUST detect exceptional cases and return the value
-(v, w) = (0, 1), which is the identity point
-on all twisted Edwards curves.<a href="#section-6.8.1-15" class="pilcrow">¶</a></p>
-<p id="section-6.8.1-16">The following straight-line implementation of the above rational map
-handles the exceptional cases.
-Implementations of other rational maps (e.g., the ones give in <span>[<a href="#RFC7748" class="xref">RFC7748</a>]</span>)
-are analogous.<a href="#section-6.8.1-16" class="pilcrow">¶</a></p>
-<div class="artwork art-text alignLeft" id="section-6.8.1-17">
-<pre>
-rational_map(s, t)
-
-Input: (s, t), a point on the curve K * t^2 = s^3 + J * s^2 + s.
-Output: (v, w), a point on an equivalent twisted Edwards curve.
-
-1. tv1 = s + 1
-2. tv2 = tv1 * t        # (s + 1) * t
-3. tv2 = inv0(tv2)      # 1 / ((s + 1) * t)
-4.   v = tv2 * tv1      # 1 / t
-5.   v = v * s          # s / t
-6.   w = tv2 * t        # 1 / (s + 1)
-7. tv1 = s - 1
-8.   w = w * tv1        # (s - 1) / (s + 1)
-9.   e = tv2 == 0
-10.  w = CMOV(w, 1, e)  # handle exceptional case
-11. return (v, w)
-</pre><a href="#section-6.8.1-17" class="pilcrow">¶</a>
-</div>
+</ol>
 </section>
 </div>
 <div id="ell2edwards">
@@ -3966,9 +3910,12 @@ michele.orru@ens.fr<a href="#section-12-1.3.2" class="pilcrow">¶</a></p>
 <a href="#section-13.1" class="section-number selfRef">13.1. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
         </h3>
 <dl class="references">
+<dt id="EID4730">[EID4730]</dt>
+<dd>
+<span class="refAuthor">Langley, A.</span>, <span class="refTitle">"RFC 7748, Errata ID 4730"</span>, <time datetime="2016-07">July 2016</time>, <span>&lt;<a href="https://www.rfc-editor.org/errata/eid4730">https://www.rfc-editor.org/errata/eid4730</a>&gt;</span>. </dd>
 <dt id="I-D.irtf-cfrg-pairing-friendly-curves">[I-D.irtf-cfrg-pairing-friendly-curves]</dt>
 <dd>
-<span class="refAuthor">Sakemi, Y.</span><span class="refAuthor">, Kobayashi, T.</span><span class="refAuthor">, and T. Saito</span>, <span class="refTitle">"Pairing-Friendly Curves"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-irtf-cfrg-pairing-friendly-curves-03</span>, <time datetime="2020-03-27">27 March 2020</time>, <span>&lt;<a href="http://www.ietf.org/internet-drafts/draft-irtf-cfrg-pairing-friendly-curves-03.txt">http://www.ietf.org/internet-drafts/draft-irtf-cfrg-pairing-friendly-curves-03.txt</a>&gt;</span>. </dd>
+<span class="refAuthor">Sakemi, Y.</span><span class="refAuthor">, Kobayashi, T.</span><span class="refAuthor">, and T. Saito</span>, <span class="refTitle">"Pairing-Friendly Curves"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-irtf-cfrg-pairing-friendly-curves-04</span>, <time datetime="2020-04-28">28 April 2020</time>, <span>&lt;<a href="http://www.ietf.org/internet-drafts/draft-irtf-cfrg-pairing-friendly-curves-04.txt">http://www.ietf.org/internet-drafts/draft-irtf-cfrg-pairing-friendly-curves-04.txt</a>&gt;</span>. </dd>
 <dt id="RFC2119">[RFC2119]</dt>
 <dd>
 <span class="refAuthor">Bradner, S.</span>, <span class="refTitle">"Key words for use in RFCs to Indicate Requirement Levels"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 2119</span>, <span class="seriesInfo">DOI 10.17487/RFC2119</span>, <time datetime="1997-03">March 1997</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc2119">https://www.rfc-editor.org/info/rfc2119</a>&gt;</span>. </dd>
@@ -4247,82 +4194,125 @@ This document does not deal with this complementary problem.<a href="#section-ap
       <h2 id="name-rational-maps">
 <a href="#section-appendix.b" class="section-number selfRef">Appendix B. </a><a href="#name-rational-maps" class="section-name selfRef">Rational maps</a>
       </h2>
-<p id="section-appendix.b-1">This section gives several useful rational maps.<a href="#section-appendix.b-1" class="pilcrow">¶</a></p>
+<p id="section-appendix.b-1">This section gives rational maps that can be used when hashing to
+twisted Edwards or Montgomery curves.<a href="#section-appendix.b-1" class="pilcrow">¶</a></p>
+<p id="section-appendix.b-2">Given a twisted Edwards curve, <a href="#appx-rational-map-edw" class="xref">Appendix B.1</a>
+shows how to derive a corresponding Montgomery
+curve and how to map from that curve to the twisted Edwards curve.
+This mapping may be used when hashing to twisted Edwards curves
+as described in <a href="#twisted-edwards" class="xref">Section 6.8</a>.<a href="#section-appendix.b-2" class="pilcrow">¶</a></p>
+<p id="section-appendix.b-3">Given a Montgomery curve, <a href="#appx-rational-map-mont" class="xref">Appendix B.2</a> shows
+how to derive a corresponding Weierstrass curve and how to map from that
+curve to the Montgomery curve.
+This mapping can be used to hash to Montgomery or twisted Edwards curves
+via the Shallue-van de Woestijne (<a href="#svdw" class="xref">Section 6.6.1</a>) or Simplified SWU (<a href="#simple-swu" class="xref">Section 6.6.2</a>)
+method, as follows:<a href="#section-appendix.b-3" class="pilcrow">¶</a></p>
+<ul>
+<li id="section-appendix.b-4.1">For Montgomery curves, first map to the Weierstrass curve, then convert
+to Montgomery coordinates via the mapping.<a href="#section-appendix.b-4.1" class="pilcrow">¶</a>
+</li>
+<li id="section-appendix.b-4.2">For twisted Edwards curves, compose the Weierstrass to Montgomery mapping
+with the Montgomery to twisted Edwards mapping
+(<a href="#appx-rational-map-edw" class="xref">Appendix B.1</a>) to obtain a Weierstrass curve and a mapping
+to the target twisted Edwards curve.
+Map to this Weierstrass curve, then convert to Edwards coordinates
+via the mapping.<a href="#section-appendix.b-4.2" class="pilcrow">¶</a>
+</li>
+</ul>
 <div id="appx-rational-map-edw">
 <section id="section-b.1">
-        <h2 id="name-twisted-edwards-to-montgome">
-<a href="#section-b.1" class="section-number selfRef">B.1. </a><a href="#name-twisted-edwards-to-montgome" class="section-name selfRef">Twisted Edwards to Montgomery curves</a>
+        <h2 id="name-generic-montgomery-to-twist">
+<a href="#section-b.1" class="section-number selfRef">B.1. </a><a href="#name-generic-montgomery-to-twist" class="section-name selfRef">Generic Montgomery to twisted Edwards map</a>
         </h2>
 <p id="section-b.1-1">This section gives a generic birational map between twisted Edwards
-and Montgomery curves.
-This birational map comprises the rational map specified in
-<a href="#rational-map" class="xref">Section 6.8.1</a> and its inverse.<a href="#section-b.1-1" class="pilcrow">¶</a></p>
-<p id="section-b.1-2">The twisted Edwards curve<a href="#section-b.1-2" class="pilcrow">¶</a></p>
-<div class="artwork art-text alignLeft" id="section-b.1-3">
+and Montgomery curves.<a href="#section-b.1-1" class="pilcrow">¶</a></p>
+<p id="section-b.1-2">The map in this section is a simplified version of the map given in
+<span>[<a href="#BBJLP08" class="xref">BBJLP08</a>]</span>, Theorem 3.2.
+Specifically, this section's map handles exceptional cases in a
+simplified way that is geared towards hashing to a twisted Edwards
+curve's prime-order subgroup.<a href="#section-b.1-2" class="pilcrow">¶</a></p>
+<p id="section-b.1-3">The twisted Edwards curve<a href="#section-b.1-3" class="pilcrow">¶</a></p>
+<div class="artwork art-text alignLeft" id="section-b.1-4">
 <pre>
     a * v^2 + w^2 = 1 + d * v^2 * w^2
-</pre><a href="#section-b.1-3" class="pilcrow">¶</a>
+</pre><a href="#section-b.1-4" class="pilcrow">¶</a>
 </div>
-<p id="section-b.1-4">is birationally equivalent to the Montgomery curve<a href="#section-b.1-4" class="pilcrow">¶</a></p>
-<div class="artwork art-text alignLeft" id="section-b.1-5">
+<p id="section-b.1-5">is birationally equivalent to the Montgomery curve<a href="#section-b.1-5" class="pilcrow">¶</a></p>
+<div class="artwork art-text alignLeft" id="section-b.1-6">
 <pre>
     K * t^2 = s^3 + J * s^2 + s
-</pre><a href="#section-b.1-5" class="pilcrow">¶</a>
+</pre><a href="#section-b.1-6" class="pilcrow">¶</a>
 </div>
-<p id="section-b.1-6">by the following mappings (<span>[<a href="#BBJLP08" class="xref">BBJLP08</a>]</span>, Theorem 3.2).
-To convert from twisted Edwards to Montgomery form, the mapping is<a href="#section-b.1-6" class="pilcrow">¶</a></p>
+<p id="section-b.1-7">which has the form required by the Elligator 2 mapping of <a href="#elligator2" class="xref">Section 6.7.1</a>.
+The coefficients of the Montgomery curve are<a href="#section-b.1-7" class="pilcrow">¶</a></p>
 <ul>
-<li id="section-b.1-7.1">J = 2 * (a + d) / (a - d)<a href="#section-b.1-7.1" class="pilcrow">¶</a>
+<li id="section-b.1-8.1">J = 2 * (a + d) / (a - d)<a href="#section-b.1-8.1" class="pilcrow">¶</a>
 </li>
-<li id="section-b.1-7.2">K = 4 / (a - d)<a href="#section-b.1-7.2" class="pilcrow">¶</a>
-</li>
-<li id="section-b.1-7.3">s = (1 + w) / (1 - w)<a href="#section-b.1-7.3" class="pilcrow">¶</a>
-</li>
-<li id="section-b.1-7.4">t = (1 + w) / (v * (1 - w))<a href="#section-b.1-7.4" class="pilcrow">¶</a>
+<li id="section-b.1-8.2">K = 4 / (a - d)<a href="#section-b.1-8.2" class="pilcrow">¶</a>
 </li>
 </ul>
-<p id="section-b.1-8">This mapping is defined when a != d, which is guaranteed by the definition
-of twisted Edwards curves.
-The mapping is undefined when v == 0 or w == 1.
-If (v, w) == (0, -1), return the point (s, t) = (0, 0).
-For all other undefined inputs, return the identity point on the Montgomery curve.
-(This follows from <span>[<a href="#BBJLP08" class="xref">BBJLP08</a>]</span>, Section 3.)<a href="#section-b.1-8" class="pilcrow">¶</a></p>
-<p id="section-b.1-9">To convert from Montgomery to twisted Edwards form, the mapping is<a href="#section-b.1-9" class="pilcrow">¶</a></p>
+<p id="section-b.1-9">The rational map from the point (s, t) on the above Montgomery curve
+to the point (v, w) on the twisted Edwards curve is given by<a href="#section-b.1-9" class="pilcrow">¶</a></p>
 <ul>
-<li id="section-b.1-10.1">a = (J + 2) / K<a href="#section-b.1-10.1" class="pilcrow">¶</a>
+<li id="section-b.1-10.1">v = s / t<a href="#section-b.1-10.1" class="pilcrow">¶</a>
 </li>
-<li id="section-b.1-10.2">d = (J - 2) / K<a href="#section-b.1-10.2" class="pilcrow">¶</a>
-</li>
-<li id="section-b.1-10.3">v = s / t<a href="#section-b.1-10.3" class="pilcrow">¶</a>
-</li>
-<li id="section-b.1-10.4">w = (s - 1) / (s + 1)<a href="#section-b.1-10.4" class="pilcrow">¶</a>
+<li id="section-b.1-10.2">w = (s - 1) / (s + 1)<a href="#section-b.1-10.2" class="pilcrow">¶</a>
 </li>
 </ul>
-<p id="section-b.1-11">This mapping is defined when J != 2, J != -2, and K != 0; all Montgomery
-curves meet these criteria.
-The mapping is undefined when t == 0 or s == -1.
-If (s, t) == (0, 0), return the point (v, w) = (0, -1).
-For all other undefined inputs, return the identity point on the twisted
-Edwards curve, namely, (v, w) = (0, 1).
-(This follows from <span>[<a href="#BBJLP08" class="xref">BBJLP08</a>]</span>, Section 3.)<a href="#section-b.1-11" class="pilcrow">¶</a></p>
-<p id="section-b.1-12">(Note that <a href="#rational-map" class="xref">Section 6.8.1</a> gives a simpler rule for handling undefined
-inputs to this rational map: always return the identity point.
-The simpler rule gives the same result when used as part of an encoding
-function (<a href="#roadmap" class="xref">Section 3</a>), because the cofactor clearing step will always
-map the point (v, w) = (0, -1) to the identity point.)<a href="#section-b.1-12" class="pilcrow">¶</a></p>
-<p id="section-b.1-13">Composing the mapping of this section with the mapping from
-Montgomery to Weierstrass curves in <a href="#appx-rational-map-mont" class="xref">Appendix B.2</a>
-yields a mapping from twisted Edwards curves to Weierstrass curves,
-which is the form required by the mappings in <a href="#weierstrass" class="xref">Section 6.6</a>.
-This composition of mappings can be used to apply the Shallue-van
-de Woestijne (<a href="#svdw" class="xref">Section 6.6.1</a>) or Simplified SWU (<a href="#simple-swu" class="xref">Section 6.6.2</a>) method
-to twisted Edwards curves.<a href="#section-b.1-13" class="pilcrow">¶</a></p>
+<p id="section-b.1-11">This mapping is undefined when t == 0 or s == -1, i.e., when
+the denominator of either of the above rational functions is zero.
+Implementations MUST detect exceptional cases and return the value
+(v, w) = (0, 1), which is the identity point on all twisted Edwards curves.<a href="#section-b.1-11" class="pilcrow">¶</a></p>
+<p id="section-b.1-12">The following straight-line implementation of the above rational map
+handles the exceptional cases.<a href="#section-b.1-12" class="pilcrow">¶</a></p>
+<div class="artwork art-text alignLeft" id="section-b.1-13">
+<pre>
+edw_to_monty_generic(s, t)
+
+Input: (s, t), a point on the curve K * t^2 = s^3 + J * s^2 + s.
+Output: (v, w), a point on an equivalent twisted Edwards curve.
+
+1. tv1 = s + 1
+2. tv2 = tv1 * t        # (s + 1) * t
+3. tv2 = inv0(tv2)      # 1 / ((s + 1) * t)
+4.   v = tv2 * tv1      # 1 / t
+5.   v = v * s          # s / t
+6.   w = tv2 * t        # 1 / (s + 1)
+7. tv1 = s - 1
+8.   w = w * tv1        # (s - 1) / (s + 1)
+9.   e = tv2 == 0
+10.  w = CMOV(w, 1, e)  # handle exceptional case
+11. return (v, w)
+</pre><a href="#section-b.1-13" class="pilcrow">¶</a>
+</div>
+<p id="section-b.1-14">For completeness, we also give the inverse relations.
+(Note that this map is not required when hashing to twisted Edwards curves.)
+The coefficients of the twisted Edwards curve corresponding to
+the above Montgomery curve are<a href="#section-b.1-14" class="pilcrow">¶</a></p>
+<ul>
+<li id="section-b.1-15.1">a = (J + 2) / K<a href="#section-b.1-15.1" class="pilcrow">¶</a>
+</li>
+<li id="section-b.1-15.2">d = (J - 2) / K<a href="#section-b.1-15.2" class="pilcrow">¶</a>
+</li>
+</ul>
+<p id="section-b.1-16">The rational map from the point (v, w) on the twisted Edwards
+curve to the point (s, t) on the Montgomery curve is given by<a href="#section-b.1-16" class="pilcrow">¶</a></p>
+<ul>
+<li id="section-b.1-17.1">s = (1 + w) / (1 - w)<a href="#section-b.1-17.1" class="pilcrow">¶</a>
+</li>
+<li id="section-b.1-17.2">t = (1 + w) / (v * (1 - w))<a href="#section-b.1-17.2" class="pilcrow">¶</a>
+</li>
+</ul>
+<p id="section-b.1-18">The mapping is undefined when v == 0 or w == 1.
+When the goal is to map into the prime-order subgroup of the Montgomery
+curve, it suffices to return the identity point on the Montgomery curve
+in the exceptional cases.<a href="#section-b.1-18" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="appx-rational-map-mont">
 <section id="section-b.2">
-        <h2 id="name-montgomery-to-weierstrass-c">
-<a href="#section-b.2" class="section-number selfRef">B.2. </a><a href="#name-montgomery-to-weierstrass-c" class="section-name selfRef">Montgomery to Weierstrass curves</a>
+        <h2 id="name-weierstrass-to-montgomery-m">
+<a href="#section-b.2" class="section-number selfRef">B.2. </a><a href="#name-weierstrass-to-montgomery-m" class="section-name selfRef">Weierstrass to Montgomery map</a>
         </h2>
 <p id="section-b.2-1">The rational map from the point (s, t) on the Montgomery curve<a href="#section-b.2-1" class="pilcrow">¶</a></p>
 <div class="artwork art-text alignLeft" id="section-b.2-2">
@@ -4354,9 +4344,6 @@ to twisted Edwards curves.<a href="#section-b.1-13" class="pilcrow">¶</a></p>
 <li id="section-b.2-8.2">t = y * K<a href="#section-b.2-8.2" class="pilcrow">¶</a>
 </li>
 </ul>
-<p id="section-b.2-9">This mapping can be used to apply the Shallue-van de Woestijne
-(<a href="#svdw" class="xref">Section 6.6.1</a>) or Simplified SWU (<a href="#simple-swu" class="xref">Section 6.6.2</a>) method to
-Montgomery curves.<a href="#section-b.2-9" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -5031,7 +5018,10 @@ Steps:
 for edwards25519 <span>[<a href="#RFC7748" class="xref">RFC7748</a>]</span> as specified in <a href="#suites-25519" class="xref">Section 8.5</a>.
 The subroutine map_to_curve_elligator2_curve25519
 is defined in <a href="#map-to-curve25519" class="xref">Appendix D.3.1</a>.<a href="#section-d.3.2-1" class="pilcrow">¶</a></p>
-<div class="artwork art-text alignLeft" id="section-d.3.2-2">
+<p id="section-d.3.2-2">Note that the sign of the constant c1 below is chosen as specified
+in <a href="#rational-map" class="xref">Section 6.8.1</a>, i.e., applying the rational map to the edwards25519
+base point yields the curve25519 base point (see erratum <span>[<a href="#EID4730" class="xref">EID4730</a>]</span>).<a href="#section-d.3.2-2" class="pilcrow">¶</a></p>
+<div class="artwork art-text alignLeft" id="section-d.3.2-3">
 <pre>
 map_to_curve_elligator2_edwards25519(u)
 
@@ -5056,7 +5046,7 @@ Steps:
 11. yn = CMOV(yn, 1, e)
 12. yd = CMOV(yd, 1, e)
 13. return (xn, xd, yn, yd)
-</pre><a href="#section-d.3.2-2" class="pilcrow">¶</a>
+</pre><a href="#section-d.3.2-3" class="pilcrow">¶</a>
 </div>
 </section>
 </div>
