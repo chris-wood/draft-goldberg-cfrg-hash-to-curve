@@ -1,6 +1,6 @@
 {
   "magic": "B8n2c@e8kvfx",
-  "timestamp": "2020-04-29T00:08:47.467396+00:00",
+  "timestamp": "2020-05-04T03:25:44.337637+00:00",
   "repo": "cfrg/draft-irtf-cfrg-hash-to-curve",
   "labels": [
     {
@@ -24482,7 +24482,7 @@
       "labels": [],
       "body": "This PR makes a tiny clarification in Section 5, and some more extensive changes in Section 6 and Appx B in response to #243.\r\n\r\nSpecifically, it moves the definition of the generic Montgomery to twisted Edwards rational map to Appx B ~~and it adds the optimized Monty->Edw map for square K~~. It also clarifies that the map is specified as part of the suite and updates the discussion of sign for standardized mappings.\r\n\r\nEDIT: I removed the optimized Monty->Edw map for square K. Per a conversation with @chris-wood, best to discuss the clarifications in this PR separately from the question of adding another mapping.",
       "createdAt": "2020-04-20T21:35:18Z",
-      "updatedAt": "2020-04-29T00:07:48Z",
+      "updatedAt": "2020-04-29T00:18:41Z",
       "closedAt": "2020-04-29T00:07:48Z",
       "mergedAt": "2020-04-29T00:07:48Z",
       "mergedBy": "chris-wood",
@@ -24550,7 +24550,7 @@
       "labels": [],
       "body": "This PR adds a section to the appendix that specifies a slightly more optimized Montgomery->Edwards mapping for the case that `4 / (a - d)` is square in F (`a` and `d` are the coefficients of the twisted Edwards curve). This is the mapping that's specified in RFC7748 for Curve25519.\r\n\r\nThe idea here is to help readers pick a better mapping when defining suites for Edwards curves that don't have a standardized Montgomery counterpart.\r\n\r\n**Note** that this PR builds on #244. The differences are all in [this commit](https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/pull/246/commits/cc8db5e928a93e4eec37a3793bdf1b8b4119abb6), to make it easier to see what's going on. If we decide to add this, I'll rebase after we land #244.",
       "createdAt": "2020-04-28T21:24:17Z",
-      "updatedAt": "2020-04-28T21:33:13Z",
+      "updatedAt": "2020-04-29T00:21:30Z",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -24558,9 +24558,9 @@
         {
           "author": "kwantam",
           "authorAssociation": "COLLABORATOR",
-          "body": "I'm ambivalent about adding this. On the one hand, it's might be nice to include this info to help folks design better suites for twisted Edwards curves that don't have a standardized Montgomery counterpart, which I suppose is good.\r\n\r\nOn the other hand, it only applies to a restricted class of curves---and looking at the Edwards curves listed on [SafeCurves](https://safecurves.cr.yp.to), it looks like this map only applies to Curve41417. And even when it does apply, it only saves a small handful of multiplications---it would be tough to squeeze even a 1% performance boost from this \"optimization.\"\r\n\r\nSo in the end I'm OK just leaving it out. Folks who are defining new curves are of course welcome to define whatever super-optimized Montgomery->Edwards mapping they want regardless of what we say in the appendix...",
+          "body": "I'm ambivalent about adding this. On the one hand, it might be nice to include this info to help folks design better suites for twisted Edwards curves that don't have a standardized Montgomery counterpart, which I suppose is good.\r\n\r\nOn the other hand, it only applies to a restricted class of curves---and looking at the Edwards curves listed on [SafeCurves](https://safecurves.cr.yp.to), it looks like this map only applies to Curve41417. And even when it does apply, it only saves a small handful of multiplications---it would be tough to squeeze even a 1% performance boost from this \"optimization.\"\r\n\r\nSo in the end I'm OK just leaving it out. Folks who are defining new curves are of course welcome to define whatever super-optimized Montgomery->Edwards mapping they want regardless of what we say in the appendix...",
           "createdAt": "2020-04-28T21:33:13Z",
-          "updatedAt": "2020-04-28T21:33:13Z"
+          "updatedAt": "2020-04-29T00:21:30Z"
         }
       ],
       "reviews": []
@@ -24570,18 +24570,33 @@
       "id": "MDExOlB1bGxSZXF1ZXN0NDEwMzg3ODA3",
       "title": "move straight-line impls from Section 6 to Appx",
       "url": "https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/pull/247",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "kwantam",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "This PR moves all of the generic straight-line code from Section 6 to a new appx.\r\n\r\nThe reason to make this a new appx is that the existing \"optimized sample code\" appx has a different interface---all of the mappings use projective coordinates and return ratios. Keeping this in its own appx gets rid of confusion about which sample code uses which interface.",
       "createdAt": "2020-04-28T22:11:50Z",
-      "updatedAt": "2020-04-28T23:03:27Z",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "comments": [],
+      "updatedAt": "2020-04-29T03:10:46Z",
+      "closedAt": "2020-04-29T03:10:46Z",
+      "mergedAt": "2020-04-29T03:10:46Z",
+      "mergedBy": "chris-wood",
+      "comments": [
+        {
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "body": "(rebased onto master)",
+          "createdAt": "2020-04-29T00:20:45Z",
+          "updatedAt": "2020-04-29T00:20:45Z"
+        },
+        {
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@armfazh, are you OK with this?",
+          "createdAt": "2020-04-29T00:46:47Z",
+          "updatedAt": "2020-04-29T00:46:47Z"
+        }
+      ],
       "reviews": [
         {
           "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDAyMjcxODEw",
@@ -24595,8 +24610,48 @@
           "createdAt": "2020-04-28T23:03:27Z",
           "updatedAt": "2020-04-28T23:03:27Z",
           "comments": []
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDAyMzE2Mjg1",
+          "commit": {
+            "abbreviatedOid": "c529b36"
+          },
+          "author": "armfazh",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2020-04-29T01:24:33Z",
+          "updatedAt": "2020-04-29T01:24:33Z",
+          "comments": []
         }
       ]
+    },
+    {
+      "number": 248,
+      "id": "MDExOlB1bGxSZXF1ZXN0NDEyNzA5OTEy",
+      "title": "Fix numbering",
+      "url": "https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/pull/248",
+      "state": "MERGED",
+      "author": "kirk-baird",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fixing a minor typo in the numbering.",
+      "createdAt": "2020-05-04T02:27:12Z",
+      "updatedAt": "2020-05-04T03:25:17Z",
+      "closedAt": "2020-05-04T03:25:17Z",
+      "mergedAt": "2020-05-04T03:25:17Z",
+      "mergedBy": "kwantam",
+      "comments": [
+        {
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Thanks!",
+          "createdAt": "2020-05-04T03:25:08Z",
+          "updatedAt": "2020-05-04T03:25:08Z"
+        }
+      ],
+      "reviews": []
     }
   ]
 }
