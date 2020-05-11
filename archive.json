@@ -1,6 +1,6 @@
 {
-  "magic": "B8n2c@e8kvfx",
-  "timestamp": "2020-05-04T03:25:44.337637+00:00",
+  "magic": "E!vIA5L86J2I",
+  "timestamp": "2020-05-11T19:14:51.503338+00:00",
   "repo": "cfrg/draft-irtf-cfrg-hash-to-curve",
   "labels": [
     {
@@ -5640,7 +5640,16 @@
             }
           ]
         }
-      ]
+      ],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "0fcf998b873399dfdd0474eb264f0c4a3ec8fdca",
+      "headRepository": "samscott89/draft-sullivan-cfrg-hash-to-curve",
+      "headRefName": "changes",
+      "headRefOid": "793d6cf4bbfb50ef0189204ef347abe5ef4bd200",
+      "mergeCommit": {
+        "oid": "a492404a93965af4d67fcb654a6a3216af968cb1"
+      }
     },
     {
       "number": 19,
@@ -5835,7 +5844,16 @@
             }
           ]
         }
-      ]
+      ],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "a492404a93965af4d67fcb654a6a3216af968cb1",
+      "headRepository": "samscott89/draft-sullivan-cfrg-hash-to-curve",
+      "headRefName": "changes",
+      "headRefOid": "fa253299371aecbe4b980e30a51838c1dd2cb2b9",
+      "mergeCommit": {
+        "oid": "88b8084365e8126c0d0efac9ec622c59b8394df1"
+      }
     },
     {
       "number": 20,
@@ -6128,7 +6146,14 @@
             }
           ]
         }
-      ]
+      ],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "2fee72ad1787b65c988382ffa0fd61fbe777ba95",
+      "headRepository": "Ela-BLee/draft-sullivan-cfrg-hash-to-curve",
+      "headRefName": "changes",
+      "headRefOid": "edc1d037df73ebbc6aeab2be990016743ff85365",
+      "mergeCommit": null
     },
     {
       "number": 21,
@@ -6283,7 +6308,16 @@
           "updatedAt": "2018-05-14T22:46:15Z",
           "comments": []
         }
-      ]
+      ],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "34f43482de044ddfba5ebdde0f3a8a3cc89cb873",
+      "headRepository": "samscott89/draft-sullivan-cfrg-hash-to-curve",
+      "headRefName": "changes",
+      "headRefOid": "8f82b214b548665704444d5c6972cf9642fd3467",
+      "mergeCommit": {
+        "oid": "b662ba0f2432be946bb1c0e9f42f72a4c8393de2"
+      }
     },
     {
       "number": 24,
@@ -6351,7 +6385,16 @@
             }
           ]
         }
-      ]
+      ],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "b662ba0f2432be946bb1c0e9f42f72a4c8393de2",
+      "headRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "caw/ro",
+      "headRefOid": "20e524b862dbb357ce32dcc40c9934a491ca7126",
+      "mergeCommit": {
+        "oid": "f9d3bca1c9d6dd83c5597204b9b60732412afd1e"
+      }
     },
     {
       "number": 25,
@@ -6538,7 +6581,16 @@
             }
           ]
         }
-      ]
+      ],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "f9d3bca1c9d6dd83c5597204b9b60732412afd1e",
+      "headRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "caw/pocs",
+      "headRefOid": "4bee51df43ce1ae54cd6ef54ba567a29bcfa672e",
+      "mergeCommit": {
+        "oid": "da1f7b2679c7516522119c9e3d6e8d13fa2eb02d"
+      }
     },
     {
       "number": 31,
@@ -6744,7 +6796,16 @@
             }
           ]
         }
-      ]
+      ],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "da1f7b2679c7516522119c9e3d6e8d13fa2eb02d",
+      "headRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "caw/hacspec",
+      "headRefOid": "adc1f15b270decf8ec10e5ba8e373f19b39a49a6",
+      "mergeCommit": {
+        "oid": "781b3ab570539ed3cc0a0b4a97c2f931ee439012"
+      }
     },
     {
       "number": 33,
@@ -6777,7 +6838,16 @@
           "updatedAt": "2018-07-01T20:41:54Z",
           "comments": []
         }
-      ]
+      ],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "0e08d7613c9a77783a08cc56d15082aa226f540b",
+      "headRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "caw/naive-clarify",
+      "headRefOid": "65341643e39e6e85f3be3e856e6b54d1326dddc8",
+      "mergeCommit": {
+        "oid": "fdb70a5f0c836a4ab8090c5a84952c688e5ccc35"
+      }
     },
     {
       "number": 44,
@@ -6838,7 +6908,14 @@
             }
           ]
         }
-      ]
+      ],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "fdb70a5f0c836a4ab8090c5a84952c688e5ccc35",
+      "headRepository": "klcappelli/draft-sullivan-cfrg-hash-to-curve",
+      "headRefName": "tables",
+      "headRefOid": "2d9cf13a15a2476695e1640dd73275da026639ff",
+      "mergeCommit": null
     },
     {
       "number": 56,
@@ -6879,7 +6956,16 @@
           "updatedAt": "2018-10-09T05:14:10Z",
           "comments": []
         }
-      ]
+      ],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "fdb70a5f0c836a4ab8090c5a84952c688e5ccc35",
+      "headRepository": "samscott89/draft-sullivan-cfrg-hash-to-curve",
+      "headRefName": "update-utilities",
+      "headRefOid": "cb55b6a757c8c5ee35d0462df8296319d007cd68",
+      "mergeCommit": {
+        "oid": "f093b5838aa8068b09ad1b8af2a63b2f51f41def"
+      }
     },
     {
       "number": 57,
@@ -6956,7 +7042,16 @@
           "updatedAt": "2018-10-20T01:32:56Z",
           "comments": []
         }
-      ]
+      ],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "32a1a5922a2d3bb39ea5eb97868dcf47cead1327",
+      "headRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "nick/ciphersuites",
+      "headRefOid": "1330b8251fe14d0f331a920ec14c6fce83bd2036",
+      "mergeCommit": {
+        "oid": "6cd3189cb1bb74fe926697cb17a6d574e40cfa24"
+      }
     },
     {
       "number": 58,
@@ -7057,7 +7152,16 @@
           "updatedAt": "2018-10-18T23:35:56Z",
           "comments": []
         }
-      ]
+      ],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "8e193b7e41c3b4658675f814440789edc6694a24",
+      "headRepository": "armfazh/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "typos",
+      "headRefOid": "e223a01d59f99911e4e759876b2fa8ac706bbf09",
+      "mergeCommit": {
+        "oid": "32a1a5922a2d3bb39ea5eb97868dcf47cead1327"
+      }
     },
     {
       "number": 59,
@@ -7275,7 +7379,14 @@
             }
           ]
         }
-      ]
+      ],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "eed50eabd4c8416432dbedd13ad44ccc0e56d6d9",
+      "headRepository": "samscott89/draft-sullivan-cfrg-hash-to-curve",
+      "headRefName": "hash-to-base-improvements",
+      "headRefOid": "7c557424159b93440006c3dff7ed199e0e728e4e",
+      "mergeCommit": null
     },
     {
       "number": 60,
@@ -7294,7 +7405,16 @@
       "mergedAt": "2018-10-22T13:49:08Z",
       "mergedBy": "chris-wood",
       "comments": [],
-      "reviews": []
+      "reviews": [],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "8f9d9a5cbb1c3994faa879e71d3656ac1aa711cf",
+      "headRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "caw/various-edits",
+      "headRefOid": "eed50eabd4c8416432dbedd13ad44ccc0e56d6d9",
+      "mergeCommit": {
+        "oid": "eed50eabd4c8416432dbedd13ad44ccc0e56d6d9"
+      }
     },
     {
       "number": 64,
@@ -7327,7 +7447,16 @@
           "updatedAt": "2018-10-22T20:11:47Z",
           "comments": []
         }
-      ]
+      ],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "eed50eabd4c8416432dbedd13ad44ccc0e56d6d9",
+      "headRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "caw/cmov",
+      "headRefOid": "fb287f78808055a34a6fbaebab9cc5bba73e9479",
+      "mergeCommit": {
+        "oid": "fe6551c2b57f378d8ab5f3b9453d4f735409f7df"
+      }
     },
     {
       "number": 65,
@@ -7400,7 +7529,16 @@
           "updatedAt": "2018-10-22T20:32:40Z",
           "comments": []
         }
-      ]
+      ],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "fe6551c2b57f378d8ab5f3b9453d4f735409f7df",
+      "headRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "caw/more-cleanup",
+      "headRefOid": "67986e2aeb9b9885d04d921597681aeb73ef24fa",
+      "mergeCommit": {
+        "oid": "d7ed0df33fe054082930e2dd70ed2facf9dfe274"
+      }
     },
     {
       "number": 67,
@@ -7433,7 +7571,16 @@
           "updatedAt": "2018-10-22T20:42:29Z",
           "comments": []
         }
-      ]
+      ],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "d7ed0df33fe054082930e2dd70ed2facf9dfe274",
+      "headRepository": "samscott89/draft-sullivan-cfrg-hash-to-curve",
+      "headRefName": "icart-bug",
+      "headRefOid": "ec7ddd168c89f445b346472a15fc3a2af0ff7fda",
+      "mergeCommit": {
+        "oid": "2fee72ad1787b65c988382ffa0fd61fbe777ba95"
+      }
     },
     {
       "number": 68,
@@ -7487,7 +7634,14 @@
           "updatedAt": "2018-10-23T15:08:02Z",
           "comments": []
         }
-      ]
+      ],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "2fee72ad1787b65c988382ffa0fd61fbe777ba95",
+      "headRepository": "armfazh/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "rev01",
+      "headRefOid": "2413c7917e048d33b6e46f2fc53a87d482517fec",
+      "mergeCommit": null
     },
     {
       "number": 72,
@@ -7738,7 +7892,16 @@
           "updatedAt": "2019-02-09T15:59:00Z",
           "comments": []
         }
-      ]
+      ],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "86f7d4a0e65d8d58019dd2db364bc4c6565b3c37",
+      "headRepository": "samscott89/draft-sullivan-cfrg-hash-to-curve",
+      "headRefName": "algorithm-clarity",
+      "headRefOid": "425d955031a33d20132fb6662a0fbf030741646d",
+      "mergeCommit": {
+        "oid": "42903d81677fe9f0d56813429da43d711fd33a0e"
+      }
     },
     {
       "number": 74,
@@ -7864,7 +8027,16 @@
             }
           ]
         }
-      ]
+      ],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "42903d81677fe9f0d56813429da43d711fd33a0e",
+      "headRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "caw/edits",
+      "headRefOid": "c46c7bc4bc7e2420153b8410fc8a78515888d27e",
+      "mergeCommit": {
+        "oid": "76d7bb422cc4f94aed92ccd6f42f69167533a287"
+      }
     },
     {
       "number": 75,
@@ -7883,7 +8055,14 @@
       "mergedAt": null,
       "mergedBy": null,
       "comments": [],
-      "reviews": []
+      "reviews": [],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "76d7bb422cc4f94aed92ccd6f42f69167533a287",
+      "headRepository": "samscott89/draft-sullivan-cfrg-hash-to-curve",
+      "headRefName": "details-square-root",
+      "headRefOid": "3abfe31bbe8f8b4db2bbadef52b2742c40dcba86",
+      "mergeCommit": null
     },
     {
       "number": 76,
@@ -8004,7 +8183,16 @@
             }
           ]
         }
-      ]
+      ],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "2b988928986119601bc22de139c678d5b1fab494",
+      "headRepository": "samscott89/draft-sullivan-cfrg-hash-to-curve",
+      "headRefName": "details-square-root",
+      "headRefOid": "235d2bae0d1338c35e4d6b940b078da4a7c25ea6",
+      "mergeCommit": {
+        "oid": "d51d8443655d8658e5f7cefaddccb2537d4f59ed"
+      }
     },
     {
       "number": 77,
@@ -8146,7 +8334,16 @@
             }
           ]
         }
-      ]
+      ],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "d51d8443655d8658e5f7cefaddccb2537d4f59ed",
+      "headRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "caw/vectors",
+      "headRefOid": "614758d3f96836d24bb45f1d5107003543c738bc",
+      "mergeCommit": {
+        "oid": "43201207b29a6794fd9a7d9d0f0596800702cba7"
+      }
     },
     {
       "number": 78,
@@ -8187,7 +8384,16 @@
           "updatedAt": "2019-03-01T16:20:26Z",
           "comments": []
         }
-      ]
+      ],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "d96d735db4dffba50831af72e38a200ff814dec4",
+      "headRepository": "samscott89/draft-sullivan-cfrg-hash-to-curve",
+      "headRefName": "alg-efficiency",
+      "headRefOid": "bfd0cfc9df375fd1c3405d8489d5d30d1128732a",
+      "mergeCommit": {
+        "oid": "fc1c89adf5994a6406532ad1383ea10a5caa2a78"
+      }
     },
     {
       "number": 83,
@@ -8228,7 +8434,16 @@
           "updatedAt": "2019-02-13T03:12:11Z",
           "comments": []
         }
-      ]
+      ],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "43201207b29a6794fd9a7d9d0f0596800702cba7",
+      "headRepository": "armfazh/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "feb12-del-index",
+      "headRefOid": "a5bc63ab74947997286b05fcce4085454bbf52d4",
+      "mergeCommit": {
+        "oid": "ef23acbbd6d030b2c466ab7fdcd0279c2ca1fcba"
+      }
     },
     {
       "number": 84,
@@ -8296,7 +8511,16 @@
             }
           ]
         }
-      ]
+      ],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "216b317947c38dbe9368982821fa696a60750848",
+      "headRepository": "armfazh/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "feb12-preconditions",
+      "headRefOid": "77b17cd8a383316b39f3b80f361e47a55c9e9b75",
+      "mergeCommit": {
+        "oid": "d96d735db4dffba50831af72e38a200ff814dec4"
+      }
     },
     {
       "number": 86,
@@ -8789,7 +9013,16 @@
           "updatedAt": "2019-02-27T00:46:31Z",
           "comments": []
         }
-      ]
+      ],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "ef23acbbd6d030b2c466ab7fdcd0279c2ca1fcba",
+      "headRepository": "armfazh/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "feb13_aEqual0",
+      "headRefOid": "0dc9968532715edb0ab9a8e37523550d5d31f99d",
+      "mergeCommit": {
+        "oid": "3ce9c3e87a3799fbbcc798bd2b0dec984f264832"
+      }
     },
     {
       "number": 89,
@@ -8816,7 +9049,16 @@
           "updatedAt": "2019-03-01T21:13:16Z"
         }
       ],
-      "reviews": []
+      "reviews": [],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "a940065c50b82f1e3f6ffb97e73691c176311631",
+      "headRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "caw/hash2base-rename",
+      "headRefOid": "640426251c511ff79767a02235d5145aec2b0468",
+      "mergeCommit": {
+        "oid": "63ec71da8a59aec00927e75dd26ae312265e5cea"
+      }
     },
     {
       "number": 91,
@@ -8849,7 +9091,16 @@
           "updatedAt": "2019-03-11T18:47:44Z",
           "comments": []
         }
-      ]
+      ],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "8150855f1529290e783bbd903dd7e4aef29c9b57",
+      "headRepository": "armfazh/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "master",
+      "headRefOid": "24a84bc79a2e6ba2681455ba515879f2f61ab119",
+      "mergeCommit": {
+        "oid": "2765896160f9ed956f4ae651aaea278c5663f919"
+      }
     },
     {
       "number": 92,
@@ -8868,7 +9119,16 @@
       "mergedAt": "2019-03-15T01:09:22Z",
       "mergedBy": "chris-wood",
       "comments": [],
-      "reviews": []
+      "reviews": [],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "2765896160f9ed956f4ae651aaea278c5663f919",
+      "headRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "fix-non-ascii",
+      "headRefOid": "5f1a4541dc893c2f34c56924c98d10bf19a4c337",
+      "mergeCommit": {
+        "oid": "9682be6cf4b38d129ac3691e5cd210276763d439"
+      }
     },
     {
       "number": 94,
@@ -9116,7 +9376,14 @@
             }
           ]
         }
-      ]
+      ],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "9682be6cf4b38d129ac3691e5cd210276763d439",
+      "headRepository": "armfazh/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "fix_hash2base",
+      "headRefOid": "5a677589854bc0d6a70ba7056d07bc5a3c1e99db",
+      "mergeCommit": null
     },
     {
       "number": 97,
@@ -9894,7 +10161,16 @@
             }
           ]
         }
-      ]
+      ],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "9682be6cf4b38d129ac3691e5cd210276763d439",
+      "headRepository": "armfazh/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "apr02",
+      "headRefOid": "1b20fdf62597c1744bd8484462ae1d0d5fa3a393",
+      "mergeCommit": {
+        "oid": "69f7e0eac615d51f18a35b53e69a3a99e66b05d8"
+      }
     },
     {
       "number": 104,
@@ -11918,7 +12194,16 @@
             }
           ]
         }
-      ]
+      ],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "29471b2ff1d0e4b0fadc7724b1a6f09277df8346",
+      "headRepository": "kwantam/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "master",
+      "headRefOid": "385d8282c81461e2bdd5009ffd83d6a82ec69a5b",
+      "mergeCommit": {
+        "oid": "61fc31e9b152caa9ebd56f960b37df0f1da99180"
+      }
     },
     {
       "number": 114,
@@ -11952,7 +12237,16 @@
           "updatedAt": "2019-06-03T20:53:09Z"
         }
       ],
-      "reviews": []
+      "reviews": [],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "029e677faf077a4ce3b454bef21f83227a9a03cf",
+      "headRepository": "kwantam/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "sgn0_impl",
+      "headRefOid": "ea8c1aa870d8246a811fa36defba27f4a2cafb72",
+      "mergeCommit": {
+        "oid": "938c005eed80c9c457727470e209dfda02546a92"
+      }
     },
     {
       "number": 115,
@@ -11985,7 +12279,16 @@
           "updatedAt": "2019-05-31T17:11:11Z",
           "comments": []
         }
-      ]
+      ],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "61fc31e9b152caa9ebd56f960b37df0f1da99180",
+      "headRepository": "kwantam/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "sqrt_clarification",
+      "headRefOid": "b1805711be6db8ef2a2f1c711f30a580a1419e27",
+      "mergeCommit": {
+        "oid": "412d5b1864dc62e7802090a8edb94c45c5b875aa"
+      }
     },
     {
       "number": 116,
@@ -12635,7 +12938,16 @@
             }
           ]
         }
-      ]
+      ],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "412d5b1864dc62e7802090a8edb94c45c5b875aa",
+      "headRepository": "kwantam/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "hash2base_update",
+      "headRefOid": "3267ff41c589c87be3df15a7791139d5764b473c",
+      "mergeCommit": {
+        "oid": "029e677faf077a4ce3b454bef21f83227a9a03cf"
+      }
     },
     {
       "number": 118,
@@ -12814,7 +13126,16 @@
           "updatedAt": "2020-03-13T20:02:16Z",
           "comments": []
         }
-      ]
+      ],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "4f73ecf9d7b0550ee564f324eedbcde0bfae2f3a",
+      "headRepository": "armfazh/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "diagrams",
+      "headRefOid": "845d3558d8f4dde775697db91ac80d99cc1cbfea",
+      "mergeCommit": {
+        "oid": "36346e036152d3130dce85c520a9cc9f2978aa8d"
+      }
     },
     {
       "number": 119,
@@ -12862,7 +13183,14 @@
           "updatedAt": "2019-06-04T20:25:24Z"
         }
       ],
-      "reviews": []
+      "reviews": [],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "938c005eed80c9c457727470e209dfda02546a92",
+      "headRepository": "armfazh/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "contribRoadmap",
+      "headRefOid": "1cb3b0a2acd7baeffcaa1db50b5b37b86992e8df",
+      "mergeCommit": null
     },
     {
       "number": 121,
@@ -13665,7 +13993,16 @@
           "updatedAt": "2019-06-18T18:01:09Z",
           "comments": []
         }
-      ]
+      ],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "5c22f835dca8723435bc8f4e72a259119f0d668d",
+      "headRepository": "armfazh/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "extendedRoadmap",
+      "headRefOid": "d51275459f6ef107b2aae59119342b3c46d4f776",
+      "mergeCommit": {
+        "oid": "6893c4d1b38627ebf98a2443333566c071294f36"
+      }
     },
     {
       "number": 122,
@@ -13732,7 +14069,16 @@
             }
           ]
         }
-      ]
+      ],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "938c005eed80c9c457727470e209dfda02546a92",
+      "headRepository": "kwantam/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "relwork_update",
+      "headRefOid": "ec9b5c643d7d943241ca4f519e0f4a6fa89a23d3",
+      "mergeCommit": {
+        "oid": "69e6cb39a11e798f59ef0d7d15043c40eb12d2d2"
+      }
     },
     {
       "number": 123,
@@ -13859,7 +14205,16 @@
           "updatedAt": "2019-06-05T19:17:44Z",
           "comments": []
         }
-      ]
+      ],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "69e6cb39a11e798f59ef0d7d15043c40eb12d2d2",
+      "headRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "caw/clarification-crh",
+      "headRefOid": "84ceebb620f40df0bd8f9e74d1ffb238377b6f7d",
+      "mergeCommit": {
+        "oid": "8465c6eefed7ed29f25e1a65d92226cd0c42743b"
+      }
     },
     {
       "number": 125,
@@ -13900,7 +14255,16 @@
           "updatedAt": "2019-06-07T00:52:44Z",
           "comments": []
         }
-      ]
+      ],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "8465c6eefed7ed29f25e1a65d92226cd0c42743b",
+      "headRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "caw/remove-hacspec",
+      "headRefOid": "87a6b1c76806655358dd8c398474c5cb63ad7524",
+      "mergeCommit": {
+        "oid": "5c22f835dca8723435bc8f4e72a259119f0d668d"
+      }
     },
     {
       "number": 127,
@@ -14527,7 +14891,16 @@
           "updatedAt": "2019-06-26T07:10:51Z",
           "comments": []
         }
-      ]
+      ],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "3504f0f759476c9e5a7eb9105d5196da64526f75",
+      "headRepository": "kwantam/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "indent_fix",
+      "headRefOid": "5736c8c3a4020ef579b34f1787fb2ce6d282ce81",
+      "mergeCommit": {
+        "oid": "25b3a80a998c823ebd4d9aeedb4471a337134544"
+      }
     },
     {
       "number": 130,
@@ -14625,7 +14998,16 @@
           "updatedAt": "2019-06-26T06:57:53Z",
           "comments": []
         }
-      ]
+      ],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "6893c4d1b38627ebf98a2443333566c071294f36",
+      "headRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "caw/naming-and-names",
+      "headRefOid": "d52c95a53c0935a5b81a0cdc4431780d1c9b5c4e",
+      "mergeCommit": {
+        "oid": "3504f0f759476c9e5a7eb9105d5196da64526f75"
+      }
     },
     {
       "number": 131,
@@ -14658,7 +15040,16 @@
           "updatedAt": "2019-06-26T17:14:24Z",
           "comments": []
         }
-      ]
+      ],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "25b3a80a998c823ebd4d9aeedb4471a337134544",
+      "headRepository": "kwantam/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "indent_fix",
+      "headRefOid": "190c875932804962dbc34c0347fabc570bf608a3",
+      "mergeCommit": {
+        "oid": "89f8dde0d8fc81708669be3eb1c0473cc558e04d"
+      }
     },
     {
       "number": 132,
@@ -15568,7 +15959,16 @@
             }
           ]
         }
-      ]
+      ],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "89f8dde0d8fc81708669be3eb1c0473cc558e04d",
+      "headRepository": "kwantam/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "edwards_maps",
+      "headRefOid": "5ad2439683af33645431700d3b7789dede5c1c7f",
+      "mergeCommit": {
+        "oid": "f20f8c73fa60cbbcdb40b68f5ac6f9cf877117fd"
+      }
     },
     {
       "number": 136,
@@ -15601,7 +16001,16 @@
           "updatedAt": "2019-07-02T20:20:38Z",
           "comments": []
         }
-      ]
+      ],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "f20f8c73fa60cbbcdb40b68f5ac6f9cf877117fd",
+      "headRepository": "kwantam/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "spacing_fixes",
+      "headRefOid": "66e1bbd6e3f86c7902af4dabfb5add34221e2c35",
+      "mergeCommit": {
+        "oid": "8064073ef75c91b7ec5bf25877eb263f6d516832"
+      }
     },
     {
       "number": 138,
@@ -16176,7 +16585,16 @@
             }
           ]
         }
-      ]
+      ],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "8064073ef75c91b7ec5bf25877eb263f6d516832",
+      "headRepository": "kwantam/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "suite_table",
+      "headRefOid": "adce053e2dd76762f83ad1ee75eb783b2221c667",
+      "mergeCommit": {
+        "oid": "4f6fbc6c6a12d55aa4680ab6555b95ea1c2e94ac"
+      }
     },
     {
       "number": 139,
@@ -16449,7 +16867,16 @@
             }
           ]
         }
-      ]
+      ],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "37d5f4dcb62b097af1afeb2ff3e8dd785bebf8b1",
+      "headRepository": "kwantam/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "domain_separation",
+      "headRefOid": "b500bffa40ceec2851191d483ccea17f21372c99",
+      "mergeCommit": {
+        "oid": "f764a27b30ca3cf1562636396bcde68ffe342b53"
+      }
     },
     {
       "number": 141,
@@ -16862,7 +17289,16 @@
             }
           ]
         }
-      ]
+      ],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "f764a27b30ca3cf1562636396bcde68ffe342b53",
+      "headRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "caw/hkdf",
+      "headRefOid": "041994685c8c586994d659d325539c9b4bbbade0",
+      "mergeCommit": {
+        "oid": "95e8aedb8db7a4bec2152f126d5e8c2f653842f2"
+      }
     },
     {
       "number": 142,
@@ -16895,7 +17331,16 @@
           "updatedAt": "2019-07-05T13:52:55Z",
           "comments": []
         }
-      ]
+      ],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "f764a27b30ca3cf1562636396bcde68ffe342b53",
+      "headRepository": "kwantam/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "remove_test_vectors_for_now",
+      "headRefOid": "e9c01b003747010360d69a0e5029b8803f3bcfbd",
+      "mergeCommit": {
+        "oid": "ad162f3ed2ccda85befeb8b3d9ec90e38d6261a3"
+      }
     },
     {
       "number": 143,
@@ -16928,7 +17373,16 @@
           "updatedAt": "2019-07-05T20:05:53Z",
           "comments": []
         }
-      ]
+      ],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "caw/hkdf",
+      "baseRefOid": "2726950f38ccece49f8b6f586551f4ce77c23076",
+      "headRepository": "kwantam/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "kwantam/hkdf",
+      "headRefOid": "bb070f6b68c1271731a4cfdca0aef41855214a08",
+      "mergeCommit": {
+        "oid": "958655a9727ffead84713ad2ca9af647c2c2a89b"
+      }
     },
     {
       "number": 145,
@@ -17260,7 +17714,16 @@
             }
           ]
         }
-      ]
+      ],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "95e8aedb8db7a4bec2152f126d5e8c2f653842f2",
+      "headRepository": "kwantam/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "clarity_fixes",
+      "headRefOid": "0ef5698f6ecdefc9d5a7e68401a0d4a923b12e6b",
+      "mergeCommit": {
+        "oid": "df4025608b9a7e1d1cab292b7cee7d3be816d941"
+      }
     },
     {
       "number": 146,
@@ -17418,7 +17881,16 @@
             }
           ]
         }
-      ]
+      ],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "df4025608b9a7e1d1cab292b7cee7d3be816d941",
+      "headRepository": "kwantam/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "new_pseudocode",
+      "headRefOid": "36fff9f1e13f761787a527c43f160e23a6b5da72",
+      "mergeCommit": {
+        "oid": "1f399042bff2912670aa72e6f3c3d6a9727a432c"
+      }
     },
     {
       "number": 147,
@@ -17473,7 +17945,16 @@
           "updatedAt": "2019-07-08T20:17:37Z",
           "comments": []
         }
-      ]
+      ],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "4f6fbc6c6a12d55aa4680ab6555b95ea1c2e94ac",
+      "headRepository": "JustinDrake/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "patch-1",
+      "headRefOid": "0e3bf4e062cd4209120fd3aeb299c107ea7b76e6",
+      "mergeCommit": {
+        "oid": "173533ce583b98e0a02423314116ff10478dc56b"
+      }
     },
     {
       "number": 148,
@@ -17526,7 +18007,16 @@
           "updatedAt": "2019-07-08T21:04:04Z",
           "comments": []
         }
-      ]
+      ],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "df4025608b9a7e1d1cab292b7cee7d3be816d941",
+      "headRepository": "armfazh/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "nit00",
+      "headRefOid": "59de8bf2320a4d0fa73ac6f0554b59cd3546eac4",
+      "mergeCommit": {
+        "oid": "3cff06cb02d874bfd762c192a7e699845f6af473"
+      }
     },
     {
       "number": 149,
@@ -17608,7 +18098,14 @@
             }
           ]
         }
-      ]
+      ],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "df4025608b9a7e1d1cab292b7cee7d3be816d941",
+      "headRepository": "JustinDrake/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "patch-2",
+      "headRefOid": "2b2d25f342a83f30e8d2b576d140632b65146d95",
+      "mergeCommit": null
     },
     {
       "number": 150,
@@ -17654,7 +18151,16 @@
           "updatedAt": "2019-07-08T22:38:08Z",
           "comments": []
         }
-      ]
+      ],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "3cff06cb02d874bfd762c192a7e699845f6af473",
+      "headRepository": "kwantam/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "typo_fix",
+      "headRefOid": "0424ff0f280e4d49bde3f5b8fe66e4826e3abe4a",
+      "mergeCommit": {
+        "oid": "e5e9647e178cae923f25b6bb74b8b292a6394900"
+      }
     },
     {
       "number": 152,
@@ -17700,7 +18206,14 @@
           "updatedAt": "2019-09-04T19:25:09Z",
           "comments": []
         }
-      ]
+      ],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "1f399042bff2912670aa72e6f3c3d6a9727a432c",
+      "headRepository": "JustinDrake/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "patch-3",
+      "headRefOid": "4f0773eb3ba415d9a2e55fca24e1d9e1f3d50b03",
+      "mergeCommit": null
     },
     {
       "number": 154,
@@ -17769,7 +18282,14 @@
           "updatedAt": "2019-09-04T09:20:15Z"
         }
       ],
-      "reviews": []
+      "reviews": [],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "1f399042bff2912670aa72e6f3c3d6a9727a432c",
+      "headRepository": "JustinDrake/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "patch-4",
+      "headRefOid": "64f5e30a1233e7631445e2ed511e5f17e8c5785b",
+      "mergeCommit": null
     },
     {
       "number": 163,
@@ -17989,7 +18509,16 @@
           "updatedAt": "2019-08-12T21:46:30Z",
           "comments": []
         }
-      ]
+      ],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "1f399042bff2912670aa72e6f3c3d6a9727a432c",
+      "headRepository": "kwantam/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "small_fixes",
+      "headRefOid": "466df2a8d4f7923ff641f636e6f1eeb0576f6320",
+      "mergeCommit": {
+        "oid": "7e7ccaf7d20bae921c4726feb40aa908f012a711"
+      }
     },
     {
       "number": 167,
@@ -18023,7 +18552,14 @@
           "updatedAt": "2019-10-23T21:54:53Z"
         }
       ],
-      "reviews": []
+      "reviews": [],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "7e7ccaf7d20bae921c4726feb40aa908f012a711",
+      "headRepository": "armfazh/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "addSW",
+      "headRefOid": "a0c68c9c78e67d5019e7aa3659e5a9f0af2ba29a",
+      "mergeCommit": null
     },
     {
       "number": 168,
@@ -18104,7 +18640,16 @@
           "updatedAt": "2019-10-10T18:35:30Z",
           "comments": []
         }
-      ]
+      ],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "7e7ccaf7d20bae921c4726feb40aa908f012a711",
+      "headRepository": "armfazh/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "delIcart",
+      "headRefOid": "6841e8c93af409c0ff090ea702c8b485e5297a05",
+      "mergeCommit": {
+        "oid": "a7128c32638684e9672aba289481810218561ab8"
+      }
     },
     {
       "number": 169,
@@ -18131,7 +18676,14 @@
           "updatedAt": "2019-10-10T16:44:25Z"
         }
       ],
-      "reviews": []
+      "reviews": [],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "7e7ccaf7d20bae921c4726feb40aa908f012a711",
+      "headRepository": "vanhoefm/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "master",
+      "headRefOid": "5f174fa065a205aa8f69434a522f1f8d5e07140b",
+      "mergeCommit": null
     },
     {
       "number": 170,
@@ -18549,7 +19101,16 @@
           "updatedAt": "2019-10-23T21:45:56Z",
           "comments": []
         }
-      ]
+      ],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "a7128c32638684e9672aba289481810218561ab8",
+      "headRepository": "kwantam/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "master",
+      "headRefOid": "a36792de6791ee117e4d9fb9d6ef65fcd65650a6",
+      "mergeCommit": {
+        "oid": "4fbcead2d20cdc12f1b0d81fe56fe46c05bbdd8c"
+      }
     },
     {
       "number": 172,
@@ -18711,7 +19272,16 @@
             }
           ]
         }
-      ]
+      ],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "4fbcead2d20cdc12f1b0d81fe56fe46c05bbdd8c",
+      "headRepository": "kwantam/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "z_pseudocode",
+      "headRefOid": "b60914d7f032452733ffd0f955267bbca3fee168",
+      "mergeCommit": {
+        "oid": "33f4b05c3437af649bdc0f64860b596200af942c"
+      }
     },
     {
       "number": 175,
@@ -18846,7 +19416,16 @@
           "updatedAt": "2019-10-27T00:42:31Z",
           "comments": []
         }
-      ]
+      ],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "a44290412bb28eea77042458d79b28d8dda38756",
+      "headRepository": "kwantam/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "alt_hash_to_base",
+      "headRefOid": "2e784b2a36afab2a74d70aa6437337ead82e95c7",
+      "mergeCommit": {
+        "oid": "c69a465bfe8aae3b785539687d803c6694e4a706"
+      }
     },
     {
       "number": 176,
@@ -19110,7 +19689,16 @@
           "updatedAt": "2019-10-28T19:08:25Z",
           "comments": []
         }
-      ]
+      ],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "a44290412bb28eea77042458d79b28d8dda38756",
+      "headRepository": "kwantam/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "sqrt_sgn0_variants",
+      "headRefOid": "28961d5e940bb3855b7bb02e4593a9a4141ebd5f",
+      "mergeCommit": {
+        "oid": "46cecc5624cd4ebe63b1e94875afb58d71e7ca36"
+      }
     },
     {
       "number": 177,
@@ -19185,7 +19773,16 @@
           "updatedAt": "2019-10-27T02:04:19Z",
           "comments": []
         }
-      ]
+      ],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "79e2b9d9e05b42effad8d9277a45cb21d746dd37",
+      "headRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "caw/style",
+      "headRefOid": "a3df87ba82fb86abdb1ba22a42e00482636db3a4",
+      "mergeCommit": {
+        "oid": "d5a6df047322d7ac2b34e2859c69b3d4c6ce3e3d"
+      }
     },
     {
       "number": 178,
@@ -19218,7 +19815,16 @@
           "updatedAt": "2019-10-27T02:01:51Z",
           "comments": []
         }
-      ]
+      ],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "79e2b9d9e05b42effad8d9277a45cb21d746dd37",
+      "headRepository": "kwantam/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "fix_p256_map",
+      "headRefOid": "e00dfc5a7ef63d64aeb5c0f93a4f07bfab4f7eb2",
+      "mergeCommit": {
+        "oid": "f294fed3f361d9ed5f4410f190a56f4fcd2f659f"
+      }
     },
     {
       "number": 179,
@@ -19273,7 +19879,16 @@
           "updatedAt": "2019-10-27T02:49:07Z",
           "comments": []
         }
-      ]
+      ],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "d5a6df047322d7ac2b34e2859c69b3d4c6ce3e3d",
+      "headRepository": "kwantam/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "mod_notation",
+      "headRefOid": "d2e794750b6baf116367f541295a8c835298e31c",
+      "mergeCommit": {
+        "oid": "d2e794750b6baf116367f541295a8c835298e31c"
+      }
     },
     {
       "number": 180,
@@ -19292,7 +19907,16 @@
       "mergedAt": "2019-10-27T03:01:27Z",
       "mergedBy": "chris-wood",
       "comments": [],
-      "reviews": []
+      "reviews": [],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "d5a6df047322d7ac2b34e2859c69b3d4c6ce3e3d",
+      "headRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "caw/mode-mod",
+      "headRefOid": "94cf0597d75c1f2b7dcfe51fb4ebf7a46088fd37",
+      "mergeCommit": {
+        "oid": "a44290412bb28eea77042458d79b28d8dda38756"
+      }
     },
     {
       "number": 182,
@@ -19319,7 +19943,14 @@
           "updatedAt": "2019-10-28T18:27:38Z"
         }
       ],
-      "reviews": []
+      "reviews": [],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "a44290412bb28eea77042458d79b28d8dda38756",
+      "headRepository": "kwantam/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "clarify_sswu_opt",
+      "headRefOid": "ed23ad17aa66c5194eb2c97941af8e0c6564cc17",
+      "mergeCommit": null
     },
     {
       "number": 183,
@@ -19487,7 +20118,16 @@
           "updatedAt": "2019-10-31T21:24:10Z",
           "comments": []
         }
-      ]
+      ],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "46cecc5624cd4ebe63b1e94875afb58d71e7ca36",
+      "headRepository": "kwantam/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "sswu_generic",
+      "headRefOid": "b79dc33d4f54d8c58d85b83da6f092cc263f4c2c",
+      "mergeCommit": {
+        "oid": "6cf678ac3c92083b7934dafb8d8a2f8fefd3d884"
+      }
     },
     {
       "number": 184,
@@ -19520,7 +20160,16 @@
           "updatedAt": "2019-10-30T23:10:29Z",
           "comments": []
         }
-      ]
+      ],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "46cecc5624cd4ebe63b1e94875afb58d71e7ca36",
+      "headRepository": "kwantam/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "dst_clarity",
+      "headRefOid": "280da4451f19b053c308054b7466c30d68120618",
+      "mergeCommit": {
+        "oid": "7fa6e255e55a1ddc497a3271a2236f7076bc1d15"
+      }
     },
     {
       "number": 185,
@@ -20126,7 +20775,16 @@
           "updatedAt": "2019-11-01T19:14:11Z",
           "comments": []
         }
-      ]
+      ],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "6cf678ac3c92083b7934dafb8d8a2f8fefd3d884",
+      "headRepository": "kwantam/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "howto",
+      "headRefOid": "74d94acc3dc3420a0518ec952dc78a792f3a3c1d",
+      "mergeCommit": {
+        "oid": "bccdbd1cc9cd0be0f18d593737e8b614379d256e"
+      }
     },
     {
       "number": 186,
@@ -20159,7 +20817,16 @@
           "updatedAt": "2019-11-01T21:58:12Z",
           "comments": []
         }
-      ]
+      ],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "bccdbd1cc9cd0be0f18d593737e8b614379d256e",
+      "headRepository": "kwantam/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "map_fix",
+      "headRefOid": "2a8bf2d5cef00bf56d42832c447cd5fe26bbc0f1",
+      "mergeCommit": {
+        "oid": "ba064645fdb654de9ffeaf27e749c75a7f9b4dff"
+      }
     },
     {
       "number": 187,
@@ -20192,7 +20859,16 @@
           "updatedAt": "2019-11-02T14:04:04Z",
           "comments": []
         }
-      ]
+      ],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "ba064645fdb654de9ffeaf27e749c75a7f9b4dff",
+      "headRepository": "kwantam/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "one_more_map_test",
+      "headRefOid": "a6e8e8b588e61308bc600a95a2c1d06cedb21669",
+      "mergeCommit": {
+        "oid": "a68a2ab66e2524ac4c68389ce658098684842eac"
+      }
     },
     {
       "number": 188,
@@ -20366,7 +21042,16 @@
             }
           ]
         }
-      ]
+      ],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "a68a2ab66e2524ac4c68389ce658098684842eac",
+      "headRepository": "kwantam/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "code_cleanup",
+      "headRefOid": "e0292717a903b20a4ab9130d7c0eedb7fb8fdfe6",
+      "mergeCommit": {
+        "oid": "d6d786a150ca407e11f2b6e875d462801c139895"
+      }
     },
     {
       "number": 189,
@@ -20759,7 +21444,16 @@
             }
           ]
         }
-      ]
+      ],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "d6d786a150ca407e11f2b6e875d462801c139895",
+      "headRepository": "kwantam/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "doc_clarifications",
+      "headRefOid": "f3c0f20559b1030f684401d73a6a0474507095a5",
+      "mergeCommit": {
+        "oid": "08541b53792013ac8815d7759d483afc953bd834"
+      }
     },
     {
       "number": 191,
@@ -20950,7 +21644,14 @@
           "updatedAt": "2020-03-29T01:34:11Z",
           "comments": []
         }
-      ]
+      ],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "8e4b62bc2c615c9c8669d4d507c5dc1cc2cdc610",
+      "headRepository": "mmaker/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "master",
+      "headRefOid": "b4a94a8e3f1a3685b2d5cfadb3e570d78d382abe",
+      "mergeCommit": null
     },
     {
       "number": 192,
@@ -21091,7 +21792,16 @@
           "updatedAt": "2019-11-12T18:47:12Z",
           "comments": []
         }
-      ]
+      ],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "a68a2ab66e2524ac4c68389ce658098684842eac",
+      "headRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "caw/tonelli-shanks-fix",
+      "headRefOid": "e31b0859a954d268cf4b50d5f1aa5f5240549ac5",
+      "mergeCommit": {
+        "oid": "7f27a3dbfc74950f9cd5a116cb7a73175ea2ad01"
+      }
     },
     {
       "number": 193,
@@ -21192,7 +21902,16 @@
           "updatedAt": "2019-11-16T21:44:14Z",
           "comments": []
         }
-      ]
+      ],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "a68a2ab66e2524ac4c68389ce658098684842eac",
+      "headRepository": "armfazh/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "polynomialRep",
+      "headRefOid": "205660e89c42d438e5dff1a502d76cb392914299",
+      "mergeCommit": {
+        "oid": "6d956280c019ef4273a211f7f4012f7c3452a073"
+      }
     },
     {
       "number": 196,
@@ -21325,7 +22044,16 @@
           "updatedAt": "2020-02-25T02:18:10Z",
           "comments": []
         }
-      ]
+      ],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "efd1b186af6fe8ca2b75058bf6ae8e1c6bbaa6a9",
+      "headRepository": "armfazh/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "test_vectors",
+      "headRefOid": "78c36c36d76c8338f1824724342d7401d7f62b75",
+      "mergeCommit": {
+        "oid": "2500e6c42c16ae719c92c4f60aac4b003662c24f"
+      }
     },
     {
       "number": 197,
@@ -21358,7 +22086,16 @@
           "updatedAt": "2019-12-14T03:29:26Z",
           "comments": []
         }
-      ]
+      ],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "08541b53792013ac8815d7759d483afc953bd834",
+      "headRepository": "kwantam/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "small_fixes",
+      "headRefOid": "6323fcb0b28de49994584cfd20e6114de38198f7",
+      "mergeCommit": {
+        "oid": "6cf7fa9742e2f85f5ee6454861afd462e38d4230"
+      }
     },
     {
       "number": 198,
@@ -21468,7 +22205,16 @@
           "updatedAt": "2020-01-23T18:07:57Z",
           "comments": []
         }
-      ]
+      ],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "4bde0ada68d389ebf3a24bf0879bfb6db0d6351a",
+      "headRepository": "kwantam/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "remove_pfc",
+      "headRefOid": "13c241f06dcee5ddeeafc4fad00cd3df859525b3",
+      "mergeCommit": {
+        "oid": "fcacfa4e2f1feec7754ae0ef3e8c8ed2b6418a90"
+      }
     },
     {
       "number": 201,
@@ -21509,7 +22255,16 @@
           "updatedAt": "2020-01-22T02:17:24Z",
           "comments": []
         }
-      ]
+      ],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "6cf7fa9742e2f85f5ee6454861afd462e38d4230",
+      "headRepository": "kwantam/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "py3",
+      "headRefOid": "4686684bc2b44d3e512cf441d0cf59e1d363c046",
+      "mergeCommit": {
+        "oid": "4bde0ada68d389ebf3a24bf0879bfb6db0d6351a"
+      }
     },
     {
       "number": 204,
@@ -21555,7 +22310,16 @@
           "updatedAt": "2020-01-25T14:01:18Z",
           "comments": []
         }
-      ]
+      ],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "fcacfa4e2f1feec7754ae0ef3e8c8ed2b6418a90",
+      "headRepository": "kwantam/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "curve25519_sha512",
+      "headRefOid": "0104885b6943fda672d60a82a1d63b94da139a11",
+      "mergeCommit": {
+        "oid": "6ec26b0b97e760c2b8f960284d1207805c42ea1c"
+      }
     },
     {
       "number": 205,
@@ -21617,7 +22381,16 @@
             }
           ]
         }
-      ]
+      ],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "6ec26b0b97e760c2b8f960284d1207805c42ea1c",
+      "headRepository": "armfazh/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "refImpl",
+      "headRefOid": "0ae507f12781c5d08b927e01c274030e3a7b5fb4",
+      "mergeCommit": {
+        "oid": "4966eb25336a89fe1c82a3203a2eec0dd87254d3"
+      }
     },
     {
       "number": 208,
@@ -21636,7 +22409,16 @@
       "mergedAt": "2020-02-16T01:10:34Z",
       "mergedBy": "chris-wood",
       "comments": [],
-      "reviews": []
+      "reviews": [],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "6893c4d1b38627ebf98a2443333566c071294f36",
+      "headRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "fix",
+      "headRefOid": "4966eb25336a89fe1c82a3203a2eec0dd87254d3",
+      "mergeCommit": {
+        "oid": "fe5e81ca440530467743a27a8d19ac67e906cf97"
+      }
     },
     {
       "number": 209,
@@ -21669,7 +22451,16 @@
           "updatedAt": "2020-02-16T19:27:37Z",
           "comments": []
         }
-      ]
+      ],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "fe5e81ca440530467743a27a8d19ac67e906cf97",
+      "headRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "caw/appendix-tidy",
+      "headRefOid": "dcbb49625d9a6d438c695ea3c8a53d5691f8cf0a",
+      "mergeCommit": {
+        "oid": "efd1b186af6fe8ca2b75058bf6ae8e1c6bbaa6a9"
+      }
     },
     {
       "number": 211,
@@ -21710,7 +22501,14 @@
           "updatedAt": "2020-02-28T09:56:50Z"
         }
       ],
-      "reviews": []
+      "reviews": [],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "efd1b186af6fe8ca2b75058bf6ae8e1c6bbaa6a9",
+      "headRepository": "dot-asm/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "master",
+      "headRefOid": "f8896705068cb1033ad50ee98dd767cca4c0eaae",
+      "mergeCommit": null
     },
     {
       "number": 212,
@@ -22622,7 +23420,16 @@
             }
           ]
         }
-      ]
+      ],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "2500e6c42c16ae719c92c4f60aac4b003662c24f",
+      "headRepository": "kwantam/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "new-hash_to_field",
+      "headRefOid": "821b9072e997f48543d7ffef171052e4d34e4187",
+      "mergeCommit": {
+        "oid": "2b2ea54698b23aa9316b857f110c360ca6388d94"
+      }
     },
     {
       "number": 214,
@@ -22803,7 +23610,16 @@
             }
           ]
         }
-      ]
+      ],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "72136122bbecbe7ecaa438e94434aa57835a1588",
+      "headRepository": "kwantam/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "new-h2f-code",
+      "headRefOid": "c059d1db957d2de4f75b61862af129bf8c177e2d",
+      "mergeCommit": {
+        "oid": "54818b0eb786b5c81f1258cee3d6c3bcd9e59833"
+      }
     },
     {
       "number": 215,
@@ -22960,7 +23776,16 @@
           "updatedAt": "2020-03-03T18:57:01Z",
           "comments": []
         }
-      ]
+      ],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "2b2ea54698b23aa9316b857f110c360ca6388d94",
+      "headRepository": "kwantam/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "remove-long-weierstrass",
+      "headRefOid": "53794623e1864278cbc0ee9c91da90a400d36d5e",
+      "mergeCommit": {
+        "oid": "72136122bbecbe7ecaa438e94434aa57835a1588"
+      }
     },
     {
       "number": 217,
@@ -23171,7 +23996,16 @@
           "updatedAt": "2020-03-09T16:53:36Z",
           "comments": []
         }
-      ]
+      ],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "1715f79539f9fb904b9aeca3a4e30f813f91fecb",
+      "headRepository": "dot-asm/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "test_vector_struct",
+      "headRefOid": "e1f1126fbe12ecef523e174ccfae235d48b2781e",
+      "mergeCommit": {
+        "oid": "4f73ecf9d7b0550ee564f324eedbcde0bfae2f3a"
+      }
     },
     {
       "number": 219,
@@ -23204,7 +24038,16 @@
           "updatedAt": "2020-03-10T15:24:00Z",
           "comments": []
         }
-      ]
+      ],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "4f73ecf9d7b0550ee564f324eedbcde0bfae2f3a",
+      "headRepository": "kwantam/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "front_matter",
+      "headRefOid": "059753344db5c979b873c6fcfdf5408be90d5091",
+      "mergeCommit": {
+        "oid": "8e4b62bc2c615c9c8669d4d507c5dc1cc2cdc610"
+      }
     },
     {
       "number": 221,
@@ -23250,7 +24093,16 @@
           "updatedAt": "2020-03-13T19:02:03Z",
           "comments": []
         }
-      ]
+      ],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "8e4b62bc2c615c9c8669d4d507c5dc1cc2cdc610",
+      "headRepository": "kwantam/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "dst_clarification",
+      "headRefOid": "8adfe20de621241bc7b544c702509d0105001eee",
+      "mergeCommit": {
+        "oid": "e9374e1c64c589e3a49308fc27f16a42d5c32312"
+      }
     },
     {
       "number": 224,
@@ -23469,7 +24321,16 @@
             }
           ]
         }
-      ]
+      ],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "36346e036152d3130dce85c520a9cc9f2978aa8d",
+      "headRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "caw/ciphersuite-security-parameter",
+      "headRefOid": "0616f03dc1c76bb894b2592e985f1ebfa31a99a2",
+      "mergeCommit": {
+        "oid": "0b598fc68b83eddfd89ebe1a4ce8538cdbf15fd4"
+      }
     },
     {
       "number": 226,
@@ -23502,7 +24363,16 @@
           "updatedAt": "2020-03-18T23:51:33Z",
           "comments": []
         }
-      ]
+      ],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "0b598fc68b83eddfd89ebe1a4ce8538cdbf15fd4",
+      "headRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "armfazh-versionsGo",
+      "headRefOid": "a13c81f825d45b05d3134a77b5b035cff7e755a0",
+      "mergeCommit": {
+        "oid": "003fbdc82e60100fdc5ecb4370ca0c37e8236451"
+      }
     },
     {
       "number": 228,
@@ -23556,7 +24426,16 @@
           "updatedAt": "2020-03-20T20:26:45Z",
           "comments": []
         }
-      ]
+      ],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "003fbdc82e60100fdc5ecb4370ca0c37e8236451",
+      "headRepository": "kwantam/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "k_guidance",
+      "headRefOid": "53e5b1d2049ecf38882ddf413d75d5b4f03c15be",
+      "mergeCommit": {
+        "oid": "9283cbad5c07ff78dc6d0d4e1beab6966bd91529"
+      }
     },
     {
       "number": 229,
@@ -23575,7 +24454,16 @@
       "mergedAt": "2020-03-26T02:54:24Z",
       "mergedBy": "kwantam",
       "comments": [],
-      "reviews": []
+      "reviews": [],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "9283cbad5c07ff78dc6d0d4e1beab6966bd91529",
+      "headRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "armfazh/addrust",
+      "headRefOid": "7ab58ee7e1f73be1ce87b19d660fb4aa2102888b",
+      "mergeCommit": {
+        "oid": "98b7a19d8d8e6b6209e355cb02587ed730bf60a3"
+      }
     },
     {
       "number": 230,
@@ -23657,7 +24545,16 @@
           "updatedAt": "2020-03-28T00:21:17Z",
           "comments": []
         }
-      ]
+      ],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "98b7a19d8d8e6b6209e355cb02587ed730bf60a3",
+      "headRepository": "kwantam/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "sgn0_simplifications",
+      "headRefOid": "de4fd17ce5a8e1a9f3ce712f2debdbd05bf157ea",
+      "mergeCommit": {
+        "oid": "8b9c78823e6b691e3e6aabf8116448327094809a"
+      }
     },
     {
       "number": 231,
@@ -23712,7 +24609,16 @@
           "updatedAt": "2020-03-30T15:31:02Z"
         }
       ],
-      "reviews": []
+      "reviews": [],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "98b7a19d8d8e6b6209e355cb02587ed730bf60a3",
+      "headRepository": "kwantam/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "readme_other_impl",
+      "headRefOid": "37a5e7f45e4edbe5fe11a5605198ab5d02cd78a9",
+      "mergeCommit": {
+        "oid": "6c3a58e3d73e4e20958b7452ee4ad8bc1cda1494"
+      }
     },
     {
       "number": 232,
@@ -24077,7 +24983,16 @@
             }
           ]
         }
-      ]
+      ],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "7b839f2dfc0093478ce335d58cbdf5ba0858753a",
+      "headRepository": "kwantam/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "mmaker_g2_endo",
+      "headRefOid": "997423649522040065bef7db6eb7e6a3add80a37",
+      "mergeCommit": {
+        "oid": "710888066d63fc6e83228cf4c064d78a135d8d90"
+      }
     },
     {
       "number": 233,
@@ -24190,7 +25105,16 @@
           "updatedAt": "2020-03-30T19:38:13Z",
           "comments": []
         }
-      ]
+      ],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "8b9c78823e6b691e3e6aabf8116448327094809a",
+      "headRepository": "kwantam/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "clarifications",
+      "headRefOid": "9fc2d626619d209c310f2eadf8662152fcf16f07",
+      "mergeCommit": {
+        "oid": "50c13e120b2315cfe776dbb8682a714b1ad7f6d4"
+      }
     },
     {
       "number": 234,
@@ -24231,7 +25155,16 @@
           "updatedAt": "2020-03-30T19:59:43Z",
           "comments": []
         }
-      ]
+      ],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "6c3a58e3d73e4e20958b7452ee4ad8bc1cda1494",
+      "headRepository": "kwantam/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "readme_libsodium",
+      "headRefOid": "bc0b71e64a6218b1e4042f446c659acf23305d34",
+      "mergeCommit": {
+        "oid": "314e63ba8059d7b9611800bf66bde8b8d86e5e91"
+      }
     },
     {
       "number": 238,
@@ -24279,7 +25212,16 @@
           "updatedAt": "2020-04-08T22:51:08Z",
           "comments": []
         }
-      ]
+      ],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "314e63ba8059d7b9611800bf66bde8b8d86e5e91",
+      "headRepository": "armfazh/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "fixLinP521",
+      "headRefOid": "c7bfaff37ae046e8eed19da8ec0fcc4a0f1a7d6a",
+      "mergeCommit": {
+        "oid": "4c47e09e95e8a8c6ab7faf2ae54d9491e5822c9f"
+      }
     },
     {
       "number": 239,
@@ -24312,7 +25254,16 @@
           "updatedAt": "2020-04-09T15:56:33Z",
           "comments": []
         }
-      ]
+      ],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "4c47e09e95e8a8c6ab7faf2ae54d9491e5822c9f",
+      "headRepository": "armfazh/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "fixLinP521_main",
+      "headRefOid": "18b383d0ae2fcee9901be775d99d52a2edea8e18",
+      "mergeCommit": {
+        "oid": "80f074bc3acb2d0ad5392ca180e219d016a3fc55"
+      }
     },
     {
       "number": 240,
@@ -24360,7 +25311,16 @@
           "updatedAt": "2020-04-14T20:04:28Z",
           "comments": []
         }
-      ]
+      ],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "710888066d63fc6e83228cf4c064d78a135d8d90",
+      "headRepository": "kwantam/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "new_optimized_code",
+      "headRefOid": "7a301b45f1e24163f51b1f3be9e02ea92bf5994c",
+      "mergeCommit": {
+        "oid": "24d9d50a309438b9f7d75a4b1c00b8087c75c73f"
+      }
     },
     {
       "number": 241,
@@ -24422,7 +25382,16 @@
           "updatedAt": "2020-04-16T13:00:03Z",
           "comments": []
         }
-      ]
+      ],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "80f074bc3acb2d0ad5392ca180e219d016a3fc55",
+      "headRepository": "kwantam/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "suffix_free_dst",
+      "headRefOid": "793a8499302b1285d089579a03ca2619aa56289c",
+      "mergeCommit": {
+        "oid": "7b839f2dfc0093478ce335d58cbdf5ba0858753a"
+      }
     },
     {
       "number": 242,
@@ -24468,7 +25437,16 @@
           "updatedAt": "2020-04-16T12:58:27Z",
           "comments": []
         }
-      ]
+      ],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "80f074bc3acb2d0ad5392ca180e219d016a3fc55",
+      "headRepository": "kwantam/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "is_square_extensions",
+      "headRefOid": "72ec99cec8a55e73b0731fafffc990ad16a56d92",
+      "mergeCommit": {
+        "oid": "69dda837d7d6fdff0da3c87444a523ace3814e13"
+      }
     },
     {
       "number": 244,
@@ -24536,7 +25514,16 @@
           "updatedAt": "2020-04-29T00:07:19Z",
           "comments": []
         }
-      ]
+      ],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "1bbf07bbc187a0ebe7f9e49740fc59abbb9e5c48",
+      "headRepository": "kwantam/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "small_clarifications",
+      "headRefOid": "dc830985719ad4adfd4f020855d8de1cdf24a35e",
+      "mergeCommit": {
+        "oid": "17ed13d76e970bbd85d7a94e790a34c3d48b6d1a"
+      }
     },
     {
       "number": 246,
@@ -24563,7 +25550,14 @@
           "updatedAt": "2020-04-29T00:21:30Z"
         }
       ],
-      "reviews": []
+      "reviews": [],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "17ed13d76e970bbd85d7a94e790a34c3d48b6d1a",
+      "headRepository": "kwantam/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "add_k1",
+      "headRefOid": "0e26b17b8c772a69638562b60132c0b2eb034599",
+      "mergeCommit": null
     },
     {
       "number": 247,
@@ -24624,7 +25618,16 @@
           "updatedAt": "2020-04-29T01:24:33Z",
           "comments": []
         }
-      ]
+      ],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "17ed13d76e970bbd85d7a94e790a34c3d48b6d1a",
+      "headRepository": "kwantam/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "straight_line_appx",
+      "headRefOid": "c529b36036f1ca5026525ab2ad0058a1d5093ef1",
+      "mergeCommit": {
+        "oid": "c3d5f178ff4d3699ee69ac937e95a3316a0b1aba"
+      }
     },
     {
       "number": 248,
@@ -24651,6 +25654,41 @@
           "updatedAt": "2020-05-04T03:25:08Z"
         }
       ],
+      "reviews": [],
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "c3d5f178ff4d3699ee69ac937e95a3316a0b1aba",
+      "headRepository": "kirk-baird/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "kirk-patch-01",
+      "headRefOid": "e88c7164e77d538311e550bb35a2d73bb38813ab",
+      "mergeCommit": {
+        "oid": "7112dceb3356a9d3746feb5068168da13acc179b"
+      }
+    },
+    {
+      "number": 249,
+      "id": "MDExOlB1bGxSZXF1ZXN0NDE2MjkxNTc1",
+      "title": "Updating v07 implementations",
+      "url": "https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/pull/249",
+      "state": "OPEN",
+      "author": "armfazh",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Updates links to implementations compatible with draft-v07.",
+      "createdAt": "2020-05-11T19:14:27Z",
+      "updatedAt": "2020-05-11T19:14:27Z",
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "7112dceb3356a9d3746feb5068168da13acc179b",
+      "headRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "armfazh/v07Implemantations",
+      "headRefOid": "23662318dcec85771168d6aa02401a2c9247fff5",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
       "reviews": []
     }
   ]
