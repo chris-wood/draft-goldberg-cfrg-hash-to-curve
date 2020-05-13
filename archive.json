@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2020-05-11T19:14:51.503338+00:00",
+  "timestamp": "2020-05-13T22:12:16.754499+00:00",
   "repo": "cfrg/draft-irtf-cfrg-hash-to-curve",
   "labels": [
     {
@@ -25571,10 +25571,19 @@
       "labels": [],
       "body": "This PR moves all of the generic straight-line code from Section 6 to a new appx.\r\n\r\nThe reason to make this a new appx is that the existing \"optimized sample code\" appx has a different interface---all of the mappings use projective coordinates and return ratios. Keeping this in its own appx gets rid of confusion about which sample code uses which interface.",
       "createdAt": "2020-04-28T22:11:50Z",
-      "updatedAt": "2020-04-29T03:10:46Z",
+      "updatedAt": "2020-05-11T21:13:34Z",
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "17ed13d76e970bbd85d7a94e790a34c3d48b6d1a",
+      "headRepository": "kwantam/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "straight_line_appx",
+      "headRefOid": "c529b36036f1ca5026525ab2ad0058a1d5093ef1",
       "closedAt": "2020-04-29T03:10:46Z",
       "mergedAt": "2020-04-29T03:10:46Z",
       "mergedBy": "chris-wood",
+      "mergeCommit": {
+        "oid": "c3d5f178ff4d3699ee69ac937e95a3316a0b1aba"
+      },
       "comments": [
         {
           "author": "kwantam",
@@ -25618,16 +25627,7 @@
           "updatedAt": "2020-04-29T01:24:33Z",
           "comments": []
         }
-      ],
-      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
-      "baseRefName": "master",
-      "baseRefOid": "17ed13d76e970bbd85d7a94e790a34c3d48b6d1a",
-      "headRepository": "kwantam/draft-irtf-cfrg-hash-to-curve",
-      "headRefName": "straight_line_appx",
-      "headRefOid": "c529b36036f1ca5026525ab2ad0058a1d5093ef1",
-      "mergeCommit": {
-        "oid": "c3d5f178ff4d3699ee69ac937e95a3316a0b1aba"
-      }
+      ]
     },
     {
       "number": 248,
@@ -25641,10 +25641,19 @@
       "labels": [],
       "body": "Fixing a minor typo in the numbering.",
       "createdAt": "2020-05-04T02:27:12Z",
-      "updatedAt": "2020-05-04T03:25:17Z",
+      "updatedAt": "2020-05-13T08:17:43Z",
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "c3d5f178ff4d3699ee69ac937e95a3316a0b1aba",
+      "headRepository": "kirk-baird/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "kirk-patch-01",
+      "headRefOid": "e88c7164e77d538311e550bb35a2d73bb38813ab",
       "closedAt": "2020-05-04T03:25:17Z",
       "mergedAt": "2020-05-04T03:25:17Z",
       "mergedBy": "kwantam",
+      "mergeCommit": {
+        "oid": "7112dceb3356a9d3746feb5068168da13acc179b"
+      },
       "comments": [
         {
           "author": "kwantam",
@@ -25654,42 +25663,125 @@
           "updatedAt": "2020-05-04T03:25:08Z"
         }
       ],
-      "reviews": [],
-      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
-      "baseRefName": "master",
-      "baseRefOid": "c3d5f178ff4d3699ee69ac937e95a3316a0b1aba",
-      "headRepository": "kirk-baird/draft-irtf-cfrg-hash-to-curve",
-      "headRefName": "kirk-patch-01",
-      "headRefOid": "e88c7164e77d538311e550bb35a2d73bb38813ab",
-      "mergeCommit": {
-        "oid": "7112dceb3356a9d3746feb5068168da13acc179b"
-      }
+      "reviews": []
     },
     {
       "number": 249,
       "id": "MDExOlB1bGxSZXF1ZXN0NDE2MjkxNTc1",
       "title": "Updating v07 implementations",
       "url": "https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/pull/249",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "armfazh",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Updates links to implementations compatible with draft-v07.",
       "createdAt": "2020-05-11T19:14:27Z",
-      "updatedAt": "2020-05-11T19:14:27Z",
+      "updatedAt": "2020-05-11T20:54:27Z",
       "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
       "baseRefName": "master",
       "baseRefOid": "7112dceb3356a9d3746feb5068168da13acc179b",
       "headRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
       "headRefName": "armfazh/v07Implemantations",
       "headRefOid": "23662318dcec85771168d6aa02401a2c9247fff5",
+      "closedAt": "2020-05-11T20:54:27Z",
+      "mergedAt": "2020-05-11T20:54:27Z",
+      "mergedBy": "chris-wood",
+      "mergeCommit": {
+        "oid": "fd12ba041298053931d6fbb4ee8d5340bb01ef34"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDA5NTIyOTA0",
+          "commit": {
+            "abbreviatedOid": "2366231"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2020-05-11T20:54:22Z",
+          "updatedAt": "2020-05-11T20:54:22Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 250,
+      "id": "MDExOlB1bGxSZXF1ZXN0NDE2NDA0MTIw",
+      "title": "change sign computation for Ell2 to match BHKL13",
+      "url": "https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/pull/250",
+      "state": "OPEN",
+      "author": "kwantam",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "This PR changes the definition of Elligator 2 to match the way that point sign is chosen in BHKL13. This has the effect of making the mapping injective (which is not important in our context, but doesn't hurt and may be useful in other contexts).\r\n\r\nThis was suggested [on the CFRG mailing list](https://mailarchive.ietf.org/arch/msg/cfrg/4EwW-jmlu1OXWE_1v4aKVTBGpZo/) by Mike Hamburg.\r\n\r\nNote that for most (all?) curves the number of points in the image of the mapping is the same under both methods of choosing the sign; they just correspond to slightly different inputs.\r\n\r\nThis PR also updates all of the pseudocode, the corresponding sage code, and the test vectors.",
+      "createdAt": "2020-05-11T23:38:47Z",
+      "updatedAt": "2020-05-11T23:49:49Z",
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "fd12ba041298053931d6fbb4ee8d5340bb01ef34",
+      "headRepository": "kwantam/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "ell2_sign_fix",
+      "headRefOid": "8ec5a3fdcbfc05d00ab18aa419ddfc895cb5b686",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
       "reviews": []
+    },
+    {
+      "number": 251,
+      "id": "MDExOlB1bGxSZXF1ZXN0NDE3MTk4MTcw",
+      "title": "Add Apache Milagro - Rust to list of references",
+      "url": "https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/pull/251",
+      "state": "MERGED",
+      "author": "kirk-baird",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Apache Milagro - Rust hash implemented hash-to-curve-v07 for BLS12-381 and will hopefully have many more implemented soon.",
+      "createdAt": "2020-05-13T08:20:19Z",
+      "updatedAt": "2020-05-13T22:11:49Z",
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "fd12ba041298053931d6fbb4ee8d5340bb01ef34",
+      "headRepository": "kirk-baird/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "kirk-patch-02",
+      "headRefOid": "f77362d23495e29902a66a3be26b6674f675a0a0",
+      "closedAt": "2020-05-13T22:11:49Z",
+      "mergedAt": "2020-05-13T22:11:49Z",
+      "mergedBy": "chris-wood",
+      "mergeCommit": {
+        "oid": "7344dfa66ff259c869a551f9aba30ba35531957d"
+      },
+      "comments": [
+        {
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Lovely -- thanks!",
+          "createdAt": "2020-05-13T22:11:45Z",
+          "updatedAt": "2020-05-13T22:11:45Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDExMzM1NjMy",
+          "commit": {
+            "abbreviatedOid": "f77362d"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2020-05-13T22:11:38Z",
+          "updatedAt": "2020-05-13T22:11:38Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
