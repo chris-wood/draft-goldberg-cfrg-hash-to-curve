@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2020-05-13T22:12:16.754499+00:00",
+  "timestamp": "2020-05-19T21:47:59.019956+00:00",
   "repo": "cfrg/draft-irtf-cfrg-hash-to-curve",
   "labels": [
     {
@@ -5419,7 +5419,7 @@
       "labels": [],
       "body": "Michael Scott wrote to observe that the generic Edwards to Montgomery map can be simplified in some cases.\r\n\r\nConsider the Edwards curve\r\n\r\n    a * v^2 + w^2 = 1 + d * v^2 * w^2\r\n\r\nAssuming that there is no corresponding standardized Montgomery curve, the document currently suggests mapping to the following curve\r\n\r\n    K * t^2 = s^3 + J * s^2 + s\r\n    J = 2 * (a + d) / (a - d)\r\n    K = 4 / (a - d)\r\n\r\nand then mapping back to the Edwards curve via\r\n\r\n    v = s / t\r\n    w = (s - 1) / (s + 1)\r\n\r\nThe j-invariant of a Montgomery curve depends only on the J coefficient, meaning that for all Montgomery curves given above, the curve\r\n\r\n    t^2 = s^3 + J * s^2 + s\r\n\r\nis isomorphic to either the curve or its quadratic twist. Most interestingly, to us, when K is a quadratic residue, then the above two Montgomery curves are isomorphic via\r\n\r\n    (s, t) \u21a6 (s, t \u221aK)\r\n\r\nand therefore we can map back from the curve with K = 1 to the Edwards curve via\r\n\r\n    v = (s \u221aK) / t\r\n    w = (s - 1) / (s + 1)\r\n\r\nNote that this is exactly the map that RFC7748 specifies from edwards25519 to curve25519.\r\n\r\n(See https://eprint.iacr.org/2017/212.pdf for more info on the above.)\r\n\r\n---\r\n\r\nAlong the same lines, when K is non-square we could map from\r\n\r\n    Z * t^2 = s^3 + J * s^2 + s\r\n\r\nto the Edwards curve, where Z is the distinguished non-square in F used to map to Montgomery. The Montgomery to Edwards map would then be\r\n\r\n    v = (s \u221a(K/Z)) / t\r\n    w = (s - 1) / (s + 1)\r\n\r\nThe advantage is that this lets us use a very small value (Z) in place of K (which is likely much larger) when evaluating Elligator.\r\n\r\n---\r\n\r\nOK, so what does this mean to us? It means that we can, in principle, specify a somewhat better optimized map from Edwards to Montgomery. In particular, keeping the definitions above,\r\n\r\n    if is_square(K):\r\n        // map from t^2 = s^3 + J * s^2 + s\r\n    else:\r\n        // map from Z * t^2 = s^3 + J * s^2 + s\r\n\r\nSo: question: do we think this is would be a reasonable optimization to add?",
       "createdAt": "2020-04-18T21:55:37Z",
-      "updatedAt": "2020-04-20T21:35:40Z",
+      "updatedAt": "2020-05-19T21:34:59Z",
       "closedAt": null,
       "comments": [
         {
@@ -5463,6 +5463,13 @@
           "body": "Thoughts on #244 @armfazh @chris-wood ?",
           "createdAt": "2020-04-20T21:35:39Z",
           "updatedAt": "2020-04-20T21:35:39Z"
+        },
+        {
+          "author": "armfazh",
+          "authorAssociation": "COLLABORATOR",
+          "body": "PR:244 was merged, so this can be closed.",
+          "createdAt": "2020-05-19T21:34:59Z",
+          "updatedAt": "2020-05-19T21:34:59Z"
         }
       ]
     },
@@ -5508,6 +5515,44 @@
           "body": "No worries, @CarlBeek! I appreciate nudges towards forward progress. ",
           "createdAt": "2020-04-28T20:34:39Z",
           "updatedAt": "2020-04-28T20:34:39Z"
+        }
+      ]
+    },
+    {
+      "number": 252,
+      "id": "MDU6SXNzdWU2MjA2MDkzNzM=",
+      "title": "Remove SSWU",
+      "url": "https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/issues/252",
+      "state": "OPEN",
+      "author": "chris-wood",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Several folks noted that we might just remove SSWU on the list, in response to #235. I'm inclined to agree, given that SSWU is less friendly to implementations. If folks agree, I can prepare a PR to take it out.\r\n\r\n@kwantam, @armfazh: a penny for your thoughts? :-)",
+      "createdAt": "2020-05-19T01:36:52Z",
+      "updatedAt": "2020-05-19T21:31:22Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I don't think this is a good idea, for a few reasons:\r\n\r\n1. If we remove SSWU, there is no \"fast\" option for any curve other than Montgomery/Edwards curves. Here, fast means \"hashing costs 1 square root.\" A constant-time Shallue and van de Woestijne costs roughly 3x as much, so this is a quite big performance hit.\r\n\r\n2. SvdW tempts the implementor to \"optimize\" by making the map non--constant-time, since this is potentially a 3x savings in hashing cost. For example, one can make SvdW go faster by using a fast quadratic residuosity test, but this test is inherently not constant time, and constant-time variants are complex.\r\n\r\n3. The only other option to make SvdW faster is randomized masking. This is hard to get right in practice and is subject to randomness failures, so it is (in my view) *not* something we should be describing or, by removing SSWU, implicitly endorsing as a way to hash quickly to non-Monty/Edwards curves.\r\n\r\n5. The BLS signatures standard is using SSWU to BLS12-381, and lots of folks have started implementing this already.\r\n\r\n6. The VRF standard looks like it's going to be reffing SSWU-to-NIST P-256. No one has implemented yet to my knowledge.\r\n\r\nI've been glad to remove more and more maps from the document, but in all cases these maps offered very little beyond the ones that we've kept. Removing SSWU takes away the best-performing option for most curves. My guess is that if we do this, people will go their own way and use SSWU anyway, which is kind of a failure outcome for the document.",
+          "createdAt": "2020-05-19T02:57:00Z",
+          "updatedAt": "2020-05-19T02:57:31Z"
+        },
+        {
+          "author": "armfazh",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I am not in favor to remove SSWU. \r\n\r\nIn fact, we would **promote its use**, since it's the fastest option for many curves as it requires only 1 exponentiation.\r\n\r\n\r\n\r\n\r\n\r\n",
+          "createdAt": "2020-05-19T21:27:53Z",
+          "updatedAt": "2020-05-19T21:27:53Z"
+        },
+        {
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "body": "My apologies -- I think caused confusion here! I meant to convey that we remove the *suites*, not the map itself. For several curves, we define suites for both SSWU and SWVD. I don't see a strong reason for doing this, other than library flexibility. But to David's credit in the other issue, that might just complicate things later on.",
+          "createdAt": "2020-05-19T21:31:21Z",
+          "updatedAt": "2020-05-19T21:31:21Z"
         }
       ]
     }
@@ -25537,10 +25582,17 @@
       "labels": [],
       "body": "This PR adds a section to the appendix that specifies a slightly more optimized Montgomery->Edwards mapping for the case that `4 / (a - d)` is square in F (`a` and `d` are the coefficients of the twisted Edwards curve). This is the mapping that's specified in RFC7748 for Curve25519.\r\n\r\nThe idea here is to help readers pick a better mapping when defining suites for Edwards curves that don't have a standardized Montgomery counterpart.\r\n\r\n**Note** that this PR builds on #244. The differences are all in [this commit](https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/pull/246/commits/cc8db5e928a93e4eec37a3793bdf1b8b4119abb6), to make it easier to see what's going on. If we decide to add this, I'll rebase after we land #244.",
       "createdAt": "2020-04-28T21:24:17Z",
-      "updatedAt": "2020-04-29T00:21:30Z",
+      "updatedAt": "2020-05-19T20:34:51Z",
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "17ed13d76e970bbd85d7a94e790a34c3d48b6d1a",
+      "headRepository": "kwantam/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "add_k1",
+      "headRefOid": "aa8d9a935120fc4ab2fdfbb1b37fc3a4d384d483",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
+      "mergeCommit": null,
       "comments": [
         {
           "author": "kwantam",
@@ -25548,16 +25600,37 @@
           "body": "I'm ambivalent about adding this. On the one hand, it might be nice to include this info to help folks design better suites for twisted Edwards curves that don't have a standardized Montgomery counterpart, which I suppose is good.\r\n\r\nOn the other hand, it only applies to a restricted class of curves---and looking at the Edwards curves listed on [SafeCurves](https://safecurves.cr.yp.to), it looks like this map only applies to Curve41417. And even when it does apply, it only saves a small handful of multiplications---it would be tough to squeeze even a 1% performance boost from this \"optimization.\"\r\n\r\nSo in the end I'm OK just leaving it out. Folks who are defining new curves are of course welcome to define whatever super-optimized Montgomery->Edwards mapping they want regardless of what we say in the appendix...",
           "createdAt": "2020-04-28T21:33:13Z",
           "updatedAt": "2020-04-29T00:21:30Z"
+        },
+        {
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Thanks for moving this to a separate PR, and sorry for the delay in getting to this! I think we should leave this out, for the reasons outlined above. @armfazh, if you agree, let's close this. ",
+          "createdAt": "2020-05-19T01:38:52Z",
+          "updatedAt": "2020-05-19T01:38:52Z"
         }
       ],
-      "reviews": [],
-      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
-      "baseRefName": "master",
-      "baseRefOid": "17ed13d76e970bbd85d7a94e790a34c3d48b6d1a",
-      "headRepository": "kwantam/draft-irtf-cfrg-hash-to-curve",
-      "headRefName": "add_k1",
-      "headRefOid": "0e26b17b8c772a69638562b60132c0b2eb034599",
-      "mergeCommit": null
+      "reviews": [
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDE0Nzk4MjQ3",
+          "commit": {
+            "abbreviatedOid": "0e26b17"
+          },
+          "author": "armfazh",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2020-05-19T20:28:46Z",
+          "updatedAt": "2020-05-19T20:34:35Z",
+          "comments": [
+            {
+              "originalPosition": 62,
+              "body": "```suggestion\r\nis birationally equivalent to the Montgomery curve\r\n```",
+              "createdAt": "2020-05-19T20:28:46Z",
+              "updatedAt": "2020-05-19T20:34:51Z"
+            }
+          ]
+        }
+      ]
     },
     {
       "number": 247,
@@ -25712,26 +25785,55 @@
       "id": "MDExOlB1bGxSZXF1ZXN0NDE2NDA0MTIw",
       "title": "change sign computation for Ell2 to match BHKL13",
       "url": "https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/pull/250",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "kwantam",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "This PR changes the definition of Elligator 2 to match the way that point sign is chosen in BHKL13. This has the effect of making the mapping injective (which is not important in our context, but doesn't hurt and may be useful in other contexts).\r\n\r\nThis was suggested [on the CFRG mailing list](https://mailarchive.ietf.org/arch/msg/cfrg/4EwW-jmlu1OXWE_1v4aKVTBGpZo/) by Mike Hamburg.\r\n\r\nNote that for most (all?) curves the number of points in the image of the mapping is the same under both methods of choosing the sign; they just correspond to slightly different inputs.\r\n\r\nThis PR also updates all of the pseudocode, the corresponding sage code, and the test vectors.",
       "createdAt": "2020-05-11T23:38:47Z",
-      "updatedAt": "2020-05-11T23:49:49Z",
+      "updatedAt": "2020-05-19T21:47:04Z",
       "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
       "baseRefName": "master",
       "baseRefOid": "fd12ba041298053931d6fbb4ee8d5340bb01ef34",
       "headRepository": "kwantam/draft-irtf-cfrg-hash-to-curve",
       "headRefName": "ell2_sign_fix",
       "headRefOid": "8ec5a3fdcbfc05d00ab18aa419ddfc895cb5b686",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2020-05-19T21:47:04Z",
+      "mergedAt": "2020-05-19T21:47:04Z",
+      "mergedBy": "chris-wood",
+      "mergeCommit": {
+        "oid": "146f1626292cc6571e705be9b87b2f5a97a54bec"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDE0MDQyMzcy",
+          "commit": {
+            "abbreviatedOid": "8ec5a3f"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Thanks, @kwantam! This looks good to me. @armfazh, can you please have a look?",
+          "createdAt": "2020-05-19T01:34:51Z",
+          "updatedAt": "2020-05-19T01:34:51Z",
+          "comments": []
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDE0ODMyMDMy",
+          "commit": {
+            "abbreviatedOid": "8ec5a3f"
+          },
+          "author": "armfazh",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "It looks good to me",
+          "createdAt": "2020-05-19T21:20:36Z",
+          "updatedAt": "2020-05-19T21:20:45Z",
+          "comments": []
+        }
+      ]
     },
     {
       "number": 251,
