@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2020-05-19T21:47:59.019956+00:00",
+  "timestamp": "2020-05-20T23:17:17.286707+00:00",
   "repo": "cfrg/draft-irtf-cfrg-hash-to-curve",
   "labels": [
     {
@@ -47,6 +47,16 @@
       "name": "WIP",
       "description": "Work in progress",
       "color": "fbca04"
+    },
+    {
+      "name": "nice-to-have",
+      "description": "Nice to have",
+      "color": "b60205"
+    },
+    {
+      "name": "editorial",
+      "description": "Editorial",
+      "color": "6846a8"
     }
   ],
   "issues": [
@@ -5268,7 +5278,7 @@
       "labels": [],
       "body": "Congrats for the amazing work that has been and keeps being made on this document!\r\n\r\nJust a general observation: do so many suites have to be defined?\r\n\r\n`edwards25519_XMD:SHA-256_ELL2_RO_` is identical to `edwards25519_XMD:SHA_512_ELL2_RO_`, except that `H` is SHA-256 instead of SHA-512. Are both really needed?\r\n\r\nFor the same curve, should a new protocol opt for the suite using SVDW or its counterpart using Simplified SWU? It might be useful for the document to make a recommendation.\r\n\r\nIn order to facilitate interoperability, increase code reuse and provide guidance to protocol designers, would it make sense to slightly reduce the list, or make one recommendation per curve?\r\n\r\nPlease apologize if this has been discussed before. ",
       "createdAt": "2020-03-30T21:30:08Z",
-      "updatedAt": "2020-04-14T22:33:09Z",
+      "updatedAt": "2020-05-20T18:08:39Z",
       "closedAt": null,
       "comments": [
         {
@@ -5305,6 +5315,69 @@
           "body": "Well said, @davidben! We'd all benefit from more input from folks implementing and using these in protocols before nailing down a minimal set of options. I'll take this to the list to see if we can get some of that feedback!",
           "createdAt": "2020-04-14T22:33:09Z",
           "updatedAt": "2020-04-14T22:33:09Z"
+        },
+        {
+          "author": "armfazh",
+          "authorAssociation": "COLLABORATOR",
+          "body": "This is my proposal for choosing a single suite per group.\r\n*Replace RO -> NU, if needed.\r\n\r\n| Group | Suites |\r\n|-----|----|\r\n| P-256 | P256_XMD:SHA-256_SSWU_RO_ |   \r\n| P-384 | P384_XMD:SHA-512_SSWU_RO_ |   \r\n| P-521 | P521_XMD:SHA-512_SSWU_RO_ |   \r\n| curve25519 | curve25519_XMD:SHA-512_ELL2_RO_ |   \r\n| edwards25519 | edwards25519_XMD:SHA-512_ELL2_RO_ |   \r\n| curve448 | curve448_XMD:SHA-512_ELL2_RO_ |   \r\n| edwards448 | edwards448_XMD:SHA-512_ELL2_RO_ |   \r\n| secp256k1 | secp256k1_XMD:SHA-256_SSWU_RO_  |\r\n| BLS12381-G1 | BLS12381G1_XMD:SHA-256_SSWU_RO_ |\r\n| BLS12381-G2 | BLS12381G2_XMD:SHA-256_SSWU_RO_ |\r\n\r\n",
+          "createdAt": "2020-05-19T21:48:35Z",
+          "updatedAt": "2020-05-20T18:08:39Z"
+        },
+        {
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "body": "That seems like a reasonable set of choices to me. @kwantam, what do you think?",
+          "createdAt": "2020-05-19T22:02:39Z",
+          "updatedAt": "2020-05-19T22:02:39Z"
+        },
+        {
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Generally these look good to me. Some people might wonder about SHA-512 with curve25519, so we may want to add a comment that this is because of Ed25519.\r\n\r\nOne small concern: VRF (which should be merging our PR soon, I hope!) is using NU rather than RO. If we remove the NU suites, they will have to add the suite description in their document, which is slightly unfortunate...\r\n\r\nThoughts on how to handle? Should we warn them about this preemptively and try to get them to add the suite definitions now? Should we keep the -NU suites defined for these cases? Something else?",
+          "createdAt": "2020-05-19T23:51:32Z",
+          "updatedAt": "2020-05-19T23:51:59Z"
+        },
+        {
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Ah, one other question: why SVDW for secp256k1? Is it so that we can remove the isogeny map in the appendix?\r\n\r\nMy guess is that most people who use secp256k1 are very speed sensitive (why else would one use \"riskier\" Koblitz curves?), so it might make sense to stick with SSWU here, too.",
+          "createdAt": "2020-05-19T23:53:13Z",
+          "updatedAt": "2020-05-19T23:53:13Z"
+        },
+        {
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Does the VRF document *need* the NU variant? If not, I'd suggest they use the RO variant instead. ",
+          "createdAt": "2020-05-19T23:53:55Z",
+          "updatedAt": "2020-05-19T23:53:55Z"
+        },
+        {
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I think they're concerned about computational cost, and they don't need the RO for the security proof.\r\n\r\n@reyzin may be able to chime in here (or I can ping him offline)",
+          "createdAt": "2020-05-19T23:54:19Z",
+          "updatedAt": "2020-05-19T23:54:56Z"
+        },
+        {
+          "author": "mratsim",
+          "authorAssociation": "NONE",
+          "body": "Perhaps the intent of those suite parameters should be clarified?\r\nI don't mind having several suites as long as protocol designers are guided towards one suitable for their use case: i.e. if cryptography will be a bottleneck, choose a SSWU suite.\r\n\r\n> As a library author who recently wrote an implementation, please default to [removing options](https://www.imperialviolet.org/2016/05/16/agility.html). The job of a specification is to make decisions so we have common primitives. Every choice point in the spec is a failure to make a decision. Sometimes that's necessary, but it usually isn't. Where it is, definitely include a recommended one, but that's a baseline expectation. The preferred option is to not define the extra ones in the first place.\r\n\r\nThis is not a library though, it's a core building block of protocols. The risk is that if you don't provide recommendations that address the protocol needs, the designers might create their own assemblage.\r\n\r\n> The worst outcome would be for different systems to make different choices and implementations are forced to support many variations to cover them all. We should pick as few as possible so everyone's very limited cryptographic testing and implementation efforts can be concentrated on the things that matter.\r\n\r\nI agree with the last part but for me the worst would be that if none of the building blocks fit the needs (say SSWU was removed and cryptography was already a bottleneck) and designers have nothing vetted that fits their need.\r\n\r\nIf we really want to make sure we don't forget an use-case we need to start from the potential users or domains and not from our list of suites, i.e.:\r\n\r\n- I design a protocol for embedded device to do X, I cannot compromise on signature size, speed delay are not an issue\r\n  - User question: is there a suite that provides what I need?\r\n- I design a protocol for smart device with user interactivity, I cannot compromise on both signature size and speed, ...\r\n- I design a P2P protocol, I expect a lot of signing, ...\r\n- I design a remote access protocol, ...\r\n- I design a content delivery system (Cable TV ...) with ephemeral keys ...\r\n",
+          "createdAt": "2020-05-20T12:34:51Z",
+          "updatedAt": "2020-05-20T12:34:51Z"
+        },
+        {
+          "author": "davidben",
+          "authorAssociation": "NONE",
+          "body": "FWIW, if there are clear needs (protocols where the perf difference between NU and RO is very significant and RO's stronger properties are provably unnecessary), I think it's reasonable to have both NU and RO variations. The cost of supporting both NU and RO, from the code complexity side, is fairly low compared to, say, implementing both SSWU and SVDW for the same curve.\r\n\r\nI think the argument against NU would be that NU has more sharp edges than RO and having common primitives be consistently robust is worth some performance hit.\r\n\r\n> This is not a library though, it's a core building block of protocols. The risk is that if you don't provide recommendations that address the protocol needs, the designers might create their own assemblage.\r\n\r\nUltimately those protocols will call into functions implemented by the cryptographic libraries they use. Diversity in building blocks used by protocols is precisely what inflates a library's maintenance burden. If some variation is indeed necessary, it is necessary, but standards shouldn't include options for the sake of it. Variations must pull their weight.",
+          "createdAt": "2020-05-20T17:46:40Z",
+          "updatedAt": "2020-05-20T17:46:40Z"
+        },
+        {
+          "author": "armfazh",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> Ah, one other question: why SVDW for secp256k1? Is it so that we can remove the isogeny map in the appendix?\r\n\r\nYes, I think SSWU fits better for this curve if performance is a must. So I just update the list.\r\n",
+          "createdAt": "2020-05-20T18:08:24Z",
+          "updatedAt": "2020-05-20T18:08:24Z"
         }
       ]
     },
@@ -5412,15 +5485,15 @@
       "id": "MDU6SXNzdWU2MDI1NjA1MjA=",
       "title": "potential optimization for Edwards to Montgomery map",
       "url": "https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/issues/243",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "kwantam",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Michael Scott wrote to observe that the generic Edwards to Montgomery map can be simplified in some cases.\r\n\r\nConsider the Edwards curve\r\n\r\n    a * v^2 + w^2 = 1 + d * v^2 * w^2\r\n\r\nAssuming that there is no corresponding standardized Montgomery curve, the document currently suggests mapping to the following curve\r\n\r\n    K * t^2 = s^3 + J * s^2 + s\r\n    J = 2 * (a + d) / (a - d)\r\n    K = 4 / (a - d)\r\n\r\nand then mapping back to the Edwards curve via\r\n\r\n    v = s / t\r\n    w = (s - 1) / (s + 1)\r\n\r\nThe j-invariant of a Montgomery curve depends only on the J coefficient, meaning that for all Montgomery curves given above, the curve\r\n\r\n    t^2 = s^3 + J * s^2 + s\r\n\r\nis isomorphic to either the curve or its quadratic twist. Most interestingly, to us, when K is a quadratic residue, then the above two Montgomery curves are isomorphic via\r\n\r\n    (s, t) \u21a6 (s, t \u221aK)\r\n\r\nand therefore we can map back from the curve with K = 1 to the Edwards curve via\r\n\r\n    v = (s \u221aK) / t\r\n    w = (s - 1) / (s + 1)\r\n\r\nNote that this is exactly the map that RFC7748 specifies from edwards25519 to curve25519.\r\n\r\n(See https://eprint.iacr.org/2017/212.pdf for more info on the above.)\r\n\r\n---\r\n\r\nAlong the same lines, when K is non-square we could map from\r\n\r\n    Z * t^2 = s^3 + J * s^2 + s\r\n\r\nto the Edwards curve, where Z is the distinguished non-square in F used to map to Montgomery. The Montgomery to Edwards map would then be\r\n\r\n    v = (s \u221a(K/Z)) / t\r\n    w = (s - 1) / (s + 1)\r\n\r\nThe advantage is that this lets us use a very small value (Z) in place of K (which is likely much larger) when evaluating Elligator.\r\n\r\n---\r\n\r\nOK, so what does this mean to us? It means that we can, in principle, specify a somewhat better optimized map from Edwards to Montgomery. In particular, keeping the definitions above,\r\n\r\n    if is_square(K):\r\n        // map from t^2 = s^3 + J * s^2 + s\r\n    else:\r\n        // map from Z * t^2 = s^3 + J * s^2 + s\r\n\r\nSo: question: do we think this is would be a reasonable optimization to add?",
       "createdAt": "2020-04-18T21:55:37Z",
-      "updatedAt": "2020-05-19T21:34:59Z",
-      "closedAt": null,
+      "updatedAt": "2020-05-19T23:47:37Z",
+      "closedAt": "2020-05-19T23:47:37Z",
       "comments": [
         {
           "author": "kwantam",
@@ -5470,6 +5543,13 @@
           "body": "PR:244 was merged, so this can be closed.",
           "createdAt": "2020-05-19T21:34:59Z",
           "updatedAt": "2020-05-19T21:34:59Z"
+        },
+        {
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "body": "agree with @armfazh: seems like whichever way we decide on #246, we can close this",
+          "createdAt": "2020-05-19T23:47:31Z",
+          "updatedAt": "2020-05-19T23:47:31Z"
         }
       ]
     },
@@ -5523,15 +5603,15 @@
       "id": "MDU6SXNzdWU2MjA2MDkzNzM=",
       "title": "Remove SSWU",
       "url": "https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/issues/252",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "chris-wood",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Several folks noted that we might just remove SSWU on the list, in response to #235. I'm inclined to agree, given that SSWU is less friendly to implementations. If folks agree, I can prepare a PR to take it out.\r\n\r\n@kwantam, @armfazh: a penny for your thoughts? :-)",
       "createdAt": "2020-05-19T01:36:52Z",
-      "updatedAt": "2020-05-19T21:31:22Z",
-      "closedAt": null,
+      "updatedAt": "2020-05-20T23:11:52Z",
+      "closedAt": "2020-05-20T23:11:52Z",
       "comments": [
         {
           "author": "kwantam",
@@ -5553,6 +5633,53 @@
           "body": "My apologies -- I think caused confusion here! I meant to convey that we remove the *suites*, not the map itself. For several curves, we define suites for both SSWU and SWVD. I don't see a strong reason for doing this, other than library flexibility. But to David's credit in the other issue, that might just complicate things later on.",
           "createdAt": "2020-05-19T21:31:21Z",
           "updatedAt": "2020-05-19T21:31:21Z"
+        },
+        {
+          "author": "mratsim",
+          "authorAssociation": "NONE",
+          "body": "As someone who implemented SSWU for BLS12-381, I found the spec quite useful and easy to follow.\r\n\r\nI think it's OK to have 2 options, 1 for speed and 1 for generality.",
+          "createdAt": "2020-05-20T12:14:55Z",
+          "updatedAt": "2020-05-20T12:14:55Z"
+        },
+        {
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Closing, as we're discussing removing suites in #235.",
+          "createdAt": "2020-05-20T23:11:50Z",
+          "updatedAt": "2020-05-20T23:11:50Z"
+        }
+      ]
+    },
+    {
+      "number": 253,
+      "id": "MDU6SXNzdWU2MjE0NTUyOTA=",
+      "title": "xmd test vectors",
+      "url": "https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/issues/253",
+      "state": "OPEN",
+      "author": "kwantam",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [
+        "nice-to-have"
+      ],
+      "body": "Should we include test vectors for XMD? This could help folks to implement...",
+      "createdAt": "2020-05-20T04:44:34Z",
+      "updatedAt": "2020-05-20T23:11:09Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "jedisct1",
+          "authorAssociation": "NONE",
+          "body": "XMD is pretty straightforward. I'm not convinced that it is necessary.",
+          "createdAt": "2020-05-20T05:10:41Z",
+          "updatedAt": "2020-05-20T05:10:41Z"
+        },
+        {
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Let's mark this as a \"nice to have\" issue?",
+          "createdAt": "2020-05-20T23:10:26Z",
+          "updatedAt": "2020-05-20T23:10:26Z"
         }
       ]
     }
@@ -25792,7 +25919,7 @@
       "labels": [],
       "body": "This PR changes the definition of Elligator 2 to match the way that point sign is chosen in BHKL13. This has the effect of making the mapping injective (which is not important in our context, but doesn't hurt and may be useful in other contexts).\r\n\r\nThis was suggested [on the CFRG mailing list](https://mailarchive.ietf.org/arch/msg/cfrg/4EwW-jmlu1OXWE_1v4aKVTBGpZo/) by Mike Hamburg.\r\n\r\nNote that for most (all?) curves the number of points in the image of the mapping is the same under both methods of choosing the sign; they just correspond to slightly different inputs.\r\n\r\nThis PR also updates all of the pseudocode, the corresponding sage code, and the test vectors.",
       "createdAt": "2020-05-11T23:38:47Z",
-      "updatedAt": "2020-05-19T21:47:04Z",
+      "updatedAt": "2020-05-20T04:45:40Z",
       "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
       "baseRefName": "master",
       "baseRefOid": "fd12ba041298053931d6fbb4ee8d5340bb01ef34",
