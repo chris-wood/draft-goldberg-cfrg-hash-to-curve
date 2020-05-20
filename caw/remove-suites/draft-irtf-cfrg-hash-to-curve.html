@@ -1730,9 +1730,12 @@ the subgroup G of E. <a href="#cofactor-clearing" class="xref">Section 7</a> des
 this operation.<a href="#section-3-2.3" class="pilcrow">¶</a>
 </li>
 </ul>
-<p id="section-3-3">We describe two high-level encoding functions (<a href="#term-encoding" class="xref">Section 2.2.2</a>).
-Although these functions have the same interface, the
-distributions of their outputs are different.<a href="#section-3-3" class="pilcrow">¶</a></p>
+<p id="section-3-3">We describe two high-level encoding functions (<a href="#term-encoding" class="xref">Section 2.2.2</a>): nonuniform
+and random oracle encoding. Although these functions have the same interface, the
+distributions of their outputs are different. Note that the suites specified
+in <a href="#suites" class="xref">Section 8</a> only make use of the random oracle encoding function. See
+<a href="#suites-howto" class="xref">Section 8.1</a> for instructions on how to define a suite using the nonuniform
+encoding function.<a href="#section-3-3" class="pilcrow">¶</a></p>
 <ul>
 <li id="section-3-4.1">Nonuniform encoding (encode_to_curve). This function encodes byte strings to points in G.
 The distribution of the output is not uniformly random in G.<a href="#section-3-4.1" class="pilcrow">¶</a>

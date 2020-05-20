@@ -551,9 +551,9 @@ Internet-Draft                hash-to-curve                     May 2020
       E to the subgroup G of E.  Section 7 describes methods to perform
       this operation.
 
-   We describe two high-level encoding functions (Section 2.2.2).
-   Although these functions have the same interface, the distributions
-   of their outputs are different.
+   We describe two high-level encoding functions (Section 2.2.2):
+   nonuniform and random oracle encoding.  Although these functions have
+   the same interface, the distributions of their outputs are different.
 
 
 
@@ -561,6 +561,10 @@ Faz-Hernandez, et al.   Expires 21 November 2020               [Page 10]
 
 Internet-Draft                hash-to-curve                     May 2020
 
+
+   Note that the suites specified in Section 8 only make use of the
+   random oracle encoding function.  See Section 8.1 for instructions on
+   how to define a suite using the nonuniform encoding function.
 
    *  Nonuniform encoding (encode_to_curve).  This function encodes byte
       strings to points in G.  The distribution of the output is not
@@ -607,10 +611,6 @@ Internet-Draft                hash-to-curve                     May 2020
    include domain separation (Section 2.2.5) to avoid interfering with
    other uses of similar functionality.
 
-   Protocols that instantiate multiple, independent hash functions based
-   on either hash_to_curve or encode_to_curve MUST enforce domain
-   separation between those hash functions.  This requirement applies
-
 
 
 Faz-Hernandez, et al.   Expires 21 November 2020               [Page 11]
@@ -618,6 +618,9 @@ Faz-Hernandez, et al.   Expires 21 November 2020               [Page 11]
 Internet-Draft                hash-to-curve                     May 2020
 
 
+   Protocols that instantiate multiple, independent hash functions based
+   on either hash_to_curve or encode_to_curve MUST enforce domain
+   separation between those hash functions.  This requirement applies
    both in the case of multiple hashes to the same curve and in the case
    of multiple hashes to different curves.  (This is because the
    hash_to_field primitive (Section 5) requires domain separation to
@@ -663,9 +666,6 @@ Internet-Draft                hash-to-curve                     May 2020
 
    Algorithms in this document make use of utility functions described
    below.
-
-
-
 
 
 
