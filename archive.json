@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2020-05-21T12:53:45.926905+00:00",
+  "timestamp": "2020-05-21T22:04:41.398153+00:00",
   "repo": "cfrg/draft-irtf-cfrg-hash-to-curve",
   "labels": [
     {
@@ -4640,7 +4640,7 @@
       "labels": [],
       "body": "The definition of CMOV in the draft is:\r\n\r\nhttps://tools.ietf.org/html/draft-irtf-cfrg-hash-to-curve-05#section-4\r\n\r\n> CMOV(a, b, c): If c is False, CMOV returns a, otherwise it returns\r\n      b.  To prevent against timing attacks, this operation must run in\r\n      constant time, without revealing the value of c.  Commonly,\r\n      implementations assume that the selector c is 1 for True or 0 for\r\n      False.  In this case, given a bit string C, the desired selector c\r\n      can be computed by OR-ing all bits of C together.  The resulting\r\n      selector will be either 0 if all bits of C are zero, or 1 if at\r\n      least one bit of C is 1.\r\n\r\nThe definition in the VRF spec is:\r\n\r\nhttps://tools.ietf.org/html/draft-irtf-cfrg-vrf-06#section-5.4.1.2 (at the bottom of ECVRF_hash_to_curve_elligator2_25519)\r\n\r\n> Alternatively, let CMOV(result_if_1, result_if_0, selector) be the\r\n   function that returns result_if_1 when selector is 1 and result_if_0\r\n   when selector is 0.\r\n>\r\n> [...]\r\n>\r\n> CMOV can\r\n   be implemented in constant time a variety of ways; for example, by\r\n   expanding b from a single bit to an all-0 or all-1 string\r\n   (accomplished by negating b in standard two's-complement arithmetic)\r\n   and then applying bitwise XOR and AND operations as follows: other_x\r\n   XOR ((x XOR other_x) AND b)\r\n\r\n=> The definitions are opposite in both specs\r\n\r\nI didn't find a Github repo for the VRF specs but given:\r\n- the overlap in intended audience of both specs (for example Algorand are implementing both hash to curve and VRF)\r\n- that the VRF spec also has a hash_to_curve section \r\nI think it would be best to have the same definition.",
       "createdAt": "2020-02-16T20:52:43Z",
-      "updatedAt": "2020-05-21T04:08:01Z",
+      "updatedAt": "2020-05-21T13:25:01Z",
       "closedAt": null,
       "comments": [
         {
@@ -4705,6 +4705,13 @@
           "body": "I've been communicating with Leo actively in the last few days. For now, I think no call is necessary.",
           "createdAt": "2020-05-21T04:08:01Z",
           "updatedAt": "2020-05-21T04:08:01Z"
+        },
+        {
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "body": "(Whoops!)",
+          "createdAt": "2020-05-21T13:25:01Z",
+          "updatedAt": "2020-05-21T13:25:01Z"
         }
       ]
     },
@@ -4844,7 +4851,7 @@
       "labels": [],
       "body": "I'd like to argue that it wouldn't be inappropriate to have test vectors exercise conditions in algorithms, or more specifically both outcomes of CMOVs/if conditions. As opposite to just a limited number of specific strings fed to all algorithms,the set that is obviously too small to trigger all conditions in any chosen algorithm. Given current state [when test input is passed to hash_to_field] it naturally ~causes~ poses a challenge, as one would have to search for inputs that trigger specific conditions, but it shouldn't be a heavy computational problem.\r\n\r\nOn related note one can also wonder if it would be beneficial to ensure that [sufficient amount of] inputs to sgn0 are \"endian-unambiguous\". By \"endian ambiguity\" I mean that a specific input can yield same sign for both little- and big-endian variants of sgn0, in which case implementation invoking wrong sgn0 would pass the corresponding test.\r\n\r\nAlso, it might be useful to provide intermediate results from inputs to corresponding map_to_curves, as opposite for complete stack, so that map_to_curves can be tested by themselves. Does it make sense?\r\n",
       "createdAt": "2020-03-01T17:40:48Z",
-      "updatedAt": "2020-04-03T18:05:56Z",
+      "updatedAt": "2020-05-21T19:19:05Z",
       "closedAt": null,
       "comments": [
         {
@@ -4899,9 +4906,9 @@
         {
           "author": "kwantam",
           "authorAssociation": "COLLABORATOR",
-          "body": "Action items so far from this thread:\r\n\r\n- [x] make sure that poc code is linked in an obvious place in the doc (say, in the test vectors appendix)\r\n- [x] add intermediate values (output of hash-to-field, output of map-to-curve before cofactor clearing) to test vectors\r\n- [ ] choose test vectors that give reasonable branch coverage (e.g., different signs, x1 vs x2, etc)\r\n- [ ] choose test vectors such that sgn0 result is distinct for sgn0_le vs sgn0_be\r\n- [ ] incorporate @jedisct1's suggestions below\r\n\r\nPlease let me know if I'm missing any.",
+          "body": "Action items so far from this thread:\r\n\r\n- [x] make sure that poc code is linked in an obvious place in the doc (say, in the test vectors appendix)\r\n- [x] add intermediate values (output of hash-to-field, output of map-to-curve before cofactor clearing) to test vectors\r\n- [ ] choose test vectors that give reasonable branch coverage (e.g., different signs, x1 vs x2, etc)\r\n- [x] ~choose test vectors such that sgn0 result is distinct for sgn0_le vs sgn0_be~ no longer needed, only one sgn0 now\r\n- [ ] incorporate @jedisct1's suggestions below\r\n\r\nPlease let me know if I'm missing any.",
           "createdAt": "2020-03-02T17:44:05Z",
-          "updatedAt": "2020-04-03T18:05:56Z"
+          "updatedAt": "2020-05-21T19:19:05Z"
         },
         {
           "author": "mratsim",
@@ -5299,15 +5306,15 @@
       "id": "MDU6SXNzdWU1OTA2MDk4NzE=",
       "title": "Too many suites?",
       "url": "https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/issues/235",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "jedisct1",
       "authorAssociation": "NONE",
       "assignees": [],
       "labels": [],
       "body": "Congrats for the amazing work that has been and keeps being made on this document!\r\n\r\nJust a general observation: do so many suites have to be defined?\r\n\r\n`edwards25519_XMD:SHA-256_ELL2_RO_` is identical to `edwards25519_XMD:SHA_512_ELL2_RO_`, except that `H` is SHA-256 instead of SHA-512. Are both really needed?\r\n\r\nFor the same curve, should a new protocol opt for the suite using SVDW or its counterpart using Simplified SWU? It might be useful for the document to make a recommendation.\r\n\r\nIn order to facilitate interoperability, increase code reuse and provide guidance to protocol designers, would it make sense to slightly reduce the list, or make one recommendation per curve?\r\n\r\nPlease apologize if this has been discussed before. ",
       "createdAt": "2020-03-30T21:30:08Z",
-      "updatedAt": "2020-05-21T12:52:58Z",
-      "closedAt": null,
+      "updatedAt": "2020-05-21T22:04:09Z",
+      "closedAt": "2020-05-21T22:04:09Z",
       "comments": [
         {
           "author": "armfazh",
@@ -5448,6 +5455,34 @@
           "body": "I think we're both trying to predict the future with slightly different objectives. I'm not convinced scary advisory text is sufficient, though I'm not willing to lie down in the road over it either!\r\n\r\nSo, in the interest of moving forward, I'll add back one NU suite (in #254) for each curve, with the scary warning text, and then we can close out this issue. Sound good?\r\n\r\nEdit: #254 is now updated!",
           "createdAt": "2020-05-21T12:40:29Z",
           "updatedAt": "2020-05-21T12:52:58Z"
+        },
+        {
+          "author": "jedisct1",
+          "authorAssociation": "NONE",
+          "body": "Sounds good to me.\r\n\r\nFor implementers, supporting NU and/or RO is pretty much the the same thing, and the scary warning is good enough to encourage protocol designers to use RO as a general recommendation.",
+          "createdAt": "2020-05-21T13:16:19Z",
+          "updatedAt": "2020-05-21T13:16:19Z"
+        },
+        {
+          "author": "davidben",
+          "authorAssociation": "NONE",
+          "body": "SGTM",
+          "createdAt": "2020-05-21T13:50:55Z",
+          "updatedAt": "2020-05-21T13:50:55Z"
+        },
+        {
+          "author": "reyzin",
+          "authorAssociation": "NONE",
+          "body": "Curious: can anyone do a tally of uses of hash-to-curve that require RO vs the ones for which NU suffices? @chris-wood @kwantam -- I don't know who your potential users are besides VRF.",
+          "createdAt": "2020-05-21T16:04:54Z",
+          "updatedAt": "2020-05-21T16:04:54Z"
+        },
+        {
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@reyzin great suggestion! I'll take a crack at that and share the results here.\r\n\r\nEdit: An initial list [is here](https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/wiki/hash-to-curve-applications).",
+          "createdAt": "2020-05-21T16:19:32Z",
+          "updatedAt": "2020-05-21T16:39:35Z"
         }
       ]
     },
@@ -25772,21 +25807,21 @@
       "id": "MDExOlB1bGxSZXF1ZXN0NDEwMzY5NTMw",
       "title": "add special mapping for k=1 in appendix",
       "url": "https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/pull/246",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "kwantam",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "This PR adds a section to the appendix that specifies a slightly more optimized Montgomery->Edwards mapping for the case that `4 / (a - d)` is square in F (`a` and `d` are the coefficients of the twisted Edwards curve). This is the mapping that's specified in RFC7748 for Curve25519.\r\n\r\nThe idea here is to help readers pick a better mapping when defining suites for Edwards curves that don't have a standardized Montgomery counterpart.\r\n\r\n**Note** that this PR builds on #244. The differences are all in [this commit](https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/pull/246/commits/cc8db5e928a93e4eec37a3793bdf1b8b4119abb6), to make it easier to see what's going on. If we decide to add this, I'll rebase after we land #244.",
       "createdAt": "2020-04-28T21:24:17Z",
-      "updatedAt": "2020-05-19T20:34:51Z",
+      "updatedAt": "2020-05-21T17:33:28Z",
       "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
       "baseRefName": "master",
       "baseRefOid": "17ed13d76e970bbd85d7a94e790a34c3d48b6d1a",
       "headRepository": "kwantam/draft-irtf-cfrg-hash-to-curve",
       "headRefName": "add_k1",
       "headRefOid": "aa8d9a935120fc4ab2fdfbb1b37fc3a4d384d483",
-      "closedAt": null,
+      "closedAt": "2020-05-21T17:33:28Z",
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
@@ -25804,6 +25839,20 @@
           "body": "Thanks for moving this to a separate PR, and sorry for the delay in getting to this! I think we should leave this out, for the reasons outlined above. @armfazh, if you agree, let's close this. ",
           "createdAt": "2020-05-19T01:38:52Z",
           "updatedAt": "2020-05-19T01:38:52Z"
+        },
+        {
+          "author": "armfazh",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Agree, let's close this.",
+          "createdAt": "2020-05-21T17:32:26Z",
+          "updatedAt": "2020-05-21T17:32:26Z"
+        },
+        {
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Closing for now. It will remain part of history in case we ever want to revisit it!",
+          "createdAt": "2020-05-21T17:33:28Z",
+          "updatedAt": "2020-05-21T17:33:28Z"
         }
       ],
       "reviews": [
@@ -26087,26 +26136,50 @@
       "id": "MDExOlB1bGxSZXF1ZXN0NDIxMDY3Mjky",
       "title": "Remove unnecessary ciphersuite variety",
       "url": "https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/pull/254",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "chris-wood",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Closes #235. \r\n\r\ncc @davidben, @jedisct1, @reyzin",
       "createdAt": "2020-05-20T23:20:13Z",
-      "updatedAt": "2020-05-21T12:52:47Z",
+      "updatedAt": "2020-05-21T22:04:09Z",
       "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
       "baseRefName": "master",
       "baseRefOid": "146f1626292cc6571e705be9b87b2f5a97a54bec",
       "headRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
       "headRefName": "caw/remove-suites",
       "headRefOid": "db467220b59f8d60cfdee1a13799d4f86ce8cfe5",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
-      "comments": [],
-      "reviews": []
+      "closedAt": "2020-05-21T22:04:09Z",
+      "mergedAt": "2020-05-21T22:04:09Z",
+      "mergedBy": "chris-wood",
+      "mergeCommit": {
+        "oid": "b745602521c4535c172b793ce7ce6060935ce009"
+      },
+      "comments": [
+        {
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@kwantam @armfazh, are we good to merge this based on discussion in #235?",
+          "createdAt": "2020-05-21T16:43:24Z",
+          "updatedAt": "2020-05-21T16:43:24Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDE2MzQyNTI1",
+          "commit": {
+            "abbreviatedOid": "db46722"
+          },
+          "author": "armfazh",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "lgtm",
+          "createdAt": "2020-05-21T17:22:33Z",
+          "updatedAt": "2020-05-21T17:22:33Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
