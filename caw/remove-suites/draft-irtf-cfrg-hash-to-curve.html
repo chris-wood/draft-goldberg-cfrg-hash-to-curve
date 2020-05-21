@@ -836,7 +836,7 @@ table.left {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Faz-Hernandez, et al.</td>
-<td class="center">Expires 21 November 2020</td>
+<td class="center">Expires 22 November 2020</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -849,12 +849,12 @@ table.left {
 <dd class="internet-draft">draft-irtf-cfrg-hash-to-curve-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2020-05-20" class="published">20 May 2020</time>
+<time datetime="2020-05-21" class="published">21 May 2020</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2020-11-21">21 November 2020</time></dd>
+<dd class="expires"><time datetime="2020-11-22">22 November 2020</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -905,7 +905,7 @@ arbitrary string to a point on an elliptic curve.<a href="#section-abstract-1" c
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 21 November 2020.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 22 November 2020.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1732,10 +1732,7 @@ this operation.<a href="#section-3-2.3" class="pilcrow">¶</a>
 </ul>
 <p id="section-3-3">We describe two high-level encoding functions (<a href="#term-encoding" class="xref">Section 2.2.2</a>): nonuniform
 and random oracle encoding. Although these functions have the same interface, the
-distributions of their outputs are different. Note that the suites specified
-in <a href="#suites" class="xref">Section 8</a> only make use of the random oracle encoding function. See
-<a href="#suites-howto" class="xref">Section 8.1</a> for instructions on how to define a suite using the nonuniform
-encoding function.<a href="#section-3-3" class="pilcrow">¶</a></p>
+distributions of their outputs are different.<a href="#section-3-3" class="pilcrow">¶</a></p>
 <ul>
 <li id="section-3-4.1">Nonuniform encoding (encode_to_curve). This function encodes byte strings to points in G.
 The distribution of the output is not uniformly random in G.<a href="#section-3-4.1" class="pilcrow">¶</a>
@@ -2890,8 +2887,12 @@ the underlying hash function).<a href="#section-8-5.8" class="pilcrow">¶</a>
 <p id="section-8-6">In addition to the above parameters, the mapping f may require
 additional parameters Z, M, rational_map, E', and/or iso_map.
 These MUST be specified when applicable.<a href="#section-8-6" class="pilcrow">¶</a></p>
-<p id="section-8-7">The below table lists the curves for which suites are defined and
-the subsection that gives the corresponding parameters.<a href="#section-8-7" class="pilcrow">¶</a></p>
+<p id="section-8-7">Suites with nonuniform encodings MUST NOT be used in applications whose security
+relies on a random oracle. Applications using nonuniform encodings SHOULD carefully
+analyze the security implications of using such an encoding. When the required
+encoding is not clear, applications SHOULD use a random oracle.<a href="#section-8-7" class="pilcrow">¶</a></p>
+<p id="section-8-8">The below table lists the curves for which suites are defined and
+the subsection that gives the corresponding parameters.<a href="#section-8-8" class="pilcrow">¶</a></p>
 <table class="center" id="table-2">
         <caption><a href="#table-2" class="selfRef">Table 2</a></caption>
 <thead>
@@ -2978,7 +2979,7 @@ encode_to_curve.<a href="#section-8.1-2.6" class="pilcrow">¶</a>
         <h3 id="name-suites-for-nist-p-256">
 <a href="#section-8.2" class="section-number selfRef">8.2. </a><a href="#name-suites-for-nist-p-256" class="section-name selfRef">Suites for NIST P-256</a>
         </h3>
-<p id="section-8.2-1">This section defines one ciphersuite for the NIST P-256 elliptic curve <span>[<a href="#FIPS186-4" class="xref">FIPS186-4</a>]</span>.<a href="#section-8.2-1" class="pilcrow">¶</a></p>
+<p id="section-8.2-1">This section defines ciphersuites for the NIST P-256 elliptic curve <span>[<a href="#FIPS186-4" class="xref">FIPS186-4</a>]</span>.<a href="#section-8.2-1" class="pilcrow">¶</a></p>
 <p id="section-8.2-2">P256_XMD:SHA-256_SSWU_RO_ is defined as follows:<a href="#section-8.2-2" class="pilcrow">¶</a></p>
 <ul>
 <li id="section-8.2-3.1">encoding type: hash_to_curve (<a href="#roadmap" class="xref">Section 3</a>)<a href="#section-8.2-3.1" class="pilcrow">¶</a>
@@ -3011,8 +3012,10 @@ encode_to_curve.<a href="#section-8.1-2.6" class="pilcrow">¶</a>
 <li id="section-8.2-3.11">h_eff: 1<a href="#section-8.2-3.11" class="pilcrow">¶</a>
 </li>
 </ul>
-<p id="section-8.2-4">An optimized example implementation of the Simplified SWU mapping
-to P-256 is given in <a href="#sswu-map-to-3mod4" class="xref">Appendix E.2.1</a>.<a href="#section-8.2-4" class="pilcrow">¶</a></p>
+<p id="section-8.2-4">P256_XMD:SHA-256_SSWU_NU_ is identical to P256_XMD:SHA-256_SSWU_RO_,
+except that the encoding type is encode_to_curve (<a href="#roadmap" class="xref">Section 3</a>).<a href="#section-8.2-4" class="pilcrow">¶</a></p>
+<p id="section-8.2-5">An optimized example implementation of the Simplified SWU mapping
+to P-256 is given in <a href="#sswu-map-to-3mod4" class="xref">Appendix E.2.1</a>.<a href="#section-8.2-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="suites-p384">
@@ -3020,7 +3023,7 @@ to P-256 is given in <a href="#sswu-map-to-3mod4" class="xref">Appendix E.2.1</a
         <h3 id="name-suites-for-nist-p-384">
 <a href="#section-8.3" class="section-number selfRef">8.3. </a><a href="#name-suites-for-nist-p-384" class="section-name selfRef">Suites for NIST P-384</a>
         </h3>
-<p id="section-8.3-1">This section defines one ciphersuite for the NIST P-384 elliptic curve <span>[<a href="#FIPS186-4" class="xref">FIPS186-4</a>]</span>.<a href="#section-8.3-1" class="pilcrow">¶</a></p>
+<p id="section-8.3-1">This section defines ciphersuites for the NIST P-384 elliptic curve <span>[<a href="#FIPS186-4" class="xref">FIPS186-4</a>]</span>.<a href="#section-8.3-1" class="pilcrow">¶</a></p>
 <p id="section-8.3-2">P384_XMD:SHA-512_SSWU_RO_ is defined as follows:<a href="#section-8.3-2" class="pilcrow">¶</a></p>
 <ul>
 <li id="section-8.3-3.1">encoding type: hash_to_curve (<a href="#roadmap" class="xref">Section 3</a>)<a href="#section-8.3-3.1" class="pilcrow">¶</a>
@@ -3053,8 +3056,10 @@ to P-256 is given in <a href="#sswu-map-to-3mod4" class="xref">Appendix E.2.1</a
 <li id="section-8.3-3.11">h_eff: 1<a href="#section-8.3-3.11" class="pilcrow">¶</a>
 </li>
 </ul>
-<p id="section-8.3-4">An optimized example implementation of the Simplified SWU mapping
-to P-384 is given in <a href="#sswu-map-to-3mod4" class="xref">Appendix E.2.1</a>.<a href="#section-8.3-4" class="pilcrow">¶</a></p>
+<p id="section-8.3-4">P384_XMD:SHA-512_SSWU_NU_ is identical to P384_XMD:SHA-512_SSWU_RO_,
+except that the encoding type is encode_to_curve (<a href="#roadmap" class="xref">Section 3</a>).<a href="#section-8.3-4" class="pilcrow">¶</a></p>
+<p id="section-8.3-5">An optimized example implementation of the Simplified SWU mapping
+to P-384 is given in <a href="#sswu-map-to-3mod4" class="xref">Appendix E.2.1</a>.<a href="#section-8.3-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="suites-p521">
@@ -3062,7 +3067,7 @@ to P-384 is given in <a href="#sswu-map-to-3mod4" class="xref">Appendix E.2.1</a
         <h3 id="name-suites-for-nist-p-521">
 <a href="#section-8.4" class="section-number selfRef">8.4. </a><a href="#name-suites-for-nist-p-521" class="section-name selfRef">Suites for NIST P-521</a>
         </h3>
-<p id="section-8.4-1">This section defines one ciphersuite for the NIST P-521 elliptic curve <span>[<a href="#FIPS186-4" class="xref">FIPS186-4</a>]</span>.<a href="#section-8.4-1" class="pilcrow">¶</a></p>
+<p id="section-8.4-1">This section defines ciphersuites for the NIST P-521 elliptic curve <span>[<a href="#FIPS186-4" class="xref">FIPS186-4</a>]</span>.<a href="#section-8.4-1" class="pilcrow">¶</a></p>
 <p id="section-8.4-2">P521_XMD:SHA-512_SSWU_RO_ is defined as follows:<a href="#section-8.4-2" class="pilcrow">¶</a></p>
 <ul>
 <li id="section-8.4-3.1">encoding type: hash_to_curve (<a href="#roadmap" class="xref">Section 3</a>)<a href="#section-8.4-3.1" class="pilcrow">¶</a>
@@ -3095,8 +3100,10 @@ to P-384 is given in <a href="#sswu-map-to-3mod4" class="xref">Appendix E.2.1</a
 <li id="section-8.4-3.11">h_eff: 1<a href="#section-8.4-3.11" class="pilcrow">¶</a>
 </li>
 </ul>
-<p id="section-8.4-4">An optimized example implementation of the Simplified SWU mapping
-to P-521 is given in <a href="#sswu-map-to-3mod4" class="xref">Appendix E.2.1</a>.<a href="#section-8.4-4" class="pilcrow">¶</a></p>
+<p id="section-8.4-4">P521_XMD:SHA-512_SSWU_NU_ is identical to P521_XMD:SHA-512_SSWU_RO_,
+except that the encoding type is encode_to_curve (<a href="#roadmap" class="xref">Section 3</a>).<a href="#section-8.4-4" class="pilcrow">¶</a></p>
+<p id="section-8.4-5">An optimized example implementation of the Simplified SWU mapping
+to P-521 is given in <a href="#sswu-map-to-3mod4" class="xref">Appendix E.2.1</a>.<a href="#section-8.4-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="suites-25519">
@@ -3156,8 +3163,12 @@ except for the following parameters:<a href="#section-8.5-4" class="pilcrow">¶<
 <li id="section-8.5-5.4">rational_map: the birational map defined in <span>[<a href="#RFC7748" class="xref">RFC7748</a>]</span>, Section 4.1<a href="#section-8.5-5.4" class="pilcrow">¶</a>
 </li>
 </ul>
-<p id="section-8.5-6">Optimized example implementations of the above mappings are given in
-<a href="#map-to-curve25519" class="xref">Appendix E.3.1</a> and <a href="#map-to-edwards25519" class="xref">Appendix E.3.2</a>.<a href="#section-8.5-6" class="pilcrow">¶</a></p>
+<p id="section-8.5-6">curve25519_XMD:SHA-512_ELL2_NU_ is identical to curve25519_XMD:SHA-512_ELL2_RO_,
+except that the encoding type is encode_to_curve (<a href="#roadmap" class="xref">Section 3</a>).<a href="#section-8.5-6" class="pilcrow">¶</a></p>
+<p id="section-8.5-7">edwards25519_XMD:SHA-512_ELL2_NU_ is identical to edwards25519_XMD:SHA-512_ELL2_RO_,
+except that the encoding type is encode_to_curve (<a href="#roadmap" class="xref">Section 3</a>).<a href="#section-8.5-7" class="pilcrow">¶</a></p>
+<p id="section-8.5-8">Optimized example implementations of the above mappings are given in
+<a href="#map-to-curve25519" class="xref">Appendix E.3.1</a> and <a href="#map-to-edwards25519" class="xref">Appendix E.3.2</a>.<a href="#section-8.5-8" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="suites-448">
@@ -3217,8 +3228,12 @@ except for the following parameters:<a href="#section-8.6-4" class="pilcrow">¶<
 <li id="section-8.6-5.4">rational_map: the 4-isogeny map defined in <span>[<a href="#RFC7748" class="xref">RFC7748</a>]</span>, Section 4.2<a href="#section-8.6-5.4" class="pilcrow">¶</a>
 </li>
 </ul>
-<p id="section-8.6-6">Optimized example implementations of the above mappings are given in
-<a href="#map-to-curve448" class="xref">Appendix E.3.3</a> and <a href="#map-to-edwards448" class="xref">Appendix E.3.4</a>.<a href="#section-8.6-6" class="pilcrow">¶</a></p>
+<p id="section-8.6-6">curve448_XMD:SHA-512_ELL2_NU_ is identical to curve448_XMD:SHA-512_ELL2_RO_,
+except that the encoding type is encode_to_curve (<a href="#roadmap" class="xref">Section 3</a>).<a href="#section-8.6-6" class="pilcrow">¶</a></p>
+<p id="section-8.6-7">edwards448_XMD:SHA-512_ELL2_NU_ is identical to edwards448_XMD:SHA-512_ELL2_RO_,
+except that the encoding type is encode_to_curve (<a href="#roadmap" class="xref">Section 3</a>).<a href="#section-8.6-7" class="pilcrow">¶</a></p>
+<p id="section-8.6-8">Optimized example implementations of the above mappings are given in
+<a href="#map-to-curve448" class="xref">Appendix E.3.3</a> and <a href="#map-to-edwards448" class="xref">Appendix E.3.4</a>.<a href="#section-8.6-8" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="suites-secp256k1">
@@ -3226,7 +3241,7 @@ except for the following parameters:<a href="#section-8.6-4" class="pilcrow">¶<
         <h3 id="name-suites-for-secp256k1">
 <a href="#section-8.7" class="section-number selfRef">8.7. </a><a href="#name-suites-for-secp256k1" class="section-name selfRef">Suites for secp256k1</a>
         </h3>
-<p id="section-8.7-1">This section defines one ciphersuite for the secp256k1 elliptic curve <span>[<a href="#SEC2" class="xref">SEC2</a>]</span>.<a href="#section-8.7-1" class="pilcrow">¶</a></p>
+<p id="section-8.7-1">This section defines ciphersuites for the secp256k1 elliptic curve <span>[<a href="#SEC2" class="xref">SEC2</a>]</span>.<a href="#section-8.7-1" class="pilcrow">¶</a></p>
 <p id="section-8.7-2">secp256k1_XMD:SHA-256_SSWU_RO_ is defined as follows:<a href="#section-8.7-2" class="pilcrow">¶</a></p>
 <ul>
 <li id="section-8.7-3.1">encoding type: hash_to_curve (<a href="#roadmap" class="xref">Section 3</a>)<a href="#section-8.7-3.1" class="pilcrow">¶</a>
@@ -3263,8 +3278,10 @@ except for the following parameters:<a href="#section-8.6-4" class="pilcrow">¶<
 <li id="section-8.7-3.13">h_eff: 1<a href="#section-8.7-3.13" class="pilcrow">¶</a>
 </li>
 </ul>
-<p id="section-8.7-4">An optimized example implementation of the Simplified SWU mapping
-to the curve E' isogenous to secp256k1 is given in <a href="#sswu-map-to-3mod4" class="xref">Appendix E.2.1</a>.<a href="#section-8.7-4" class="pilcrow">¶</a></p>
+<p id="section-8.7-4">secp256k1_XMD:SHA-256_SSWU_NU_ is identical to secp256k1_XMD:SHA-256_SSWU_RO_,
+except that the encoding type is encode_to_curve (<a href="#roadmap" class="xref">Section 3</a>).<a href="#section-8.7-4" class="pilcrow">¶</a></p>
+<p id="section-8.7-5">An optimized example implementation of the Simplified SWU mapping
+to the curve E' isogenous to secp256k1 is given in <a href="#sswu-map-to-3mod4" class="xref">Appendix E.2.1</a>.<a href="#section-8.7-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="suites-bls12381">
@@ -3317,10 +3334,12 @@ The curve parameters in this section match the ones listed in
 <li id="section-8.8.1-2.13">h_eff: 0xd201000000010001<a href="#section-8.8.1-2.13" class="pilcrow">¶</a>
 </li>
 </ul>
-<p id="section-8.8.1-3">Note that the h_eff values for these suites are chosen for compatibility
-with the fast cofactor clearing method described by Scott (<span>[<a href="#WB19" class="xref">WB19</a>]</span> Section 5).<a href="#section-8.8.1-3" class="pilcrow">¶</a></p>
-<p id="section-8.8.1-4">An optimized example implementation of the Simplified SWU mapping
-to the curve E' isogenous to BLS12-381 G1 is given in <a href="#sswu-map-to-3mod4" class="xref">Appendix E.2.1</a>.<a href="#section-8.8.1-4" class="pilcrow">¶</a></p>
+<p id="section-8.8.1-3">BLS12381G1_XMD:SHA-256_SSWU_NU_ is identical to BLS12381G1_XMD:SHA-256_SSWU_RO_,
+except that the encoding type is encode_to_curve (<a href="#roadmap" class="xref">Section 3</a>).<a href="#section-8.8.1-3" class="pilcrow">¶</a></p>
+<p id="section-8.8.1-4">Note that the h_eff values for these suites are chosen for compatibility
+with the fast cofactor clearing method described by Scott (<span>[<a href="#WB19" class="xref">WB19</a>]</span> Section 5).<a href="#section-8.8.1-4" class="pilcrow">¶</a></p>
+<p id="section-8.8.1-5">An optimized example implementation of the Simplified SWU mapping
+to the curve E' isogenous to BLS12-381 G1 is given in <a href="#sswu-map-to-3mod4" class="xref">Appendix E.2.1</a>.<a href="#section-8.8.1-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="suites-bls12381-g2">
@@ -3371,11 +3390,13 @@ to the curve E' isogenous to BLS12-381 G1 is given in <a href="#sswu-map-to-3mod
 <li id="section-8.8.2-2.12">h_eff: 0xbc69f08f2ee75b3584c6a0ea91b352888e2a8e9145ad7689986ff031508ffe1329c2f178731db956d82bf015d1212b02ec0ec69d7477c1ae954cbc06689f6a359894c0adebbf6b4e8020005aaa95551<a href="#section-8.8.2-2.12" class="pilcrow">¶</a>
 </li>
 </ul>
-<p id="section-8.8.2-3">Note that the h_eff values for these suites are chosen for compatibility
+<p id="section-8.8.2-3">BLS12381G2_XMD:SHA-256_SSWU_NU_ is identical to BLS12381G2_XMD:SHA-256_SSWU_RO_,
+except that the encoding type is encode_to_curve (<a href="#roadmap" class="xref">Section 3</a>).<a href="#section-8.8.2-3" class="pilcrow">¶</a></p>
+<p id="section-8.8.2-4">Note that the h_eff values for these suites are chosen for compatibility
 with the fast cofactor clearing method described by
-Budroni and Pintore (<span>[<a href="#BP17" class="xref">BP17</a>]</span>, Section 4.1), and summarized in <a href="#clear-cofactor-bls12381-g2" class="xref">Appendix E.4</a>.<a href="#section-8.8.2-3" class="pilcrow">¶</a></p>
-<p id="section-8.8.2-4">An optimized example implementation of the Simplified SWU mapping
-to the curve E' isogenous to BLS12-381 G2 is given in <a href="#sswu-map-to-9mod16" class="xref">Appendix E.2.3</a>.<a href="#section-8.8.2-4" class="pilcrow">¶</a></p>
+Budroni and Pintore (<span>[<a href="#BP17" class="xref">BP17</a>]</span>, Section 4.1), and summarized in <a href="#clear-cofactor-bls12381-g2" class="xref">Appendix E.4</a>.<a href="#section-8.8.2-4" class="pilcrow">¶</a></p>
+<p id="section-8.8.2-5">An optimized example implementation of the Simplified SWU mapping
+to the curve E' isogenous to BLS12-381 G2 is given in <a href="#sswu-map-to-9mod16" class="xref">Appendix E.2.3</a>.<a href="#section-8.8.2-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
