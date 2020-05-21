@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2020-05-20T23:17:17.286707+00:00",
+  "timestamp": "2020-05-21T12:53:45.926905+00:00",
   "repo": "cfrg/draft-irtf-cfrg-hash-to-curve",
   "labels": [
     {
@@ -4640,7 +4640,7 @@
       "labels": [],
       "body": "The definition of CMOV in the draft is:\r\n\r\nhttps://tools.ietf.org/html/draft-irtf-cfrg-hash-to-curve-05#section-4\r\n\r\n> CMOV(a, b, c): If c is False, CMOV returns a, otherwise it returns\r\n      b.  To prevent against timing attacks, this operation must run in\r\n      constant time, without revealing the value of c.  Commonly,\r\n      implementations assume that the selector c is 1 for True or 0 for\r\n      False.  In this case, given a bit string C, the desired selector c\r\n      can be computed by OR-ing all bits of C together.  The resulting\r\n      selector will be either 0 if all bits of C are zero, or 1 if at\r\n      least one bit of C is 1.\r\n\r\nThe definition in the VRF spec is:\r\n\r\nhttps://tools.ietf.org/html/draft-irtf-cfrg-vrf-06#section-5.4.1.2 (at the bottom of ECVRF_hash_to_curve_elligator2_25519)\r\n\r\n> Alternatively, let CMOV(result_if_1, result_if_0, selector) be the\r\n   function that returns result_if_1 when selector is 1 and result_if_0\r\n   when selector is 0.\r\n>\r\n> [...]\r\n>\r\n> CMOV can\r\n   be implemented in constant time a variety of ways; for example, by\r\n   expanding b from a single bit to an all-0 or all-1 string\r\n   (accomplished by negating b in standard two's-complement arithmetic)\r\n   and then applying bitwise XOR and AND operations as follows: other_x\r\n   XOR ((x XOR other_x) AND b)\r\n\r\n=> The definitions are opposite in both specs\r\n\r\nI didn't find a Github repo for the VRF specs but given:\r\n- the overlap in intended audience of both specs (for example Algorand are implementing both hash to curve and VRF)\r\n- that the VRF spec also has a hash_to_curve section \r\nI think it would be best to have the same definition.",
       "createdAt": "2020-02-16T20:52:43Z",
-      "updatedAt": "2020-03-04T09:24:42Z",
+      "updatedAt": "2020-05-21T04:08:01Z",
       "closedAt": null,
       "comments": [
         {
@@ -4677,6 +4677,34 @@
           "body": "I'll try! I need to talk to the VRF folks about this asap. Once we land the outstanding PRs and get our suite names finalized, I can refresh the [VRF PR](https://github.com/fcelda/nsec5-draft/pull/35) and hopefully get it integrated.",
           "createdAt": "2020-03-04T09:24:30Z",
           "updatedAt": "2020-03-04T09:24:42Z"
+        },
+        {
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@kwantam, what's the word here? Do we still need this issue?",
+          "createdAt": "2020-05-20T23:21:49Z",
+          "updatedAt": "2020-05-20T23:21:56Z"
+        },
+        {
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "body": "No, I think this will be taken care of once we come to an understanding with the VRF folks. But let's leave it for now to make sure it doesn't fall through the cracks.",
+          "createdAt": "2020-05-21T02:06:51Z",
+          "updatedAt": "2020-05-21T02:06:51Z"
+        },
+        {
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "body": "What do we need to come to an understanding with the VRF folks? Would it help to get everyone together on a call to discuss?",
+          "createdAt": "2020-05-21T03:39:55Z",
+          "updatedAt": "2020-05-21T03:39:55Z"
+        },
+        {
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I've been communicating with Leo actively in the last few days. For now, I think no call is necessary.",
+          "createdAt": "2020-05-21T04:08:01Z",
+          "updatedAt": "2020-05-21T04:08:01Z"
         }
       ]
     },
@@ -5278,7 +5306,7 @@
       "labels": [],
       "body": "Congrats for the amazing work that has been and keeps being made on this document!\r\n\r\nJust a general observation: do so many suites have to be defined?\r\n\r\n`edwards25519_XMD:SHA-256_ELL2_RO_` is identical to `edwards25519_XMD:SHA_512_ELL2_RO_`, except that `H` is SHA-256 instead of SHA-512. Are both really needed?\r\n\r\nFor the same curve, should a new protocol opt for the suite using SVDW or its counterpart using Simplified SWU? It might be useful for the document to make a recommendation.\r\n\r\nIn order to facilitate interoperability, increase code reuse and provide guidance to protocol designers, would it make sense to slightly reduce the list, or make one recommendation per curve?\r\n\r\nPlease apologize if this has been discussed before. ",
       "createdAt": "2020-03-30T21:30:08Z",
-      "updatedAt": "2020-05-20T18:08:39Z",
+      "updatedAt": "2020-05-21T12:52:58Z",
       "closedAt": null,
       "comments": [
         {
@@ -5378,6 +5406,48 @@
           "body": "> Ah, one other question: why SVDW for secp256k1? Is it so that we can remove the isogeny map in the appendix?\r\n\r\nYes, I think SSWU fits better for this curve if performance is a must. So I just update the list.\r\n",
           "createdAt": "2020-05-20T18:08:24Z",
           "updatedAt": "2020-05-20T18:08:24Z"
+        },
+        {
+          "author": "reyzin",
+          "authorAssociation": "NONE",
+          "body": "\r\n> Does the VRF document _need_ the NU variant? If not, I'd suggest they use the RO variant instead.\r\n\r\n> I think they're concerned about computational cost, and they don't need the RO for the security proof.\r\n> \r\n> @reyzin may be able to chime in here (or I can ping him offline)\r\n\r\nRight, exactly. If I am not mistaken, the RO variants are twice as expensive as corresponding NU variants. In most applications I can think of (VRF included), NU is sufficient.\r\n\r\n",
+          "createdAt": "2020-05-21T03:09:29Z",
+          "updatedAt": "2020-05-21T03:09:29Z"
+        },
+        {
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@reyzin the question here is not necessarily whether it's sufficient, but whether it's necessary. Is that the case for applications you're aware of? \r\n\r\nIf they're necessary, would you object to the VRF draft registering the NU ciphersuites? That would move them to the application where they're needed, without burdening the main hash-to-curve draft. (@kwantam, what do you think?)",
+          "createdAt": "2020-05-21T03:23:24Z",
+          "updatedAt": "2020-05-21T03:23:24Z"
+        },
+        {
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "body": "My general feeling is that if we have users for particular ciphersuites now, we define those ciphersuites in the document. As @davidben says, the difference code-wise between the two is very, very small.\r\n\r\n(And we can add further encouragement to pick RO if we're concerned that people will get this wrong.)",
+          "createdAt": "2020-05-21T03:28:19Z",
+          "updatedAt": "2020-05-21T03:28:19Z"
+        },
+        {
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "body": "That\u2019s true, but why burden the document for one use case while risking future applications making the wrong choice? I\u2019m not sure any amount of text will be sufficient in deterring mistakes. \r\n\r\nIt seems better to have the default focus of this document be on RO encodings. Any application that can afford to relax this property can then define NU variants as needed. In this case, the VRF document would define a NU variant. This reduces risk of using the wrong variant when looking at only this document, satisfies the VRF use case, and exercises the effort we put into the registry. That seems like a win all around. What are the downsides?",
+          "createdAt": "2020-05-21T03:38:59Z",
+          "updatedAt": "2020-05-21T03:38:59Z"
+        },
+        {
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "body": "First, I fully admit that downsides depend on perspective! :smile:\r\n\r\nBut in my mind the document exists to serve upper-level protocols, and from that point of view it's sad to require the VRF folks to specify their own suites (and probably also their own hash-to-curve test vectors) when this is a known use-case and we have the machinery and text already in place to do it for them.\r\n\r\nMoreover, as @reyzin's comment indicates, I expect that the document *will* have plenty of \"client\" protocols in the future that prefer to use nonuniform hashing. In other words, I don't think it's likely to be just one use-case in the long run. If that's true, and if we leave out NU, those documents will likewise need to define their own suites, which may well end up causing unnecessary fragmentation.\r\n\r\nI'd be totally happy to have, in *every* suite subsection, a note saying something like\r\n\r\n> foo_RO_ is the RECOMMENDED suite for curve X. foo_NU_ MUST NOT be used in protocols whose security relies on a random oracle. Protocols using foo_NU_ SHOULD carefully analyze the security implications of using a nonuniform encoding.",
+          "createdAt": "2020-05-21T04:36:36Z",
+          "updatedAt": "2020-05-21T04:38:45Z"
+        },
+        {
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I think we're both trying to predict the future with slightly different objectives. I'm not convinced scary advisory text is sufficient, though I'm not willing to lie down in the road over it either!\r\n\r\nSo, in the interest of moving forward, I'll add back one NU suite (in #254) for each curve, with the scary warning text, and then we can close out this issue. Sound good?\r\n\r\nEdit: #254 is now updated!",
+          "createdAt": "2020-05-21T12:40:29Z",
+          "updatedAt": "2020-05-21T12:52:58Z"
         }
       ]
     },
@@ -26011,6 +26081,32 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 254,
+      "id": "MDExOlB1bGxSZXF1ZXN0NDIxMDY3Mjky",
+      "title": "Remove unnecessary ciphersuite variety",
+      "url": "https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/pull/254",
+      "state": "OPEN",
+      "author": "chris-wood",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Closes #235. \r\n\r\ncc @davidben, @jedisct1, @reyzin",
+      "createdAt": "2020-05-20T23:20:13Z",
+      "updatedAt": "2020-05-21T12:52:47Z",
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "146f1626292cc6571e705be9b87b2f5a97a54bec",
+      "headRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "caw/remove-suites",
+      "headRefOid": "db467220b59f8d60cfdee1a13799d4f86ce8cfe5",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
