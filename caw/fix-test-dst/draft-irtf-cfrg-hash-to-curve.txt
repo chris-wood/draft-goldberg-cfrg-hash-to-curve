@@ -195,29 +195,29 @@ Internet-Draft                hash-to-curve                     May 2020
        H.3.2.  P521_XMD:SHA-512_SSWU_NU_ . . . . . . . . . . . . . . 108
        H.3.3.  P521_XMD:SHA-512_SVDW_RO_ . . . . . . . . . . . . . . 110
        H.3.4.  P521_XMD:SHA-512_SVDW_NU_ . . . . . . . . . . . . . . 112
-     H.4.  secp256k1 . . . . . . . . . . . . . . . . . . . . . . . . 114
-       H.4.1.  secp256k1_XMD:SHA-256_SSWU_RO_  . . . . . . . . . . . 114
-       H.4.2.  secp256k1_XMD:SHA-256_SSWU_NU_  . . . . . . . . . . . 116
-       H.4.3.  secp256k1_XMD:SHA-256_SVDW_RO_  . . . . . . . . . . . 117
-       H.4.4.  secp256k1_XMD:SHA-256_SVDW_NU_  . . . . . . . . . . . 119
+     H.4.  curve25519  . . . . . . . . . . . . . . . . . . . . . . . 114
+       H.4.1.  curve25519_XMD:SHA-256_ELL2_RO_ . . . . . . . . . . . 114
+       H.4.2.  curve25519_XMD:SHA-256_ELL2_NU_ . . . . . . . . . . . 116
+       H.4.3.  curve25519_XMD:SHA-512_ELL2_RO_ . . . . . . . . . . . 117
+       H.4.4.  curve25519_XMD:SHA-512_ELL2_NU_ . . . . . . . . . . . 119
      H.5.  edwards25519  . . . . . . . . . . . . . . . . . . . . . . 120
        H.5.1.  edwards25519_XMD:SHA-256_ELL2_RO_ . . . . . . . . . . 120
-       H.5.2.  edwards25519_XMD:SHA-512_ELL2_RO_ . . . . . . . . . . 122
-       H.5.3.  edwards25519_XMD:SHA-256_ELL2_NU_ . . . . . . . . . . 124
+       H.5.2.  edwards25519_XMD:SHA-256_ELL2_NU_ . . . . . . . . . . 122
+       H.5.3.  edwards25519_XMD:SHA-512_ELL2_RO_ . . . . . . . . . . 123
        H.5.4.  edwards25519_XMD:SHA-512_ELL2_NU_ . . . . . . . . . . 125
-     H.6.  edwards448  . . . . . . . . . . . . . . . . . . . . . . . 126
-       H.6.1.  edwards448_XMD:SHA-512_ELL2_RO_ . . . . . . . . . . . 126
-       H.6.2.  edwards448_XMD:SHA-512_ELL2_NU_ . . . . . . . . . . . 129
-     H.7.  curve25519  . . . . . . . . . . . . . . . . . . . . . . . 131
-       H.7.1.  curve25519_XMD:SHA-256_ELL2_RO_ . . . . . . . . . . . 131
-       H.7.2.  curve25519_XMD:SHA-512_ELL2_RO_ . . . . . . . . . . . 132
-       H.7.3.  curve25519_XMD:SHA-256_ELL2_NU_ . . . . . . . . . . . 134
-       H.7.4.  curve25519_XMD:SHA-512_ELL2_NU_ . . . . . . . . . . . 136
-     H.8.  curve448  . . . . . . . . . . . . . . . . . . . . . . . . 137
-       H.8.1.  curve448_XMD:SHA-512_ELL2_RO_ . . . . . . . . . . . . 137
-       H.8.2.  curve448_XMD:SHA-512_ELL2_NU_ . . . . . . . . . . . . 139
+     H.6.  curve448  . . . . . . . . . . . . . . . . . . . . . . . . 126
+       H.6.1.  curve448_XMD:SHA-512_ELL2_RO_ . . . . . . . . . . . . 126
+       H.6.2.  curve448_XMD:SHA-512_ELL2_NU_ . . . . . . . . . . . . 129
+     H.7.  edwards448  . . . . . . . . . . . . . . . . . . . . . . . 131
+       H.7.1.  edwards448_XMD:SHA-512_ELL2_RO_ . . . . . . . . . . . 131
+       H.7.2.  edwards448_XMD:SHA-512_ELL2_NU_ . . . . . . . . . . . 133
+     H.8.  secp256k1 . . . . . . . . . . . . . . . . . . . . . . . . 135
+       H.8.1.  secp256k1_XMD:SHA-256_SSWU_RO_  . . . . . . . . . . . 135
+       H.8.2.  secp256k1_XMD:SHA-256_SSWU_NU_  . . . . . . . . . . . 137
+       H.8.3.  secp256k1_XMD:SHA-256_SVDW_RO_  . . . . . . . . . . . 138
+       H.8.4.  secp256k1_XMD:SHA-256_SVDW_NU_  . . . . . . . . . . . 140
      H.9.  BLS12-381 G1  . . . . . . . . . . . . . . . . . . . . . . 141
-       H.9.1.  BLS12381G1_XMD:SHA-256_SVDW_RO_ . . . . . . . . . . . 141
+       H.9.1.  BLS12381G1_XMD:SHA-256_SSWU_RO_ . . . . . . . . . . . 141
 
 
 
@@ -226,14 +226,14 @@ Faz-Hernandez, et al.   Expires 23 November 2020                [Page 4]
 Internet-Draft                hash-to-curve                     May 2020
 
 
-       H.9.2.  BLS12381G1_XMD:SHA-256_SSWU_RO_ . . . . . . . . . . . 143
-       H.9.3.  BLS12381G1_XMD:SHA-256_SVDW_NU_ . . . . . . . . . . . 145
-       H.9.4.  BLS12381G1_XMD:SHA-256_SSWU_NU_ . . . . . . . . . . . 146
+       H.9.2.  BLS12381G1_XMD:SHA-256_SSWU_NU_ . . . . . . . . . . . 143
+       H.9.3.  BLS12381G1_XMD:SHA-256_SVDW_RO_ . . . . . . . . . . . 144
+       H.9.4.  BLS12381G1_XMD:SHA-256_SVDW_NU_ . . . . . . . . . . . 146
      H.10. BLS12-381 G2  . . . . . . . . . . . . . . . . . . . . . . 147
-       H.10.1.  BLS12381G2_XMD:SHA-256_SVDW_RO_  . . . . . . . . . . 147
-       H.10.2.  BLS12381G2_XMD:SHA-256_SSWU_RO_  . . . . . . . . . . 150
-       H.10.3.  BLS12381G2_XMD:SHA-256_SVDW_NU_  . . . . . . . . . . 154
-       H.10.4.  BLS12381G2_XMD:SHA-256_SSWU_NU_  . . . . . . . . . . 156
+       H.10.1.  BLS12381G2_XMD:SHA-256_SSWU_RO_  . . . . . . . . . . 147
+       H.10.2.  BLS12381G2_XMD:SHA-256_SSWU_NU_  . . . . . . . . . . 150
+       H.10.3.  BLS12381G2_XMD:SHA-256_SVDW_RO_  . . . . . . . . . . 153
+       H.10.4.  BLS12381G2_XMD:SHA-256_SVDW_NU_  . . . . . . . . . . 156
    Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . . 158
 
 1.  Introduction
@@ -2858,11 +2858,11 @@ Faz-Hernandez, et al.   Expires 23 November 2020               [Page 51]
 Internet-Draft                hash-to-curve                     May 2020
 
 
-   [FFSTV13]  Farashahi, R.R., Fouque, P.A., Shparlinski, I.E., Tibouch,
-              M., and J.F. Voloch, "Indifferentiable deterministic
-              hashing to elliptic and hyperelliptic curves",
-              DOI 10.1090/S0025-5718-2012-02606-8, pages 491-512,
-              In Math. Comp. vol 82, 2013,
+   [FFSTV13]  Farashahi, R.R., Fouque, P.A., Shparlinski, I.E.,
+              Tibouchi, M., and J.F. Voloch, "Indifferentiable
+              deterministic hashing to elliptic and hyperelliptic
+              curves", DOI 10.1090/S0025-5718-2012-02606-8,
+              pages 491-512, In Math. Comp. vol 82, 2013,
               <https://doi.org/10.1090/S0025-5718-2012-02606-8>.
 
    [FIPS180-4]
@@ -6354,30 +6354,30 @@ Internet-Draft                hash-to-curve                     May 2020
              bd9f5323b8ff413f4d9a94dc4284584496011f2da0fcef6cb773c5
              972d0caf17faf076e9eead9c
 
-H.4.  secp256k1
+H.4.  curve25519
 
-H.4.1.  secp256k1_XMD:SHA-256_SSWU_RO_
+H.4.1.  curve25519_XMD:SHA-256_ELL2_RO_
 
-   suite   = secp256k1_XMD:SHA-256_SSWU_RO_
-   dst     = QUUX-V01-CS02-with-secp256k1_XMD:SHA-256_SSWU_RO_
+   suite   = curve25519_XMD:SHA-256_ELL2_RO_
+   dst     = QUUX-V01-CS02-with-curve25519_XMD:SHA-256_ELL2_RO_
 
    msg     =
-   P.x     = c1cae290e291aee617ebaef1be6d73861479c48b841eaba9b7b585
-             2ddfeb1346
-   P.y     = 64fa678e07ae116126f08b022a94af6de15985c996c3a91b64c406
-             a960e51067
-   u[0]    = 6b0f9910dd2ba71c78f2ee9f04d73b5f4c5f7fc773a701abea1e57
-             3cab002fb3
-   u[1]    = 1ae6c212e08fe1a5937f6202f929a2cc8ef4ee5b9782db68b0d579
-             9fd8f09e16
-   Q0.x    = 74519ef88b32b425a095e4ebcc84d81b64e9e2c2675340a720bb1a
-             1857b99f1e
-   Q0.y    = c174fa322ab7c192e11748beed45b508e9fdb1ce046dee9c2cd3a2
-             a86b410936
-   Q1.x    = 44548adb1b399263ded3510554d28b4bead34b8cf9a37b4bd0bd2b
-             a4db87ae63
-   Q1.y    = 96eb8e2faf05e368efe5957c6167001760233e6dd2487516b46ae7
-             25c4cce0c6
+   P.x     = 4862b8982319ecce44c1b6ccf7ba9c205d137764dc98a8bc515ddf
+             05c0fddb82
+   P.y     = 3cee08cfd22a80a995c3cb6c4ebb9013f1b3d9ab510af661aef334
+             92e62c2eba
+   u[0]    = 7a4e3b740e8dc911b8029ce6a65d6bc00bf03d8d92866a6ae99902
+             6439451ea5
+   u[1]    = 5b7b0f765beb8b9051ce5ca68232c305fb1eb79426c43cb93efce2
+             f8a985065b
+   Q0.x    = 50243f13d19b38590084e7a58e063a4cfc63123b57c868fb69aa29
+             f90085f2f8
+   Q0.y    = 09920ffda8c180a2bcd999d411e032f799ab9e08ba312d5a236d13
+             0f7ce824e2
+   Q1.x    = 41baf7c5cded32252f9051d537ea0cb8cb1a89fe61b7a7fc81228c
+             793984075e
+   Q1.y    = 177ab481ae51c765ff5e5547760dd51f04b27107e3a0eb788d73fa
+             ba5d9a7dd3
 
 
 
@@ -6387,40 +6387,40 @@ Internet-Draft                hash-to-curve                     May 2020
 
 
    msg     = abc
-   P.x     = 3377e01eab42db296b512293120c6cee72b6ecf9f9205760bd9ff1
-             1fb3cb2c4b
-   P.y     = 7f95890f33efebd1044d382a01b1bee0900fb6116f94688d487c6c
-             7b9c8371f6
-   u[0]    = 128aab5d3679a1f7601e3bdf94ced1f43e491f544767e18a4873f3
-             97b08a2b61
-   u[1]    = 5897b65da3b595a813d0fdcc75c895dc531be76a03518b044daaa0
-             f2e4689e00
-   Q0.x    = 07dd9432d426845fb19857d1b3a91722436604ccbbbadad8523b8f
-             c38a5322d7
-   Q0.y    = 604588ef5138cffe3277bbd590b8550bcbe0e523bbaf1bed4014a4
-             67122eb33f
-   Q1.x    = e9ef9794d15d4e77dde751e06c182782046b8dac05f8491eb88764
-             fc65321f78
-   Q1.y    = cb07ce53670d5314bf236ee2c871455c562dd76314aa41f012919f
-             e8e7f717b3
+   P.x     = 1c44a862cd8ce1c2f5e9ef28f96fa22f1cc6d4bb3dee19e76c20e1
+             b7e427e4de
+   P.y     = 0a2ca953d666a5aedfae4198f5c6fa7dd4c7b7b920aac855802832
+             93c8a5481a
+   u[0]    = 1c72fdce7455952e317d9c99be2d41e0bd5ea9fdef44b3890a6f00
+             e6df68dc08
+   u[1]    = 666ec661edfbc1e979a1b52c821e491069e7b6bf3e3071b2793669
+             adb0d51d48
+   Q0.x    = 0cc50715428377fc3e246f18180a6dad804e76382ca30b228ade26
+             ed417ce863
+   Q0.y    = 28247138ef21d16dc8b24196b30943292ef31738ff32317c6f5920
+             227c9aa331
+   Q1.x    = 7d15f5242faac9dc9b24d5a92ee7059a193c75863c56cc28309a57
+             5b1f113240
+   Q1.y    = 3b7c8d357c423a840173e263f592d1fd61f1756414655388fee002
+             9e8a3df94b
 
    msg     = abcdef0123456789
-   P.x     = bac54083f293f1fe08e4a70137260aa90783a5cb84d3f35848b324
-             d0674b0e3a
-   P.y     = 4436476085d4c3c4508b60fcf4389c40176adce756b398bdee27bc
-             a19758d828
-   u[0]    = ea67a7c02f2cd5d8b87715c169d055a22520f74daeb080e6180958
-             380e2f98b9
-   u[1]    = 7434d0d1a500d38380d1f9615c021857ac8d546925f5f2355319d8
-             23a478da18
-   Q0.x    = 576d43ab0260275adf11af990d130a5752704f7947862876172080
-             8862544b5d
-   Q0.y    = 643c4a7fb68ae6cff55edd66b809087434bbaff0c07f3f9ec4d49b
-             b3c16623c3
-   Q1.x    = f89d6d261a5e00fe5cf45e827b507643e67c2a947a20fd9ad71039
-             f8b0e29ff8
-   Q1.y    = b33855e0cc34a9176ead91c6c3acb1aacb1ce936d563bc1cee1dcf
-             fc806caf57
+   P.x     = 18b0cebd7c0c183faa6ef80de99c4e1f5a53fb012164d4fd20a28a
+             1ba1cd15ee
+   P.y     = 764bdd170a631f9b17bb4bc01434f10920f4cb5e5ab49f54f7e5ce
+             220368324f
+   u[0]    = 6403431b8b370088637a608849b184b257c0394dbd94416a765335
+             1be9a769d7
+   u[1]    = 48a581f02df76a8b30d72b295e08aaf1a8b5c2a1774599d3ae069e
+             ceaf5363b3
+   Q0.x    = 2e5e5f9f180d3f934de4f6e9665afb13f63af94822818fb7f6a6d4
+             2eb630f558
+   Q0.y    = 44741c5756f2c4e9735c23dc17771d871636f849e097b0a73492bf
+             df1882dbd7
+   Q1.x    = 40022c69f6df7e3fca358b3ca2188a1aceb6c87fd54104d61dc563
+             ff7506f9aa
+   Q1.y    = 3e77a3381adbc93504f2a3e38749e47ab9db5068237be7b4b5b1b7
+             5f368f779f
 
    msg     = a512_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -6432,8 +6432,8 @@ Internet-Draft                hash-to-curve                     May 2020
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-   P.x     = e3c8d35aaaf0b9b647e88a0a0a7ee5d5bed5ad38238152e4e6fd8c
-             1f8cb7c998
+   P.x     = 242e08f391333017bd0e073ff98a035ce12d06958d665bdc747f26
+             aa4c068797
 
 
 
@@ -6442,54 +6442,54 @@ Faz-Hernandez, et al.   Expires 23 November 2020              [Page 115]
 Internet-Draft                hash-to-curve                     May 2020
 
 
-   P.y     = 8446eeb6181bf12f56a9d24e262221cc2f0c4725c7e3803024b588
-             8ee5823aa6
-   u[0]    = 8d862e7e7e23d7843fe16d811d46d7e6480127a6b78838c277bca1
-             7df6900e9f
-   u[1]    = 68071d2530f040f081ba818d3c7188a94c900586761e9115efa47a
-             e9bd847938
-   Q0.x    = b32b0ab55977b936f1e93fdc68cec775e13245e161dbfe556bbb1f
-             72799b4181
-   Q0.y    = 2f5317098360b722f132d7156a94822641b615c91f8663be691698
-             70a12af9e8
-   Q1.x    = 148f98780f19388b9fa93e7dc567b5a673e5fca7079cd9cdafd719
-             82ec4c5e12
-   Q1.y    = 3989645d83a433bc0c001f3dac29af861f33a6fd1e04f4b36873f5
-             bff497298a
+   P.y     = 58c35ae3481ef62470e1ff7a74636b5217299120d7b9d64b0975f1
+             534e214fd4
+   u[0]    = 5cb58f59fc0408aedd631a35127867c5f57c08dd16ed2f41d2c53a
+             5d171c1f5f
+   u[1]    = 75256ab69d1682b3684aee79407187eadba42c2535951a5a9d0439
+             119a09e220
+   Q0.x    = 3d2ddec936382349e044cb1bbd4ea77c5897be086cf0257a6e098b
+             4c86593830
+   Q0.y    = 24f41fa861e1d5d50738d1feecfd97a09b25ff10a0ffd76ee5a4be
+             9ceef20c03
+   Q1.x    = 61d6d7ecdf8adaa92aa234caf888d28b143d0df7a935a858a9b025
+             38c83fcfa8
+   Q1.y    = 66219626f0e6b2eb140a457602b8464795203b2f0958dd341a5b67
+             671f3c6446
 
-H.4.2.  secp256k1_XMD:SHA-256_SSWU_NU_
+H.4.2.  curve25519_XMD:SHA-256_ELL2_NU_
 
-   suite   = secp256k1_XMD:SHA-256_SSWU_NU_
-   dst     = QUUX-V01-CS02-with-secp256k1_XMD:SHA-256_SSWU_NU_
+   suite   = curve25519_XMD:SHA-256_ELL2_NU_
+   dst     = QUUX-V01-CS02-with-curve25519_XMD:SHA-256_ELL2_NU_
 
    msg     =
-   P.x     = a4792346075feae77ac3b30026f99c1441b4ecf666ded19b7522cf
-             65c4c55c5b
-   P.y     = 62c59e2a6aeed1b23be5883e833912b08ba06be7f57c0e9cdc663f
-             31639ff3a7
-   u[0]    = 0137fcd23bc3da962e8808f97474d097a6c8aa2881fceef4514173
-             635872cf3b
-   Q.x     = a4792346075feae77ac3b30026f99c1441b4ecf666ded19b7522cf
-             65c4c55c5b
-   Q.y     = 62c59e2a6aeed1b23be5883e833912b08ba06be7f57c0e9cdc663f
-             31639ff3a7
+   P.x     = 29bdf5d29093fa455527f71e127051a2e041a49280491a76a1388a
+             d076f6095d
+   P.y     = 3de8f04872088447568cad67c91dbeec50f5598fc877bf37cad9ab
+             468bce0323
+   u[0]    = 4891f78130dadef68a54bdd970a27d8ee6ee71c757466de3c62567
+             9be2b6b503
+   Q.x     = 108610cd44e0269b3850000447c055b05a64846111a30c94ba6339
+             8771934ceb
+   Q.y     = 6acae1b616d835282f2c717e4439d6074f6cc000177c25e18ac8d8
+             60a3dd63b2
 
    msg     = abc
-   P.x     = 3f3b5842033fff837d504bb4ce2a372bfeadbdbd84a1d2b678b6e1
-             d7ee426b9d
-   P.y     = 902910d1fef15d8ae2006fc84f2a5a7bda0e0407dc913062c3a493
-             c4f5d876a5
-   u[0]    = e03f894b4d7caf1a50d6aa45cac27412c8867a25489e32c5ddeb50
-             3229f63a2e
-   Q.x     = 3f3b5842033fff837d504bb4ce2a372bfeadbdbd84a1d2b678b6e1
-             d7ee426b9d
-   Q.y     = 902910d1fef15d8ae2006fc84f2a5a7bda0e0407dc913062c3a493
-             c4f5d876a5
+   P.x     = 3358356987959ca72432c8662f46590267fd5ac352fbedcd3d6279
+             499fedc0dc
+   P.y     = 1a8a98a200593bc8f3355fc8e60e2cf09c5b288eb7232bea227886
+             b39ed54d1d
+   u[0]    = 21d66e516ae54fae0a51c3bb70446ec38c5f19eb506ae8686e6748
+             72d950d2c2
+   Q.x     = 2b123502330b33d1a880146c1e84ec5ff95679bea200d6d5cf4042
+             99af42def8
+   Q.y     = 44920d10af5b5a20b113572479cdd02253b70eff8f612afa782c55
+             278d997213
 
    msg     = abcdef0123456789
-   P.x     = 07644fa6281c694709f53bdd21bed94dab995671e4a8cd1904ec4a
-             a50c59bfdf
-   P.y     = c79f8d1dad79b6540426922f7fbc9579c3018dafeffcd4552b1626
+   P.x     = 43c767fc98423fa43546890d80e5da0e214928d3d4a596661bb61d
+             82a67b998d
+   P.y     = 62da60fc3d86471d6b181bb66948f3eb24fedfc0dea953caf305be
 
 
 
@@ -6498,13 +6498,13 @@ Faz-Hernandez, et al.   Expires 23 November 2020              [Page 116]
 Internet-Draft                hash-to-curve                     May 2020
 
 
-             b506c21e7b
-   u[0]    = e7a6525ae7069ff43498f7f508b41c57f80563c1fe4283510b3224
-             46f32af41b
-   Q.x     = 07644fa6281c694709f53bdd21bed94dab995671e4a8cd1904ec4a
-             a50c59bfdf
-   Q.y     = c79f8d1dad79b6540426922f7fbc9579c3018dafeffcd4552b1626
-             b506c21e7b
+             07e829a6f1
+   u[0]    = 48b37143c123d622f5ecab78883f76c853fb679d084454efae891a
+             e1f3f34979
+   Q.x     = 5bb746418e69e835ec6cc74d6b498ee04dd598b5b9ca805b73bb33
+             0ae3a72151
+   Q.y     = 4b0969181ba9cb050e16367b6469d31cc017e68ed38f0ffdc3312f
+             067fe897ca
 
    msg     = a512_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -6516,36 +6516,36 @@ Internet-Draft                hash-to-curve                     May 2020
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-   P.x     = 17d22b867658977b5002dbe8d0ee70a8cfddec3eec50fb93f36136
-             070fd9fa6c
-   P.y     = e9178ff02f4dab73480f8dd590328aea99856a7b6cc8e5a6cdf289
-             ecc2a51718
-   u[0]    = a9ffbeee1d6e41ac33c248fb3364612ff591b502386c1bf6ac4aaf
-             1ea51f8c3b
-   Q.x     = 17d22b867658977b5002dbe8d0ee70a8cfddec3eec50fb93f36136
-             070fd9fa6c
-   Q.y     = e9178ff02f4dab73480f8dd590328aea99856a7b6cc8e5a6cdf289
-             ecc2a51718
+   P.x     = 5fdb7e86a2e7dc2b58d68916a88060261612ce60792116be083962
+             dd938cd396
+   P.y     = 3cb7911525bda90a355e0346f81a00cc765e39cfc32651a6eb4777
+             744d71c677
+   u[0]    = 4408df5a3aaaab5aea075c0713feda3675c2c4cd6b6b09672aab2f
+             0749553d08
+   Q.x     = 2c8722b119aa6da7b32fcd4737ecb649a117b5262460e1aa2f0ebf
+             a56f4cc5a2
+   Q.y     = 5e93469aa8cab6e6b557b27d55ddae13c68c7dca950fba33c79022
+             2cb6c99eca
 
-H.4.3.  secp256k1_XMD:SHA-256_SVDW_RO_
+H.4.3.  curve25519_XMD:SHA-512_ELL2_RO_
 
-   suite   = secp256k1_XMD:SHA-256_SVDW_RO_
-   dst     = QUUX-V01-CS02-with-secp256k1_XMD:SHA-256_SVDW_RO_
+   suite   = curve25519_XMD:SHA-512_ELL2_RO_
+   dst     = QUUX-V01-CS02-with-curve25519_XMD:SHA-512_ELL2_RO_
 
    msg     =
-   P.x     = 681cdcff1040e531295769e1385a001d786082e3df5d4c665eb6c4
-             348a862f72
-   P.y     = b81e84dfe09c09f7196809e33c8ccc965aa544904e881c27b23818
-             f4e7123649
-   u[0]    = ce39f067e4ce73ff4271c958894b2f246f4192e6994793d22d66e5
-             1d36c04c55
-   u[1]    = c50f834ee4c78053e21a4484e697471534b6d30db1b4c91e3745fa
-             d81b7d99d5
-   Q0.x    = e8a15c0ab6731a2859adc3de46528133261ce51aa218b7aa3418cf
-             c4093cd41d
-   Q0.y    = 8f22fbc4d441d40a7e6f5441d5b1e957761558f8656bb0e61e2fbb
-             56e7fc58a9
-   Q1.x    = d5acd2b6c12a9148411654555f74d2fbf0ddf4b8c4db5780905dd0
+   P.x     = 2de3780abb67e861289f5749d16d3e217ffa722192d16bbd9d1bfb
+             9d112b98c0
+   P.y     = 3b5dc2a498941a1033d176567d457845637554a2fe7a3507d21abd
+             1c1bd6e878
+   u[0]    = 005fe8a7b8fef0a16c105e6cadf5a6740b3365e18692a9c05bfbb4
+             d97f645a6a
+   u[1]    = 1347edbec6a2b5d8c02e058819819bee177077c9d10a4ce165aab0
+             fd0252261a
+   Q0.x    = 36b4df0c864c64707cbf6cf36e9ee2c09a6cb93b28313c169be295
+             61bb904f98
+   Q0.y    = 6cd59d664fb58c66c892883cd0eb792e52055284dac3907dd756b4
+             5d15c3983d
+   Q1.x    = 3fa114783a505c0b2b2fbeef0102853c0b494e7757f2a089d0daae
 
 
 
@@ -6554,45 +6554,45 @@ Faz-Hernandez, et al.   Expires 23 November 2020              [Page 117]
 Internet-Draft                hash-to-curve                     May 2020
 
 
-             391a7ca386
-   Q1.y    = bc12d5bb5ba8058f87627c2ae7cf283fb700bcaab64d2d6f164e9c
-             e2a80531c5
+             7ed9a0db2b
+   Q1.y    = 76c0fe7fec932aaafb8eefb42d9cbb32eb931158f469ff3050af15
+             cfdbbeff94
 
    msg     = abc
-   P.x     = b7835e0724df5109be807b20d3c21e74c77dfb03de3ec7ae1183dc
-             dc5fca2319
-   P.y     = 8a18ed2c760d6042e78d40635e834a10dda769de04ec59feaf3dac
-             98f651774f
-   u[0]    = e6595690edfe0443ac43f03bafbe2441d7c9531f8c2a228e2e2ec7
-             fd2707c957
-   u[1]    = 902920cee9a88deac22437f27edd23ea0caddb302583994f2486eb
-             83806b9608
-   Q0.x    = 571ae96af49f82976a1fcd9db9ae1c548646902d69ee8acf05815c
-             96203a7266
-   Q0.y    = 85bbf930ed0e70632efd9b6c11125d966351c11214f0996767a1b7
-             a2b287790b
-   Q1.x    = bf5faa0d179e6447fa580121404aa276c8bc0c74fde7a0e4974d6a
-             c19e482bbd
-   Q1.y    = 46779e7fb4972bd79ba8ed9edc83502f4cd78317e406b210ecc64c
-             2b0e61834a
+   P.x     = 2b4419f1f2d48f5872de692b0aca72cc7b0a60915dd70bde432e82
+             6b6abc526d
+   P.y     = 1b8235f255a268f0a6fa8763e97eb3d22d149343d495da1160eff9
+             703f2d07dd
+   u[0]    = 49bed021c7a3748f09fa8cdfcac044089f7829d3531066ac9e74e0
+             994e05bc7d
+   u[1]    = 5c36525b663e63389d886105cee7ed712325d5a97e60e140aba7e2
+             ce5ae851b6
+   Q0.x    = 16b3d86e056b7970fa00165f6f48d90b619ad618791661b7b5e1ec
+             78be10eac1
+   Q0.y    = 4ab256422d84c5120b278cbdfc4e1facc5baadffeccecf8ee9bf39
+             46106d50ca
+   Q1.x    = 7ec29ddbf34539c40adfa98fcb39ec36368f47f30e8f888cc7e86f
+             4d46e0c264
+   Q1.y    = 10d1abc1cae2d34c06e247f2141ba897657fb39f1080d54f09ce0a
+             f128067c74
 
    msg     = abcdef0123456789
-   P.x     = c288b6ecc8591667cda4c85b5512ec7bc6150200852efa1ddd48ff
-             b849500d0d
-   P.y     = 1c728ccb672f1d81b9603107b9b715b509f6d3d8196081de1ea2e9
-             83a0590321
-   u[0]    = b9c17e7c01c9383fa68acfea580b8a8d9cd6b99509ef9643da56f3
-             f860430cf9
-   u[1]    = 004b6ed134e82a8c87bf5608152850f2c19645291f720ed24d819b
-             a10fece75c
-   Q0.x    = 3d97acba8e03dfd6182154ed74e2b5da35251e905c85dfd97912ed
-             6e7fd48630
-   Q0.y    = ff16232f07dfdef99fe33c049b24247f2f64cfd9ef57f9c5edbe54
-             adfc6a18d7
-   Q1.x    = c24e8340854cddfac64597be3c97becfc77fced643629004b2fcf5
-             4fa88c7cd0
-   Q1.y    = 1a5f0895de0e39a45fa1c34ed310ade02aff6fb24c1a31c37995e7
-             78282d833a
+   P.x     = 68ca1ea5a6acf4e9956daa101709b1eee6c1bb0df1de3b90d46023
+             82a104c036
+   P.y     = 2a375b656207123d10766e68b938b1812a4a6625ff83cb8d5e86f5
+             8a4be08353
+   u[0]    = 6412b7485ba26d3d1b6c290a8e1435b2959f03721874939b21782d
+             f17323d160
+   u[1]    = 24c7b46c1c6d9a21d32f5707be1380ab82db1054fde82865d5c9e3
+             d968f287b2
+   Q0.x    = 71de3dadfe268872326c35ac512164850860567aea0e7325e6b91a
+             98f86533ad
+   Q0.y    = 26a08b6e9a18084c56f2147bf515414b9b63f1522e1b6c5649f7d4
+             b0324296ec
+   Q1.x    = 5704069021f61e41779e2ba6b932268316d6d2a6f064f997a22fef
+             16d1eaeaca
+   Q1.y    = 50483c7540f64fb4497619c050f2c7fe55454ec0f0e79870bb4430
+             2e34232210
 
    msg     = a512_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -6612,51 +6612,51 @@ Internet-Draft                hash-to-curve                     May 2020
 
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-   P.x     = 8193b74bae0faaba0bad9b52120e5b880cef87768286d8b66e7730
-             d63a0dbdde
-   P.y     = 38004a2647072c692198c57503b8734cc08cb3d75088c698f9dfcf
-             8374fdae53
-   u[0]    = 314ac8337582505cc4ddbd6bf9ee428ff1a184b6a86b4bd6c1e618
-             59b3ccfb81
-   u[1]    = b2e042919d6b101e7b532cead4cf2b32450b2cf1efe016876af0bc
-             babfa33946
-   Q0.x    = 610005757272554508886af92c541eb7c2ca9c515d676d12b9b484
-             82cb71189e
-   Q0.y    = 8a9534bfd189a8ea6ef6d161e91f0497a89a63f306815f2296f7d9
-             be9d4cf6fd
-   Q1.x    = 601de6ff81f5cd99d5c6d448c12ff95f425eee9b1a45cf1cbf6197
-             30bc5f618e
-   Q1.y    = 454c504165d4338cea3ce020ed83e0c9a9364a4c03eac9dc66d7dc
-             1c968481fe
+   P.x     = 1bc61845a138e912f047b5e70ba9606ba2a447a4dade024c8ef3dd
+             42b7bbc5fe
+   P.y     = 623d05e47b70e25f7f1d51dda6d7c23c9a18ce015fe3548df596ea
+             9e38c69bf1
+   u[0]    = 20f481e85da7a3bf60ac0fb11ed1d0558fc6f941b3ac5469aa8b56
+             ec883d6d7d
+   u[1]    = 017d57fd257e9a78913999a23b52ca988157a81b09c5442501d07f
+             ed20869465
+   Q0.x    = 02d606e2699b918ee36f2818f2bc5013e437e673c9f9b9cdc15fd0
+             c5ee913970
+   Q0.y    = 29e9dc92297231ef211245db9e31767996c5625dfbf92e1c8107ef
+             887365de1e
+   Q1.x    = 38920e9b988d1ab7449c0fa9a6058192c0c797bb3d42ac34572434
+             1a1aa98745
+   Q1.y    = 24dcc1be7c4d591d307e89049fd2ed30aae8911245a9d8554bf603
+             2e5aa40d3d
 
-H.4.4.  secp256k1_XMD:SHA-256_SVDW_NU_
+H.4.4.  curve25519_XMD:SHA-512_ELL2_NU_
 
-   suite   = secp256k1_XMD:SHA-256_SVDW_NU_
-   dst     = QUUX-V01-CS02-with-secp256k1_XMD:SHA-256_SVDW_NU_
+   suite   = curve25519_XMD:SHA-512_ELL2_NU_
+   dst     = QUUX-V01-CS02-with-curve25519_XMD:SHA-512_ELL2_NU_
 
    msg     =
-   P.x     = 9522be2c6356ac3116299a77d6519c1dd81e0245927ae54ec35777
-             cd76090beb
-   P.y     = 436261fecce2a42ae2900e6065408a527d42ce495f0b8972256844
-             1684c75bc9
-   u[0]    = c83dca043ffd7c53ffcacb10b2d6eb45d9e00ba547960c52cf713a
-             3f002f5b1f
-   Q.x     = 9522be2c6356ac3116299a77d6519c1dd81e0245927ae54ec35777
-             cd76090beb
-   Q.y     = 436261fecce2a42ae2900e6065408a527d42ce495f0b8972256844
-             1684c75bc9
+   P.x     = 1bb913f0c9daefa0b3375378ffa534bda5526c97391952a7789eb9
+             76edfe4d08
+   P.y     = 4548368f4f983243e747b62a600840ae7c1dab5c723991f85d3a97
+             68479f3ec4
+   u[0]    = 608d892b641f0328523802a6603427c26e55e6f27e71a91a478148
+             d45b5093cd
+   Q.x     = 51125222da5e763d97f3c10fcc92ea6860b9ccbbd2eb1285728f56
+             6721c1e65b
+   Q.y     = 343d2204f812d3dfc5304a5808c6c0d81a903a5d228b342442aa3c
+             9ba5520a3d
 
    msg     = abc
-   P.x     = 93b31b3af1ff977c0c44a44c161bdd8399e9bded157ee85f1bc3c9
-             47464febc1
-   P.y     = 9d93fa4ac18b3e8bc4b73aff932a11dfeea42b92bb6a7de16cc973
-             1e5131bdab
-   u[0]    = 4acc3c03893f3754e90e2b95433b1a11c67a5d25db3a23e3abb54d
-             09548d8a61
-   Q.x     = 93b31b3af1ff977c0c44a44c161bdd8399e9bded157ee85f1bc3c9
-             47464febc1
-   Q.y     = 9d93fa4ac18b3e8bc4b73aff932a11dfeea42b92bb6a7de16cc973
-             1e5131bdab
+   P.x     = 7c22950b7d900fa866334262fcaea47a441a578df43b894b4625c9
+             b450f9a026
+   P.y     = 5547bc00e4c09685dcbc6cb6765288b386d8bdcb595fa5a6e3969e
+             08097f0541
+   u[0]    = 46f5b22494bfeaa7f232cc8d054be68561af50230234d7d1d63d1d
+             9abeca8da5
+   Q.x     = 7d56d1e08cb0ccb92baf069c18c49bb5a0dcd927eff8dcf75ca921
+             ef7f3e6eeb
+   Q.y     = 404d9a7dc25c9c05c44ab9a94590e7c3fe2dcec74533a0b24b188a
+             5d5dacf429
 
 
 
@@ -6667,16 +6667,16 @@ Internet-Draft                hash-to-curve                     May 2020
 
 
    msg     = abcdef0123456789
-   P.x     = ca1ae3784ca4b07ddc6b42967c71f484a2df8572a90d658c759c25
-             23776f9280
-   P.y     = f47ab406b1ca24a65220bb5a37cad0d53102504584057cb6df341b
-             9d38bf107f
-   u[0]    = 85f7fc345214e082a16acc739daf7f3b83130d21a3f8dcc484d830
-             74a1b0ef4b
-   Q.x     = ca1ae3784ca4b07ddc6b42967c71f484a2df8572a90d658c759c25
-             23776f9280
-   Q.y     = f47ab406b1ca24a65220bb5a37cad0d53102504584057cb6df341b
-             9d38bf107f
+   P.x     = 31ad08a8b0deeb2a4d8b0206ca25f567ab4e042746f792f4b7973f
+             3ae2096c52
+   P.y     = 405070c28e78b4fa269427c82827261991b9718bd6c6e95d627d70
+             1a53c30db1
+   u[0]    = 235fe40c443766ce7e18111c33862d66c3b33267efa50d50f9e8e5
+             d252a40aaa
+   Q.x     = 3fbe66b9c9883d79e8407150e7c2a1c8680bee496c62fabe4619a7
+             2b3cabe90f
+   Q.y     = 08ec476147c9a0a3ff312d303dbbd076abb7551e5fce82b48ab14b
+             433f8d0a7b
 
    msg     = a512_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -6688,16 +6688,16 @@ Internet-Draft                hash-to-curve                     May 2020
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-   P.x     = 4da63499ee61d5d395e4d3ab137200a2888bfbb70634457e1041cd
-             4ed7089207
-   P.y     = 7904daf4f9bf2b233f68fca4699d139107e5c6c63746853616d656
-             1fce8228d3
-   u[0]    = 4d4ff69e27b4062fde8a0d014db239ad81fce3f076ecd7b0557ad7
-             6bfdaa29bf
-   Q.x     = 4da63499ee61d5d395e4d3ab137200a2888bfbb70634457e1041cd
-             4ed7089207
-   Q.y     = 7904daf4f9bf2b233f68fca4699d139107e5c6c63746853616d656
-             1fce8228d3
+   P.x     = 5fd892c0958d1a75f54c3182a18d286efab784e774d1e017ba2fb2
+             52998b5dc1
+   P.y     = 750af3c66101737423a4519ac792fb93337bd74ee751f19da4cf1e
+             94f4d6d0b8
+   u[0]    = 1a68a1af9f663592291af987203393f707305c7bac9c8d63d6a729
+             bdc553dc19
+   Q.x     = 3bcd651ee54d5f7b6013898aab251ee8ecc0688166fce6e9548d38
+             472f6bd196
+   Q.y     = 1bb36ad9197299f111b4ef21271c41f4b7ecf5543db8bb5931307e
+             bdb2eaa465
 
 H.5.  edwards25519
 
@@ -6803,7 +6803,77 @@ Internet-Draft                hash-to-curve                     May 2020
    Q1.y    = 4c32cc1ae29429c1a09d4e12a87791af0356e3241c03c36b0470c8
              deb24ce5a4
 
-H.5.2.  edwards25519_XMD:SHA-512_ELL2_RO_
+H.5.2.  edwards25519_XMD:SHA-256_ELL2_NU_
+
+   suite   = edwards25519_XMD:SHA-256_ELL2_NU_
+   dst     = QUUX-V01-CS02-with-edwards25519_XMD:SHA-256_ELL2_NU_
+
+   msg     =
+   P.x     = 0fe5d93c5b7e884f21ff6d26d399aaa480b02aa2a448c1698388f2
+             fc2f4a4780
+   P.y     = 0790ea483b3c32db6bf309284b4505a223fc924566aec49c07818e
+             6f47828fae
+   u[0]    = 02a1cfe37eb58fe86a4000791177a5b43aa1886711d4ba24f56976
+             2045700085
+   Q.x     = 25c3d41731b9b929e0df904056444c8d69c425b2c1abb4b36357aa
+             1a344a9734
+   Q.y     = 1ef6f720a96797dcc7118c98daae4189cdc1f8405a39e3c4e15546
+             03410178ac
+
+   msg     = abc
+   P.x     = 7306c55c38f0407ba67123cb0185998ff1807d27541b3d7a98c9c3
+             e143801f38
+   P.y     = 767f521b90cb19a5c9918df81d212a9b50be4500ee246e81f48baf
+             5911bfd5f5
+   u[0]    = 1debc09abffdf870affecb05d1656ba98d41404506b55a08c4bbdb
+
+
+
+Faz-Hernandez, et al.   Expires 23 November 2020              [Page 122]
+
+Internet-Draft                hash-to-curve                     May 2020
+
+
+             42a40969bc
+   Q.x     = 02079693d400c83ab5e0d49e12fecd0cc6bdda4bae5dc61627cff9
+             8e1f88589c
+   Q.y     = 4ebddb42951ec7ff17770a3f1a63f023c0c94df20f9e64ca4686f0
+             7adf3262a7
+
+   msg     = abcdef0123456789
+   P.x     = 4b6bbd347ea59230daaadaad2bec527d0ab54d4e33bf3c041553a5
+             d2e1fcad33
+   P.y     = 7850c843092d554be1f3ac27ba4e3cfe18c510a10ddc32de67657c
+             0a5a806881
+   u[0]    = 3dd81e4eb3c6231942f9140e1dd0d18bc0200b754ef8d3b2f39d1b
+             044edf1c5d
+   Q.x     = 036b0261181df7b7510d9aae789693a6a6c8ecd93288b63117bd25
+             20174f8a99
+   Q.y     = 1b348cf9a9be673f47f6ab1c4db44ad72ab22cd1a91383098ded8e
+             bd4eff5c99
+
+   msg     = a512_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+   P.x     = 60f765a74455643897a2f9d66b054d28f46c57084a7f0baec2401c
+             fb4150b44d
+   P.y     = 76f903b132761d6983ae88558da61086673e3da33356892e154304
+             11e2ad8261
+   u[0]    = 6abcc53ddc54f5e1927b92cbe1aca2ee28b37338e72dbc74736457
+             5986a93c7e
+   Q.x     = 0035341a80d048a93eee132344832f9af6af4cd73ef0c6445afd44
+             8125364430
+   Q.y     = 31af431a1ab3fb618a9f02288d53295ba11745d346a7c194864973
+             0a9e1acffe
+
+H.5.3.  edwards25519_XMD:SHA-512_ELL2_RO_
 
    suite   = edwards25519_XMD:SHA-512_ELL2_RO_
    dst     = QUUX-V01-CS02-with-edwards25519_XMD:SHA-512_ELL2_RO_
@@ -6812,6 +6882,14 @@ H.5.2.  edwards25519_XMD:SHA-512_ELL2_RO_
    P.x     = 3c3da6925a3c3c268448dcabb47ccde5439559d9599646a8260e47
              b1e4822fc6
    P.y     = 09a6c8561a0b22bef63124c588ce4c62ea83a3c899763af26d7953
+
+
+
+Faz-Hernandez, et al.   Expires 23 November 2020              [Page 123]
+
+Internet-Draft                hash-to-curve                     May 2020
+
+
              02e115dc21
    u[0]    = 03fef4813c8cb5f98c6eef88fae174e6e7d5380de2b007799ac7ee
              712d203f3a
@@ -6825,14 +6903,6 @@ H.5.2.  edwards25519_XMD:SHA-512_ELL2_RO_
              3da19c9ed2
    Q1.y    = 7876d81474828d8a5928b50c82420b2bd0898d819e9550c5c82c39
              fc9bafa196
-
-
-
-
-Faz-Hernandez, et al.   Expires 23 November 2020              [Page 122]
-
-Internet-Draft                hash-to-curve                     May 2020
-
 
    msg     = abc
    P.x     = 608040b42285cc0d72cbb3985c6b04c935370c7361f4b7fbdb1ae7
@@ -6868,6 +6938,14 @@ Internet-Draft                hash-to-curve                     May 2020
    Q1.x    = 0757e7e904f5e86d2d2f4acf7e01c63827fde2d363985aa7432106
              f1b3a444ec
    Q1.y    = 50026c96930a24961e9d86aa91ea1465398ff8e42015e2ec1fa397
+
+
+
+Faz-Hernandez, et al.   Expires 23 November 2020              [Page 124]
+
+Internet-Draft                hash-to-curve                     May 2020
+
+
              d416f6a1c0
 
    msg     = a512_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -6882,14 +6960,6 @@ Internet-Draft                hash-to-curve                     May 2020
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
    P.x     = 0efcfde5898a839b00997fbe40d2ebe950bc81181afbd5cd6b9618
              aa336c1e8c
-
-
-
-Faz-Hernandez, et al.   Expires 23 November 2020              [Page 123]
-
-Internet-Draft                hash-to-curve                     May 2020
-
-
    P.y     = 6dc2fc04f266c5c27f236a80b14f92ccd051ef1ff027f26a07f8c0
              f327d8f995
    u[0]    = 6e34e04a5106e9bd59f64aba49601bf09d23b27f7b594e56d5de06
@@ -6904,76 +6974,6 @@ Internet-Draft                hash-to-curve                     May 2020
              5aa815454f
    Q1.y    = 67ccac7c3cb8d1381242d8d6585c57eabaddbb5dca5243a68a8aeb
              5477d94b3a
-
-H.5.3.  edwards25519_XMD:SHA-256_ELL2_NU_
-
-   suite   = edwards25519_XMD:SHA-256_ELL2_NU_
-   dst     = QUUX-V01-CS02-with-edwards25519_XMD:SHA-256_ELL2_NU_
-
-   msg     =
-   P.x     = 0fe5d93c5b7e884f21ff6d26d399aaa480b02aa2a448c1698388f2
-             fc2f4a4780
-   P.y     = 0790ea483b3c32db6bf309284b4505a223fc924566aec49c07818e
-             6f47828fae
-   u[0]    = 02a1cfe37eb58fe86a4000791177a5b43aa1886711d4ba24f56976
-             2045700085
-   Q.x     = 25c3d41731b9b929e0df904056444c8d69c425b2c1abb4b36357aa
-             1a344a9734
-   Q.y     = 1ef6f720a96797dcc7118c98daae4189cdc1f8405a39e3c4e15546
-             03410178ac
-
-   msg     = abc
-   P.x     = 7306c55c38f0407ba67123cb0185998ff1807d27541b3d7a98c9c3
-             e143801f38
-   P.y     = 767f521b90cb19a5c9918df81d212a9b50be4500ee246e81f48baf
-             5911bfd5f5
-   u[0]    = 1debc09abffdf870affecb05d1656ba98d41404506b55a08c4bbdb
-             42a40969bc
-   Q.x     = 02079693d400c83ab5e0d49e12fecd0cc6bdda4bae5dc61627cff9
-             8e1f88589c
-   Q.y     = 4ebddb42951ec7ff17770a3f1a63f023c0c94df20f9e64ca4686f0
-             7adf3262a7
-
-   msg     = abcdef0123456789
-   P.x     = 4b6bbd347ea59230daaadaad2bec527d0ab54d4e33bf3c041553a5
-             d2e1fcad33
-   P.y     = 7850c843092d554be1f3ac27ba4e3cfe18c510a10ddc32de67657c
-
-
-
-Faz-Hernandez, et al.   Expires 23 November 2020              [Page 124]
-
-Internet-Draft                hash-to-curve                     May 2020
-
-
-             0a5a806881
-   u[0]    = 3dd81e4eb3c6231942f9140e1dd0d18bc0200b754ef8d3b2f39d1b
-             044edf1c5d
-   Q.x     = 036b0261181df7b7510d9aae789693a6a6c8ecd93288b63117bd25
-             20174f8a99
-   Q.y     = 1b348cf9a9be673f47f6ab1c4db44ad72ab22cd1a91383098ded8e
-             bd4eff5c99
-
-   msg     = a512_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-   P.x     = 60f765a74455643897a2f9d66b054d28f46c57084a7f0baec2401c
-             fb4150b44d
-   P.y     = 76f903b132761d6983ae88558da61086673e3da33356892e154304
-             11e2ad8261
-   u[0]    = 6abcc53ddc54f5e1927b92cbe1aca2ee28b37338e72dbc74736457
-             5986a93c7e
-   Q.x     = 0035341a80d048a93eee132344832f9af6af4cd73ef0c6445afd44
-             8125364430
-   Q.y     = 31af431a1ab3fb618a9f02288d53295ba11745d346a7c194864973
-             0a9e1acffe
 
 H.5.4.  edwards25519_XMD:SHA-512_ELL2_NU_
 
@@ -7045,9 +7045,9 @@ Internet-Draft                hash-to-curve                     May 2020
    Q.y     = 38fb39f1566ca118ae6c7af42810c0bb9767ae5960abb5a8ca7925
              30bfb9447d
 
-H.6.  edwards448
+H.6.  curve448
 
-H.6.1.  edwards448_XMD:SHA-512_ELL2_RO_
+H.6.1.  curve448_XMD:SHA-512_ELL2_RO_
 
 
 
@@ -7057,6 +7057,240 @@ Faz-Hernandez, et al.   Expires 23 November 2020              [Page 126]
 
 Internet-Draft                hash-to-curve                     May 2020
 
+
+   suite   = curve448_XMD:SHA-512_ELL2_RO_
+   dst     = QUUX-V01-CS02-with-curve448_XMD:SHA-512_ELL2_RO_
+
+   msg     =
+   P.x     = da2332a516a063fef60267e6d89120bb999247ff7f52b313c8eee2
+             777e03320f30996a53280b6d8c3847cfb9ea565f46310e582a3733
+             4f69
+   P.y     = dc7be59148778dbf9fbeaeaf2ce578b9b82f8d72fe8e7073ad92f2
+             77fb987b34711ba8571b30f89de8049d744ba3107399f2dc3c9d5c
+             c8b2
+   u[0]    = e06d3a0f99597cd9fa6ccb2c3db31d163e50940d2c7504e1bfba16
+             ac69c2a7cbb52df77f100c4e6908788b50ebfb7c47b2e96586ca59
+             b47b
+   u[1]    = 88267fb8a9a813556844b3ac7861b380ad7597ed0ef030be490274
+             54b83f441e34aee8682afabdae4f3deafaa894b15de9bd6af5059e
+             f0ff
+   Q0.x    = 8219c3ff382cfe2f02a2a20f5ffd54564203edc7336022abc6b397
+             3ec7e61fc2d458a81846385080febb458695746c0ffc04e080b2fd
+             ecf2
+   Q0.y    = 9712f659ce8ddbd2bc581af3c6c359038d877174805b8772a647b3
+             b0bc9d66a579f72bc9ada3b836aaf2642d909ed9b96dc686ae668a
+             b5c1
+   Q1.x    = 2730fc1f5ea277c6ee5096eece84901d42fa3f78c018b1174c4685
+             e0be780f769933d28d29b13b330352353b9e1c98bb5ea6dabdf7e5
+             8e5a
+   Q1.y    = 5cb3a598ff66725b74c0e9f33e23b317a82a8bd6d1be02816688ef
+             74a5d704c14d09440f123573666e81a01cb19d91e25a4e98bab1f2
+             4668
+
+   msg     = abc
+   P.x     = 126bdbaa7d8690fbf97447adf5b0ead68a48e3c75fb49d4ee584d9
+             7f08fadb3fd00d107455bd5a032c682d8a80b4f796960d61fc01e3
+             9faf
+   P.y     = d973b5f9d4babfb95e1e28484068fdd3314b2e334f8bfcbccb9878
+             a1b9d0247bb4294c035caf1558c7d5fe140fb440fc32f7c4637f56
+             2db5
+   u[0]    = c0f1c170cea7276b72c0e744f4b1d6974da6a57b50bf3e0551f208
+             c500a3797fd2279e9d19a3379fcb82ee31d22654645eb4e1440e0f
+             012a
+   u[1]    = f264aea0654f5055d2fbe15a00635fd8a93c90bde40f22632da6c0
+             cc2e62403261ebd0d21d08ef90704772b9f381f03d46a0a271fcde
+             22ee
+   Q0.x    = 97f4538634980c078431983bc90dd20bffaa3c7e3d0343742738eb
+             2f9a6a49357798a8900239e49b384e88acfeeaa4819de34b6be12b
+             b583
+   Q0.y    = cd0a7ca6b2bc2f3483ece0ae77307301fe8de23d31077f792ac7a6
+             bc6362178b22be3188ac29940e576d33f477be976aa1bd60272dde
+             8fae
+
+
+
+Faz-Hernandez, et al.   Expires 23 November 2020              [Page 127]
+
+Internet-Draft                hash-to-curve                     May 2020
+
+
+   Q1.x    = 7c03c44df3e7d00f16eb363e25573f1cbe229303deb83c4744df1c
+             d1f8542748d41d8eb004fa7633752c8ca82c71e30de3dda8cbe542
+             3a9d
+   Q1.y    = eb29f9825c4f564a6b94bacf78e0eea3888597ee6a893cea9f5ebe
+             7ada5edbb1a1601a98124e3c3355ed413f9661089b5a11947685c4
+             371a
+
+   msg     = abcdef0123456789
+   P.x     = 474e477439d7a9592a13094b38c54e25828c681c7c8b81ba2d54c8
+             0148a25be684ce2e8e25fc0149c10ed1f601bf0883ae16c364c6d3
+             fa63
+   P.y     = 1989aff846273a5cc768b4624884c707f25d050b9dc9293cbe109c
+             019ee084d28de004b83ebb0ba175081792c91b721215df14dabf0d
+             6a70
+   u[0]    = 5f09c4906a56cd7b4a620fbed243b8c1bffa30e58ca6c709273e63
+             e14e547f1fde8545e04b63e34d4bb2df6143ed0469172fee016040
+             3e9d
+   u[1]    = 8816db97222c7cf1a728ae635542497683c6959f042e51c62ba270
+             eb437d7e9cce9080e5c8e05b05e0b0a298823bd661d5272258c7f6
+             d76e
+   Q0.x    = e6d0c0fd0e30e1a27d9bbee310398e2461e9199000476e57d819be
+             2f343a32165bcc5e524c3feffca3b272bc801367b47032b6f5ae21
+             b514
+   Q0.y    = 87ecc285bada245d203e67f6a5cf19876abdd4fb994b1d72f2bd21
+             5b19048721359eed24d2de20d344a06cb859445a726c4c76156160
+             13a7
+   Q1.x    = feebcf52ae07ffc9c6665912c8e6ab14adf880dba9679d1862af6a
+             1eedc25b33c641af1cf8385771afec096701e247602e54c1e183ff
+             d151
+   Q1.y    = 47a95cb1361c02caeaac9d036b99bb11e733fa2f140c9831694057
+             eab0e7878b0b823891b02428ee2cb09627bb6cbf860bf72cad6b44
+             61c4
+
+   msg     = a512_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+   P.x     = 63f7b02ccfdcc3dda4c2f3162b3a29cce131bfec05c937f47fbea6
+             92da6c35611ea3b02056184530a7a16a266e24aa440201418650a9
+             b1d6
+   P.y     = e7c55ef24be0109fd3a32e982809aa389e9583cc0861ff42e08b4d
+             1d261f50ddaa4887642aa80a3a7658a107159d0f60c6809bf052f2
+
+
+
+Faz-Hernandez, et al.   Expires 23 November 2020              [Page 128]
+
+Internet-Draft                hash-to-curve                     May 2020
+
+
+             feec
+   u[0]    = ec36b3337ec9b94b8a32a192617f278c72d89b0c31f19d184c29c2
+             a26c7d53ce880de19d980be7ba2c43451966a3e5b9b7b3496834e7
+             3868
+   u[1]    = 8b5ff5b833a4655293cc8f8feb940bc84e8f2e240370a002457346
+             628a892cbb8abd96c1140ca044a1bca85181a0a4ffcaf8a42a95ef
+             f4c9
+   Q0.x    = 3d94294cbb050707f5ad5a0dfc596445848c05a81d2a175a05b34e
+             409748cbe98970d1a0fd4bcdc030969481d669f0ce8befe72e0e7a
+             3506
+   Q0.y    = 11718321d9ed5ce14aaa7d1d06f6a91ca3875eb2bef70e96b54aa2
+             51387629633860898faf3ec18ae47d5a6a0d605536435140d0f8e9
+             802d
+   Q1.x    = b283ab36f5dff4d54dca265e74ca355d751983fb013f458f44dcb6
+             b00302569788ed0a3567ca93be803e6a5aa883587e3a9da9368626
+             6ecf
+   Q1.y    = 7bebe0e4520198e026127cf8bd4308db737358afaca143788637c6
+             75812282336699de18e4b239e7c5e95797154b8cd00aa51b830993
+             9abc
+
+H.6.2.  curve448_XMD:SHA-512_ELL2_NU_
+
+   suite   = curve448_XMD:SHA-512_ELL2_NU_
+   dst     = QUUX-V01-CS02-with-curve448_XMD:SHA-512_ELL2_NU_
+
+   msg     =
+   P.x     = ea84fb65c9404271a743b99e734888d7d5170dee33421936180745
+             66b8c4faf0d751b46bcdcebbce41e44d101f93b098e150836eeb26
+             3d90
+   P.y     = a8378c8c97c14c4127ebf6b36c9d4a6524be2b85ad76fd195315d3
+             d6eecf5147c9d96edb7f574935d0e945f6664040dbe0270d4ae24d
+             ab64
+   u[0]    = 89b0674b247b36697f028e39edb34bd9ee6ba968148447c80773ea
+             54650f5f57e005f69898502ea754f3dd710562cf80f347296b15f2
+             b040
+   Q.x     = e57024bb58651499c5e87dffb879b0bd3abfbfa9f5af2962c2597c
+             61cc24e2ad7a2802d5f98bc6265ea54e7b83befb8c59afd0854f5e
+             bc09
+   Q.y     = 0f2a66e25fba03deb43daf0dc694d6265e0f426f041a0bc5970206
+             871f88a0a09b0463607ff6ac94cb3609ed74d7eb9e7842a7b5f652
+             89c2
+
+   msg     = abc
+   P.x     = 2e7014413676426069da399013d0a825ea436f6036fc895099838d
+             0c2e047b69a8c98b2b5e5a5e1d203bc58829141bbcc1bbf66d5d7c
+             eb85
+   P.y     = 843b3542bd5c3175fa8a1160b0f5b3ce54f9650a18b0b8f02b83b6
+             2f4adfda146b0ab04bf902fb098459d0cf2171c640f003df8d79ee
+
+
+
+Faz-Hernandez, et al.   Expires 23 November 2020              [Page 129]
+
+Internet-Draft                hash-to-curve                     May 2020
+
+
+             e4db
+   u[0]    = 413957bbc65b091215af8af48ad7e24bf048e9f6d9a73aec17e998
+             a2b51cfc4ccdb4c25693e764db7799619f163532ec1ce5692e1753
+             0384
+   Q.x     = 8e4ff7f3bf4e42202441a441da4afaa6d4f32f95d0406742172e88
+             af8ffa304022eb3d2fddc5cffbb0241466daf3f152fddc26184074
+             12fb
+   Q.y     = 22e7d04d6dabbf15eee6529bf1f6a3a9efaa3a772956de1c08441d
+             94ef63b163ecea2065aebb004e8cfc12cfd2f946de05277caabba1
+             4a96
+
+   msg     = abcdef0123456789
+   P.x     = fec43c1455df411dcb549c6cd3c25915bc73b1bb1655b164b98298
+             c557dc1bf6f33791a43d167375cd645a51a13e34e645d0f5a05def
+             b6a5
+   P.y     = b9ede648411291433b4ecb333869315db05522a26c34ad87a73d52
+             3fa34f77b6ae8299d992ad5dc5d0d08f708975d19124168dd7d840
+             f7e4
+   u[0]    = fe602896e4a559685e0deb1c7c8ff4eec02cda9037bb6bd009d003
+             31b0b51227b64704e2462fd9cad0ebc24cb8817c5758703f720125
+             1c94
+   Q.x     = 1f1aefee6f36a913a0c63a69439400e00d6b900554489e3a25eaa6
+             6d4b68cafd0dc63e5645701b37edd7535b1b38305efb0460d8f103
+             616a
+   Q.y     = 2e8d502126f2ab8c125f8213c7a5fed8ca59857a8c9bd2955f938f
+             4beb89b57f3edbb823bdc4fa94e15e9bbf9f644137bf865ec7659b
+             deb9
+
+   msg     = a512_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+   P.x     = 1953f9cb8340b7968c1d820fad943cb58d132ec5db85a3bc22a408
+             b834f4d14fae0826164d92f285a71977ee1ca21c48fb08ecccf71f
+             b43f
+   P.y     = 2a5ebf1f4082bb8fa4ead0a54bb9b9d820018b06c2a9c81be048bc
+             6cae60fb99099cbcb9daf82a88cb177be328283f96f6e623af362a
+             6165
+   u[0]    = 264d09a96a80db8aac3b51d54f7f115dfe3a615e85713f2d4d4bf6
+             2c47ce0e8ebe261fc3a281166e9c25ea689010639f8131ffb6d8c0
+             d5c9
+   Q.x     = 62d81718b0b327cf3b0dd77885de6cf3202bc2c0a20bbd3af18127
+
+
+
+Faz-Hernandez, et al.   Expires 23 November 2020              [Page 130]
+
+Internet-Draft                hash-to-curve                     May 2020
+
+
+             16104fb5a39878dbe92862f40c28e1ae078a0b8c25ba23c9bca5fa
+             ed8a
+   Q.y     = 6505d475959b61e33f9e4c2c6d8033b5dbd09432993997c07ae2c2
+             4a31d7a35c02e15f357aebf0178b7b8525074b2400ec3d1bb8eda1
+             b9ee
+
+H.7.  edwards448
+
+H.7.1.  edwards448_XMD:SHA-512_ELL2_RO_
 
    suite   = edwards448_XMD:SHA-512_ELL2_RO_
    dst     = QUUX-V01-CS02-with-edwards448_XMD:SHA-512_ELL2_RO_
@@ -7096,6 +7330,14 @@ Internet-Draft                hash-to-curve                     May 2020
              b36b
    u[0]    = 4c3b600dba4a986944840b32e154510af806aa095f856fdf8fe320
              1221314704aba830579f3da5e30f3300e89814324a0bef26a9cd3a
+
+
+
+Faz-Hernandez, et al.   Expires 23 November 2020              [Page 131]
+
+Internet-Draft                hash-to-curve                     May 2020
+
+
              b6a0
    u[1]    = f0ae99c47274ed37fc582a7edc75aa0ddfdb7ed77e7eebbc293dca
              8312a6ff43e7c34c6796f9fe2a21c337deab5523d4825aebde5f14
@@ -7106,14 +7348,6 @@ Internet-Draft                hash-to-curve                     May 2020
    Q0.y    = d1cfb0fb4572b51b0c4e27d574adb4fd5a3276e4c59709c732ef1b
              7ce9e59fd87df98a79c65fb709110a3922ffdf8b4593c3ed9caf96
              6e9e
-
-
-
-Faz-Hernandez, et al.   Expires 23 November 2020              [Page 127]
-
-Internet-Draft                hash-to-curve                     May 2020
-
-
    Q1.x    = 94558aaac183cb8f263caa55eb79d1c4d44f681d2c9e2efc23927b
              6e272b7e3261f5d178dc166a6724aa2b2b5abfd4a97c6fc38ce423
              998f
@@ -7152,6 +7386,14 @@ Internet-Draft                hash-to-curve                     May 2020
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+
+
+
+Faz-Hernandez, et al.   Expires 23 November 2020              [Page 132]
+
+Internet-Draft                hash-to-curve                     May 2020
+
+
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -7162,14 +7404,6 @@ Internet-Draft                hash-to-curve                     May 2020
              3201
    P.y     = 547c2293a8b8489270957118e69a241227dc32c5587819269630ff
              687bb88284b88376fa8f86e0dbafc09d8dbba49a4a433fbd379d10
-
-
-
-Faz-Hernandez, et al.   Expires 23 November 2020              [Page 128]
-
-Internet-Draft                hash-to-curve                     May 2020
-
-
              3c5c
    u[0]    = 967a9f376c20a33d6a041ed783fd7a6b7fba24ab92029bc69340a2
              6441c287d368b8496fb14d19631ff406e057bcf8e8553660e7e73d
@@ -7190,7 +7424,7 @@ Internet-Draft                hash-to-curve                     May 2020
              939c69581ecaee71a5f656fcd091688391f41ca1b23b3fad4876e6
              8e01
 
-H.6.2.  edwards448_XMD:SHA-512_ELL2_NU_
+H.7.2.  edwards448_XMD:SHA-512_ELL2_NU_
 
    suite   = edwards448_XMD:SHA-512_ELL2_NU_
    dst     = QUUX-V01-CS02-with-edwards448_XMD:SHA-512_ELL2_NU_
@@ -7208,6 +7442,14 @@ H.6.2.  edwards448_XMD:SHA-512_ELL2_NU_
    Q.x     = ce981eeb6c73a7edba5c4c29af37010c398f1dbe39fe00be52100e
              b7c107f71793ce5928c2a34ce7fc37e054838d2788c46abad5b1f7
              009f
+
+
+
+Faz-Hernandez, et al.   Expires 23 November 2020              [Page 133]
+
+Internet-Draft                hash-to-curve                     May 2020
+
+
    Q.y     = e822cb7fa3f0e97e1215619f13ed7fde59137dc807a37ffbb7a375
              7f948f3fb50168c7fd6a5077a1fe7e6f484ba4881c964e5fff2b99
              e9af
@@ -7218,14 +7460,6 @@ H.6.2.  edwards448_XMD:SHA-512_ELL2_NU_
              37b8
    P.y     = a1ba8d111dd6338338f88c552d3338077fc5fe037860f2eb2b7496
              6a4a96f7fc59f859518caba87a1cf3fefbcace608e7b651ab5cb9e
-
-
-
-Faz-Hernandez, et al.   Expires 23 November 2020              [Page 129]
-
-Internet-Draft                hash-to-curve                     May 2020
-
-
              1eed
    u[0]    = 2f3bcc6253b74569ea64a9d90ea4ee52c71bd168241eaa88c6f458
              93ffe00fe9888f2966a6308ce194cff35059d09cf59c68f3b961d0
@@ -7264,6 +7498,14 @@ Internet-Draft                hash-to-curve                     May 2020
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+
+
+
+Faz-Hernandez, et al.   Expires 23 November 2020              [Page 134]
+
+Internet-Draft                hash-to-curve                     May 2020
+
+
    P.x     = e6856da5667f5083bddc84e447578522373fe36b45af60245d5e40
              adbe2c1934918a1d2071a1826dbbaed45bbaef0d888a4ffd513281
              26a0
@@ -7274,286 +7516,44 @@ Internet-Draft                hash-to-curve                     May 2020
              9948a0b0eee887163a93a90566b456c687bb8671ef2e2fe4e51ebd
              8def
    Q.x     = 60d1975f6f5b78a8e6edf580958acead694b229a7b35e79b1f214d
-
-
-
-Faz-Hernandez, et al.   Expires 23 November 2020              [Page 130]
-
-Internet-Draft                hash-to-curve                     May 2020
-
-
              e76b2391d3fa39ccb1b0d19d719f37f91fc191c554b97acff501af
              6fac
    Q.y     = 5dbd9a91c9865928da7fffcd548ad4da813539d349aa40798fed5d
              33c872ca56e6545ca0b851eba4b1b05cf9a710b15c94de700a6d6d
              d1c8
 
-H.7.  curve25519
+H.8.  secp256k1
 
-H.7.1.  curve25519_XMD:SHA-256_ELL2_RO_
+H.8.1.  secp256k1_XMD:SHA-256_SSWU_RO_
 
-   suite   = curve25519_XMD:SHA-256_ELL2_RO_
-   dst     = QUUX-V01-CS02-with-curve25519_XMD:SHA-256_ELL2_RO_
-
-   msg     =
-   P.x     = 4862b8982319ecce44c1b6ccf7ba9c205d137764dc98a8bc515ddf
-             05c0fddb82
-   P.y     = 3cee08cfd22a80a995c3cb6c4ebb9013f1b3d9ab510af661aef334
-             92e62c2eba
-   u[0]    = 7a4e3b740e8dc911b8029ce6a65d6bc00bf03d8d92866a6ae99902
-             6439451ea5
-   u[1]    = 5b7b0f765beb8b9051ce5ca68232c305fb1eb79426c43cb93efce2
-             f8a985065b
-   Q0.x    = 50243f13d19b38590084e7a58e063a4cfc63123b57c868fb69aa29
-             f90085f2f8
-   Q0.y    = 09920ffda8c180a2bcd999d411e032f799ab9e08ba312d5a236d13
-             0f7ce824e2
-   Q1.x    = 41baf7c5cded32252f9051d537ea0cb8cb1a89fe61b7a7fc81228c
-             793984075e
-   Q1.y    = 177ab481ae51c765ff5e5547760dd51f04b27107e3a0eb788d73fa
-             ba5d9a7dd3
-
-   msg     = abc
-   P.x     = 1c44a862cd8ce1c2f5e9ef28f96fa22f1cc6d4bb3dee19e76c20e1
-             b7e427e4de
-   P.y     = 0a2ca953d666a5aedfae4198f5c6fa7dd4c7b7b920aac855802832
-             93c8a5481a
-   u[0]    = 1c72fdce7455952e317d9c99be2d41e0bd5ea9fdef44b3890a6f00
-             e6df68dc08
-   u[1]    = 666ec661edfbc1e979a1b52c821e491069e7b6bf3e3071b2793669
-             adb0d51d48
-   Q0.x    = 0cc50715428377fc3e246f18180a6dad804e76382ca30b228ade26
-             ed417ce863
-   Q0.y    = 28247138ef21d16dc8b24196b30943292ef31738ff32317c6f5920
-             227c9aa331
-   Q1.x    = 7d15f5242faac9dc9b24d5a92ee7059a193c75863c56cc28309a57
-             5b1f113240
-   Q1.y    = 3b7c8d357c423a840173e263f592d1fd61f1756414655388fee002
-             9e8a3df94b
-
-
-
-Faz-Hernandez, et al.   Expires 23 November 2020              [Page 131]
-
-Internet-Draft                hash-to-curve                     May 2020
-
-
-   msg     = abcdef0123456789
-   P.x     = 18b0cebd7c0c183faa6ef80de99c4e1f5a53fb012164d4fd20a28a
-             1ba1cd15ee
-   P.y     = 764bdd170a631f9b17bb4bc01434f10920f4cb5e5ab49f54f7e5ce
-             220368324f
-   u[0]    = 6403431b8b370088637a608849b184b257c0394dbd94416a765335
-             1be9a769d7
-   u[1]    = 48a581f02df76a8b30d72b295e08aaf1a8b5c2a1774599d3ae069e
-             ceaf5363b3
-   Q0.x    = 2e5e5f9f180d3f934de4f6e9665afb13f63af94822818fb7f6a6d4
-             2eb630f558
-   Q0.y    = 44741c5756f2c4e9735c23dc17771d871636f849e097b0a73492bf
-             df1882dbd7
-   Q1.x    = 40022c69f6df7e3fca358b3ca2188a1aceb6c87fd54104d61dc563
-             ff7506f9aa
-   Q1.y    = 3e77a3381adbc93504f2a3e38749e47ab9db5068237be7b4b5b1b7
-             5f368f779f
-
-   msg     = a512_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-   P.x     = 242e08f391333017bd0e073ff98a035ce12d06958d665bdc747f26
-             aa4c068797
-   P.y     = 58c35ae3481ef62470e1ff7a74636b5217299120d7b9d64b0975f1
-             534e214fd4
-   u[0]    = 5cb58f59fc0408aedd631a35127867c5f57c08dd16ed2f41d2c53a
-             5d171c1f5f
-   u[1]    = 75256ab69d1682b3684aee79407187eadba42c2535951a5a9d0439
-             119a09e220
-   Q0.x    = 3d2ddec936382349e044cb1bbd4ea77c5897be086cf0257a6e098b
-             4c86593830
-   Q0.y    = 24f41fa861e1d5d50738d1feecfd97a09b25ff10a0ffd76ee5a4be
-             9ceef20c03
-   Q1.x    = 61d6d7ecdf8adaa92aa234caf888d28b143d0df7a935a858a9b025
-             38c83fcfa8
-   Q1.y    = 66219626f0e6b2eb140a457602b8464795203b2f0958dd341a5b67
-             671f3c6446
-
-H.7.2.  curve25519_XMD:SHA-512_ELL2_RO_
-
-
-
-
-
-Faz-Hernandez, et al.   Expires 23 November 2020              [Page 132]
-
-Internet-Draft                hash-to-curve                     May 2020
-
-
-   suite   = curve25519_XMD:SHA-512_ELL2_RO_
-   dst     = QUUX-V01-CS02-with-curve25519_XMD:SHA-512_ELL2_RO_
+   suite   = secp256k1_XMD:SHA-256_SSWU_RO_
+   dst     = QUUX-V01-CS02-with-secp256k1_XMD:SHA-256_SSWU_RO_
 
    msg     =
-   P.x     = 2de3780abb67e861289f5749d16d3e217ffa722192d16bbd9d1bfb
-             9d112b98c0
-   P.y     = 3b5dc2a498941a1033d176567d457845637554a2fe7a3507d21abd
-             1c1bd6e878
-   u[0]    = 005fe8a7b8fef0a16c105e6cadf5a6740b3365e18692a9c05bfbb4
-             d97f645a6a
-   u[1]    = 1347edbec6a2b5d8c02e058819819bee177077c9d10a4ce165aab0
-             fd0252261a
-   Q0.x    = 36b4df0c864c64707cbf6cf36e9ee2c09a6cb93b28313c169be295
-             61bb904f98
-   Q0.y    = 6cd59d664fb58c66c892883cd0eb792e52055284dac3907dd756b4
-             5d15c3983d
-   Q1.x    = 3fa114783a505c0b2b2fbeef0102853c0b494e7757f2a089d0daae
-             7ed9a0db2b
-   Q1.y    = 76c0fe7fec932aaafb8eefb42d9cbb32eb931158f469ff3050af15
-             cfdbbeff94
+   P.x     = c1cae290e291aee617ebaef1be6d73861479c48b841eaba9b7b585
+             2ddfeb1346
+   P.y     = 64fa678e07ae116126f08b022a94af6de15985c996c3a91b64c406
+             a960e51067
+   u[0]    = 6b0f9910dd2ba71c78f2ee9f04d73b5f4c5f7fc773a701abea1e57
+             3cab002fb3
+   u[1]    = 1ae6c212e08fe1a5937f6202f929a2cc8ef4ee5b9782db68b0d579
+             9fd8f09e16
+   Q0.x    = 74519ef88b32b425a095e4ebcc84d81b64e9e2c2675340a720bb1a
+             1857b99f1e
+   Q0.y    = c174fa322ab7c192e11748beed45b508e9fdb1ce046dee9c2cd3a2
+             a86b410936
+   Q1.x    = 44548adb1b399263ded3510554d28b4bead34b8cf9a37b4bd0bd2b
+             a4db87ae63
+   Q1.y    = 96eb8e2faf05e368efe5957c6167001760233e6dd2487516b46ae7
+             25c4cce0c6
 
    msg     = abc
-   P.x     = 2b4419f1f2d48f5872de692b0aca72cc7b0a60915dd70bde432e82
-             6b6abc526d
-   P.y     = 1b8235f255a268f0a6fa8763e97eb3d22d149343d495da1160eff9
-             703f2d07dd
-   u[0]    = 49bed021c7a3748f09fa8cdfcac044089f7829d3531066ac9e74e0
-             994e05bc7d
-   u[1]    = 5c36525b663e63389d886105cee7ed712325d5a97e60e140aba7e2
-             ce5ae851b6
-   Q0.x    = 16b3d86e056b7970fa00165f6f48d90b619ad618791661b7b5e1ec
-             78be10eac1
-   Q0.y    = 4ab256422d84c5120b278cbdfc4e1facc5baadffeccecf8ee9bf39
-             46106d50ca
-   Q1.x    = 7ec29ddbf34539c40adfa98fcb39ec36368f47f30e8f888cc7e86f
-             4d46e0c264
-   Q1.y    = 10d1abc1cae2d34c06e247f2141ba897657fb39f1080d54f09ce0a
-             f128067c74
-
-   msg     = abcdef0123456789
-   P.x     = 68ca1ea5a6acf4e9956daa101709b1eee6c1bb0df1de3b90d46023
-             82a104c036
-   P.y     = 2a375b656207123d10766e68b938b1812a4a6625ff83cb8d5e86f5
-             8a4be08353
-   u[0]    = 6412b7485ba26d3d1b6c290a8e1435b2959f03721874939b21782d
-             f17323d160
-   u[1]    = 24c7b46c1c6d9a21d32f5707be1380ab82db1054fde82865d5c9e3
-             d968f287b2
-
-
-
-Faz-Hernandez, et al.   Expires 23 November 2020              [Page 133]
-
-Internet-Draft                hash-to-curve                     May 2020
-
-
-   Q0.x    = 71de3dadfe268872326c35ac512164850860567aea0e7325e6b91a
-             98f86533ad
-   Q0.y    = 26a08b6e9a18084c56f2147bf515414b9b63f1522e1b6c5649f7d4
-             b0324296ec
-   Q1.x    = 5704069021f61e41779e2ba6b932268316d6d2a6f064f997a22fef
-             16d1eaeaca
-   Q1.y    = 50483c7540f64fb4497619c050f2c7fe55454ec0f0e79870bb4430
-             2e34232210
-
-   msg     = a512_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-   P.x     = 1bc61845a138e912f047b5e70ba9606ba2a447a4dade024c8ef3dd
-             42b7bbc5fe
-   P.y     = 623d05e47b70e25f7f1d51dda6d7c23c9a18ce015fe3548df596ea
-             9e38c69bf1
-   u[0]    = 20f481e85da7a3bf60ac0fb11ed1d0558fc6f941b3ac5469aa8b56
-             ec883d6d7d
-   u[1]    = 017d57fd257e9a78913999a23b52ca988157a81b09c5442501d07f
-             ed20869465
-   Q0.x    = 02d606e2699b918ee36f2818f2bc5013e437e673c9f9b9cdc15fd0
-             c5ee913970
-   Q0.y    = 29e9dc92297231ef211245db9e31767996c5625dfbf92e1c8107ef
-             887365de1e
-   Q1.x    = 38920e9b988d1ab7449c0fa9a6058192c0c797bb3d42ac34572434
-             1a1aa98745
-   Q1.y    = 24dcc1be7c4d591d307e89049fd2ed30aae8911245a9d8554bf603
-             2e5aa40d3d
-
-H.7.3.  curve25519_XMD:SHA-256_ELL2_NU_
-
-   suite   = curve25519_XMD:SHA-256_ELL2_NU_
-   dst     = QUUX-V01-CS02-with-curve25519_XMD:SHA-256_ELL2_NU_
-
-   msg     =
-   P.x     = 29bdf5d29093fa455527f71e127051a2e041a49280491a76a1388a
-             d076f6095d
-   P.y     = 3de8f04872088447568cad67c91dbeec50f5598fc877bf37cad9ab
-             468bce0323
-   u[0]    = 4891f78130dadef68a54bdd970a27d8ee6ee71c757466de3c62567
-             9be2b6b503
-
-
-
-Faz-Hernandez, et al.   Expires 23 November 2020              [Page 134]
-
-Internet-Draft                hash-to-curve                     May 2020
-
-
-   Q.x     = 108610cd44e0269b3850000447c055b05a64846111a30c94ba6339
-             8771934ceb
-   Q.y     = 6acae1b616d835282f2c717e4439d6074f6cc000177c25e18ac8d8
-             60a3dd63b2
-
-   msg     = abc
-   P.x     = 3358356987959ca72432c8662f46590267fd5ac352fbedcd3d6279
-             499fedc0dc
-   P.y     = 1a8a98a200593bc8f3355fc8e60e2cf09c5b288eb7232bea227886
-             b39ed54d1d
-   u[0]    = 21d66e516ae54fae0a51c3bb70446ec38c5f19eb506ae8686e6748
-             72d950d2c2
-   Q.x     = 2b123502330b33d1a880146c1e84ec5ff95679bea200d6d5cf4042
-             99af42def8
-   Q.y     = 44920d10af5b5a20b113572479cdd02253b70eff8f612afa782c55
-             278d997213
-
-   msg     = abcdef0123456789
-   P.x     = 43c767fc98423fa43546890d80e5da0e214928d3d4a596661bb61d
-             82a67b998d
-   P.y     = 62da60fc3d86471d6b181bb66948f3eb24fedfc0dea953caf305be
-             07e829a6f1
-   u[0]    = 48b37143c123d622f5ecab78883f76c853fb679d084454efae891a
-             e1f3f34979
-   Q.x     = 5bb746418e69e835ec6cc74d6b498ee04dd598b5b9ca805b73bb33
-             0ae3a72151
-   Q.y     = 4b0969181ba9cb050e16367b6469d31cc017e68ed38f0ffdc3312f
-             067fe897ca
-
-   msg     = a512_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-   P.x     = 5fdb7e86a2e7dc2b58d68916a88060261612ce60792116be083962
-             dd938cd396
-   P.y     = 3cb7911525bda90a355e0346f81a00cc765e39cfc32651a6eb4777
-             744d71c677
-   u[0]    = 4408df5a3aaaab5aea075c0713feda3675c2c4cd6b6b09672aab2f
-             0749553d08
-   Q.x     = 2c8722b119aa6da7b32fcd4737ecb649a117b5262460e1aa2f0ebf
-             a56f4cc5a2
-   Q.y     = 5e93469aa8cab6e6b557b27d55ddae13c68c7dca950fba33c79022
+   P.x     = 3377e01eab42db296b512293120c6cee72b6ecf9f9205760bd9ff1
+             1fb3cb2c4b
+   P.y     = 7f95890f33efebd1044d382a01b1bee0900fb6116f94688d487c6c
+             7b9c8371f6
+   u[0]    = 128aab5d3679a1f7601e3bdf94ced1f43e491f544767e18a4873f3
+             97b08a2b61
 
 
 
@@ -7562,54 +7562,54 @@ Faz-Hernandez, et al.   Expires 23 November 2020              [Page 135]
 Internet-Draft                hash-to-curve                     May 2020
 
 
-             2cb6c99eca
-
-H.7.4.  curve25519_XMD:SHA-512_ELL2_NU_
-
-   suite   = curve25519_XMD:SHA-512_ELL2_NU_
-   dst     = QUUX-V01-CS02-with-curve25519_XMD:SHA-512_ELL2_NU_
-
-   msg     =
-   P.x     = 1bb913f0c9daefa0b3375378ffa534bda5526c97391952a7789eb9
-             76edfe4d08
-   P.y     = 4548368f4f983243e747b62a600840ae7c1dab5c723991f85d3a97
-             68479f3ec4
-   u[0]    = 608d892b641f0328523802a6603427c26e55e6f27e71a91a478148
-             d45b5093cd
-   Q.x     = 51125222da5e763d97f3c10fcc92ea6860b9ccbbd2eb1285728f56
-             6721c1e65b
-   Q.y     = 343d2204f812d3dfc5304a5808c6c0d81a903a5d228b342442aa3c
-             9ba5520a3d
-
-   msg     = abc
-   P.x     = 7c22950b7d900fa866334262fcaea47a441a578df43b894b4625c9
-             b450f9a026
-   P.y     = 5547bc00e4c09685dcbc6cb6765288b386d8bdcb595fa5a6e3969e
-             08097f0541
-   u[0]    = 46f5b22494bfeaa7f232cc8d054be68561af50230234d7d1d63d1d
-             9abeca8da5
-   Q.x     = 7d56d1e08cb0ccb92baf069c18c49bb5a0dcd927eff8dcf75ca921
-             ef7f3e6eeb
-   Q.y     = 404d9a7dc25c9c05c44ab9a94590e7c3fe2dcec74533a0b24b188a
-             5d5dacf429
+   u[1]    = 5897b65da3b595a813d0fdcc75c895dc531be76a03518b044daaa0
+             f2e4689e00
+   Q0.x    = 07dd9432d426845fb19857d1b3a91722436604ccbbbadad8523b8f
+             c38a5322d7
+   Q0.y    = 604588ef5138cffe3277bbd590b8550bcbe0e523bbaf1bed4014a4
+             67122eb33f
+   Q1.x    = e9ef9794d15d4e77dde751e06c182782046b8dac05f8491eb88764
+             fc65321f78
+   Q1.y    = cb07ce53670d5314bf236ee2c871455c562dd76314aa41f012919f
+             e8e7f717b3
 
    msg     = abcdef0123456789
-   P.x     = 31ad08a8b0deeb2a4d8b0206ca25f567ab4e042746f792f4b7973f
-             3ae2096c52
-   P.y     = 405070c28e78b4fa269427c82827261991b9718bd6c6e95d627d70
-             1a53c30db1
-   u[0]    = 235fe40c443766ce7e18111c33862d66c3b33267efa50d50f9e8e5
-             d252a40aaa
-   Q.x     = 3fbe66b9c9883d79e8407150e7c2a1c8680bee496c62fabe4619a7
-             2b3cabe90f
-   Q.y     = 08ec476147c9a0a3ff312d303dbbd076abb7551e5fce82b48ab14b
-             433f8d0a7b
+   P.x     = bac54083f293f1fe08e4a70137260aa90783a5cb84d3f35848b324
+             d0674b0e3a
+   P.y     = 4436476085d4c3c4508b60fcf4389c40176adce756b398bdee27bc
+             a19758d828
+   u[0]    = ea67a7c02f2cd5d8b87715c169d055a22520f74daeb080e6180958
+             380e2f98b9
+   u[1]    = 7434d0d1a500d38380d1f9615c021857ac8d546925f5f2355319d8
+             23a478da18
+   Q0.x    = 576d43ab0260275adf11af990d130a5752704f7947862876172080
+             8862544b5d
+   Q0.y    = 643c4a7fb68ae6cff55edd66b809087434bbaff0c07f3f9ec4d49b
+             b3c16623c3
+   Q1.x    = f89d6d261a5e00fe5cf45e827b507643e67c2a947a20fd9ad71039
+             f8b0e29ff8
+   Q1.y    = b33855e0cc34a9176ead91c6c3acb1aacb1ce936d563bc1cee1dcf
+             fc806caf57
 
    msg     = a512_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+   P.x     = e3c8d35aaaf0b9b647e88a0a0a7ee5d5bed5ad38238152e4e6fd8c
+             1f8cb7c998
+   P.y     = 8446eeb6181bf12f56a9d24e262221cc2f0c4725c7e3803024b588
+             8ee5823aa6
+   u[0]    = 8d862e7e7e23d7843fe16d811d46d7e6480127a6b78838c277bca1
+             7df6900e9f
+   u[1]    = 68071d2530f040f081ba818d3c7188a94c900586761e9115efa47a
+             e9bd847938
+   Q0.x    = b32b0ab55977b936f1e93fdc68cec775e13245e161dbfe556bbb1f
 
 
 
@@ -7618,54 +7618,54 @@ Faz-Hernandez, et al.   Expires 23 November 2020              [Page 136]
 Internet-Draft                hash-to-curve                     May 2020
 
 
-             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-   P.x     = 5fd892c0958d1a75f54c3182a18d286efab784e774d1e017ba2fb2
-             52998b5dc1
-   P.y     = 750af3c66101737423a4519ac792fb93337bd74ee751f19da4cf1e
-             94f4d6d0b8
-   u[0]    = 1a68a1af9f663592291af987203393f707305c7bac9c8d63d6a729
-             bdc553dc19
-   Q.x     = 3bcd651ee54d5f7b6013898aab251ee8ecc0688166fce6e9548d38
-             472f6bd196
-   Q.y     = 1bb36ad9197299f111b4ef21271c41f4b7ecf5543db8bb5931307e
-             bdb2eaa465
+             72799b4181
+   Q0.y    = 2f5317098360b722f132d7156a94822641b615c91f8663be691698
+             70a12af9e8
+   Q1.x    = 148f98780f19388b9fa93e7dc567b5a673e5fca7079cd9cdafd719
+             82ec4c5e12
+   Q1.y    = 3989645d83a433bc0c001f3dac29af861f33a6fd1e04f4b36873f5
+             bff497298a
 
-H.8.  curve448
+H.8.2.  secp256k1_XMD:SHA-256_SSWU_NU_
 
-H.8.1.  curve448_XMD:SHA-512_ELL2_RO_
-
-   suite   = curve448_XMD:SHA-512_ELL2_RO_
-   dst     = QUUX-V01-CS02-with-curve448_XMD:SHA-512_ELL2_RO_
+   suite   = secp256k1_XMD:SHA-256_SSWU_NU_
+   dst     = QUUX-V01-CS02-with-secp256k1_XMD:SHA-256_SSWU_NU_
 
    msg     =
-   P.x     = da2332a516a063fef60267e6d89120bb999247ff7f52b313c8eee2
-             777e03320f30996a53280b6d8c3847cfb9ea565f46310e582a3733
-             4f69
-   P.y     = dc7be59148778dbf9fbeaeaf2ce578b9b82f8d72fe8e7073ad92f2
-             77fb987b34711ba8571b30f89de8049d744ba3107399f2dc3c9d5c
-             c8b2
-   u[0]    = e06d3a0f99597cd9fa6ccb2c3db31d163e50940d2c7504e1bfba16
-             ac69c2a7cbb52df77f100c4e6908788b50ebfb7c47b2e96586ca59
-             b47b
-   u[1]    = 88267fb8a9a813556844b3ac7861b380ad7597ed0ef030be490274
-             54b83f441e34aee8682afabdae4f3deafaa894b15de9bd6af5059e
-             f0ff
-   Q0.x    = 8219c3ff382cfe2f02a2a20f5ffd54564203edc7336022abc6b397
-             3ec7e61fc2d458a81846385080febb458695746c0ffc04e080b2fd
-             ecf2
-   Q0.y    = 9712f659ce8ddbd2bc581af3c6c359038d877174805b8772a647b3
-             b0bc9d66a579f72bc9ada3b836aaf2642d909ed9b96dc686ae668a
-             b5c1
-   Q1.x    = 2730fc1f5ea277c6ee5096eece84901d42fa3f78c018b1174c4685
-             e0be780f769933d28d29b13b330352353b9e1c98bb5ea6dabdf7e5
-             8e5a
-   Q1.y    = 5cb3a598ff66725b74c0e9f33e23b317a82a8bd6d1be02816688ef
-             74a5d704c14d09440f123573666e81a01cb19d91e25a4e98bab1f2
-             4668
+   P.x     = a4792346075feae77ac3b30026f99c1441b4ecf666ded19b7522cf
+             65c4c55c5b
+   P.y     = 62c59e2a6aeed1b23be5883e833912b08ba06be7f57c0e9cdc663f
+             31639ff3a7
+   u[0]    = 0137fcd23bc3da962e8808f97474d097a6c8aa2881fceef4514173
+             635872cf3b
+   Q.x     = a4792346075feae77ac3b30026f99c1441b4ecf666ded19b7522cf
+             65c4c55c5b
+   Q.y     = 62c59e2a6aeed1b23be5883e833912b08ba06be7f57c0e9cdc663f
+             31639ff3a7
+
+   msg     = abc
+   P.x     = 3f3b5842033fff837d504bb4ce2a372bfeadbdbd84a1d2b678b6e1
+             d7ee426b9d
+   P.y     = 902910d1fef15d8ae2006fc84f2a5a7bda0e0407dc913062c3a493
+             c4f5d876a5
+   u[0]    = e03f894b4d7caf1a50d6aa45cac27412c8867a25489e32c5ddeb50
+             3229f63a2e
+   Q.x     = 3f3b5842033fff837d504bb4ce2a372bfeadbdbd84a1d2b678b6e1
+             d7ee426b9d
+   Q.y     = 902910d1fef15d8ae2006fc84f2a5a7bda0e0407dc913062c3a493
+             c4f5d876a5
+
+   msg     = abcdef0123456789
+   P.x     = 07644fa6281c694709f53bdd21bed94dab995671e4a8cd1904ec4a
+             a50c59bfdf
+   P.y     = c79f8d1dad79b6540426922f7fbc9579c3018dafeffcd4552b1626
+             b506c21e7b
+   u[0]    = e7a6525ae7069ff43498f7f508b41c57f80563c1fe4283510b3224
+             46f32af41b
+   Q.x     = 07644fa6281c694709f53bdd21bed94dab995671e4a8cd1904ec4a
+             a50c59bfdf
+   Q.y     = c79f8d1dad79b6540426922f7fbc9579c3018dafeffcd4552b1626
+             b506c21e7b
 
 
 
@@ -7674,54 +7674,54 @@ Faz-Hernandez, et al.   Expires 23 November 2020              [Page 137]
 Internet-Draft                hash-to-curve                     May 2020
 
 
-   msg     = abc
-   P.x     = 126bdbaa7d8690fbf97447adf5b0ead68a48e3c75fb49d4ee584d9
-             7f08fadb3fd00d107455bd5a032c682d8a80b4f796960d61fc01e3
-             9faf
-   P.y     = d973b5f9d4babfb95e1e28484068fdd3314b2e334f8bfcbccb9878
-             a1b9d0247bb4294c035caf1558c7d5fe140fb440fc32f7c4637f56
-             2db5
-   u[0]    = c0f1c170cea7276b72c0e744f4b1d6974da6a57b50bf3e0551f208
-             c500a3797fd2279e9d19a3379fcb82ee31d22654645eb4e1440e0f
-             012a
-   u[1]    = f264aea0654f5055d2fbe15a00635fd8a93c90bde40f22632da6c0
-             cc2e62403261ebd0d21d08ef90704772b9f381f03d46a0a271fcde
-             22ee
-   Q0.x    = 97f4538634980c078431983bc90dd20bffaa3c7e3d0343742738eb
-             2f9a6a49357798a8900239e49b384e88acfeeaa4819de34b6be12b
-             b583
-   Q0.y    = cd0a7ca6b2bc2f3483ece0ae77307301fe8de23d31077f792ac7a6
-             bc6362178b22be3188ac29940e576d33f477be976aa1bd60272dde
-             8fae
-   Q1.x    = 7c03c44df3e7d00f16eb363e25573f1cbe229303deb83c4744df1c
-             d1f8542748d41d8eb004fa7633752c8ca82c71e30de3dda8cbe542
-             3a9d
-   Q1.y    = eb29f9825c4f564a6b94bacf78e0eea3888597ee6a893cea9f5ebe
-             7ada5edbb1a1601a98124e3c3355ed413f9661089b5a11947685c4
-             371a
+   msg     = a512_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+   P.x     = 17d22b867658977b5002dbe8d0ee70a8cfddec3eec50fb93f36136
+             070fd9fa6c
+   P.y     = e9178ff02f4dab73480f8dd590328aea99856a7b6cc8e5a6cdf289
+             ecc2a51718
+   u[0]    = a9ffbeee1d6e41ac33c248fb3364612ff591b502386c1bf6ac4aaf
+             1ea51f8c3b
+   Q.x     = 17d22b867658977b5002dbe8d0ee70a8cfddec3eec50fb93f36136
+             070fd9fa6c
+   Q.y     = e9178ff02f4dab73480f8dd590328aea99856a7b6cc8e5a6cdf289
+             ecc2a51718
 
-   msg     = abcdef0123456789
-   P.x     = 474e477439d7a9592a13094b38c54e25828c681c7c8b81ba2d54c8
-             0148a25be684ce2e8e25fc0149c10ed1f601bf0883ae16c364c6d3
-             fa63
-   P.y     = 1989aff846273a5cc768b4624884c707f25d050b9dc9293cbe109c
-             019ee084d28de004b83ebb0ba175081792c91b721215df14dabf0d
-             6a70
-   u[0]    = 5f09c4906a56cd7b4a620fbed243b8c1bffa30e58ca6c709273e63
-             e14e547f1fde8545e04b63e34d4bb2df6143ed0469172fee016040
-             3e9d
-   u[1]    = 8816db97222c7cf1a728ae635542497683c6959f042e51c62ba270
-             eb437d7e9cce9080e5c8e05b05e0b0a298823bd661d5272258c7f6
-             d76e
-   Q0.x    = e6d0c0fd0e30e1a27d9bbee310398e2461e9199000476e57d819be
-             2f343a32165bcc5e524c3feffca3b272bc801367b47032b6f5ae21
-             b514
-   Q0.y    = 87ecc285bada245d203e67f6a5cf19876abdd4fb994b1d72f2bd21
-             5b19048721359eed24d2de20d344a06cb859445a726c4c76156160
-             13a7
-   Q1.x    = feebcf52ae07ffc9c6665912c8e6ab14adf880dba9679d1862af6a
-             1eedc25b33c641af1cf8385771afec096701e247602e54c1e183ff
-             d151
+H.8.3.  secp256k1_XMD:SHA-256_SVDW_RO_
+
+   suite   = secp256k1_XMD:SHA-256_SVDW_RO_
+   dst     = QUUX-V01-CS02-with-secp256k1_XMD:SHA-256_SVDW_RO_
+
+   msg     =
+   P.x     = 681cdcff1040e531295769e1385a001d786082e3df5d4c665eb6c4
+             348a862f72
+   P.y     = b81e84dfe09c09f7196809e33c8ccc965aa544904e881c27b23818
+             f4e7123649
+   u[0]    = ce39f067e4ce73ff4271c958894b2f246f4192e6994793d22d66e5
+             1d36c04c55
+   u[1]    = c50f834ee4c78053e21a4484e697471534b6d30db1b4c91e3745fa
+             d81b7d99d5
+   Q0.x    = e8a15c0ab6731a2859adc3de46528133261ce51aa218b7aa3418cf
+             c4093cd41d
+   Q0.y    = 8f22fbc4d441d40a7e6f5441d5b1e957761558f8656bb0e61e2fbb
+             56e7fc58a9
+   Q1.x    = d5acd2b6c12a9148411654555f74d2fbf0ddf4b8c4db5780905dd0
+             391a7ca386
+   Q1.y    = bc12d5bb5ba8058f87627c2ae7cf283fb700bcaab64d2d6f164e9c
+             e2a80531c5
+
+   msg     = abc
+   P.x     = b7835e0724df5109be807b20d3c21e74c77dfb03de3ec7ae1183dc
+             dc5fca2319
+   P.y     = 8a18ed2c760d6042e78d40635e834a10dda769de04ec59feaf3dac
 
 
 
@@ -7730,9 +7730,37 @@ Faz-Hernandez, et al.   Expires 23 November 2020              [Page 138]
 Internet-Draft                hash-to-curve                     May 2020
 
 
-   Q1.y    = 47a95cb1361c02caeaac9d036b99bb11e733fa2f140c9831694057
-             eab0e7878b0b823891b02428ee2cb09627bb6cbf860bf72cad6b44
-             61c4
+             98f651774f
+   u[0]    = e6595690edfe0443ac43f03bafbe2441d7c9531f8c2a228e2e2ec7
+             fd2707c957
+   u[1]    = 902920cee9a88deac22437f27edd23ea0caddb302583994f2486eb
+             83806b9608
+   Q0.x    = 571ae96af49f82976a1fcd9db9ae1c548646902d69ee8acf05815c
+             96203a7266
+   Q0.y    = 85bbf930ed0e70632efd9b6c11125d966351c11214f0996767a1b7
+             a2b287790b
+   Q1.x    = bf5faa0d179e6447fa580121404aa276c8bc0c74fde7a0e4974d6a
+             c19e482bbd
+   Q1.y    = 46779e7fb4972bd79ba8ed9edc83502f4cd78317e406b210ecc64c
+             2b0e61834a
+
+   msg     = abcdef0123456789
+   P.x     = c288b6ecc8591667cda4c85b5512ec7bc6150200852efa1ddd48ff
+             b849500d0d
+   P.y     = 1c728ccb672f1d81b9603107b9b715b509f6d3d8196081de1ea2e9
+             83a0590321
+   u[0]    = b9c17e7c01c9383fa68acfea580b8a8d9cd6b99509ef9643da56f3
+             f860430cf9
+   u[1]    = 004b6ed134e82a8c87bf5608152850f2c19645291f720ed24d819b
+             a10fece75c
+   Q0.x    = 3d97acba8e03dfd6182154ed74e2b5da35251e905c85dfd97912ed
+             6e7fd48630
+   Q0.y    = ff16232f07dfdef99fe33c049b24247f2f64cfd9ef57f9c5edbe54
+             adfc6a18d7
+   Q1.x    = c24e8340854cddfac64597be3c97becfc77fced643629004b2fcf5
+             4fa88c7cd0
+   Q1.y    = 1a5f0895de0e39a45fa1c34ed310ade02aff6fb24c1a31c37995e7
+             78282d833a
 
    msg     = a512_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -7744,40 +7772,12 @@ Internet-Draft                hash-to-curve                     May 2020
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-   P.x     = 63f7b02ccfdcc3dda4c2f3162b3a29cce131bfec05c937f47fbea6
-             92da6c35611ea3b02056184530a7a16a266e24aa440201418650a9
-             b1d6
-   P.y     = e7c55ef24be0109fd3a32e982809aa389e9583cc0861ff42e08b4d
-             1d261f50ddaa4887642aa80a3a7658a107159d0f60c6809bf052f2
-             feec
-   u[0]    = ec36b3337ec9b94b8a32a192617f278c72d89b0c31f19d184c29c2
-             a26c7d53ce880de19d980be7ba2c43451966a3e5b9b7b3496834e7
-             3868
-   u[1]    = 8b5ff5b833a4655293cc8f8feb940bc84e8f2e240370a002457346
-             628a892cbb8abd96c1140ca044a1bca85181a0a4ffcaf8a42a95ef
-             f4c9
-   Q0.x    = 3d94294cbb050707f5ad5a0dfc596445848c05a81d2a175a05b34e
-             409748cbe98970d1a0fd4bcdc030969481d669f0ce8befe72e0e7a
-             3506
-   Q0.y    = 11718321d9ed5ce14aaa7d1d06f6a91ca3875eb2bef70e96b54aa2
-             51387629633860898faf3ec18ae47d5a6a0d605536435140d0f8e9
-             802d
-   Q1.x    = b283ab36f5dff4d54dca265e74ca355d751983fb013f458f44dcb6
-             b00302569788ed0a3567ca93be803e6a5aa883587e3a9da9368626
-             6ecf
-   Q1.y    = 7bebe0e4520198e026127cf8bd4308db737358afaca143788637c6
-             75812282336699de18e4b239e7c5e95797154b8cd00aa51b830993
-             9abc
-
-H.8.2.  curve448_XMD:SHA-512_ELL2_NU_
-
-   suite   = curve448_XMD:SHA-512_ELL2_NU_
-   dst     = QUUX-V01-CS02-with-curve448_XMD:SHA-512_ELL2_NU_
-
-   msg     =
-   P.x     = ea84fb65c9404271a743b99e734888d7d5170dee33421936180745
-             66b8c4faf0d751b46bcdcebbce41e44d101f93b098e150836eeb26
-             3d90
+   P.x     = 8193b74bae0faaba0bad9b52120e5b880cef87768286d8b66e7730
+             d63a0dbdde
+   P.y     = 38004a2647072c692198c57503b8734cc08cb3d75088c698f9dfcf
+             8374fdae53
+   u[0]    = 314ac8337582505cc4ddbd6bf9ee428ff1a184b6a86b4bd6c1e618
+             59b3ccfb81
 
 
 
@@ -7786,54 +7786,54 @@ Faz-Hernandez, et al.   Expires 23 November 2020              [Page 139]
 Internet-Draft                hash-to-curve                     May 2020
 
 
-   P.y     = a8378c8c97c14c4127ebf6b36c9d4a6524be2b85ad76fd195315d3
-             d6eecf5147c9d96edb7f574935d0e945f6664040dbe0270d4ae24d
-             ab64
-   u[0]    = 89b0674b247b36697f028e39edb34bd9ee6ba968148447c80773ea
-             54650f5f57e005f69898502ea754f3dd710562cf80f347296b15f2
-             b040
-   Q.x     = e57024bb58651499c5e87dffb879b0bd3abfbfa9f5af2962c2597c
-             61cc24e2ad7a2802d5f98bc6265ea54e7b83befb8c59afd0854f5e
-             bc09
-   Q.y     = 0f2a66e25fba03deb43daf0dc694d6265e0f426f041a0bc5970206
-             871f88a0a09b0463607ff6ac94cb3609ed74d7eb9e7842a7b5f652
-             89c2
+   u[1]    = b2e042919d6b101e7b532cead4cf2b32450b2cf1efe016876af0bc
+             babfa33946
+   Q0.x    = 610005757272554508886af92c541eb7c2ca9c515d676d12b9b484
+             82cb71189e
+   Q0.y    = 8a9534bfd189a8ea6ef6d161e91f0497a89a63f306815f2296f7d9
+             be9d4cf6fd
+   Q1.x    = 601de6ff81f5cd99d5c6d448c12ff95f425eee9b1a45cf1cbf6197
+             30bc5f618e
+   Q1.y    = 454c504165d4338cea3ce020ed83e0c9a9364a4c03eac9dc66d7dc
+             1c968481fe
+
+H.8.4.  secp256k1_XMD:SHA-256_SVDW_NU_
+
+   suite   = secp256k1_XMD:SHA-256_SVDW_NU_
+   dst     = QUUX-V01-CS02-with-secp256k1_XMD:SHA-256_SVDW_NU_
+
+   msg     =
+   P.x     = 9522be2c6356ac3116299a77d6519c1dd81e0245927ae54ec35777
+             cd76090beb
+   P.y     = 436261fecce2a42ae2900e6065408a527d42ce495f0b8972256844
+             1684c75bc9
+   u[0]    = c83dca043ffd7c53ffcacb10b2d6eb45d9e00ba547960c52cf713a
+             3f002f5b1f
+   Q.x     = 9522be2c6356ac3116299a77d6519c1dd81e0245927ae54ec35777
+             cd76090beb
+   Q.y     = 436261fecce2a42ae2900e6065408a527d42ce495f0b8972256844
+             1684c75bc9
 
    msg     = abc
-   P.x     = 2e7014413676426069da399013d0a825ea436f6036fc895099838d
-             0c2e047b69a8c98b2b5e5a5e1d203bc58829141bbcc1bbf66d5d7c
-             eb85
-   P.y     = 843b3542bd5c3175fa8a1160b0f5b3ce54f9650a18b0b8f02b83b6
-             2f4adfda146b0ab04bf902fb098459d0cf2171c640f003df8d79ee
-             e4db
-   u[0]    = 413957bbc65b091215af8af48ad7e24bf048e9f6d9a73aec17e998
-             a2b51cfc4ccdb4c25693e764db7799619f163532ec1ce5692e1753
-             0384
-   Q.x     = 8e4ff7f3bf4e42202441a441da4afaa6d4f32f95d0406742172e88
-             af8ffa304022eb3d2fddc5cffbb0241466daf3f152fddc26184074
-             12fb
-   Q.y     = 22e7d04d6dabbf15eee6529bf1f6a3a9efaa3a772956de1c08441d
-             94ef63b163ecea2065aebb004e8cfc12cfd2f946de05277caabba1
-             4a96
+   P.x     = 93b31b3af1ff977c0c44a44c161bdd8399e9bded157ee85f1bc3c9
+             47464febc1
+   P.y     = 9d93fa4ac18b3e8bc4b73aff932a11dfeea42b92bb6a7de16cc973
+             1e5131bdab
+   u[0]    = 4acc3c03893f3754e90e2b95433b1a11c67a5d25db3a23e3abb54d
+             09548d8a61
+   Q.x     = 93b31b3af1ff977c0c44a44c161bdd8399e9bded157ee85f1bc3c9
+             47464febc1
+   Q.y     = 9d93fa4ac18b3e8bc4b73aff932a11dfeea42b92bb6a7de16cc973
+             1e5131bdab
 
    msg     = abcdef0123456789
-   P.x     = fec43c1455df411dcb549c6cd3c25915bc73b1bb1655b164b98298
-             c557dc1bf6f33791a43d167375cd645a51a13e34e645d0f5a05def
-             b6a5
-   P.y     = b9ede648411291433b4ecb333869315db05522a26c34ad87a73d52
-             3fa34f77b6ae8299d992ad5dc5d0d08f708975d19124168dd7d840
-             f7e4
-   u[0]    = fe602896e4a559685e0deb1c7c8ff4eec02cda9037bb6bd009d003
-             31b0b51227b64704e2462fd9cad0ebc24cb8817c5758703f720125
-             1c94
-   Q.x     = 1f1aefee6f36a913a0c63a69439400e00d6b900554489e3a25eaa6
-             6d4b68cafd0dc63e5645701b37edd7535b1b38305efb0460d8f103
-             616a
-   Q.y     = 2e8d502126f2ab8c125f8213c7a5fed8ca59857a8c9bd2955f938f
-             4beb89b57f3edbb823bdc4fa94e15e9bbf9f644137bf865ec7659b
-             deb9
-
-   msg     = a512_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+   P.x     = ca1ae3784ca4b07ddc6b42967c71f484a2df8572a90d658c759c25
+             23776f9280
+   P.y     = f47ab406b1ca24a65220bb5a37cad0d53102504584057cb6df341b
+             9d38bf107f
+   u[0]    = 85f7fc345214e082a16acc739daf7f3b83130d21a3f8dcc484d830
+             74a1b0ef4b
+   Q.x     = ca1ae3784ca4b07ddc6b42967c71f484a2df8572a90d658c759c25
 
 
 
@@ -7842,6 +7842,11 @@ Faz-Hernandez, et al.   Expires 23 November 2020              [Page 140]
 Internet-Draft                hash-to-curve                     May 2020
 
 
+             23776f9280
+   Q.y     = f47ab406b1ca24a65220bb5a37cad0d53102504584057cb6df341b
+             9d38bf107f
+
+   msg     = a512_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -7851,25 +7856,192 @@ Internet-Draft                hash-to-curve                     May 2020
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-   P.x     = 1953f9cb8340b7968c1d820fad943cb58d132ec5db85a3bc22a408
-             b834f4d14fae0826164d92f285a71977ee1ca21c48fb08ecccf71f
-             b43f
-   P.y     = 2a5ebf1f4082bb8fa4ead0a54bb9b9d820018b06c2a9c81be048bc
-             6cae60fb99099cbcb9daf82a88cb177be328283f96f6e623af362a
-             6165
-   u[0]    = 264d09a96a80db8aac3b51d54f7f115dfe3a615e85713f2d4d4bf6
-             2c47ce0e8ebe261fc3a281166e9c25ea689010639f8131ffb6d8c0
-             d5c9
-   Q.x     = 62d81718b0b327cf3b0dd77885de6cf3202bc2c0a20bbd3af18127
-             16104fb5a39878dbe92862f40c28e1ae078a0b8c25ba23c9bca5fa
-             ed8a
-   Q.y     = 6505d475959b61e33f9e4c2c6d8033b5dbd09432993997c07ae2c2
-             4a31d7a35c02e15f357aebf0178b7b8525074b2400ec3d1bb8eda1
-             b9ee
+   P.x     = 4da63499ee61d5d395e4d3ab137200a2888bfbb70634457e1041cd
+             4ed7089207
+   P.y     = 7904daf4f9bf2b233f68fca4699d139107e5c6c63746853616d656
+             1fce8228d3
+   u[0]    = 4d4ff69e27b4062fde8a0d014db239ad81fce3f076ecd7b0557ad7
+             6bfdaa29bf
+   Q.x     = 4da63499ee61d5d395e4d3ab137200a2888bfbb70634457e1041cd
+             4ed7089207
+   Q.y     = 7904daf4f9bf2b233f68fca4699d139107e5c6c63746853616d656
+             1fce8228d3
 
 H.9.  BLS12-381 G1
 
-H.9.1.  BLS12381G1_XMD:SHA-256_SVDW_RO_
+H.9.1.  BLS12381G1_XMD:SHA-256_SSWU_RO_
+
+   suite   = BLS12381G1_XMD:SHA-256_SSWU_RO_
+   dst     = QUUX-V01-CS02-with-BLS12381G1_XMD:SHA-256_SSWU_RO_
+
+   msg     =
+   P.x     = 052926add2207b76ca4fa57a8734416c8dc95e24501772c8142787
+             00eed6d1e4e8cf62d9c09db0fac349612b759e79a1
+   P.y     = 08ba738453bfed09cb546dbb0783dbb3a5f1f566ed67bb6be0e8c6
+             7e2e81a4cc68ee29813bb7994998f3eae0c9c6a265
+   u[0]    = 0ba14bd907ad64a016293ee7c2d276b8eae71f25a4b941eece7b0d
+             89f17f75cb3ae5438a614fb61d6835ad59f29c564f
+   u[1]    = 019b9bd7979f12657976de2884c7cce192b82c177c80e0ec604436
+             a7f538d231552f0d96d9f7babe5fa3b19b3ff25ac9
+   Q0.x    = 11a3cce7e1d90975990066b2f2643b9540fa40d6137780df4e753a
+             8054d07580db3b7f1f03396333d4a359d1fe3766fe
+   Q0.y    = 0eeaf6d794e479e270da10fdaf768db4c96b650a74518fc67b04b0
+             3927754bac66f3ac720404f339ecdcc028afa091b7
+   Q1.x    = 160003aaf1632b13396dbad518effa00fff532f604de1a7fc2082f
+             f4cb0afa2d63b2c32da1bef2bf6c5ca62dc6b72f9c
+   Q1.y    = 0d8bb2d14e20cf9f6036152ed386d79189415b6d015a20133acb4e
+
+
+
+Faz-Hernandez, et al.   Expires 23 November 2020              [Page 141]
+
+Internet-Draft                hash-to-curve                     May 2020
+
+
+             019139b94e9c146aaad5817f866c95d609a361735e
+
+   msg     = abc
+   P.x     = 03567bc5ef9c690c2ab2ecdf6a96ef1c139cc0b2f284dca0a9a794
+             3388a49a3aee664ba5379a7655d3c68900be2f6903
+   P.y     = 0b9c15f3fe6e5cf4211f346271d7b01c8f3b28be689c8429c85b67
+             af215533311f0b8dfaaa154fa6b88176c229f2885d
+   u[0]    = 0d921c33f2bad966478a03ca35d05719bdf92d347557ea166e5bba
+             579eea9b83e9afa5c088573c2281410369fbd32951
+   u[1]    = 003574a00b109ada2f26a37a91f9d1e740dffd8d69ec0c35e1e9f4
+             652c7dba61123e9dd2e76c655d956e2b3462611139
+   Q0.x    = 125435adce8e1cbd1c803e7123f45392dc6e326d292499c2c45c58
+             65985fd74fe8f042ecdeeec5ecac80680d04317d80
+   Q0.y    = 0e8828948c989126595ee30e4f7c931cbd6f4570735624fd25aef2
+             fa41d3f79cfb4b4ee7b7e55a8ce013af2a5ba20bf2
+   Q1.x    = 11def93719829ecda3b46aa8c31fc3ac9c34b428982b898369608e
+             4f042babee6c77ab9218aad5c87ba785481eff8ae4
+   Q1.y    = 0007c9cef122ccf2efd233d6eb9bfc680aa276652b0661f4f820a6
+             53cec1db7ff69899f8e52b8e92b025a12c822a6ce6
+
+   msg     = abcdef0123456789
+   P.x     = 11e0b079dea29a68f0383ee94fed1b940995272407e3bb916bbf26
+             8c263ddd57a6a27200a784cbc248e84f357ce82d98
+   P.y     = 03a87ae2caf14e8ee52e51fa2ed8eefe80f02457004ba4d486d6aa
+             1f517c0889501dc7413753f9599b099ebcbbd2d709
+   u[0]    = 062d1865eb80ebfa73dcfc45db1ad4266b9f3a93219976a3790ab8
+             d52d3e5f1e62f3b01795e36834b17b70e7b76246d4
+   u[1]    = 0cdc3e2f271f29c4ff75020857ce6c5d36008c9b48385ea2f2bf6f
+             96f428a3deb798aa033cd482d1cdc8b30178b08e3a
+   Q0.x    = 08834484878c217682f6d09a4b51444802fdba3d7f2df9903a0dda
+             db92130ebbfa807fffa0eabf257d7b48272410afff
+   Q0.y    = 0b318f7ecf77f45a0f038e62d7098221d2dbbca2a394164e2e3fe9
+             53dc714ac2cde412d8f2d7f0c03b259e6795a2508e
+   Q1.x    = 158418ed6b27e2549f05531a8281b5822b31c3bf3144277fbb977f
+             8d6e2694fedceb7011b3c2b192f23e2a44b2bd106e
+   Q1.y    = 1879074f344471fac5f839e2b4920789643c075792bec5af4282c7
+             3f7941cda5aa77b00085eb10e206171b9787c4169f
+
+   msg     = a512_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+
+
+
+Faz-Hernandez, et al.   Expires 23 November 2020              [Page 142]
+
+Internet-Draft                hash-to-curve                     May 2020
+
+
+   P.x     = 082aabae8b7dedb0e78aeb619ad3bfd9277a2f77ba7fad20ef6aab
+             dc6c31d19ba5a6d12283553294c1825c4b3ca2dcfe
+   P.y     = 05b84ae5a942248eea39e1d91030458c40153f3b654ab7872d779a
+             d1e942856a20c438e8d99bc8abfbf74729ce1f7ac8
+   u[0]    = 0a8ffa7447f6be1c5a2ea4b959c9454b431e29ccc0802bc052413a
+             9c5b4f9aac67a93431bd480d15be1e057c8a08e8c6
+   u[1]    = 05d487032f602c90fa7625dbafe0f4a49ef4a6b0b33d7bb349ff4c
+             f5410d297fd6241876e3e77b651cfc8191e40a68b7
+   Q0.x    = 0cf97e6dbd0947857f3e578231d07b309c622ade08f2c08b32ff37
+             2bd90db19467b2563cc997d4407968d4ac80e154f8
+   Q0.y    = 127f0cddf2613058101a5701f4cb9d0861fd6c2a1b8e0afe194fcc
+             f586a3201a53874a2761a9ab6d7220c68661a35ab3
+   Q1.x    = 092f1acfa62b05f95884c6791fba989bbe58044ee6355d100973bf
+             9553ade52b47929264e6ae770fb264582d8dce512a
+   Q1.y    = 028e6d0169a72cfedb737be45db6c401d3adfb12c58c619c82b93a
+             5dfcccef12290de530b0480575ddc8397cda0bbebf
+
+H.9.2.  BLS12381G1_XMD:SHA-256_SSWU_NU_
+
+   suite   = BLS12381G1_XMD:SHA-256_SSWU_NU_
+   dst     = QUUX-V01-CS02-with-BLS12381G1_XMD:SHA-256_SSWU_NU_
+
+   msg     =
+   P.x     = 184bb665c37ff561a89ec2122dd343f20e0f4cbcaec84e3c3052ea
+             81d1834e192c426074b02ed3dca4e7676ce4ce48ba
+   P.y     = 04407b8d35af4dacc809927071fc0405218f1401a6d15af775810e
+             4e460064bcc9468beeba82fdc751be70476c888bf3
+   u[0]    = 156c8a6a2c184569d69a76be144b5cdc5141d2d2ca4fe341f011e2
+             5e3969c55ad9e9b9ce2eb833c81a908e5fa4ac5f03
+   Q.x     = 11398d3b324810a1b093f8e35aa8571cced95858207e7f49c4fd74
+             656096d61d8a2f9a23cdb18a4dd11cd1d66f41f709
+   Q.y     = 19316b6fb2ba7717355d5d66a361899057e1e84a6823039efc7bec
+             cefe09d023fb2713b1c415fcf278eb0c39a89b4f72
+
+   msg     = abc
+   P.x     = 009769f3ab59bfd551d53a5f846b9984c59b97d6842b20a2c565ba
+             a167945e3d026a3755b6345df8ec7e6acb6868ae6d
+   P.y     = 1532c00cf61aa3d0ce3e5aa20c3b531a2abd2c770a790a26138183
+             03c6b830ffc0ecf6c357af3317b9575c567f11cd2c
+   u[0]    = 147e1ed29f06e4c5079b9d14fc89d2820d32419b990c1c7bb7dbea
+             2a36a045124b31ffbde7c99329c05c559af1c6cc82
+   Q.x     = 1998321bc27ff6d71df3051b5aec12ff47363d81a5e9d2dff55f44
+             4f6ca7e7d6af45c56fd029c58237c266ef5cda5254
+   Q.y     = 034d274476c6307ae584f951c82e7ea85b84f72d28f4d647173235
+             6121af8d62a49bc263e8eb913a6cf6f125995514ee
+
+   msg     = abcdef0123456789
+   P.x     = 1974dbb8e6b5d20b84df7e625e2fbfecb2cdb5f77d5eae5fb2955e
+
+
+
+Faz-Hernandez, et al.   Expires 23 November 2020              [Page 143]
+
+Internet-Draft                hash-to-curve                     May 2020
+
+
+             5ce7313cae8364bc2fff520a6c25619739c6bdcb6a
+   P.y     = 15f9897e11c6441eaa676de141c8d83c37aab8667173cbe1dfd6de
+             74d11861b961dccebcd9d289ac633455dfcc7013a3
+   u[0]    = 04090815ad598a06897dd89bcda860f25837d54e897298ce31e694
+             7378134d3761dc59a572154963e8c954919ecfa82d
+   Q.x     = 17d502fa43bd6a4cad2859049a0c3ecefd60240d129be65da271a4
+             c03a9c38fa78163b9d2a919d2beb57df7d609b4919
+   Q.y     = 109019902ae93a8732abecf2ff7fecd2e4e305eb91f41c9c3267f1
+             6b6c19de138c7272947f25512745da6c466cdfd1ac
+
+   msg     = a512_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+   P.x     = 0e7a16a975904f131682edbb03d9560d3e48214c9986bd50417a77
+             108d13dc957500edf96462a3d01e62dc6cd468ef11
+   P.y     = 0ae89e677711d05c30a48d6d75e76ca9fb70fe06c6dd6ff988683d
+             89ccde29ac7d46c53bb97a59b1901abf1db66052db
+   u[0]    = 0dd824886d2123a96447f6c56e3a3fa992fbfefdba17b6673f9f63
+             0ff19e4d326529db37e1c1be43f905bf9202e0278d
+   Q.x     = 1775d400a1bacc1c39c355da7e96d2d1c97baa9430c4a3476881f8
+             521c09a01f921f592607961efc99c4cd46bd78ca19
+   Q.y     = 1109b5d59f65964315de65a7a143e86eabc053104ed289cf480949
+             317a5685fad7254ff8e7fe6d24d3104e5d55ad6370
+
+H.9.3.  BLS12381G1_XMD:SHA-256_SVDW_RO_
 
    suite   = BLS12381G1_XMD:SHA-256_SVDW_RO_
    dst     = QUUX-V01-CS02-with-BLS12381G1_XMD:SHA-256_SVDW_RO_
@@ -7886,18 +8058,18 @@ H.9.1.  BLS12381G1_XMD:SHA-256_SVDW_RO_
    Q0.x    = 02635c900de5fda2e16303230b8332a59f7ee320f912602ca56e4e
              4ba33f1642ef1d105dd2cb5985344dce46b496d7ef
    Q0.y    = 0d2765bb3dc05efc3b16596b91826eda77598ab35fc945a1c7fcd0
-             07f01defa30e9d8d61976e5a03c12c2a46e167bcac
-   Q1.x    = 15d56648a6587a45a94d6a161b7e44c198e28dcf0cd312e4b91f89
-             2da2ea81dca527ed22801b0562212a359fdead8da4
-   Q1.y    = 0c692be34ed2a408d33aac7c45c18f48ee4065dff8e75e0b58526c
 
 
 
-Faz-Hernandez, et al.   Expires 23 November 2020              [Page 141]
+Faz-Hernandez, et al.   Expires 23 November 2020              [Page 144]
 
 Internet-Draft                hash-to-curve                     May 2020
 
 
+             07f01defa30e9d8d61976e5a03c12c2a46e167bcac
+   Q1.x    = 15d56648a6587a45a94d6a161b7e44c198e28dcf0cd312e4b91f89
+             2da2ea81dca527ed22801b0562212a359fdead8da4
+   Q1.y    = 0c692be34ed2a408d33aac7c45c18f48ee4065dff8e75e0b58526c
              cd0b270499efc95c92d760229711858d8f10d36588
 
    msg     = abc
@@ -7942,18 +8114,18 @@ Internet-Draft                hash-to-curve                     May 2020
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 
 
 
-Faz-Hernandez, et al.   Expires 23 November 2020              [Page 142]
+Faz-Hernandez, et al.   Expires 23 November 2020              [Page 145]
 
 Internet-Draft                hash-to-curve                     May 2020
 
 
+             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
    P.x     = 050d57f609e8d5e3afef254f31555023fddfb32a70aeb373165c5c
              aae6530a49578867114801b3a6c693a9d3e731006c
    P.y     = 0189d4a6de408e304cbe6af94b931da65966ff483b25c402933983
@@ -7971,109 +8143,7 @@ Internet-Draft                hash-to-curve                     May 2020
    Q1.y    = 0bf2d9e2cff5a15291c81e6440bb1d42dc2d74af80e4a73ea7bb8a
              c2bf7110abd28fb8beb55224979698942ca94ec88e
 
-H.9.2.  BLS12381G1_XMD:SHA-256_SSWU_RO_
-
-   suite   = BLS12381G1_XMD:SHA-256_SSWU_RO_
-   dst     = QUUX-V01-CS02-with-BLS12381G1_XMD:SHA-256_SSWU_RO_
-
-   msg     =
-   P.x     = 052926add2207b76ca4fa57a8734416c8dc95e24501772c8142787
-             00eed6d1e4e8cf62d9c09db0fac349612b759e79a1
-   P.y     = 08ba738453bfed09cb546dbb0783dbb3a5f1f566ed67bb6be0e8c6
-             7e2e81a4cc68ee29813bb7994998f3eae0c9c6a265
-   u[0]    = 0ba14bd907ad64a016293ee7c2d276b8eae71f25a4b941eece7b0d
-             89f17f75cb3ae5438a614fb61d6835ad59f29c564f
-   u[1]    = 019b9bd7979f12657976de2884c7cce192b82c177c80e0ec604436
-             a7f538d231552f0d96d9f7babe5fa3b19b3ff25ac9
-   Q0.x    = 11a3cce7e1d90975990066b2f2643b9540fa40d6137780df4e753a
-             8054d07580db3b7f1f03396333d4a359d1fe3766fe
-   Q0.y    = 0eeaf6d794e479e270da10fdaf768db4c96b650a74518fc67b04b0
-             3927754bac66f3ac720404f339ecdcc028afa091b7
-   Q1.x    = 160003aaf1632b13396dbad518effa00fff532f604de1a7fc2082f
-             f4cb0afa2d63b2c32da1bef2bf6c5ca62dc6b72f9c
-   Q1.y    = 0d8bb2d14e20cf9f6036152ed386d79189415b6d015a20133acb4e
-             019139b94e9c146aaad5817f866c95d609a361735e
-
-   msg     = abc
-   P.x     = 03567bc5ef9c690c2ab2ecdf6a96ef1c139cc0b2f284dca0a9a794
-             3388a49a3aee664ba5379a7655d3c68900be2f6903
-   P.y     = 0b9c15f3fe6e5cf4211f346271d7b01c8f3b28be689c8429c85b67
-             af215533311f0b8dfaaa154fa6b88176c229f2885d
-   u[0]    = 0d921c33f2bad966478a03ca35d05719bdf92d347557ea166e5bba
-             579eea9b83e9afa5c088573c2281410369fbd32951
-   u[1]    = 003574a00b109ada2f26a37a91f9d1e740dffd8d69ec0c35e1e9f4
-
-
-
-Faz-Hernandez, et al.   Expires 23 November 2020              [Page 143]
-
-Internet-Draft                hash-to-curve                     May 2020
-
-
-             652c7dba61123e9dd2e76c655d956e2b3462611139
-   Q0.x    = 125435adce8e1cbd1c803e7123f45392dc6e326d292499c2c45c58
-             65985fd74fe8f042ecdeeec5ecac80680d04317d80
-   Q0.y    = 0e8828948c989126595ee30e4f7c931cbd6f4570735624fd25aef2
-             fa41d3f79cfb4b4ee7b7e55a8ce013af2a5ba20bf2
-   Q1.x    = 11def93719829ecda3b46aa8c31fc3ac9c34b428982b898369608e
-             4f042babee6c77ab9218aad5c87ba785481eff8ae4
-   Q1.y    = 0007c9cef122ccf2efd233d6eb9bfc680aa276652b0661f4f820a6
-             53cec1db7ff69899f8e52b8e92b025a12c822a6ce6
-
-   msg     = abcdef0123456789
-   P.x     = 11e0b079dea29a68f0383ee94fed1b940995272407e3bb916bbf26
-             8c263ddd57a6a27200a784cbc248e84f357ce82d98
-   P.y     = 03a87ae2caf14e8ee52e51fa2ed8eefe80f02457004ba4d486d6aa
-             1f517c0889501dc7413753f9599b099ebcbbd2d709
-   u[0]    = 062d1865eb80ebfa73dcfc45db1ad4266b9f3a93219976a3790ab8
-             d52d3e5f1e62f3b01795e36834b17b70e7b76246d4
-   u[1]    = 0cdc3e2f271f29c4ff75020857ce6c5d36008c9b48385ea2f2bf6f
-             96f428a3deb798aa033cd482d1cdc8b30178b08e3a
-   Q0.x    = 08834484878c217682f6d09a4b51444802fdba3d7f2df9903a0dda
-             db92130ebbfa807fffa0eabf257d7b48272410afff
-   Q0.y    = 0b318f7ecf77f45a0f038e62d7098221d2dbbca2a394164e2e3fe9
-             53dc714ac2cde412d8f2d7f0c03b259e6795a2508e
-   Q1.x    = 158418ed6b27e2549f05531a8281b5822b31c3bf3144277fbb977f
-             8d6e2694fedceb7011b3c2b192f23e2a44b2bd106e
-   Q1.y    = 1879074f344471fac5f839e2b4920789643c075792bec5af4282c7
-             3f7941cda5aa77b00085eb10e206171b9787c4169f
-
-   msg     = a512_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-   P.x     = 082aabae8b7dedb0e78aeb619ad3bfd9277a2f77ba7fad20ef6aab
-             dc6c31d19ba5a6d12283553294c1825c4b3ca2dcfe
-   P.y     = 05b84ae5a942248eea39e1d91030458c40153f3b654ab7872d779a
-             d1e942856a20c438e8d99bc8abfbf74729ce1f7ac8
-   u[0]    = 0a8ffa7447f6be1c5a2ea4b959c9454b431e29ccc0802bc052413a
-             9c5b4f9aac67a93431bd480d15be1e057c8a08e8c6
-   u[1]    = 05d487032f602c90fa7625dbafe0f4a49ef4a6b0b33d7bb349ff4c
-             f5410d297fd6241876e3e77b651cfc8191e40a68b7
-   Q0.x    = 0cf97e6dbd0947857f3e578231d07b309c622ade08f2c08b32ff37
-             2bd90db19467b2563cc997d4407968d4ac80e154f8
-
-
-
-Faz-Hernandez, et al.   Expires 23 November 2020              [Page 144]
-
-Internet-Draft                hash-to-curve                     May 2020
-
-
-   Q0.y    = 127f0cddf2613058101a5701f4cb9d0861fd6c2a1b8e0afe194fcc
-             f586a3201a53874a2761a9ab6d7220c68661a35ab3
-   Q1.x    = 092f1acfa62b05f95884c6791fba989bbe58044ee6355d100973bf
-             9553ade52b47929264e6ae770fb264582d8dce512a
-   Q1.y    = 028e6d0169a72cfedb737be45db6c401d3adfb12c58c619c82b93a
-             5dfcccef12290de530b0480575ddc8397cda0bbebf
-
-H.9.3.  BLS12381G1_XMD:SHA-256_SVDW_NU_
+H.9.4.  BLS12381G1_XMD:SHA-256_SVDW_NU_
 
    suite   = BLS12381G1_XMD:SHA-256_SVDW_NU_
    dst     = QUUX-V01-CS02-with-BLS12381G1_XMD:SHA-256_SVDW_NU_
@@ -8100,6 +8170,14 @@ H.9.3.  BLS12381G1_XMD:SHA-256_SVDW_NU_
    Q.x     = 1774ca19fb55f4d2bd6a42035546ad3e3df0738436282052503965
              8fe4b5f9f0a9a1e544fc022c490981c60eda6c7530
    Q.y     = 08271f24f9029b7f3bf8a8ab54a8bd1c023d28ec6cf2d43ab7fb38
+
+
+
+Faz-Hernandez, et al.   Expires 23 November 2020              [Page 146]
+
+Internet-Draft                hash-to-curve                     May 2020
+
+
              e79c1310207b06697aa255424a645864f3f707fe62
 
    msg     = abcdef0123456789
@@ -8113,14 +8191,6 @@ H.9.3.  BLS12381G1_XMD:SHA-256_SVDW_NU_
              57b39c4f1fcd4e3d7a0800a6d046d524803e72fdcc
    Q.y     = 12ee88f97dd0d4fdd247abee8fccf9a43a31426386a576de54f103
              9803561782ec4062afcdb89cccae5645545f11d8aa
-
-
-
-
-Faz-Hernandez, et al.   Expires 23 November 2020              [Page 145]
-
-Internet-Draft                hash-to-curve                     May 2020
-
 
    msg     = a512_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -8143,264 +8213,9 @@ Internet-Draft                hash-to-curve                     May 2020
    Q.y     = 0b510e9ff778624d6cc107ca8d0a9d6c21253ea1e4aa9df2303879
              c9a17d88278de635f3f80b97ced6674fe3c553c7fe
 
-H.9.4.  BLS12381G1_XMD:SHA-256_SSWU_NU_
-
-   suite   = BLS12381G1_XMD:SHA-256_SSWU_NU_
-   dst     = QUUX-V01-CS02-with-BLS12381G1_XMD:SHA-256_SSWU_NU_
-
-   msg     =
-   P.x     = 184bb665c37ff561a89ec2122dd343f20e0f4cbcaec84e3c3052ea
-             81d1834e192c426074b02ed3dca4e7676ce4ce48ba
-   P.y     = 04407b8d35af4dacc809927071fc0405218f1401a6d15af775810e
-             4e460064bcc9468beeba82fdc751be70476c888bf3
-   u[0]    = 156c8a6a2c184569d69a76be144b5cdc5141d2d2ca4fe341f011e2
-             5e3969c55ad9e9b9ce2eb833c81a908e5fa4ac5f03
-   Q.x     = 11398d3b324810a1b093f8e35aa8571cced95858207e7f49c4fd74
-             656096d61d8a2f9a23cdb18a4dd11cd1d66f41f709
-   Q.y     = 19316b6fb2ba7717355d5d66a361899057e1e84a6823039efc7bec
-             cefe09d023fb2713b1c415fcf278eb0c39a89b4f72
-
-   msg     = abc
-   P.x     = 009769f3ab59bfd551d53a5f846b9984c59b97d6842b20a2c565ba
-             a167945e3d026a3755b6345df8ec7e6acb6868ae6d
-   P.y     = 1532c00cf61aa3d0ce3e5aa20c3b531a2abd2c770a790a26138183
-             03c6b830ffc0ecf6c357af3317b9575c567f11cd2c
-   u[0]    = 147e1ed29f06e4c5079b9d14fc89d2820d32419b990c1c7bb7dbea
-             2a36a045124b31ffbde7c99329c05c559af1c6cc82
-   Q.x     = 1998321bc27ff6d71df3051b5aec12ff47363d81a5e9d2dff55f44
-             4f6ca7e7d6af45c56fd029c58237c266ef5cda5254
-   Q.y     = 034d274476c6307ae584f951c82e7ea85b84f72d28f4d647173235
-
-
-
-Faz-Hernandez, et al.   Expires 23 November 2020              [Page 146]
-
-Internet-Draft                hash-to-curve                     May 2020
-
-
-             6121af8d62a49bc263e8eb913a6cf6f125995514ee
-
-   msg     = abcdef0123456789
-   P.x     = 1974dbb8e6b5d20b84df7e625e2fbfecb2cdb5f77d5eae5fb2955e
-             5ce7313cae8364bc2fff520a6c25619739c6bdcb6a
-   P.y     = 15f9897e11c6441eaa676de141c8d83c37aab8667173cbe1dfd6de
-             74d11861b961dccebcd9d289ac633455dfcc7013a3
-   u[0]    = 04090815ad598a06897dd89bcda860f25837d54e897298ce31e694
-             7378134d3761dc59a572154963e8c954919ecfa82d
-   Q.x     = 17d502fa43bd6a4cad2859049a0c3ecefd60240d129be65da271a4
-             c03a9c38fa78163b9d2a919d2beb57df7d609b4919
-   Q.y     = 109019902ae93a8732abecf2ff7fecd2e4e305eb91f41c9c3267f1
-             6b6c19de138c7272947f25512745da6c466cdfd1ac
-
-   msg     = a512_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-   P.x     = 0e7a16a975904f131682edbb03d9560d3e48214c9986bd50417a77
-             108d13dc957500edf96462a3d01e62dc6cd468ef11
-   P.y     = 0ae89e677711d05c30a48d6d75e76ca9fb70fe06c6dd6ff988683d
-             89ccde29ac7d46c53bb97a59b1901abf1db66052db
-   u[0]    = 0dd824886d2123a96447f6c56e3a3fa992fbfefdba17b6673f9f63
-             0ff19e4d326529db37e1c1be43f905bf9202e0278d
-   Q.x     = 1775d400a1bacc1c39c355da7e96d2d1c97baa9430c4a3476881f8
-             521c09a01f921f592607961efc99c4cd46bd78ca19
-   Q.y     = 1109b5d59f65964315de65a7a143e86eabc053104ed289cf480949
-             317a5685fad7254ff8e7fe6d24d3104e5d55ad6370
-
 H.10.  BLS12-381 G2
 
-H.10.1.  BLS12381G2_XMD:SHA-256_SVDW_RO_
-
-   suite   = BLS12381G2_XMD:SHA-256_SVDW_RO_
-   dst     = QUUX-V01-CS02-with-BLS12381G2_XMD:SHA-256_SVDW_RO_
-
-   msg     =
-   P.x     = 0e2ca6ac396817c6bfadf5a540d8237bf706d33fab35de15f4fcfe
-             f3d7bdcac65eb555b9f5e664981667ed43f857cbf1
-       + I * 0d9615e9f5e1f815206a11be4247a30173a3bd2aec009eb40445da
-             147d2e444c94e50b82e9bb5dcb52160191391b56d8
-   P.y     = 0b473b06c297aa4955e78dcbe11af4977c07d634bfa7ff55513b44
-
-
-
-Faz-Hernandez, et al.   Expires 23 November 2020              [Page 147]
-
-Internet-Draft                hash-to-curve                     May 2020
-
-
-             77c4f2d96c0ac81c22f9cb857808216e54c7a4262f
-       + I * 1466db113ccf3c7cc0cf96173485bdf900fa21bf38645220987932
-             ba599f5ec0ea559f14fdc5ed9e5a2d883d4cd380c1
-   u[0]    = 171c2e85f502b47ddbab6f3ddc5b5f6569264591f2976085ee178e
-             6fcae10b728c124b6151f765129e72d3e9c668c57f
-       + I * 0733baa0ed578dcb604f9b9b6f29600c159251718764ada67173b2
-             befdb5338cbc8c9209d1212d215b8c23bd76c0d2ae
-   u[1]    = 0af24ae79f9e15e8ac38f0417c4e04d66da312ab99985c2a8d4350
-             a671afa1e38f717f9341b97af1d91acf2ee9945eb6
-       + I * 0095588a099bf3dfb8ec786002c7a7ce4fe42817e07d1aa1dc6489
-             dce96f7cae05d76c0293665d2b7de511ff7565eb5c
-   Q0.x    = 1374b154734f556cfe19ebf4eb1dcc182c99141b0fbc076f317176
-             4f8fee3d64d6142c477328b8c1e4570e85a6368e4b
-       + I * 011890283a18c866f7f80ba5f983e7aee8f61285c0e80180d6f454
-             4252ba211f80c65b353abce1f0e231b8cdc417ceb0
-   Q0.y    = 19246a1500a21684e62c8a3176eba56d47b300a1a4039387e3ef4d
-             44d4d074ea88bfe37b0535e5fe5325fae205eac95d
-       + I * 02d3a09279344ec9d8987dce63a31ac828a3a8d8651b57f905a91d
-             fe4518dc7f010e33dc1262c42db22feafa9a470659
-   Q1.x    = 0c5f3ded8d42afa880915eefc764946973e9d54f7458626100bde9
-             9941053d4fa0b9212936c8e3d1517dfd010144b9a7
-       + I * 17146146bb9d122bcb047bee456b240d66f5b2dc17257f538ca4f9
-             ecbae282d2bd66ac66690b35fdbac5ef5c17609b6e
-   Q1.y    = 018bcc75ecc990116538ebd8f5aafb8a84e185232cfcd7de35fb65
-             30a92ce357f36812fb7202a69fee37301669ae309c
-       + I * 0250781e6fb4e0e39ae386521145743f37a160fcd6f2dcdc732978
-             44b3120ce06fb8c87a19a5f2f5bbc532308732534d
-
-   msg     = abc
-   P.x     = 10c314ad416a603efd3d8c510abe24b04e86fd4b4c8431378fc03f
-             a4358ef9085871742d628a72ac3e8787aac4a9e642
-       + I * 059eb057ec63f9316e6d214bb6eb088834a8e1784792faf1892a22
-             c84ffc0bee493a3a46bf7b9b336ae35c039b1b91ae
-   P.y     = 0800fe0f7da6d45dc2aa4372e856b7783a048349826d6fedec35f4
-             64324628ed470301c4feb2996238414da949f681d3
-       + I * 0270e82333f390d70f3f4f78d376bd806a51bbdd3b2146e585795d
-             ffdf4a3a640a1802d7df4091d1f3959106a3e77c2f
-   u[0]    = 0bc76b6279842c042cf4460096ea8eaf8a118442ba0981e8a358cb
-             8c4a3b373847da64b7bc87af5060838875f627521c
-       + I * 014fb10360165ad67973b79526ece1a53dfbecfc4adf89c9d10668
-             2af954211615d19697c48f140e168a844b1674cb21
-   u[1]    = 11ee42bc0afcdc3427d53c1fbcd43aca6e479631175b071bc0dad5
-             9ca6e98a3a36d8b9df017c34fa6bdf5b4c69ba1b71
-       + I * 038495ef8975de190e22b6fbf16f1e9e0ac72c0b1140806a3bcd65
-             ab265ddfe4cabb12c390e64e04617e6046ddc0d00e
-   Q0.x    = 113ff93ca914b8a5b97869ffa6a15839cedfc3ba3c05e69fb65a35
-             1be48cdf343e3cdbc2e8cb937fe1c018664d24cb47
-       + I * 0196727701fdd4db9b365addfba2b251046b142b4990971524e982
-
-
-
-Faz-Hernandez, et al.   Expires 23 November 2020              [Page 148]
-
-Internet-Draft                hash-to-curve                     May 2020
-
-
-             d654302815cd0dad3552ba8eda1fe15232fc10e6b5
-   Q0.y    = 0cfadad5d823f19e69d3e5542be9bebf4a0647fe452e636b61dfde
-             43a75793dc99fcc37449e831d100edf2f994a5270e
-       + I * 08b63b703c65058eb5734dd2115abb79dbbad0887d480a37a6a4bf
-             05a7a3b0d127981f86e9453609ec8ab02454ae889c
-   Q1.x    = 1380fa1dcbd0cd99bc3d5278a868571ec6cdbedee26f4c03d8c3ef
-             9380a38d91f3e051ac877f901b42bfab35793149db
-       + I * 0c4e6cb24df706078ba550ea5f1913d72047465815d155d970adb7
-             abb00b83f31c3fc725640a6b3458d667f6828e2fa0
-   Q1.y    = 039070022374114ecb31f79263f3151f07b7d854ebd5e45b21cb81
-             5c6b85709efa12549b8bfa8dbbd1a192bd3f21e2f1
-       + I * 0884bf6d2a748a08d15d55baab89e4c91cd190feeec8be6e82f6a6
-             8e90abbfd47c47b55264d403606e6c9d60b38b9bc0
-
-   msg     = abcdef0123456789
-   P.x     = 020e2399be44e2a97ccd55a6092d08f274132a3459816801dbcf18
-             3d204dc5136a84b6db4fb0d3270180a288d22d8fad
-       + I * 02a41233f3ee379164ecb18bd42090c021e1ed1250854dade2b5a3
-             5f0a02cb5eef8fceedd6d077b5b988e946b092da37
-   P.y     = 0437ac29431c2e77b53fa093d0da0e4175dd0c73adf922d08a1196
-             0cf952d18ac37c3b445aeda583c1cfaa3b1e990aec
-       + I * 05c8cb3cf0a668b6f7f0b98ddea23cf4fa560a45f6457ea634018f
-             9bdf94da8cfa1f26f139f6c1b15b86a798c803ee3a
-   u[0]    = 16c7afb18b8005300e1fec63aa4c516abe86f0970bbdadb5e832b9
-             3ead30537842ccd4d35f191b9ba409ef634ffa6912
-       + I * 0200e158d4e252cdb4a31dbcdd1f0f11266678bb919d6695b5e5dc
-             253ab78aeb89198c52702a06a86ddc7d5cdb4688e2
-   u[1]    = 0ea5bec03d8644d0f986d511a25863f63a58349d43e10463244a4a
-             1b787ae92ff6a6c2c21e2ce53d06f6646c5c7e117c
-       + I * 18004a332d6b7c78fd125d7cb78c18b0e5be1133cad9907c7f00bd
-             b46a3a9761ae305a86e42199fdadbbf9258fd89142
-   Q0.x    = 067c873663f55940b5ec9f215cb95385ce3d074a704ebb63ac3597
-             8a9cbdc437e4d809e801f3487b8e9355853efcb0a6
-       + I * 086bca0394b8c8a91e09d7d17ab0a960253ad1576745e58d463823
-             734d23f9843adba74ab22402a96b713a0808b87920
-   Q0.y    = 054e59e60e4f03d31dfc586fc50ac7463ecaa1e831e086637033e5
-             473a75eb5c113acbb86f792c94b1891ff62fcc5e74
-       + I * 0c8b48bd37c6c0773aabff20b688c861a749785953c5147a4255dc
-             65d80c70d0e5bd644ed00d47e474a58461fc23c184
-   Q1.x    = 14423f200f6eb39961d8001bf6357b1ed64d9955a513095d44d51b
-             d67c13283515273738b63119e8472ae322f4259969
-       + I * 0c76058a015226841a0060efc1018f4e495e319c26b56e5213fdd1
-             9126078e3f017be65494f5af6482c3cba5e48e2620
-   Q1.y    = 1138a80d42b2c6e4abc35a131451f3b7699aec89d4fadecca60ef8
-             e534712c101209cf318dee139cc7ea8ddd9915a5a4
-       + I * 137a9c31b0c58f04eb13e2920f45cc37e6dbe4d607b3648f34051d
-             bb09debac2d9a3bda8098ed4e9de63e043abac667a
-
-
-
-
-Faz-Hernandez, et al.   Expires 23 November 2020              [Page 149]
-
-Internet-Draft                hash-to-curve                     May 2020
-
-
-   msg     = a512_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-   P.x     = 11c612f3d1a43a30cf7f13526b1c5858c338ada1b175a50346add0
-             9538a369feb93dcf7137ccb619e4a96dcb38e83c91
-       + I * 0b251af463d03250fbe8772fb2ba19b4aaa971cf8d49617a8943b3
-             16c5923ed41677a7835122ce359c184a0dc9134e63
-   P.y     = 0ffa178d31427948da2833d5cc04de2bb279f9550db5c5292d4db1
-             d642b01a1c99e56f836b3dd0f7a1d4610779371dbd
-       + I * 1874189a185d27e3750d12473ed54c6050cbe925c3ab883b26ca56
-             ff0c8908985073ae5a7ae5f73cc71d8961b50b5f62
-   u[0]    = 0be9d2f7f1dfa94984e0207d073d1e62d3597dc65c5d230cd554b5
-             7f1b541f24edf70cbe2f27ad3108648f73f4669aed
-       + I * 141007dff28fd683551916d7e506adabdcc1289c8c850f6365277b
-             43670a110ff6c4efc180a597eb2ffa5812adfa12e0
-   u[1]    = 13d04052e31d7b3437ba708b6c42298e537981b11d522321ed53de
-             fdc0d87b67f7b82d1117610702608bd24edcb3e4b5
-       + I * 0fda20f62d488f8dfbf024e5bb503c27acfd120aeaac39be4840ea
-             f4c3697fe47c7fced8cf5a139f15f3f433e7f8a9a9
-   Q0.x    = 072e16a99492640900e0cf6048f1bc681c103c748978a07d509a5f
-             22f57fc2de2774514a376432b88d858c9c9c7ff727
-       + I * 130bd240ae9d7e564750983ee10d3de1a8b5187fdd952323041241
-             6861593b47a5afcb4d180b48fc31ae281f4e3fcaef
-   Q0.y    = 19793b1bb15b3d052d3fce48bddda13ca172186d52bb9d27663201
-             8793bd0575874a2314cee3b28710cb4aa80f7719a5
-       + I * 0c0e8a0201cd526b20ce83da87a4ef492efd905fc30d96e4218fbf
-             80c915cc160cbde368d4a3c81c2fdb909906d75d3d
-   Q1.x    = 0c917d61d2fe0e3be167b9ef069fd0a49d0607a8d5abd382f0ef51
-             f4e5832486fb7e0c82ce3c109a59f22fde2f330167
-       + I * 03b1bcfec38c4acbb345d6aeedda1ef96c73f45eef746daff44143
-             5f9ac8ab147f6fa65a32251e3077e33770528d873f
-   Q1.y    = 00443f83d69ec2591bff97323668fbc013e68178d658fe445ee208
-             1f25c4d7128d7565ab2bd02cf4aa1c1247d2df9407
-       + I * 06e7e3c145bc98de722c4b3c8b0803a1308eca4062eeca5a69148f
-             5b3c4242e79654211a7198f522548e3b42cc8bc84c
-
-H.10.2.  BLS12381G2_XMD:SHA-256_SSWU_RO_
-
-
-
-
-
-
-
-Faz-Hernandez, et al.   Expires 23 November 2020              [Page 150]
-
-Internet-Draft                hash-to-curve                     May 2020
-
+H.10.1.  BLS12381G2_XMD:SHA-256_SSWU_RO_
 
    suite   = BLS12381G2_XMD:SHA-256_SSWU_RO_
    dst     = QUUX-V01-CS02-with-BLS12381G2_XMD:SHA-256_SSWU_RO_
@@ -8411,6 +8226,14 @@ Internet-Draft                hash-to-curve                     May 2020
        + I * 05cb8437535e20ecffaef7752baddf98034139c38452458baeefab
              379ba13dff5bf5dd71b72418717047f5b0f37da03d
    P.y     = 0503921d7f6a12805e72940b963c0cf3471c7b2a524950ca195d11
+
+
+
+Faz-Hernandez, et al.   Expires 23 November 2020              [Page 147]
+
+Internet-Draft                hash-to-curve                     May 2020
+
+
              062ee75ec076daf2d4bc358c4b190c0c98064fdd92
        + I * 12424ac32561493f3fe3c260708a12b7c620e7be00099a974e259d
              dc7d1f6395c3c811cdd19f1e8dbf3e9ecfdcbab8d6
@@ -8450,14 +8273,6 @@ Internet-Draft                hash-to-curve                     May 2020
              9f3d49ac1e1ce70dd94a733534f106d4cec0eddd16
    u[0]    = 15f7c0aa8f6b296ab5ff9c2c7581ade64f4ee6f1bf18f55179ff44
              a2cf355fa53dd2a2158c5ecb17d7c52f63e7195771
-
-
-
-Faz-Hernandez, et al.   Expires 23 November 2020              [Page 151]
-
-Internet-Draft                hash-to-curve                     May 2020
-
-
        + I * 01c8067bf4c0ba709aa8b9abc3d1cef589a4758e09ef53732d670f
              d8739a7274e111ba2fcaa71b3d33df2a3a0c8529dd
    u[1]    = 187111d5e088b6b9acfdfad078c4dacf72dcd17ca17c82be35e79f
@@ -8467,6 +8282,14 @@ Internet-Draft                hash-to-curve                     May 2020
    Q0.x    = 12b2e525281b5f4d2276954e84ac4f42cf4e13b6ac4228624e1776
              0faf94ce5706d53f0ca1952f1c5ef75239aeed55ad
        + I * 05d8a724db78e570e34100c0bc4a5fa84ad5839359b40398151f37
+
+
+
+Faz-Hernandez, et al.   Expires 23 November 2020              [Page 148]
+
+Internet-Draft                hash-to-curve                     May 2020
+
+
              cff5a51de945c563463c9efbdda569850ee5a53e77
    Q0.y    = 02eacdc556d0bdb5d18d22f23dcb086dd106cad713777c7e640794
              3edbe0b3d1efe391eedf11e977fac55f9b94f2489c
@@ -8506,14 +8329,6 @@ Internet-Draft                hash-to-curve                     May 2020
              105de5e49d77f0c64867f3834848f152497eb76333
        + I * 134e0e8331cee8cb12f9c2d0742714ed9eee78a84d634c9a95f6a7
              391b37125ed48bfc6e90bf3546e99930ff67cc97bc
-
-
-
-Faz-Hernandez, et al.   Expires 23 November 2020              [Page 152]
-
-Internet-Draft                hash-to-curve                     May 2020
-
-
    Q1.x    = 004fd03968cd1c99a0dd84551f44c206c84dcbdb78076c5bfee24e
              89a92c8508b52b88b68a92258403cbe1ea2da3495f
        + I * 1674338ea298281b636b2eb0fe593008d03171195fd6dcd4531e8a
@@ -8522,6 +8337,14 @@ Internet-Draft                hash-to-curve                     May 2020
              94b632c3d09e27eca329989aee348a67b50d5e236c
        + I * 169585e164c131103d85324f2d7747b23b91d66ae5d947c449c819
              4a347969fc6bbd967729768da485ba71868df8aed2
+
+
+
+
+Faz-Hernandez, et al.   Expires 23 November 2020              [Page 149]
+
+Internet-Draft                hash-to-curve                     May 2020
+
 
    msg     = a512_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -8562,6 +8385,183 @@ Internet-Draft                hash-to-curve                     May 2020
        + I * 13103f7aace1ae1420d208a537f7d3a9679c287208026e4e3439ab
              8cd534c12856284d95e27f5e1f33eec2ce656533b0
    Q1.y    = 0958b2c4c2c10fcef5a6c59b9e92c4a67b0fae3e2e0f1b6b5edad9
+             c940b8f3524ba9ebbc3f2ceb3cfe377655b3163bd7
+       + I * 0ccb594ed8bd14ca64ed9cb4e0aba221be540f25dd0d6ba15a4a4b
+             e5d67bcf35df7853b2d8dad3ba245f1ea3697f66aa
+
+H.10.2.  BLS12381G2_XMD:SHA-256_SSWU_NU_
+
+
+
+
+
+
+
+Faz-Hernandez, et al.   Expires 23 November 2020              [Page 150]
+
+Internet-Draft                hash-to-curve                     May 2020
+
+
+   suite   = BLS12381G2_XMD:SHA-256_SSWU_NU_
+   dst     = QUUX-V01-CS02-with-BLS12381G2_XMD:SHA-256_SSWU_NU_
+
+   msg     =
+   P.x     = 00e7f4568a82b4b7dc1f14c6aaa055edf51502319c723c4dc2688c
+             7fe5944c213f510328082396515734b6612c4e7bb7
+       + I * 126b855e9e69b1f691f816e48ac6977664d24d99f8724868a18418
+             6469ddfd4617367e94527d4b74fc86413483afb35b
+   P.y     = 0caead0fd7b6176c01436833c79d305c78be307da5f6af6c133c47
+             311def6ff1e0babf57a0fb5539fce7ee12407b0a42
+       + I * 1498aadcf7ae2b345243e281ae076df6de84455d766ab6fcdaad71
+             fab60abb2e8b980a440043cd305db09d283c895e3d
+   u[0]    = 07355d25caf6e7f2f0cb2812ca0e513bd026ed09dda65b177500fa
+             31714e09ea0ded3a078b526bed3307f804d4b93b04
+       + I * 02829ce3c021339ccb5caf3e187f6370e1e2a311dec9b753631170
+             63ab2015603ff52c3d3b98f19c2f65575e99e8b78c
+   Q.x     = 18ed3794ad43c781816c523776188deafba67ab773189b8f18c49b
+             c7aa841cd81525171f7a5203b2a340579192403bef
+       + I * 0727d90785d179e7b5732c8a34b660335fed03b913710b60903cf4
+             954b651ed3466dc3728e21855ae822d4a0f1d06587
+   Q.y     = 00764a5cf6c5f61c52c838523460eb2168b5a5b43705e19cb612e0
+             06f29b717897facfd15dd1c8874c915f6d53d0342d
+       + I * 19290bb9797c12c1d275817aa2605ebe42275b66860f0e4d04487e
+             bc2e47c50b36edd86c685a60c20a2bd584a82b011a
+
+   msg     = abc
+   P.x     = 108ed59fd9fae381abfd1d6bce2fd2fa220990f0f837fa30e0f279
+             14ed6e1454db0d1ee957b219f61da6ff8be0d6441f
+       + I * 0296238ea82c6d4adb3c838ee3cb2346049c90b96d602d7bb1b469
+             b905c9228be25c627bffee872def773d5b2a2eb57d
+   P.y     = 033f90f6057aadacae7963b0a0b379dd46750c1c94a6357c99b65f
+             63b79e321ff50fe3053330911c56b6ceea08fee656
+       + I * 153606c417e59fb331b7ae6bce4fbf7c5190c33ce9402b5ebe2b70
+             e44fca614f3f1382a3625ed5493843d0b0a652fc3f
+   u[0]    = 138879a9559e24cecee8697b8b4ad32cced053138ab913b9987277
+             2dc753a2967ed50aabc907937aefb2439ba06cc50c
+       + I * 0a1ae7999ea9bab1dcc9ef8887a6cb6e8f1e22566015428d220b7e
+             ec90ffa70ad1f624018a9ad11e78d588bd3617f9f2
+   Q.x     = 0f40e1d5025ecef0d850aa0bb7bbeceab21a3d4e85e6bee857805b
+             09693051f5b25428c6be343edba5f14317fcc30143
+       + I * 02e0d261f2b9fee88b82804ec83db330caa75fbb12719cfa71ccce
+             1c532dc4e1e79b0a6a281ed8d3817524286c8bc04c
+   Q.y     = 0cf4a4adc5c66da0bca4caddc6a57ecd97c8252d7526a8ff478e0d
+             fed816c4d321b5c3039c6683ae9b1e6a3a38c9c0ae
+       + I * 11cad1646bb3768c04be2ab2bbe1f80263b7ff6f8f9488f5bc3b68
+             50e5a3e97e20acc583613c69cf3d2bfe8489744ebb
+
+   msg     = abcdef0123456789
+
+
+
+Faz-Hernandez, et al.   Expires 23 November 2020              [Page 151]
+
+Internet-Draft                hash-to-curve                     May 2020
+
+
+   P.x     = 038af300ef34c7759a6caaa4e69363cafeed218a1f207e93b2c70d
+             91a1263d375d6730bd6b6509dcac3ba5b567e85bf3
+       + I * 0da75be60fb6aa0e9e3143e40c42796edf15685cafe0279afd2a67
+             c3dff1c82341f17effd402e4f1af240ea90f4b659b
+   P.y     = 19b148cbdf163cf0894f29660d2e7bfb2b68e37d54cc83fd4e6e62
+             c020eaa48709302ef8e746736c0e19342cc1ce3df4
+       + I * 0492f4fed741b073e5a82580f7c663f9b79e036b70ab3e51162359
+             cec4e77c78086fe879b65ca7a47d34374c8315ac5e
+   u[0]    = 18c16fe362b7dbdfa102e42bdfd3e2f4e6191d479437a59db4eb71
+             6986bf08ee1f42634db66bde97d6c16bbfd342b3b8
+       + I * 0e37812ce1b146d998d5f92bdd5ada2a31bfd63dfe18311aa91637
+             b5f279dd045763166aa1615e46a50d8d8f475f184e
+   Q.x     = 13a9d4a738a85c9f917c7be36b240915434b58679980010499b9ae
+             8d7a1bf7fbe617a15b3cd6060093f40d18e0f19456
+       + I * 16fa88754e7670366a859d6f6899ad765bf5a177abedb2740aacc9
+             252c43f90cd0421373fbd5b2b76bb8f5c4886b5d37
+   Q.y     = 0a7fa7d82c46797039398253e8765a4194100b330dfed6d7fbb46d
+             6fbf01e222088779ac336e3675c7a7a0ee05bbb6e3
+       + I * 0c6ee170ab766d11fa9457cef53253f2628010b2cffc102b3b2835
+             1eb9df6c281d3cfc78e9934769d661b72a5265338d
+
+   msg     = a512_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+   P.x     = 0ea4e7c33d43e17cc516a72f76437c4bf81d8f4eac69ac355d3bf9
+             b71b8138d55dc10fd458be115afa798b55dac34be1
+       + I * 1565c2f625032d232f13121d3cfb476f45275c303a037faa255f9d
+             a62000c2c864ea881e2bcddd111edc4a3c0da3e88d
+   P.y     = 043b6f5fe4e52c839148dc66f2b3751e69a0f6ebb3d056d6465d50
+             d4108543ecd956e10fa1640dfd9bc0030cc2558d28
+       + I * 0f8991d2a1ad662e7b6f58ab787947f1fa607fce12dde171bc1790
+             3b012091b657e15333e11701edcf5b63ba2a561247
+   u[0]    = 03f80ce4ff0ca2f576d797a3660e3f65b274285c054feccc3215c8
+             79e2c0589d376e83ede13f93c32f05da0f68fd6a10
+       + I * 006488a837c5413746d868d1efb7232724da10eca410b07d8b505b
+             9363bdccf0a1fc0029bad07d65b15ccfe6dd25e20d
+   Q.x     = 19592c812d5a50c5601062faba14c7d670711745311c879de1235a
+             0a11c75aab61327bf2d1725db07ec4d6996a682886
+       + I * 0eef4fa41ddc17ed47baf447a2c498548f3c72a02381313d13bef9
+             16e240b61ce125539090d62d9fbb14a900bf1b8e90
+   Q.y     = 1260d6e0987eae96af9ebe551e08de22b37791d53f4db9e0d59da7
+
+
+
+Faz-Hernandez, et al.   Expires 23 November 2020              [Page 152]
+
+Internet-Draft                hash-to-curve                     May 2020
+
+
+             36e66699735793e853e26362531fe4adf99c1883e3
+       + I * 0dbace5df0a4ac4ac2f45d8fdf8aee45484576fdd6efc4f98ab9b9
+             f4112309e628255e183022d98ea5ed6e47ca00306c
+
+H.10.3.  BLS12381G2_XMD:SHA-256_SVDW_RO_
+
+   suite   = BLS12381G2_XMD:SHA-256_SVDW_RO_
+   dst     = QUUX-V01-CS02-with-BLS12381G2_XMD:SHA-256_SVDW_RO_
+
+   msg     =
+   P.x     = 0e2ca6ac396817c6bfadf5a540d8237bf706d33fab35de15f4fcfe
+             f3d7bdcac65eb555b9f5e664981667ed43f857cbf1
+       + I * 0d9615e9f5e1f815206a11be4247a30173a3bd2aec009eb40445da
+             147d2e444c94e50b82e9bb5dcb52160191391b56d8
+   P.y     = 0b473b06c297aa4955e78dcbe11af4977c07d634bfa7ff55513b44
+             77c4f2d96c0ac81c22f9cb857808216e54c7a4262f
+       + I * 1466db113ccf3c7cc0cf96173485bdf900fa21bf38645220987932
+             ba599f5ec0ea559f14fdc5ed9e5a2d883d4cd380c1
+   u[0]    = 171c2e85f502b47ddbab6f3ddc5b5f6569264591f2976085ee178e
+             6fcae10b728c124b6151f765129e72d3e9c668c57f
+       + I * 0733baa0ed578dcb604f9b9b6f29600c159251718764ada67173b2
+             befdb5338cbc8c9209d1212d215b8c23bd76c0d2ae
+   u[1]    = 0af24ae79f9e15e8ac38f0417c4e04d66da312ab99985c2a8d4350
+             a671afa1e38f717f9341b97af1d91acf2ee9945eb6
+       + I * 0095588a099bf3dfb8ec786002c7a7ce4fe42817e07d1aa1dc6489
+             dce96f7cae05d76c0293665d2b7de511ff7565eb5c
+   Q0.x    = 1374b154734f556cfe19ebf4eb1dcc182c99141b0fbc076f317176
+             4f8fee3d64d6142c477328b8c1e4570e85a6368e4b
+       + I * 011890283a18c866f7f80ba5f983e7aee8f61285c0e80180d6f454
+             4252ba211f80c65b353abce1f0e231b8cdc417ceb0
+   Q0.y    = 19246a1500a21684e62c8a3176eba56d47b300a1a4039387e3ef4d
+             44d4d074ea88bfe37b0535e5fe5325fae205eac95d
+       + I * 02d3a09279344ec9d8987dce63a31ac828a3a8d8651b57f905a91d
+             fe4518dc7f010e33dc1262c42db22feafa9a470659
+   Q1.x    = 0c5f3ded8d42afa880915eefc764946973e9d54f7458626100bde9
+             9941053d4fa0b9212936c8e3d1517dfd010144b9a7
+       + I * 17146146bb9d122bcb047bee456b240d66f5b2dc17257f538ca4f9
+             ecbae282d2bd66ac66690b35fdbac5ef5c17609b6e
+   Q1.y    = 018bcc75ecc990116538ebd8f5aafb8a84e185232cfcd7de35fb65
+             30a92ce357f36812fb7202a69fee37301669ae309c
+       + I * 0250781e6fb4e0e39ae386521145743f37a160fcd6f2dcdc732978
+             44b3120ce06fb8c87a19a5f2f5bbc532308732534d
+
+   msg     = abc
+   P.x     = 10c314ad416a603efd3d8c510abe24b04e86fd4b4c8431378fc03f
+             a4358ef9085871742d628a72ac3e8787aac4a9e642
+       + I * 059eb057ec63f9316e6d214bb6eb088834a8e1784792faf1892a22
+             c84ffc0bee493a3a46bf7b9b336ae35c039b1b91ae
 
 
 
@@ -8570,11 +8570,129 @@ Faz-Hernandez, et al.   Expires 23 November 2020              [Page 153]
 Internet-Draft                hash-to-curve                     May 2020
 
 
-             c940b8f3524ba9ebbc3f2ceb3cfe377655b3163bd7
-       + I * 0ccb594ed8bd14ca64ed9cb4e0aba221be540f25dd0d6ba15a4a4b
-             e5d67bcf35df7853b2d8dad3ba245f1ea3697f66aa
+   P.y     = 0800fe0f7da6d45dc2aa4372e856b7783a048349826d6fedec35f4
+             64324628ed470301c4feb2996238414da949f681d3
+       + I * 0270e82333f390d70f3f4f78d376bd806a51bbdd3b2146e585795d
+             ffdf4a3a640a1802d7df4091d1f3959106a3e77c2f
+   u[0]    = 0bc76b6279842c042cf4460096ea8eaf8a118442ba0981e8a358cb
+             8c4a3b373847da64b7bc87af5060838875f627521c
+       + I * 014fb10360165ad67973b79526ece1a53dfbecfc4adf89c9d10668
+             2af954211615d19697c48f140e168a844b1674cb21
+   u[1]    = 11ee42bc0afcdc3427d53c1fbcd43aca6e479631175b071bc0dad5
+             9ca6e98a3a36d8b9df017c34fa6bdf5b4c69ba1b71
+       + I * 038495ef8975de190e22b6fbf16f1e9e0ac72c0b1140806a3bcd65
+             ab265ddfe4cabb12c390e64e04617e6046ddc0d00e
+   Q0.x    = 113ff93ca914b8a5b97869ffa6a15839cedfc3ba3c05e69fb65a35
+             1be48cdf343e3cdbc2e8cb937fe1c018664d24cb47
+       + I * 0196727701fdd4db9b365addfba2b251046b142b4990971524e982
+             d654302815cd0dad3552ba8eda1fe15232fc10e6b5
+   Q0.y    = 0cfadad5d823f19e69d3e5542be9bebf4a0647fe452e636b61dfde
+             43a75793dc99fcc37449e831d100edf2f994a5270e
+       + I * 08b63b703c65058eb5734dd2115abb79dbbad0887d480a37a6a4bf
+             05a7a3b0d127981f86e9453609ec8ab02454ae889c
+   Q1.x    = 1380fa1dcbd0cd99bc3d5278a868571ec6cdbedee26f4c03d8c3ef
+             9380a38d91f3e051ac877f901b42bfab35793149db
+       + I * 0c4e6cb24df706078ba550ea5f1913d72047465815d155d970adb7
+             abb00b83f31c3fc725640a6b3458d667f6828e2fa0
+   Q1.y    = 039070022374114ecb31f79263f3151f07b7d854ebd5e45b21cb81
+             5c6b85709efa12549b8bfa8dbbd1a192bd3f21e2f1
+       + I * 0884bf6d2a748a08d15d55baab89e4c91cd190feeec8be6e82f6a6
+             8e90abbfd47c47b55264d403606e6c9d60b38b9bc0
 
-H.10.3.  BLS12381G2_XMD:SHA-256_SVDW_NU_
+   msg     = abcdef0123456789
+   P.x     = 020e2399be44e2a97ccd55a6092d08f274132a3459816801dbcf18
+             3d204dc5136a84b6db4fb0d3270180a288d22d8fad
+       + I * 02a41233f3ee379164ecb18bd42090c021e1ed1250854dade2b5a3
+             5f0a02cb5eef8fceedd6d077b5b988e946b092da37
+   P.y     = 0437ac29431c2e77b53fa093d0da0e4175dd0c73adf922d08a1196
+             0cf952d18ac37c3b445aeda583c1cfaa3b1e990aec
+       + I * 05c8cb3cf0a668b6f7f0b98ddea23cf4fa560a45f6457ea634018f
+             9bdf94da8cfa1f26f139f6c1b15b86a798c803ee3a
+   u[0]    = 16c7afb18b8005300e1fec63aa4c516abe86f0970bbdadb5e832b9
+             3ead30537842ccd4d35f191b9ba409ef634ffa6912
+       + I * 0200e158d4e252cdb4a31dbcdd1f0f11266678bb919d6695b5e5dc
+             253ab78aeb89198c52702a06a86ddc7d5cdb4688e2
+   u[1]    = 0ea5bec03d8644d0f986d511a25863f63a58349d43e10463244a4a
+             1b787ae92ff6a6c2c21e2ce53d06f6646c5c7e117c
+       + I * 18004a332d6b7c78fd125d7cb78c18b0e5be1133cad9907c7f00bd
+             b46a3a9761ae305a86e42199fdadbbf9258fd89142
+   Q0.x    = 067c873663f55940b5ec9f215cb95385ce3d074a704ebb63ac3597
+             8a9cbdc437e4d809e801f3487b8e9355853efcb0a6
+
+
+
+Faz-Hernandez, et al.   Expires 23 November 2020              [Page 154]
+
+Internet-Draft                hash-to-curve                     May 2020
+
+
+       + I * 086bca0394b8c8a91e09d7d17ab0a960253ad1576745e58d463823
+             734d23f9843adba74ab22402a96b713a0808b87920
+   Q0.y    = 054e59e60e4f03d31dfc586fc50ac7463ecaa1e831e086637033e5
+             473a75eb5c113acbb86f792c94b1891ff62fcc5e74
+       + I * 0c8b48bd37c6c0773aabff20b688c861a749785953c5147a4255dc
+             65d80c70d0e5bd644ed00d47e474a58461fc23c184
+   Q1.x    = 14423f200f6eb39961d8001bf6357b1ed64d9955a513095d44d51b
+             d67c13283515273738b63119e8472ae322f4259969
+       + I * 0c76058a015226841a0060efc1018f4e495e319c26b56e5213fdd1
+             9126078e3f017be65494f5af6482c3cba5e48e2620
+   Q1.y    = 1138a80d42b2c6e4abc35a131451f3b7699aec89d4fadecca60ef8
+             e534712c101209cf318dee139cc7ea8ddd9915a5a4
+       + I * 137a9c31b0c58f04eb13e2920f45cc37e6dbe4d607b3648f34051d
+             bb09debac2d9a3bda8098ed4e9de63e043abac667a
+
+   msg     = a512_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+   P.x     = 11c612f3d1a43a30cf7f13526b1c5858c338ada1b175a50346add0
+             9538a369feb93dcf7137ccb619e4a96dcb38e83c91
+       + I * 0b251af463d03250fbe8772fb2ba19b4aaa971cf8d49617a8943b3
+             16c5923ed41677a7835122ce359c184a0dc9134e63
+   P.y     = 0ffa178d31427948da2833d5cc04de2bb279f9550db5c5292d4db1
+             d642b01a1c99e56f836b3dd0f7a1d4610779371dbd
+       + I * 1874189a185d27e3750d12473ed54c6050cbe925c3ab883b26ca56
+             ff0c8908985073ae5a7ae5f73cc71d8961b50b5f62
+   u[0]    = 0be9d2f7f1dfa94984e0207d073d1e62d3597dc65c5d230cd554b5
+             7f1b541f24edf70cbe2f27ad3108648f73f4669aed
+       + I * 141007dff28fd683551916d7e506adabdcc1289c8c850f6365277b
+             43670a110ff6c4efc180a597eb2ffa5812adfa12e0
+   u[1]    = 13d04052e31d7b3437ba708b6c42298e537981b11d522321ed53de
+             fdc0d87b67f7b82d1117610702608bd24edcb3e4b5
+       + I * 0fda20f62d488f8dfbf024e5bb503c27acfd120aeaac39be4840ea
+             f4c3697fe47c7fced8cf5a139f15f3f433e7f8a9a9
+   Q0.x    = 072e16a99492640900e0cf6048f1bc681c103c748978a07d509a5f
+             22f57fc2de2774514a376432b88d858c9c9c7ff727
+       + I * 130bd240ae9d7e564750983ee10d3de1a8b5187fdd952323041241
+             6861593b47a5afcb4d180b48fc31ae281f4e3fcaef
+   Q0.y    = 19793b1bb15b3d052d3fce48bddda13ca172186d52bb9d27663201
+             8793bd0575874a2314cee3b28710cb4aa80f7719a5
+       + I * 0c0e8a0201cd526b20ce83da87a4ef492efd905fc30d96e4218fbf
+
+
+
+Faz-Hernandez, et al.   Expires 23 November 2020              [Page 155]
+
+Internet-Draft                hash-to-curve                     May 2020
+
+
+             80c915cc160cbde368d4a3c81c2fdb909906d75d3d
+   Q1.x    = 0c917d61d2fe0e3be167b9ef069fd0a49d0607a8d5abd382f0ef51
+             f4e5832486fb7e0c82ce3c109a59f22fde2f330167
+       + I * 03b1bcfec38c4acbb345d6aeedda1ef96c73f45eef746daff44143
+             5f9ac8ab147f6fa65a32251e3077e33770528d873f
+   Q1.y    = 00443f83d69ec2591bff97323668fbc013e68178d658fe445ee208
+             1f25c4d7128d7565ab2bd02cf4aa1c1247d2df9407
+       + I * 06e7e3c145bc98de722c4b3c8b0803a1308eca4062eeca5a69148f
+             5b3c4242e79654211a7198f522548e3b42cc8bc84c
+
+H.10.4.  BLS12381G2_XMD:SHA-256_SVDW_NU_
 
    suite   = BLS12381G2_XMD:SHA-256_SVDW_NU_
    dst     = QUUX-V01-CS02-with-BLS12381G2_XMD:SHA-256_SVDW_NU_
@@ -8612,20 +8730,20 @@ H.10.3.  BLS12381G2_XMD:SHA-256_SVDW_NU_
              c30e0a056bac25ed13e2ea7f892729e753c6b766f6
    u[0]    = 0d5d55f03df748358b4cbb4c0302fe09f288d5d178f70327b94618
              0c5a50e85cac3cf6d56c1d4ff8d02e447cb86629b2
+
+
+
+Faz-Hernandez, et al.   Expires 23 November 2020              [Page 156]
+
+Internet-Draft                hash-to-curve                     May 2020
+
+
        + I * 0b4c2281e855c6a3b32136a84ff071d975ccc7647d596d6224f70e
              ad04e3ffa39db6859dc0f663f7d074c1cb08dc567c
    Q.x     = 1930e08b8b5891d8feffaa3fcb1062d7a0220df21c41c95f31a9fe
              479fa005f44fe78d87f1c76f944284c5ff531df604
        + I * 0bdb30000b51ab723911f7a5ed1312dd548129fe21f0ea5000f76b
              1647d26bea367b50db09512b265ebbf06f01c78373
-
-
-
-Faz-Hernandez, et al.   Expires 23 November 2020              [Page 154]
-
-Internet-Draft                hash-to-curve                     May 2020
-
-
    Q.y     = 18d21bb316acb42c4f9a7cf0b0a9da380a87e1f9fc20c7fef2f73c
              0a11889ed8501a96bd9aa56903049975f51737f75e
        + I * 169290273de9e79ef83ac883cb6a599e4584666f0496d33cf63fe4
@@ -8668,20 +8786,20 @@ Internet-Draft                hash-to-curve                     May 2020
        + I * 0bc513da308fbe9da859c30d0973fc4adad6f1eac34b9f1d298e1e
              5e5d0d81d477e26e7e710fdb291f51055a766b3d90
    P.y     = 04ffd09c623d8209fed4c33b52e8fdd504c4c7c6ac3df8ee5a6305
+
+
+
+Faz-Hernandez, et al.   Expires 23 November 2020              [Page 157]
+
+Internet-Draft                hash-to-curve                     May 2020
+
+
              2e5dcbdbd57e205c753381c7677215267f3738436e
        + I * 0a817465f59b43fbb1ae25f2c0b733666a2e018933b4a00de55c4c
              050c070edd276afaec92abca141b293a2b5e17d806
    u[0]    = 0f879b2cd4955d506063bb2d4debcf4e24698c9063adefbf9bf98d
              1c3d469c76b889ea7672b81150eb7748289ed89122
        + I * 10bac36fd96108b7cdf0a6ec43eb913c9431c568c5c32c9a2b7b03
-
-
-
-Faz-Hernandez, et al.   Expires 23 November 2020              [Page 155]
-
-Internet-Draft                hash-to-curve                     May 2020
-
-
              d8c0a7bf7cc2361a1b41b8f2940a1badebcf94f159
    Q.x     = 058fb32320c025c581777f39238f53cc1045d0e41ae03e6d0ec5c4
              ebe6507d058b3d5e48495b65edec150da21d10b759
@@ -8691,124 +8809,6 @@ Internet-Draft                hash-to-curve                     May 2020
              ab3c8848368082f2ab4c9c4b4f2058a84f721bd9bc
        + I * 094353a53f447ba559d0d883118214927abe76b73858148b87602e
              9294483bec36646ec2580d8067ae24c1c5fdbd7b28
-
-H.10.4.  BLS12381G2_XMD:SHA-256_SSWU_NU_
-
-   suite   = BLS12381G2_XMD:SHA-256_SSWU_NU_
-   dst     = QUUX-V01-CS02-with-BLS12381G2_XMD:SHA-256_SSWU_NU_
-
-   msg     =
-   P.x     = 00e7f4568a82b4b7dc1f14c6aaa055edf51502319c723c4dc2688c
-             7fe5944c213f510328082396515734b6612c4e7bb7
-       + I * 126b855e9e69b1f691f816e48ac6977664d24d99f8724868a18418
-             6469ddfd4617367e94527d4b74fc86413483afb35b
-   P.y     = 0caead0fd7b6176c01436833c79d305c78be307da5f6af6c133c47
-             311def6ff1e0babf57a0fb5539fce7ee12407b0a42
-       + I * 1498aadcf7ae2b345243e281ae076df6de84455d766ab6fcdaad71
-             fab60abb2e8b980a440043cd305db09d283c895e3d
-   u[0]    = 07355d25caf6e7f2f0cb2812ca0e513bd026ed09dda65b177500fa
-             31714e09ea0ded3a078b526bed3307f804d4b93b04
-       + I * 02829ce3c021339ccb5caf3e187f6370e1e2a311dec9b753631170
-             63ab2015603ff52c3d3b98f19c2f65575e99e8b78c
-   Q.x     = 18ed3794ad43c781816c523776188deafba67ab773189b8f18c49b
-             c7aa841cd81525171f7a5203b2a340579192403bef
-       + I * 0727d90785d179e7b5732c8a34b660335fed03b913710b60903cf4
-             954b651ed3466dc3728e21855ae822d4a0f1d06587
-   Q.y     = 00764a5cf6c5f61c52c838523460eb2168b5a5b43705e19cb612e0
-             06f29b717897facfd15dd1c8874c915f6d53d0342d
-       + I * 19290bb9797c12c1d275817aa2605ebe42275b66860f0e4d04487e
-             bc2e47c50b36edd86c685a60c20a2bd584a82b011a
-
-   msg     = abc
-   P.x     = 108ed59fd9fae381abfd1d6bce2fd2fa220990f0f837fa30e0f279
-             14ed6e1454db0d1ee957b219f61da6ff8be0d6441f
-       + I * 0296238ea82c6d4adb3c838ee3cb2346049c90b96d602d7bb1b469
-             b905c9228be25c627bffee872def773d5b2a2eb57d
-   P.y     = 033f90f6057aadacae7963b0a0b379dd46750c1c94a6357c99b65f
-             63b79e321ff50fe3053330911c56b6ceea08fee656
-       + I * 153606c417e59fb331b7ae6bce4fbf7c5190c33ce9402b5ebe2b70
-             e44fca614f3f1382a3625ed5493843d0b0a652fc3f
-   u[0]    = 138879a9559e24cecee8697b8b4ad32cced053138ab913b9987277
-             2dc753a2967ed50aabc907937aefb2439ba06cc50c
-
-
-
-Faz-Hernandez, et al.   Expires 23 November 2020              [Page 156]
-
-Internet-Draft                hash-to-curve                     May 2020
-
-
-       + I * 0a1ae7999ea9bab1dcc9ef8887a6cb6e8f1e22566015428d220b7e
-             ec90ffa70ad1f624018a9ad11e78d588bd3617f9f2
-   Q.x     = 0f40e1d5025ecef0d850aa0bb7bbeceab21a3d4e85e6bee857805b
-             09693051f5b25428c6be343edba5f14317fcc30143
-       + I * 02e0d261f2b9fee88b82804ec83db330caa75fbb12719cfa71ccce
-             1c532dc4e1e79b0a6a281ed8d3817524286c8bc04c
-   Q.y     = 0cf4a4adc5c66da0bca4caddc6a57ecd97c8252d7526a8ff478e0d
-             fed816c4d321b5c3039c6683ae9b1e6a3a38c9c0ae
-       + I * 11cad1646bb3768c04be2ab2bbe1f80263b7ff6f8f9488f5bc3b68
-             50e5a3e97e20acc583613c69cf3d2bfe8489744ebb
-
-   msg     = abcdef0123456789
-   P.x     = 038af300ef34c7759a6caaa4e69363cafeed218a1f207e93b2c70d
-             91a1263d375d6730bd6b6509dcac3ba5b567e85bf3
-       + I * 0da75be60fb6aa0e9e3143e40c42796edf15685cafe0279afd2a67
-             c3dff1c82341f17effd402e4f1af240ea90f4b659b
-   P.y     = 19b148cbdf163cf0894f29660d2e7bfb2b68e37d54cc83fd4e6e62
-             c020eaa48709302ef8e746736c0e19342cc1ce3df4
-       + I * 0492f4fed741b073e5a82580f7c663f9b79e036b70ab3e51162359
-             cec4e77c78086fe879b65ca7a47d34374c8315ac5e
-   u[0]    = 18c16fe362b7dbdfa102e42bdfd3e2f4e6191d479437a59db4eb71
-             6986bf08ee1f42634db66bde97d6c16bbfd342b3b8
-       + I * 0e37812ce1b146d998d5f92bdd5ada2a31bfd63dfe18311aa91637
-             b5f279dd045763166aa1615e46a50d8d8f475f184e
-   Q.x     = 13a9d4a738a85c9f917c7be36b240915434b58679980010499b9ae
-             8d7a1bf7fbe617a15b3cd6060093f40d18e0f19456
-       + I * 16fa88754e7670366a859d6f6899ad765bf5a177abedb2740aacc9
-             252c43f90cd0421373fbd5b2b76bb8f5c4886b5d37
-   Q.y     = 0a7fa7d82c46797039398253e8765a4194100b330dfed6d7fbb46d
-             6fbf01e222088779ac336e3675c7a7a0ee05bbb6e3
-       + I * 0c6ee170ab766d11fa9457cef53253f2628010b2cffc102b3b2835
-             1eb9df6c281d3cfc78e9934769d661b72a5265338d
-
-   msg     = a512_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-   P.x     = 0ea4e7c33d43e17cc516a72f76437c4bf81d8f4eac69ac355d3bf9
-             b71b8138d55dc10fd458be115afa798b55dac34be1
-       + I * 1565c2f625032d232f13121d3cfb476f45275c303a037faa255f9d
-             a62000c2c864ea881e2bcddd111edc4a3c0da3e88d
-   P.y     = 043b6f5fe4e52c839148dc66f2b3751e69a0f6ebb3d056d6465d50
-
-
-
-Faz-Hernandez, et al.   Expires 23 November 2020              [Page 157]
-
-Internet-Draft                hash-to-curve                     May 2020
-
-
-             d4108543ecd956e10fa1640dfd9bc0030cc2558d28
-       + I * 0f8991d2a1ad662e7b6f58ab787947f1fa607fce12dde171bc1790
-             3b012091b657e15333e11701edcf5b63ba2a561247
-   u[0]    = 03f80ce4ff0ca2f576d797a3660e3f65b274285c054feccc3215c8
-             79e2c0589d376e83ede13f93c32f05da0f68fd6a10
-       + I * 006488a837c5413746d868d1efb7232724da10eca410b07d8b505b
-             9363bdccf0a1fc0029bad07d65b15ccfe6dd25e20d
-   Q.x     = 19592c812d5a50c5601062faba14c7d670711745311c879de1235a
-             0a11c75aab61327bf2d1725db07ec4d6996a682886
-       + I * 0eef4fa41ddc17ed47baf447a2c498548f3c72a02381313d13bef9
-             16e240b61ce125539090d62d9fbb14a900bf1b8e90
-   Q.y     = 1260d6e0987eae96af9ebe551e08de22b37791d53f4db9e0d59da7
-             36e66699735793e853e26362531fe4adf99c1883e3
-       + I * 0dbace5df0a4ac4ac2f45d8fdf8aee45484576fdd6efc4f98ab9b9
-             f4112309e628255e183022d98ea5ed6e47ca00306c
 
 Authors' Addresses
 
