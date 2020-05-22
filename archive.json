@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2020-05-21T22:04:41.398153+00:00",
+  "timestamp": "2020-05-22T16:43:30.906622+00:00",
   "repo": "cfrg/draft-irtf-cfrg-hash-to-curve",
   "labels": [
     {
@@ -5787,6 +5787,22 @@
           "updatedAt": "2020-05-20T23:10:26Z"
         }
       ]
+    },
+    {
+      "number": 256,
+      "id": "MDU6SXNzdWU2MjI5NTE4Mzg=",
+      "title": "expand domain separation discussion in Security Considerations",
+      "url": "https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/issues/256",
+      "state": "OPEN",
+      "author": "kwantam",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "After discussing with @reyzin today, it seems like we can go a little further with the domain separation discussion in Security Considerations.\r\n\r\nSpecifically: right now we append DST inside expand-message-xmd and expand-message-xof. For xof this isn't a problem because we expect it to be used with SHAKE-128 or a similar hash that has an indifferentiability proof. expand-message-xmd, on the other hand, has some subtleties that we should discuss further in how it interacts with domain separation in the invoking protocol.\r\n\r\nSpecifically, it's possible to use -xmd with either prefix or suffix domain separation, which is handy for protocols that prefer to use prefix domain separation (and there are reasons to do this; see below). Since -xmd prepends an all-zeros block to the front of the input to H when computing `b_0`, this is easy: just prepend some tag of length at most one block that's guaranteed to have a nonzero byte.\r\n\r\n(For the `b_i` computations (`i >= 1`), domain separation is automatic with overwhelming probability: the first output-block-length bytes is a random value that is never revealed to the adversary, so it's infeasible for the adversary to generate a collision and thereby differentiate -xmd from a hash function.)\r\n\r\nSo: I think we ought to add a note in Security Considerations that calls attention to this fact, because it may help future implementors to avoid footguns when using SHA-2 and other M-D functions.\r\n\r\n---\r\n\r\nThe reason invoking protocols might wish to use prefix rather than suffix domain separation with Merkle-Damgaard hash functions is that some ways of turning M-D into an indifferentiable function are fragile when composed with other protocols, and in some cases this fragility can be avoided by prefixing rather than suffixing the DST. (To be clear: the way -xmd is constructed it is *not* fragile in the way I am about to describe.)\r\n\r\nConsider two different protocols, Px and Py, each of which uses a M-D hash as an indifferentiable function by fixing the length of the M-D input and appending a domain separation tag. Let's call these fixed lengths Lx and Ly, respectively. Notice that this rules out any length extension attack against either Px or Py, because there is precisely one length allowed for each protocol.\r\n\r\nNow consider the case that Ly > Lx such that we have\r\n\r\n- Inside Px: `H(input1 || DST1)`\r\n- Inside Py: `H(input2 || DST2)`, where `input2 = input1 || DST1 || padding || ...` (imagine `padding` is the standard padding that, say, SHA-2 would add to the end of Px's HASH invocation).\r\n\r\nOops! Now Py's use of H becomes differentiable: first we observe the output from Px's H invocation, then we do a length extension attack to predict the output of Py's invocation! This is subtle and unfortunate: we couldn't differentiate Py's random oracle on its own (because of the fixed-length input), but composed with Px we can differentiate Py's random oracle.\r\n\r\nOK, so why bother with this example? Because, as @reyzin pointed out to me, if DST had been in the front, there'd be no such attack.\r\n\r\n---\r\n\r\nTo be clear: I am not suggesting any change to -xmd! But I think we should point out to readers that it's flexible in the way that other protocols can domain separate from it.",
+      "createdAt": "2020-05-22T05:03:09Z",
+      "updatedAt": "2020-05-22T05:04:51Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
@@ -26180,6 +26196,76 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 255,
+      "id": "MDExOlB1bGxSZXF1ZXN0NDIxNjkzMDky",
+      "title": "Use the example protocol name as the DST in the test vectors.",
+      "url": "https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/pull/255",
+      "state": "OPEN",
+      "author": "chris-wood",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Per @jedisct1's suggestion, this uses the example protocol from the document as the DST value. I opted *not* to include a long DST, since we don't have any branches on the length of the DST. (We do have a requirement that it be less than 256 bytes, but I'm not sure we need a test vector for that?)\r\n\r\n",
+      "createdAt": "2020-05-22T03:23:42Z",
+      "updatedAt": "2020-05-22T04:44:35Z",
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "efc6cadfdab967f272ce05d373499330e4ca3e2b",
+      "headRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "caw/fix-test-dst",
+      "headRefOid": "8086cb549aefa1840ba712b86a230ed13ae60db2",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "body": ":+1: I will do this review tomorrow!",
+          "createdAt": "2020-05-22T04:44:35Z",
+          "updatedAt": "2020-05-22T04:44:35Z"
+        }
+      ],
+      "reviews": []
+    },
+    {
+      "number": 257,
+      "id": "MDExOlB1bGxSZXF1ZXN0NDIxOTYxNTY5",
+      "title": "Fix M. Tibouchi name ",
+      "url": "https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/pull/257",
+      "state": "MERGED",
+      "author": "mratsim",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "\"Indifferentiable deterministic hashing to elliptic and hyperelliptic curves\"",
+      "createdAt": "2020-05-22T14:47:05Z",
+      "updatedAt": "2020-05-22T16:42:36Z",
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "efc6cadfdab967f272ce05d373499330e4ca3e2b",
+      "headRepository": "mratsim/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "patch-1",
+      "headRefOid": "5537622a7a6b4a36ddd17ec00c5c144e314478b4",
+      "closedAt": "2020-05-22T16:42:36Z",
+      "mergedAt": "2020-05-22T16:42:36Z",
+      "mergedBy": "kwantam",
+      "mergeCommit": {
+        "oid": "d668b0b334238fef7b6dda74a499c3836bf5f897"
+      },
+      "comments": [
+        {
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Thanks! :+1:",
+          "createdAt": "2020-05-22T16:42:26Z",
+          "updatedAt": "2020-05-22T16:42:26Z"
+        }
+      ],
+      "reviews": []
     }
   ]
 }
