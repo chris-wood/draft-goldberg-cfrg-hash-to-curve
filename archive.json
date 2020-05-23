@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2020-05-22T16:43:30.906622+00:00",
+  "timestamp": "2020-05-23T06:52:35.414394+00:00",
   "repo": "cfrg/draft-irtf-cfrg-hash-to-curve",
   "labels": [
     {
@@ -1045,7 +1045,7 @@
       "labels": [],
       "body": "The Decaf approach \r\n\r\nhttps://www.shiftleft.org/papers/decaf/\r\n\r\nhttps://ristretto.group/",
       "createdAt": "2018-07-25T19:03:28Z",
-      "updatedAt": "2019-10-27T06:15:25Z",
+      "updatedAt": "2020-05-22T20:12:10Z",
       "closedAt": "2019-10-27T06:15:25Z",
       "comments": [
         {
@@ -1089,6 +1089,13 @@
           "body": "We're in the process of hashing out separation of responsibilities between h2c and the ristretto draft with the ristretto authors. The most likely path seems to be that there will not be a map specified in h2c for Ristretto. I am closing this; we will create a new issue to track action items once the path ahead is clear.\r\n\r\n(#174 is tracking the discussion with Ristretto authors for now)",
           "createdAt": "2019-10-27T06:15:25Z",
           "updatedAt": "2019-10-27T06:15:25Z"
+        },
+        {
+          "author": "paulmillr",
+          "authorAssociation": "NONE",
+          "body": "What's status of this? I don't see an alternative mentioned in current draft besides h_eff.",
+          "createdAt": "2020-05-22T20:12:10Z",
+          "updatedAt": "2020-05-22T20:12:10Z"
         }
       ]
     },
@@ -4633,15 +4640,15 @@
       "id": "MDU6SXNzdWU1NjU5Njc4MzU=",
       "title": "CMOV: inconsistency with Verifiable Random Functions draft",
       "url": "https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/issues/210",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "mratsim",
-      "authorAssociation": "NONE",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "The definition of CMOV in the draft is:\r\n\r\nhttps://tools.ietf.org/html/draft-irtf-cfrg-hash-to-curve-05#section-4\r\n\r\n> CMOV(a, b, c): If c is False, CMOV returns a, otherwise it returns\r\n      b.  To prevent against timing attacks, this operation must run in\r\n      constant time, without revealing the value of c.  Commonly,\r\n      implementations assume that the selector c is 1 for True or 0 for\r\n      False.  In this case, given a bit string C, the desired selector c\r\n      can be computed by OR-ing all bits of C together.  The resulting\r\n      selector will be either 0 if all bits of C are zero, or 1 if at\r\n      least one bit of C is 1.\r\n\r\nThe definition in the VRF spec is:\r\n\r\nhttps://tools.ietf.org/html/draft-irtf-cfrg-vrf-06#section-5.4.1.2 (at the bottom of ECVRF_hash_to_curve_elligator2_25519)\r\n\r\n> Alternatively, let CMOV(result_if_1, result_if_0, selector) be the\r\n   function that returns result_if_1 when selector is 1 and result_if_0\r\n   when selector is 0.\r\n>\r\n> [...]\r\n>\r\n> CMOV can\r\n   be implemented in constant time a variety of ways; for example, by\r\n   expanding b from a single bit to an all-0 or all-1 string\r\n   (accomplished by negating b in standard two's-complement arithmetic)\r\n   and then applying bitwise XOR and AND operations as follows: other_x\r\n   XOR ((x XOR other_x) AND b)\r\n\r\n=> The definitions are opposite in both specs\r\n\r\nI didn't find a Github repo for the VRF specs but given:\r\n- the overlap in intended audience of both specs (for example Algorand are implementing both hash to curve and VRF)\r\n- that the VRF spec also has a hash_to_curve section \r\nI think it would be best to have the same definition.",
       "createdAt": "2020-02-16T20:52:43Z",
-      "updatedAt": "2020-05-21T13:25:01Z",
-      "closedAt": null,
+      "updatedAt": "2020-05-22T23:17:15Z",
+      "closedAt": "2020-05-22T23:17:15Z",
       "comments": [
         {
           "author": "kwantam",
@@ -4652,7 +4659,7 @@
         },
         {
           "author": "mratsim",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "body": "Here are a few remarks that might help decide one way or another:\r\n\r\n## At the word level\r\n\r\nAt the word level, `cmov` is often alternatively called `select`, `choose` or `mux` or the ternary C operator.\r\nIn all cases I came across, the order was always \r\n```python\r\ndef cmov(condition: ConstantTimeBool, result_if_1: Word, result_if_0: Word) -> Word\r\n  ## Return ``result_if_1`` if condition\r\n  ## else return ``result_if_0``\r\n```\r\n- C ternary operator\r\n- `cmov` instruction on x86 CPU.\r\n- LLVM `select`: https://llvm.org/docs/LangRef.html#select-instruction\r\n- BearSSL `mux` by @pornin: https://www.bearssl.org/gitweb/?p=BearSSL;a=blob;f=src/inner.h;h=07e1d0a478e801a91580658918130fb8b595e407;hb=HEAD#l767\r\n- Cryptocoding guidelines `select` by @veorq: https://github.com/veorq/cryptocoding#solution-1\r\n- `ct_choose` by @lmrs2: https://www.cl.cam.ac.uk/~rja14/Papers/whatyouc.pdf (https://github.com/lmrs2/ct_choose)\r\n\r\n## At the big int / field element level\r\n\r\nHowever at the big int level, `cmov`, `cmove` or `ccopy` is in the other order in the libraries I use\r\n```python\r\ndef cmov(a: mut Fp, b: Fp, condition: ConstantTimeBool) -> None\r\n  ## Copy ``b`` into ``a`` if ``condition``\r\n  ## else leave ``a`` as-is.\r\n```\r\n- BearSSL `ccopy` by @pornin: https://www.bearssl.org/gitweb/?p=BearSSL;a=blob;f=src/inner.h;h=07e1d0a478e801a91580658918130fb8b595e407;hb=HEAD#l903\r\n- Milagro `cmove` by @mcarrickscott: https://github.com/miracl/core/blob/9fa4af0ed170c0fb6a992b7d9cda2d0c2daebbab/c/fp.h#L137-L144\r\n- the current hash-to-curve draft\r\n\r\n## Analysis\r\n\r\n2 \"intuitive\" readings are conflicting:\r\n1. return first parameter if true, else return second (word-level)\r\n2. copy if true, else do nothing (bigint-level)\r\n\r\n## Proposal\r\n\r\nMaybe `ccopy` in both the hash-to-curve and the VRF specs would be a better name for conditional copying of field element to avoid potential confusion with the word-level `cmov`.",
           "createdAt": "2020-02-24T12:56:58Z",
           "updatedAt": "2020-02-24T13:00:44Z"
@@ -4712,6 +4719,13 @@
           "body": "(Whoops!)",
           "createdAt": "2020-05-21T13:25:01Z",
           "updatedAt": "2020-05-21T13:25:01Z"
+        },
+        {
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Integrated the PR into VRF, so this is done now :)",
+          "createdAt": "2020-05-22T23:17:15Z",
+          "updatedAt": "2020-05-22T23:17:15Z"
         }
       ]
     },
@@ -5760,7 +5774,7 @@
       "id": "MDU6SXNzdWU2MjE0NTUyOTA=",
       "title": "xmd test vectors",
       "url": "https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/issues/253",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "kwantam",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
@@ -5769,8 +5783,8 @@
       ],
       "body": "Should we include test vectors for XMD? This could help folks to implement...",
       "createdAt": "2020-05-20T04:44:34Z",
-      "updatedAt": "2020-05-20T23:11:09Z",
-      "closedAt": null,
+      "updatedAt": "2020-05-22T23:27:59Z",
+      "closedAt": "2020-05-22T23:27:59Z",
       "comments": [
         {
           "author": "jedisct1",
@@ -5798,11 +5812,139 @@
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
-      "body": "After discussing with @reyzin today, it seems like we can go a little further with the domain separation discussion in Security Considerations.\r\n\r\nSpecifically: right now we append DST inside expand-message-xmd and expand-message-xof. For xof this isn't a problem because we expect it to be used with SHAKE-128 or a similar hash that has an indifferentiability proof. expand-message-xmd, on the other hand, has some subtleties that we should discuss further in how it interacts with domain separation in the invoking protocol.\r\n\r\nSpecifically, it's possible to use -xmd with either prefix or suffix domain separation, which is handy for protocols that prefer to use prefix domain separation (and there are reasons to do this; see below). Since -xmd prepends an all-zeros block to the front of the input to H when computing `b_0`, this is easy: just prepend some tag of length at most one block that's guaranteed to have a nonzero byte.\r\n\r\n(For the `b_i` computations (`i >= 1`), domain separation is automatic with overwhelming probability: the first output-block-length bytes is a random value that is never revealed to the adversary, so it's infeasible for the adversary to generate a collision and thereby differentiate -xmd from a hash function.)\r\n\r\nSo: I think we ought to add a note in Security Considerations that calls attention to this fact, because it may help future implementors to avoid footguns when using SHA-2 and other M-D functions.\r\n\r\n---\r\n\r\nThe reason invoking protocols might wish to use prefix rather than suffix domain separation with Merkle-Damgaard hash functions is that some ways of turning M-D into an indifferentiable function are fragile when composed with other protocols, and in some cases this fragility can be avoided by prefixing rather than suffixing the DST. (To be clear: the way -xmd is constructed it is *not* fragile in the way I am about to describe.)\r\n\r\nConsider two different protocols, Px and Py, each of which uses a M-D hash as an indifferentiable function by fixing the length of the M-D input and appending a domain separation tag. Let's call these fixed lengths Lx and Ly, respectively. Notice that this rules out any length extension attack against either Px or Py, because there is precisely one length allowed for each protocol.\r\n\r\nNow consider the case that Ly > Lx such that we have\r\n\r\n- Inside Px: `H(input1 || DST1)`\r\n- Inside Py: `H(input2 || DST2)`, where `input2 = input1 || DST1 || padding || ...` (imagine `padding` is the standard padding that, say, SHA-2 would add to the end of Px's HASH invocation).\r\n\r\nOops! Now Py's use of H becomes differentiable: first we observe the output from Px's H invocation, then we do a length extension attack to predict the output of Py's invocation! This is subtle and unfortunate: we couldn't differentiate Py's random oracle on its own (because of the fixed-length input), but composed with Px we can differentiate Py's random oracle.\r\n\r\nOK, so why bother with this example? Because, as @reyzin pointed out to me, if DST had been in the front, there'd be no such attack.\r\n\r\n---\r\n\r\nTo be clear: I am not suggesting any change to -xmd! But I think we should point out to readers that it's flexible in the way that other protocols can domain separate from it.",
+      "body": "After discussing with @reyzin today, it seems like we can go a little further with the domain separation discussion in Security Considerations.\r\n\r\nSpecifically: right now we append DST inside expand-message-xmd and expand-message-xof. For xof this isn't a problem because we expect it to be used with SHAKE-128 or a similar hash that has an indifferentiability proof. expand-message-xmd, on the other hand, has some subtleties that we should discuss further in how it interacts with domain separation in the invoking protocol.\r\n\r\nSpecifically, it's possible to use -xmd with either prefix or suffix domain separation, which is handy for protocols that prefer to use prefix domain separation (and there are reasons to do this; see below). Since -xmd prepends an all-zeros block to the front of the input to H when computing `b_0`, this is easy: just prepend some tag of length at most one block that's guaranteed to have a nonzero byte.\r\n\r\n(For the `b_i` computations (`i >= 1`), domain separation is automatic with overwhelming probability: the first output-block-length bytes is a random value ~that is never revealed to the adversary~ (EDIT: might not be this easy...), so it's infeasible for the adversary to generate a collision and thereby differentiate -xmd from a hash function.)\r\n\r\nSo: I think we ought to add a note in Security Considerations that calls attention to this fact, because it may help future implementors to avoid footguns when using SHA-2 and other M-D functions.\r\n\r\n---\r\n\r\nThe reason invoking protocols might wish to use prefix rather than suffix domain separation with Merkle-Damgaard hash functions is that some ways of turning M-D into an indifferentiable function are fragile when composed with other protocols, and in some cases this fragility can be avoided by prefixing rather than suffixing the DST. (To be clear: the way -xmd is constructed it is *not* fragile in the way I am about to describe.)\r\n\r\nConsider two different protocols, Px and Py, each of which uses a M-D hash as an indifferentiable function by fixing the length of the M-D input and appending a domain separation tag. Let's call these fixed lengths Lx and Ly, respectively. Notice that this rules out any length extension attack against either Px or Py, because there is precisely one length allowed for each protocol.\r\n\r\nNow consider the case that Ly > Lx such that we have\r\n\r\n- Inside Px: `H(input1 || DST1)`\r\n- Inside Py: `H(input2 || DST2)`, where `input2 = input1 || DST1 || padding || ...` (imagine `padding` is the standard padding that, say, SHA-2 would add to the end of Px's HASH invocation).\r\n\r\nOops! Now Py's use of H becomes differentiable: first we observe the output from Px's H invocation, then we do a length extension attack to predict the output of Py's invocation! This is subtle and unfortunate: we couldn't differentiate Py's random oracle on its own (because of the fixed-length input), but composed with Px we can differentiate Py's random oracle.\r\n\r\nOK, so why bother with this example? Because, as @reyzin pointed out to me, if DST had been in the front, there'd be no such attack.\r\n\r\n---\r\n\r\nTo be clear: I am not suggesting any change to -xmd! But I think we should point out to readers that it's flexible in the way that other protocols can domain separate from it.",
       "createdAt": "2020-05-22T05:03:09Z",
-      "updatedAt": "2020-05-22T05:04:51Z",
+      "updatedAt": "2020-05-23T00:37:08Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "body": "This seems like a reasonable clarification. (Thanks, @reyzin!) Are you suggesting we add the example? I think noting prefix or suffix domain separation properties of -xmd is probably sufficient.",
+          "createdAt": "2020-05-22T23:35:13Z",
+          "updatedAt": "2020-05-22T23:35:13Z"
+        },
+        {
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Not totally clear we need to add an example. So probably, as you say, just want to discuss considerations for domain separating from xmd in front and in back.",
+          "createdAt": "2020-05-22T23:46:39Z",
+          "updatedAt": "2020-05-22T23:46:39Z"
+        },
+        {
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Would you mind if I took a crack at this?",
+          "createdAt": "2020-05-23T00:03:29Z",
+          "updatedAt": "2020-05-23T00:03:29Z"
+        },
+        {
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I'm still thinking through one case trying to convince myself that prefix domain separation really works. (Pointed out by, who else? @reyzin :+1:).\r\n\r\nThe issue is that the adversary obviously *can* compute `b_0` on its own and try to somehow force a collision. For example, imagine that we have a protocol that calls hash_to_field on some (msg,dst) pair that the adversary knows, and in some other place in the protocol allows the adversary to generate a hash input, like `H(DST2 || msg2)`. If DST2 is short, the adversary can grind (msg,dst) pairs until he gets a b_0 value that collides with DST2 and then set msg2 to `b_0_remaining || I2OSP(1, 1) || DST_prime`. This will cause the H invocation to output exactly the same value as `b_1` inside of expand_message_xmd, which is bad if H is supposed to be an independent random oracle. (Here, let `b_0_remaining` be the string such that `b_0 = DST2 || b_0_remaining`.)\r\n\r\nThe way to handle this with the current xmd design is to make sure DST2 is reasonably long (preferably an entire block). Then the attacker has to break the hash function to cause b_0 to collide with DST2.\r\n\r\nAn alternative would be to slightly tweak the xmd design, in particular, doing something like\r\n\r\n    F_pad = 0xFF..FF   // one block long; any fixed value other than 0 works\r\n    b_1 = H(F_pad || b_0 || I2OSP(1, 1) || DST_prime)\r\n    b_i = H(F_pad || strxor(b_0, b_(i-1)) || I2OSP(i, 1) || DST_prime)\r\n\r\nThen every invocation of H has a fixed (non-adversarially-controlled) block at the front, which trivially means that we get domain separation from any prefix DST not equal to the padding block. As now, implementors can optimize by precomputing h(IV, F_pad) and then using this value as the IV; so it's possible to avoid the cost of the extra padding.\r\n\r\nI don't love the idea of changing XMD again, though...",
+          "createdAt": "2020-05-23T00:19:36Z",
+          "updatedAt": "2020-05-23T00:21:24Z"
+        },
+        {
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "body": "OK, I thought about it some more. I don't think we should change xmd, because there's basically no way to make this completely foolproof with M-D hashes.\r\n\r\nI think the right thing to do is to split it into two cases:\r\n\r\n- suffix domain separation: this is fine. For M-D hashes, the calling protocol still has to be sure that length extension attacks are not a problem in their use of the hash. If in doubt, an easy and safe way to do this is simply to use `expand_message_xmd` with a different DST and the desired output length (presumably something like 1 hash output length).\r\n\r\n- prefix domain separation: this is fine as long as the length of the prefix domain separation tag used in the invoking protocol is at least k bits, for k the security parameter (e.g., 16 bytes for 128-bit security).",
+          "createdAt": "2020-05-23T00:36:34Z",
+          "updatedAt": "2020-05-23T00:37:08Z"
+        }
+      ]
+    },
+    {
+      "number": 260,
+      "id": "MDU6SXNzdWU2MjM1MDQyOTc=",
+      "title": "Why include nonuniform encodings at all?",
+      "url": "https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/issues/260",
+      "state": "CLOSED",
+      "author": "paulmillr",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "It's unclear what's the benefit of NU encoding. The spec says \"you should use random oracle encoding when possible\". Why use NU at all? Perhaps someone could answer the q here, or clarify this in the spec...",
+      "createdAt": "2020-05-22T22:25:37Z",
+      "updatedAt": "2020-05-22T23:18:57Z",
+      "closedAt": "2020-05-22T23:18:57Z",
+      "comments": [
+        {
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "body": "They are less computationally expensive, since they only require one evaluation of the mapping rather than two for -RO.",
+          "createdAt": "2020-05-22T22:52:06Z",
+          "updatedAt": "2020-05-22T22:52:06Z"
+        },
+        {
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Indeed -- and we have a number of protocols identified that need them. (This came up in the context of #235.) See this page for more details: https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/wiki/Known-applications.",
+          "createdAt": "2020-05-22T23:18:57Z",
+          "updatedAt": "2020-05-22T23:18:57Z"
+        }
+      ]
+    },
+    {
+      "number": 261,
+      "id": "MDU6SXNzdWU2MjM1MTk3NDM=",
+      "title": "two small pieces of feedback",
+      "url": "https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/issues/261",
+      "state": "OPEN",
+      "author": "kwantam",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "chris-wood"
+      ],
+      "labels": [],
+      "body": "Both from Leo as we were discussing VRF:\r\n\r\n1. `pseudo_random_bytes` is a bad name in `hash_to_field`, because the cryptographic notion of pseudorandomness involves a secret. Is there a better name we can use?\r\n\r\n2. Is it possible to remove line breaks from the test vectors in the document, to make copy-pasting easier?\r\n\r\nI *think* the answer to (2) is no because we're limited to some fixed line length. @chris-wood do you know for sure?\r\n\r\nAs to (1), I don't have any ideas but I'll think about it.",
+      "createdAt": "2020-05-22T23:30:11Z",
+      "updatedAt": "2020-05-23T00:03:09Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Yeah, our hands are somewhat tied by the RFC editor for (2). :-\\\r\n\r\nAs for (1), what do you mean by it \"involves a secret\"? ",
+          "createdAt": "2020-05-22T23:31:35Z",
+          "updatedAt": "2020-05-22T23:31:46Z"
+        },
+        {
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Almost-formally, we say that a pseudorandom generator is a deterministic function G and some secret s such that G(s) is statistically indistinguishable from random to anyone who doesn't know s.\r\n\r\nHere, there's no secret---all inputs are public---so \"pseudorandom\" doesn't quite apply, so we're sort of watering down / confusing terminology by using it in this way.",
+          "createdAt": "2020-05-22T23:44:57Z",
+          "updatedAt": "2020-05-22T23:45:06Z"
+        },
+        {
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Okay, I thought you meant that it's output is secret, or something :)  I'm not sure folks will find this particularly confusing, though hedging against any risk is probably best. What about `uniform_bytes`?",
+          "createdAt": "2020-05-22T23:48:45Z",
+          "updatedAt": "2020-05-22T23:48:45Z"
+        },
+        {
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "body": "`uniform_bytes` sounds great!",
+          "createdAt": "2020-05-22T23:52:59Z",
+          "updatedAt": "2020-05-22T23:52:59Z"
+        },
+        {
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "body": "(I suppose your life would have been easier if I'd mentioned this before you put all that work into #259!!!)",
+          "createdAt": "2020-05-22T23:53:35Z",
+          "updatedAt": "2020-05-22T23:53:35Z"
+        },
+        {
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Hah, no worries :-) I can submit a PR for this, unless you'd like to take a crack at it?",
+          "createdAt": "2020-05-23T00:03:01Z",
+          "updatedAt": "2020-05-23T00:03:01Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -26202,24 +26344,26 @@
       "id": "MDExOlB1bGxSZXF1ZXN0NDIxNjkzMDky",
       "title": "Use the example protocol name as the DST in the test vectors.",
       "url": "https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/pull/255",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "chris-wood",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Per @jedisct1's suggestion, this uses the example protocol from the document as the DST value. I opted *not* to include a long DST, since we don't have any branches on the length of the DST. (We do have a requirement that it be less than 256 bytes, but I'm not sure we need a test vector for that?)\r\n\r\n",
       "createdAt": "2020-05-22T03:23:42Z",
-      "updatedAt": "2020-05-22T04:44:35Z",
+      "updatedAt": "2020-05-22T21:35:46Z",
       "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
       "baseRefName": "master",
-      "baseRefOid": "efc6cadfdab967f272ce05d373499330e4ca3e2b",
+      "baseRefOid": "d668b0b334238fef7b6dda74a499c3836bf5f897",
       "headRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
       "headRefName": "caw/fix-test-dst",
-      "headRefOid": "8086cb549aefa1840ba712b86a230ed13ae60db2",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "c62262c8c5c7993a97dc380a3456127d4808e0c6",
+      "closedAt": "2020-05-22T21:35:46Z",
+      "mergedAt": "2020-05-22T21:35:46Z",
+      "mergedBy": "chris-wood",
+      "mergeCommit": {
+        "oid": "473208ac66093b19602bc3273fa74089ca8c7df8"
+      },
       "comments": [
         {
           "author": "kwantam",
@@ -26227,9 +26371,130 @@
           "body": ":+1: I will do this review tomorrow!",
           "createdAt": "2020-05-22T04:44:35Z",
           "updatedAt": "2020-05-22T04:44:35Z"
+        },
+        {
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Thanks! I have test vectors for `expand_message` ready to go, too. I'll send those in a separate PR after this lands.",
+          "createdAt": "2020-05-22T17:23:02Z",
+          "updatedAt": "2020-05-22T17:23:02Z"
+        },
+        {
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Yep, I'll remove those test vectors, too. Stand by!",
+          "createdAt": "2020-05-22T21:21:45Z",
+          "updatedAt": "2020-05-22T21:21:45Z"
+        },
+        {
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@kwantam here's the final set of suites:\r\n\r\n```\r\nALL_SUITES = [\r\n    p256_sswu_ro, p384_sswu_ro, p521_sswu_ro, secp256k1_sswu_ro,\r\n    p256_sswu_nu, p384_sswu_nu, p521_sswu_nu, secp256k1_sswu_nu,\r\n    edw25519_sha512_ro, edw448_hash_ro,\r\n    edw25519_sha512_nu, edw448_hash_nu,\r\n    monty25519_sha512_ro, monty448_hash_ro,\r\n    monty25519_sha512_nu, monty448_hash_nu,\r\n    bls12381g1_sswu_ro, bls12381g2_sswu_ro,\r\n    bls12381g1_sswu_nu, bls12381g2_sswu_nu,\r\n]\r\n```",
+          "createdAt": "2020-05-22T21:27:00Z",
+          "updatedAt": "2020-05-22T21:27:00Z"
         }
       ],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDE3MTgxMjc2",
+          "commit": {
+            "abbreviatedOid": "8086cb5"
+          },
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "state": "CHANGES_REQUESTED",
+          "body": "~`suite_448.sage` is broken---needs to import `test_dst` from `sagelib.common`.~ fixed now\r\n\r\n\r\nAh, one other thing: should we go ahead and remove the test vectors for the suites that no longer exist?",
+          "createdAt": "2020-05-22T21:02:10Z",
+          "updatedAt": "2020-05-22T21:17:00Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "```suggestion\r\n    from sagelib.common import sgn0_be\r\n```\r\n\r\nI think this might have been a mistake.",
+              "createdAt": "2020-05-22T21:02:10Z",
+              "updatedAt": "2020-05-22T21:34:29Z"
+            },
+            {
+              "originalPosition": 31,
+              "body": "Does this combined_ascii file get used somewhere? Is the idea that this replaces the `poc/test_vectors_appx.py` script?",
+              "createdAt": "2020-05-22T21:10:05Z",
+              "updatedAt": "2020-05-22T21:34:29Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDE3MTg3OTYw",
+          "commit": {
+            "abbreviatedOid": "a7e6544"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-05-22T21:20:04Z",
+          "updatedAt": "2020-05-22T21:20:05Z",
+          "comments": [
+            {
+              "originalPosition": 31,
+              "body": "Doh. I didn't even realize that was a thing! It does the same thing. Would you prefer I remove this change?",
+              "createdAt": "2020-05-22T21:20:04Z",
+              "updatedAt": "2020-05-22T21:34:29Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDE3MTg4Nzk1",
+          "commit": {
+            "abbreviatedOid": "7e8535b"
+          },
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-05-22T21:22:27Z",
+          "updatedAt": "2020-05-22T21:22:28Z",
+          "comments": [
+            {
+              "originalPosition": 31,
+              "body": "No strong preference. The order of the sections is slightly different, which ends up making the diff to the document huge. So I guess that's a small thing in favor of keeping the old script, but only a very small one.",
+              "createdAt": "2020-05-22T21:22:28Z",
+              "updatedAt": "2020-05-22T21:34:29Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDE3MTg5MDc5",
+          "commit": {
+            "abbreviatedOid": "7e8535b"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-05-22T21:23:16Z",
+          "updatedAt": "2020-05-22T21:23:16Z",
+          "comments": [
+            {
+              "originalPosition": 31,
+              "body": "I'll remove it :) ",
+              "createdAt": "2020-05-22T21:23:16Z",
+              "updatedAt": "2020-05-22T21:34:29Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDE3MTkwMzE2",
+          "commit": {
+            "abbreviatedOid": "7e8535b"
+          },
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2020-05-22T21:26:16Z",
+          "updatedAt": "2020-05-22T21:26:16Z",
+          "comments": []
+        }
+      ]
     },
     {
       "number": 257,
@@ -26263,6 +26528,234 @@
           "body": "Thanks! :+1:",
           "createdAt": "2020-05-22T16:42:26Z",
           "updatedAt": "2020-05-22T16:42:26Z"
+        }
+      ],
+      "reviews": []
+    },
+    {
+      "number": 258,
+      "id": "MDExOlB1bGxSZXF1ZXN0NDIyMTUyODkw",
+      "title": "small test vector tweaks",
+      "url": "https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/pull/258",
+      "state": "MERGED",
+      "author": "kwantam",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "This removes the unused json files and updates the script for the document and the test vectors section in the document.",
+      "createdAt": "2020-05-22T21:54:01Z",
+      "updatedAt": "2020-05-23T06:27:42Z",
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "473208ac66093b19602bc3273fa74089ca8c7df8",
+      "headRepository": "kwantam/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "test_vector_little",
+      "headRefOid": "8ad338bea7ae5d85f71720c970659af9fde465dd",
+      "closedAt": "2020-05-22T21:55:13Z",
+      "mergedAt": "2020-05-22T21:55:13Z",
+      "mergedBy": "chris-wood",
+      "mergeCommit": {
+        "oid": "f23930f0377a392767fb2467fb6a5c165750e604"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDE3MjAzNDY0",
+          "commit": {
+            "abbreviatedOid": "8ad338b"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2020-05-22T21:55:06Z",
+          "updatedAt": "2020-05-22T21:55:06Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 259,
+      "id": "MDExOlB1bGxSZXF1ZXN0NDIyMTU5NDE4",
+      "title": "Add expand_message test vectors",
+      "url": "https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/pull/259",
+      "state": "MERGED",
+      "author": "chris-wood",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Closes #253.",
+      "createdAt": "2020-05-22T22:22:15Z",
+      "updatedAt": "2020-05-22T23:27:59Z",
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "f23930f0377a392767fb2467fb6a5c165750e604",
+      "headRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "caw/expand-vectors",
+      "headRefOid": "92a51cd7d860e272fcb32adfddcda5dabb16be67",
+      "closedAt": "2020-05-22T23:27:59Z",
+      "mergedAt": "2020-05-22T23:27:59Z",
+      "mergedBy": "chris-wood",
+      "mergeCommit": {
+        "oid": "f69ca372d8db728650706590d9e3a1788d5abb70"
+      },
+      "comments": [
+        {
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> One small thing: would it make sense to fix the line wrapping in the ASCII test vectors? I know this is annoying, but I'm guessing the rfc editor is going to make us do it at some point...\r\n\r\nYeah, probably. I think we can probably tackle this during RGLC, so I'll merge this as-is now!",
+          "createdAt": "2020-05-22T23:27:55Z",
+          "updatedAt": "2020-05-22T23:27:55Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDE3MjEzNTgw",
+          "commit": {
+            "abbreviatedOid": "5fcca41"
+          },
+          "author": "armfazh",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-05-22T22:33:50Z",
+          "updatedAt": "2020-05-22T22:33:51Z",
+          "comments": [
+            {
+              "originalPosition": 29,
+              "body": "what is the input msg?",
+              "createdAt": "2020-05-22T22:33:50Z",
+              "updatedAt": "2020-05-22T23:08:51Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDE3MjE0Mzgx",
+          "commit": {
+            "abbreviatedOid": "5fcca41"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-05-22T22:37:28Z",
+          "updatedAt": "2020-05-22T22:37:29Z",
+          "comments": [
+            {
+              "originalPosition": 29,
+              "body": "Oh whoops -- I added it to the dictionary but forgot to render it. Stand by!",
+              "createdAt": "2020-05-22T22:37:29Z",
+              "updatedAt": "2020-05-22T23:08:51Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDE3MjE5OTky",
+          "commit": {
+            "abbreviatedOid": "7b9175d"
+          },
+          "author": "armfazh",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-05-22T23:07:59Z",
+          "updatedAt": "2020-05-22T23:08:00Z",
+          "comments": [
+            {
+              "originalPosition": 124,
+              "body": "I think here is where your are dumping twice.\r\n",
+              "createdAt": "2020-05-22T23:08:00Z",
+              "updatedAt": "2020-05-22T23:08:51Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDE3MjIwMjgw",
+          "commit": {
+            "abbreviatedOid": "92a51cd"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-05-22T23:09:44Z",
+          "updatedAt": "2020-05-22T23:09:45Z",
+          "comments": [
+            {
+              "originalPosition": 124,
+              "body": "I didn't consider this a big deal, but fixed it nonetheless. Please have a look!",
+              "createdAt": "2020-05-22T23:09:44Z",
+              "updatedAt": "2020-05-22T23:09:45Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDE3MjIwODc0",
+          "commit": {
+            "abbreviatedOid": "92a51cd"
+          },
+          "author": "armfazh",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2020-05-22T23:12:49Z",
+          "updatedAt": "2020-05-22T23:12:49Z",
+          "comments": []
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDE3MjIzMjk5",
+          "commit": {
+            "abbreviatedOid": "92a51cd"
+          },
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Looks good to me!\r\n\r\nOne small thing: would it make sense to fix the line wrapping in the ASCII test vectors? I know this is annoying, but I'm guessing the rfc editor is going to make us do it at some point...",
+          "createdAt": "2020-05-22T23:26:38Z",
+          "updatedAt": "2020-05-22T23:26:38Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 262,
+      "id": "MDExOlB1bGxSZXF1ZXN0NDIyMjE4MzU3",
+      "title": "Fixes indentation of is_square.",
+      "url": "https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/pull/262",
+      "state": "MERGED",
+      "author": "armfazh",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fixes indentation of is_square.",
+      "createdAt": "2020-05-23T04:09:59Z",
+      "updatedAt": "2020-05-23T06:52:02Z",
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "f69ca372d8db728650706590d9e3a1788d5abb70",
+      "headRepository": "armfazh/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "fixIden",
+      "headRefOid": "9457c2b486b19818d6cc6e597cb67ec56280068c",
+      "closedAt": "2020-05-23T06:52:01Z",
+      "mergedAt": "2020-05-23T06:52:01Z",
+      "mergedBy": "kwantam",
+      "mergeCommit": {
+        "oid": "e92c188be1ac404e7c013f6f6e4b9e12efbdc871"
+      },
+      "comments": [
+        {
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Hmm. Have you tried running this through the compilation pipeline? My recollection is that this gives the wrong result. I'll check now and report back.",
+          "createdAt": "2020-05-23T06:26:20Z",
+          "updatedAt": "2020-05-23T06:26:20Z"
+        },
+        {
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "body": "OK! So it turns out that the kramdown HTML output is kind of broken, and what we should actually care about is the text. This is indeed an improvement :+1:\r\n\r\nI did a quick sweep of the document for consistency of blockquotes-inside-of-bullets. ~Looks like there are two instances of this issue in #hashtofield-expand-dst. Also maybe the blockquotes in #roadmap?~ The output doesn't seem to be improved by changing these. I'd say leave them alone.",
+          "createdAt": "2020-05-23T06:45:54Z",
+          "updatedAt": "2020-05-23T06:51:41Z"
         }
       ],
       "reviews": []
