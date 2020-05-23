@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2020-05-23T06:52:35.414394+00:00",
+  "timestamp": "2020-05-23T14:53:57.545216+00:00",
   "repo": "cfrg/draft-irtf-cfrg-hash-to-curve",
   "labels": [
     {
@@ -5899,7 +5899,7 @@
       "labels": [],
       "body": "Both from Leo as we were discussing VRF:\r\n\r\n1. `pseudo_random_bytes` is a bad name in `hash_to_field`, because the cryptographic notion of pseudorandomness involves a secret. Is there a better name we can use?\r\n\r\n2. Is it possible to remove line breaks from the test vectors in the document, to make copy-pasting easier?\r\n\r\nI *think* the answer to (2) is no because we're limited to some fixed line length. @chris-wood do you know for sure?\r\n\r\nAs to (1), I don't have any ideas but I'll think about it.",
       "createdAt": "2020-05-22T23:30:11Z",
-      "updatedAt": "2020-05-23T00:03:09Z",
+      "updatedAt": "2020-05-23T14:26:57Z",
       "closedAt": null,
       "comments": [
         {
@@ -5919,9 +5919,9 @@
         {
           "author": "chris-wood",
           "authorAssociation": "COLLABORATOR",
-          "body": "Okay, I thought you meant that it's output is secret, or something :)  I'm not sure folks will find this particularly confusing, though hedging against any risk is probably best. What about `uniform_bytes`?",
+          "body": "Okay, I thought you meant that its output is secret, or something :)  I'm not sure folks will find this particularly confusing, though hedging against any risk is probably best. What about `uniform_bytes`?",
           "createdAt": "2020-05-22T23:48:45Z",
-          "updatedAt": "2020-05-22T23:48:45Z"
+          "updatedAt": "2020-05-23T14:26:57Z"
         },
         {
           "author": "kwantam",
@@ -26758,6 +26758,32 @@
           "updatedAt": "2020-05-23T06:51:41Z"
         }
       ],
+      "reviews": []
+    },
+    {
+      "number": 263,
+      "id": "MDExOlB1bGxSZXF1ZXN0NDIyMjg0Njkx",
+      "title": "Rename pseudo_random_bytes to uniform_bytes",
+      "url": "https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/pull/263",
+      "state": "OPEN",
+      "author": "chris-wood",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Closes #261. (Thanks, @reyzin!)",
+      "createdAt": "2020-05-23T14:53:49Z",
+      "updatedAt": "2020-05-23T14:53:55Z",
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "e92c188be1ac404e7c013f6f6e4b9e12efbdc871",
+      "headRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "caw/rename-pseudorandom",
+      "headRefOid": "828115dd90a0bbb6067b77b180a884f7c458f8c3",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
       "reviews": []
     }
   ]
