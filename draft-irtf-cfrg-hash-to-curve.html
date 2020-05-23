@@ -836,7 +836,7 @@ table.left {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Faz-Hernandez, et al.</td>
-<td class="center">Expires 23 November 2020</td>
+<td class="center">Expires 24 November 2020</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -849,12 +849,12 @@ table.left {
 <dd class="internet-draft">draft-irtf-cfrg-hash-to-curve-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2020-05-22" class="published">22 May 2020</time>
+<time datetime="2020-05-23" class="published">23 May 2020</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2020-11-23">23 November 2020</time></dd>
+<dd class="expires"><time datetime="2020-11-24">24 November 2020</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -905,7 +905,7 @@ arbitrary string to a point on an elliptic curve.<a href="#section-abstract-1" c
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 23 November 2020.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 24 November 2020.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1818,69 +1818,65 @@ Commonly, implementations assume that the selector c is 1 for True or
 be computed by OR-ing all bits of C together. The resulting selector will be
 either 0 if all bits of C are zero, or 1 if at least one bit of C is 1.<a href="#section-4-3.1" class="pilcrow">¶</a>
 </li>
-<li id="section-4-3.2">is_square(x): This function returns True whenever the value x is a
+<li id="section-4-3.2">
+          <p id="section-4-3.2.1">is_square(x): This function returns True whenever the value x is a
 square in the field F. By Euler's criterion, this function can be
-calculated in constant time as<a href="#section-4-3.2" class="pilcrow">¶</a>
-</li>
-</ul>
-<div class="artwork art-text alignLeft" id="section-4-4">
+calculated in constant time as<a href="#section-4-3.2.1" class="pilcrow">¶</a></p>
+<div class="artwork art-text alignLeft" id="section-4-3.2.2">
 <pre>
 is_square(x) := { True,  if x^((q - 1) / 2) is 0 or 1 in F;
                 { False, otherwise.
-</pre><a href="#section-4-4" class="pilcrow">¶</a>
+</pre><a href="#section-4-3.2.2" class="pilcrow">¶</a>
 </div>
-<div class="artwork art-text alignLeft" id="section-4-5">
-<pre>
-In certain extension fields, is\_square can be computed in constant
+<p id="section-4-3.2.3">
+In certain extension fields, is_square can be computed in constant
 time more quickly than by the above exponentiation.
-{{AR13}} and {{S85}} describe optimized methods for extension fields.
-{{appx-sqrt-issq}} gives an optimized straight-line method for GF(p^2).
-</pre><a href="#section-4-5" class="pilcrow">¶</a>
-</div>
-<ul>
-<li id="section-4-6.1">
-          <p id="section-4-6.1.1">sqrt(x): The sqrt operation is a multi-valued function, i.e. there exist
+<span>[<a href="#AR13" class="xref">AR13</a>]</span> and <span>[<a href="#S85" class="xref">S85</a>]</span> describe optimized methods for extension fields.
+<a href="#appx-sqrt-issq" class="xref">Appendix G.5</a> gives an optimized straight-line method for GF(p^2).<a href="#section-4-3.2.3" class="pilcrow">¶</a></p>
+</li>
+<li id="section-4-3.3">
+          <p id="section-4-3.3.1">sqrt(x): The sqrt operation is a multi-valued function, i.e. there exist
 two roots of x in the field F whenever x is square.
 To maintain compatibility across implementations while allowing implementors
 leeway for optimizations, this document does not require sqrt() to return a
 particular value. Instead, as explained in <a href="#point-sign" class="xref">Section 6.4</a>, any higher-level
 function that computes square roots also specifies how to determine the sign
-of the result.<a href="#section-4-6.1.1" class="pilcrow">¶</a></p>
-<p id="section-4-6.1.2">
+of the result.<a href="#section-4-3.3.1" class="pilcrow">¶</a></p>
+<p id="section-4-3.3.2">
 The preferred way of computing square roots is to fix a deterministic
 algorithm particular to F. We give several algorithms in <a href="#appx-sqrt" class="xref">Appendix G</a>.
 Regardless of the method chosen, the sqrt function should be implemented
-in a way that resists timing side channels, i.e., in constant time.<a href="#section-4-6.1.2" class="pilcrow">¶</a></p>
+in a way that resists timing side channels, i.e., in constant time.<a href="#section-4-3.3.2" class="pilcrow">¶</a></p>
 </li>
-<li id="section-4-6.2">sgn0(x): This function returns either 0 or 1 indicating the "sign" of x,
+<li id="section-4-3.4">sgn0(x): This function returns either 0 or 1 indicating the "sign" of x,
 where sgn0(x) == 1 just when x is "negative".
 (In other words, this function always considers 0 to be positive.)
-<a href="#sgn0-function" class="xref">Section 4.1</a> defines this function and discusses its implementation.<a href="#section-4-6.2" class="pilcrow">¶</a>
+<a href="#sgn0-function" class="xref">Section 4.1</a> defines this function and discusses its implementation.<a href="#section-4-3.4" class="pilcrow">¶</a>
 </li>
-<li id="section-4-6.3">inv0(x): This function returns the multiplicative inverse of x in F,
+<li id="section-4-3.5">inv0(x): This function returns the multiplicative inverse of x in F,
 extended to all of F by fixing inv0(0) == 0.
 To implement inv0 in constant time, compute inv0(x) := x^(q - 2).
-Notice on input 0, the output is 0 as required.<a href="#section-4-6.3" class="pilcrow">¶</a>
+Notice on input 0, the output is 0 as required.<a href="#section-4-3.5" class="pilcrow">¶</a>
 </li>
-<li id="section-4-6.4">I2OSP and OS2IP: These functions are used to convert a byte string to
-and from a non-negative integer as described in <span>[<a href="#RFC8017" class="xref">RFC8017</a>]</span>.<a href="#section-4-6.4" class="pilcrow">¶</a>
+<li id="section-4-3.6">I2OSP and OS2IP: These functions are used to convert a byte string to
+and from a non-negative integer as described in <span>[<a href="#RFC8017" class="xref">RFC8017</a>]</span>.<a href="#section-4-3.6" class="pilcrow">¶</a>
 </li>
-<li id="section-4-6.5">a || b: denotes the concatenation of strings a and b.<a href="#section-4-6.5" class="pilcrow">¶</a>
+<li id="section-4-3.7">a || b: denotes the concatenation of strings a and b.<a href="#section-4-3.7" class="pilcrow">¶</a>
 </li>
-<li id="section-4-6.6">substr(str, sstart, slen): for a byte string str, this function returns
+<li id="section-4-3.8">substr(str, sstart, slen): for a byte string str, this function returns
 the slen-byte substring starting at position sstart; positions are zero
 indexed.
-For example, substr("ABCDEFG", 2, 3) == "CDE".<a href="#section-4-6.6" class="pilcrow">¶</a>
+For example, substr("ABCDEFG", 2, 3) == "CDE".<a href="#section-4-3.8" class="pilcrow">¶</a>
 </li>
-<li id="section-4-6.7">len(str): for a byte string str, this function returns the length of str
+<li id="section-4-3.9">len(str): for a byte string str, this function returns the length of str
 in bytes.
-For example, len("ABC") == 3.<a href="#section-4-6.7" class="pilcrow">¶</a>
+For example, len("ABC") == 3.<a href="#section-4-3.9" class="pilcrow">¶</a>
 </li>
-<li id="section-4-6.8">strxor(str1, str2): for byte strings str1 and str2, strxor(str1, str2)
+<li id="section-4-3.10">strxor(str1, str2): for byte strings str1 and str2, strxor(str1, str2)
 returns the bitwise XOR of the two strings.
 For example, strxor("abc", "XYZ") == "9;9" (the strings in this example
 are ASCII literals, but strxor is defined for arbitrary byte strings).
-In this document, strxor is only applied to inputs of equal length.<a href="#section-4-6.8" class="pilcrow">¶</a>
+In this document, strxor is only applied to inputs of equal length.<a href="#section-4-3.10" class="pilcrow">¶</a>
 </li>
 </ul>
 <div id="sgn0-function">
