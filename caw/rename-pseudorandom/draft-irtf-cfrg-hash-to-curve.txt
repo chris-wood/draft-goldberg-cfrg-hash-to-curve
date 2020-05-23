@@ -859,12 +859,12 @@ Internet-Draft                hash-to-curve                     May 2020
    meaning that this value is statistically far from uniform in [0, p -
    1].
 
-   To control bias, hash_to_field instead uses pseudorandom integers
-   whose length is at least ceil(log2(p)) + k bits, where k is the
-   target security level for the suite in bits.  Reducing such integers
-   mod p gives bias at most 2^-k for any p; this bias is appropriate
-   when targeting k-bit security.  For each such integer, hash_to_field
-   uses expand_message to obtain L pseudorandom bytes, where L =
+   To control bias, hash_to_field instead uses random integers whose
+   length is at least ceil(log2(p)) + k bits, where k is the target
+   security level for the suite in bits.  Reducing such integers mod p
+   gives bias at most 2^-k for any p; this bias is appropriate when
+   targeting k-bit security.  For each such integer, hash_to_field uses
+   expand_message to obtain L uniform bytes, where L =
    ceil((ceil(log2(p)) + k) / 8); this byte string is then interpreted
    as an integer via OS2IP [RFC8017].  For example, for a 255-bit prime
    p, and k = 128-bit security, L = ceil((255 + 128) / 8) = 48 bytes.
@@ -2452,9 +2452,9 @@ Internet-Draft                hash-to-curve                     May 2020
    elements; see Section 10.1 and Section 10.2 for further discussion.
 
    Each encoding type (Section 3) accepts an arbitrary byte string and
-   maps it to a pseudorandom point on the curve.  Note, however, that
-   directly evaluating the mappings of Section 6 produces an output that
-   is distinguishable from random.
+   maps it to a point on the curve.  Note, however, that directly
+   evaluating the mappings of Section 6 produces an output that is
+   distinguishable from random.
 
 
 
@@ -3039,14 +3039,13 @@ Internet-Draft                hash-to-curve                     May 2020
    Boneh et al.  [BLS01] describe an encoding method they call
    MapToGroup, which works roughly as follows: first, use the input
    string to initialize a pseudorandom number generator, then use the
-   generator to produce a pseudorandom value x in F.  If x is the
-   x-coordinate of a point on the elliptic curve, output that point.
-   Otherwise, generate a new pseudorandom value x in F and try again.
-   Since a random value x in F has probability about 1/2 of
-   corresponding to a point on the curve, the expected number of tries
-   is just two.  However, the running time of this method depends on the
-   input string, which means that it is not safe to use in protocols
-   sensitive to timing side channels.
+   generator to produce a value x in F.  If x is the x-coordinate of a
+   point on the elliptic curve, output that point.  Otherwise, generate
+   a new value x in F and try again.  Since a random value x in F has
+   probability about 1/2 of corresponding to a point on the curve, the
+   expected number of tries is just two.  However, the running time of
+   this method depends on the input string, which means that it is not
+   safe to use in protocols sensitive to timing side channels.
 
    Schinzel and Skalba [SS04] introduce a method of constructing
    elliptic curve points deterministically, for a restricted class of
@@ -3072,8 +3071,9 @@ Internet-Draft                hash-to-curve                     May 2020
    Several extensions and generalizations follow this work, including
    [FSV09], [FT10], [KLR10], [F11], and [CK11].
 
-
-
+   Following the work of Farashahi [F11], Fouque et al.  [FJT13]
+   describe a mapping to curves over fields of characteristic p = 3 (mod
+   4) having a number of points divisible by 4.  Bernstein et al.
 
 
 
@@ -3082,9 +3082,6 @@ Faz-Hernandez, et al.   Expires 24 November 2020               [Page 55]
 Internet-Draft                hash-to-curve                     May 2020
 
 
-   Following the work of Farashahi [F11], Fouque et al.  [FJT13]
-   describe a mapping to curves over fields of characteristic p = 3 (mod
-   4) having a number of points divisible by 4.  Bernstein et al.
    [BHKL13] optimize this mapping and describe a related mapping that
    they call "Elligator 2," which applies to any curve over a field of
    odd characteristic having a point of order 2.  This includes
@@ -3129,6 +3126,9 @@ Appendix B.  Rational maps
    corresponding Montgomery curve and how to map from that curve to the
    twisted Edwards curve.  This mapping may be used when hashing to
    twisted Edwards curves as described in Section 6.8.
+
+
+
 
 
 
