@@ -2452,10 +2452,10 @@ Internet-Draft                hash-to-curve                     May 2020
    elements; see Section 10.1 and Section 10.2 for further discussion.
 
    Each encoding type (Section 3) accepts an arbitrary byte string and
-   maps it to a point on the curve.  Note, however, that directly
+   maps it to a point on the curve sampled from a distribution that
+   depends on the encoding type.  It is important to note that directly
    evaluating the mappings of Section 6 produces an output that is
    distinguishable from random.
-
 
 
 
