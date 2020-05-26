@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2020-05-23T14:53:57.545216+00:00",
+  "timestamp": "2020-05-26T17:47:35.599469+00:00",
   "repo": "cfrg/draft-irtf-cfrg-hash-to-curve",
   "labels": [
     {
@@ -5890,7 +5890,7 @@
       "id": "MDU6SXNzdWU2MjM1MTk3NDM=",
       "title": "two small pieces of feedback",
       "url": "https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/issues/261",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "kwantam",
       "authorAssociation": "COLLABORATOR",
       "assignees": [
@@ -5899,8 +5899,8 @@
       "labels": [],
       "body": "Both from Leo as we were discussing VRF:\r\n\r\n1. `pseudo_random_bytes` is a bad name in `hash_to_field`, because the cryptographic notion of pseudorandomness involves a secret. Is there a better name we can use?\r\n\r\n2. Is it possible to remove line breaks from the test vectors in the document, to make copy-pasting easier?\r\n\r\nI *think* the answer to (2) is no because we're limited to some fixed line length. @chris-wood do you know for sure?\r\n\r\nAs to (1), I don't have any ideas but I'll think about it.",
       "createdAt": "2020-05-22T23:30:11Z",
-      "updatedAt": "2020-05-23T14:26:57Z",
-      "closedAt": null,
+      "updatedAt": "2020-05-23T18:30:38Z",
+      "closedAt": "2020-05-23T18:30:38Z",
       "comments": [
         {
           "author": "chris-wood",
@@ -5943,6 +5943,44 @@
           "body": "Hah, no worries :-) I can submit a PR for this, unless you'd like to take a crack at it?",
           "createdAt": "2020-05-23T00:03:01Z",
           "updatedAt": "2020-05-23T00:03:01Z"
+        }
+      ]
+    },
+    {
+      "number": 265,
+      "id": "MDU6SXNzdWU2MjQ5MzE3MDg=",
+      "title": "Padding in expand_message_xmd test vectors",
+      "url": "https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/issues/265",
+      "state": "CLOSED",
+      "author": "mratsim",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "I may be missing something obvious but from the https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/pull/259 vectors (great idea) I have an issue with msg_prime padding:\r\n\r\nVector:\r\n```\r\nname    = expand_message_xmd\r\nDST     = QUUX-V01-CS02-with-expander\r\nhash    = SHA256\r\nsecurity_param = 128\r\n\r\nmsg     =\r\nDST_prime = 515555582d5630312d435330322d776974682d657870616e646572\r\n          1b\r\nmsg_prime = 000000000000000000000000000000000000000000000000000000\r\n          000000000000000000000000000000000000000000000000000000\r\n          000000000000000000000000000000000000000000000000000000\r\n          000000000000000000000000000000000000000000000000000000\r\n          000000000000000000000000000000000000000000200051555558\r\n          2d5630312d435330322d776974682d657870616e6465721b\r\nuniform_bytes = 2eaa1f7b5715f4736e6a5dbe288257abf1faa028680c1d938cd62a\r\n          c699ead642\r\n```\r\n\r\nSpec:\r\n```\r\nexpand_message_xmd(msg, DST, len_in_bytes)\r\n\r\nParameters:\r\n- H, a hash function (see requirements above).\r\n- b_in_bytes, ceil(b / 8) for b the output size of H in bits.\r\n  For example, for b = 256, b_in_bytes = 32.\r\n- r_in_bytes, the input block size of H, measured in bytes.\r\n  For example, for SHA-256, r_in_bytes = 64.\r\n\r\nInput:\r\n- msg, a byte string.\r\n- DST, a byte string of at most 255 bytes.\r\n  See below for information on using longer DSTs.\r\n- len_in_bytes, the length of the requested output in bytes.\r\n\r\nOutput:\r\n- uniform_bytes, a byte string\r\n\r\nSteps:\r\n1.  ell = ceil(len_in_bytes / b_in_bytes)\r\n2.  ABORT if ell > 255\r\n3.  DST_prime = DST || I2OSP(len(DST), 1)\r\n4.  Z_pad = I2OSP(0, r_in_bytes)\r\n5.  l_i_b_str = I2OSP(len_in_bytes, 2)\r\n6.  msg_prime = Z_pad || msg || l_i_b_str || I2OSP(0, 1) || DST_prime\r\n7.  b_0 = H(msg_prime)\r\n8.  b_1 = H(b_0 || I2OSP(1, 1) || DST_prime)\r\n9.  for i in (2, ..., ell):\r\n10.    b_i = H(strxor(b_0, b_(i - 1)) || I2OSP(i, 1) || DST_prime)\r\n11. uniform_bytes = b_1 || ... || b_ell\r\n12. return substr(uniform_bytes, 0, len_in_bytes)\r\n~~~\r\n```\r\n\r\n1. We can clearly see at the end of the `msg_prime` this part `l_i_b_str || I2OSP(0, 1) || DST_prime`\r\n`002000515555582d5630312d435330322d776974682d657870616e6465721b`\r\n2. However preceding this `0020...` we have 4*54+40 zeros for a total of 256.\r\n3. As the msg is empty, those come from Z_pad.\r\n4. Z_pad uses the hash block size, for SHA256 (the test vector config), it's 64 bytes.\r\n5. In hex 64 zero bytes would lead to 128 zeros\r\n6. We have 256 zeros, was z_pad mistakenly duplicated?",
+      "createdAt": "2020-05-26T14:33:54Z",
+      "updatedAt": "2020-05-26T17:47:01Z",
+      "closedAt": "2020-05-26T17:47:01Z",
+      "comments": [
+        {
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Hmm. I just checked that the code does the right thing, so I am guessing the disconnect is in the way things are getting translated into the test vectors (which is good---much worse if the code is broken!).\r\n\r\nI may not have time to look into this until tomorrow afternoon or Thursday, but I'll get back to you asap.\r\n\r\nThanks for the report!",
+          "createdAt": "2020-05-26T15:13:13Z",
+          "updatedAt": "2020-05-26T15:13:13Z"
+        },
+        {
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Ah, well, here's an obvious issue: the SHA-256 and SHA-512 test vectors are identical. I'm guessing this means what we're listing as SHA-256 test vectors are not.",
+          "createdAt": "2020-05-26T15:20:05Z",
+          "updatedAt": "2020-05-26T15:20:05Z"
+        },
+        {
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Aha! found it. I'll open a PR now.",
+          "createdAt": "2020-05-26T15:28:58Z",
+          "updatedAt": "2020-05-26T15:28:58Z"
         }
       ]
     }
@@ -26765,26 +26803,293 @@
       "id": "MDExOlB1bGxSZXF1ZXN0NDIyMjg0Njkx",
       "title": "Rename pseudo_random_bytes to uniform_bytes",
       "url": "https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/pull/263",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "chris-wood",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Closes #261. (Thanks, @reyzin!)",
       "createdAt": "2020-05-23T14:53:49Z",
-      "updatedAt": "2020-05-23T14:53:55Z",
+      "updatedAt": "2020-05-23T18:30:38Z",
       "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
       "baseRefName": "master",
       "baseRefOid": "e92c188be1ac404e7c013f6f6e4b9e12efbdc871",
       "headRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
       "headRefName": "caw/rename-pseudorandom",
-      "headRefOid": "828115dd90a0bbb6067b77b180a884f7c458f8c3",
+      "headRefOid": "d0eff3985b46deeae013a554452ecb857f2e967a",
+      "closedAt": "2020-05-23T18:30:38Z",
+      "mergedAt": "2020-05-23T18:30:37Z",
+      "mergedBy": "chris-wood",
+      "mergeCommit": {
+        "oid": "e5642d7ad475232ee6de9a68eed1f43469a513e4"
+      },
+      "comments": [
+        {
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Thanks! They look good. Merging now.",
+          "createdAt": "2020-05-23T18:30:33Z",
+          "updatedAt": "2020-05-23T18:30:33Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDE3Mjk1MjM4",
+          "commit": {
+            "abbreviatedOid": "d0eff39"
+          },
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Looks good!\r\n\r\nI pushed a couple commits that remove bad uses of the word \"pseudorandom\" in the text, too. Please let me know if the edits look weird or wrong!",
+          "createdAt": "2020-05-23T17:37:06Z",
+          "updatedAt": "2020-05-23T17:37:06Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 264,
+      "id": "MDExOlB1bGxSZXF1ZXN0NDIyMzM1ODA0",
+      "title": "Domain separation discussion in Security Considerations",
+      "url": "https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/pull/264",
+      "state": "OPEN",
+      "author": "kwantam",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "This PR:\r\n\r\n- updates acknowledgments\r\n- slightly tweaks and clarifies the domain separation requirements\r\n- adds a discussion of \"external\" domain separation in the Security Recommendations section\r\n\r\ncloses #256",
+      "createdAt": "2020-05-23T22:38:49Z",
+      "updatedAt": "2020-05-24T13:26:06Z",
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "e5642d7ad475232ee6de9a68eed1f43469a513e4",
+      "headRepository": "kwantam/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "domain_separation_considerations",
+      "headRefOid": "e6addd680e782af22bb58279fb3e76bc96e8ed0f",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDE3MzE1Mzkw",
+          "commit": {
+            "abbreviatedOid": "dcd4bc4"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "Thanks! This matches what I expected from the issue. I only have a couple suggestions and one clarifying question.",
+          "createdAt": "2020-05-23T23:23:56Z",
+          "updatedAt": "2020-05-23T23:37:22Z",
+          "comments": [
+            {
+              "originalPosition": 116,
+              "body": "```suggestion\r\n1. For each use of H outside hash\\_to\\_field, choose a unique domain\r\n   separation tag DST\\_ext. Augment each invocation of H with input msg by\r\n   computing H(DST\\_ext || msg || I2OSP(0, 1)).\r\n```",
+              "createdAt": "2020-05-23T23:23:56Z",
+              "updatedAt": "2020-05-24T06:38:01Z"
+            },
+            {
+              "originalPosition": 121,
+              "body": "```suggestion\r\n   required to be nonzero ({{domain-separation}}, requirement 2), and DST\\_prime is always\r\n```",
+              "createdAt": "2020-05-23T23:25:29Z",
+              "updatedAt": "2020-05-24T06:38:01Z"
+            },
+            {
+              "originalPosition": 126,
+              "body": "```suggestion\r\n   For example, for two uses of H whose inputs are msg1 and msg2,\r\n```",
+              "createdAt": "2020-05-23T23:25:59Z",
+              "updatedAt": "2020-05-24T06:38:01Z"
+            },
+            {
+              "originalPosition": 126,
+              "body": "To me, an invocation is a single call to H, e.g., H(msg), whereas (as I understand it) what we mean here is that we want to clone H twice using DST_ext1 and DST_ext2.",
+              "createdAt": "2020-05-23T23:28:08Z",
+              "updatedAt": "2020-05-24T06:38:01Z"
+            },
+            {
+              "originalPosition": 149,
+              "body": "```suggestion\r\n   For example, for two uses of H whose inputs are msg1 and msg2,\r\n```",
+              "createdAt": "2020-05-23T23:28:57Z",
+              "updatedAt": "2020-05-24T06:38:01Z"
+            },
+            {
+              "originalPosition": 158,
+              "body": "```suggestion\r\n{{hashtofield-expand-other}} are expected to have similar properties.\r\nHowever, these should be analyzed on a case-by-case basis.\r\n```",
+              "createdAt": "2020-05-23T23:29:46Z",
+              "updatedAt": "2020-05-24T06:38:01Z"
+            },
+            {
+              "originalPosition": 166,
+              "body": "```suggestion\r\nexpand\\_message\\_xmd guards against these attacks.\r\nApplications can use it as a random oracle outside of hash\\_to\\_field\r\nwith proper domain separation from invocations inside hash\\_to\\_field\r\nby choosing a different DST.\r\n```",
+              "createdAt": "2020-05-23T23:30:14Z",
+              "updatedAt": "2020-05-24T06:38:01Z"
+            },
+            {
+              "originalPosition": 168,
+              "body": "This is another possibility to use expand_message_xmd outside of hash_to_field? I'm not sure I follow this example. The above paragraph says, as I understand it, \"feel free to crib expand_message_xmd for your purposes so long as you apply domain separation with a separate tag.\" It's not clear to me how this example follows. Can you clarify?",
+              "createdAt": "2020-05-23T23:34:55Z",
+              "updatedAt": "2020-05-24T06:38:01Z"
+            },
+            {
+              "originalPosition": 204,
+              "body": "\ud83d\udc4d ",
+              "createdAt": "2020-05-23T23:36:27Z",
+              "updatedAt": "2020-05-24T06:38:01Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDE3MzI0OTcz",
+          "commit": {
+            "abbreviatedOid": "dcd4bc4"
+          },
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-05-24T03:59:33Z",
+          "updatedAt": "2020-05-24T03:59:33Z",
+          "comments": [
+            {
+              "originalPosition": 168,
+              "body": "Ah, yes, sorry. What I meant was, an alternative to using expand_msg_xmd is to use HMAC. And then the idea is, this is how you'd domain separate HMAC from expand_message_xmd. I will clarify",
+              "createdAt": "2020-05-24T03:59:33Z",
+              "updatedAt": "2020-05-24T06:38:01Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDE3MzI3NDM5",
+          "commit": {
+            "abbreviatedOid": "c174f27"
+          },
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-05-24T05:12:49Z",
+          "updatedAt": "2020-05-24T05:12:49Z",
+          "comments": [
+            {
+              "originalPosition": 168,
+              "body": "OK, I took a crack at clarifying. Does this make sense now?\r\n\r\nThe reason I want to include \"how to domain separate HMAC from expand_message_xmd\" is that I suspect this might be something that protocols will want to do.",
+              "createdAt": "2020-05-24T05:12:49Z",
+              "updatedAt": "2020-05-24T06:38:01Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDE3MzI4NTI4",
+          "commit": {
+            "abbreviatedOid": "3bcc44f"
+          },
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-05-24T05:44:05Z",
+          "updatedAt": "2020-05-24T05:44:05Z",
+          "comments": [
+            {
+              "originalPosition": 168,
+              "body": "Did some further simplification.",
+              "createdAt": "2020-05-24T05:44:05Z",
+              "updatedAt": "2020-05-24T06:38:01Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDE3MzU4NTA2",
+          "commit": {
+            "abbreviatedOid": "e6addd6"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "This is much more clear now -- thanks for the additional details. (I need to give this a careful look in conjunction with the domain separation efforts we put into [HPKE](https://cfrg.github.io/draft-irtf-cfrg-hpke/draft-irtf-cfrg-hpke.html#name-cryptographic-dependencies), but that's not a blocking task.) ",
+          "createdAt": "2020-05-24T13:24:50Z",
+          "updatedAt": "2020-05-24T13:24:50Z",
+          "comments": []
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDE3MzU4NTk3",
+          "commit": {
+            "abbreviatedOid": "e6addd6"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-05-24T13:26:05Z",
+          "updatedAt": "2020-05-24T13:26:06Z",
+          "comments": [
+            {
+              "originalPosition": 168,
+              "body": "Yep! All good now.",
+              "createdAt": "2020-05-24T13:26:05Z",
+              "updatedAt": "2020-05-24T13:26:06Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 266,
+      "id": "MDExOlB1bGxSZXF1ZXN0NDIzMzI0MTI4",
+      "title": "fixes and tweaks for h2f test vectors",
+      "url": "https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/pull/266",
+      "state": "MERGED",
+      "author": "kwantam",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "This PR addresses the issue in #265 and also updates the data dumped out in the expand_message test vectors:\r\n\r\n- adds `len_in_bytes` argument for each invocation\r\n- removes `security_param`, which is an internal variable for sanity checking and not part of the API\r\n\r\nAlso, this PR updates `printer.py` to wrap correctly when the label is longer than 7 chars.\r\n\r\ncloses #265 ",
+      "createdAt": "2020-05-26T16:42:39Z",
+      "updatedAt": "2020-05-26T17:47:01Z",
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "e5642d7ad475232ee6de9a68eed1f43469a513e4",
+      "headRepository": "kwantam/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "h2f_vector_fix",
+      "headRefOid": "380f3510318260cc956d4930eea32ab1f7a7fb25",
+      "closedAt": "2020-05-26T17:47:01Z",
+      "mergedAt": "2020-05-26T17:47:01Z",
+      "mergedBy": "chris-wood",
+      "mergeCommit": {
+        "oid": "da6db8b0e3ed731af1199420f87b8cd903c1321a"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDE4NTE3ODA5",
+          "commit": {
+            "abbreviatedOid": "380f351"
+          },
+          "author": "armfazh",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2020-05-26T17:24:32Z",
+          "updatedAt": "2020-05-26T17:24:32Z",
+          "comments": []
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDE4NTM0Mjc1",
+          "commit": {
+            "abbreviatedOid": "380f351"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Looks great! Thanks!",
+          "createdAt": "2020-05-26T17:46:50Z",
+          "updatedAt": "2020-05-26T17:46:50Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
