@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2020-05-26T17:47:35.599469+00:00",
+  "timestamp": "2020-05-28T21:15:50.479416+00:00",
   "repo": "cfrg/draft-irtf-cfrg-hash-to-curve",
   "labels": [
     {
@@ -5807,15 +5807,15 @@
       "id": "MDU6SXNzdWU2MjI5NTE4Mzg=",
       "title": "expand domain separation discussion in Security Considerations",
       "url": "https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/issues/256",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "kwantam",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "After discussing with @reyzin today, it seems like we can go a little further with the domain separation discussion in Security Considerations.\r\n\r\nSpecifically: right now we append DST inside expand-message-xmd and expand-message-xof. For xof this isn't a problem because we expect it to be used with SHAKE-128 or a similar hash that has an indifferentiability proof. expand-message-xmd, on the other hand, has some subtleties that we should discuss further in how it interacts with domain separation in the invoking protocol.\r\n\r\nSpecifically, it's possible to use -xmd with either prefix or suffix domain separation, which is handy for protocols that prefer to use prefix domain separation (and there are reasons to do this; see below). Since -xmd prepends an all-zeros block to the front of the input to H when computing `b_0`, this is easy: just prepend some tag of length at most one block that's guaranteed to have a nonzero byte.\r\n\r\n(For the `b_i` computations (`i >= 1`), domain separation is automatic with overwhelming probability: the first output-block-length bytes is a random value ~that is never revealed to the adversary~ (EDIT: might not be this easy...), so it's infeasible for the adversary to generate a collision and thereby differentiate -xmd from a hash function.)\r\n\r\nSo: I think we ought to add a note in Security Considerations that calls attention to this fact, because it may help future implementors to avoid footguns when using SHA-2 and other M-D functions.\r\n\r\n---\r\n\r\nThe reason invoking protocols might wish to use prefix rather than suffix domain separation with Merkle-Damgaard hash functions is that some ways of turning M-D into an indifferentiable function are fragile when composed with other protocols, and in some cases this fragility can be avoided by prefixing rather than suffixing the DST. (To be clear: the way -xmd is constructed it is *not* fragile in the way I am about to describe.)\r\n\r\nConsider two different protocols, Px and Py, each of which uses a M-D hash as an indifferentiable function by fixing the length of the M-D input and appending a domain separation tag. Let's call these fixed lengths Lx and Ly, respectively. Notice that this rules out any length extension attack against either Px or Py, because there is precisely one length allowed for each protocol.\r\n\r\nNow consider the case that Ly > Lx such that we have\r\n\r\n- Inside Px: `H(input1 || DST1)`\r\n- Inside Py: `H(input2 || DST2)`, where `input2 = input1 || DST1 || padding || ...` (imagine `padding` is the standard padding that, say, SHA-2 would add to the end of Px's HASH invocation).\r\n\r\nOops! Now Py's use of H becomes differentiable: first we observe the output from Px's H invocation, then we do a length extension attack to predict the output of Py's invocation! This is subtle and unfortunate: we couldn't differentiate Py's random oracle on its own (because of the fixed-length input), but composed with Px we can differentiate Py's random oracle.\r\n\r\nOK, so why bother with this example? Because, as @reyzin pointed out to me, if DST had been in the front, there'd be no such attack.\r\n\r\n---\r\n\r\nTo be clear: I am not suggesting any change to -xmd! But I think we should point out to readers that it's flexible in the way that other protocols can domain separate from it.",
       "createdAt": "2020-05-22T05:03:09Z",
-      "updatedAt": "2020-05-23T00:37:08Z",
-      "closedAt": null,
+      "updatedAt": "2020-05-28T21:15:03Z",
+      "closedAt": "2020-05-28T21:15:03Z",
       "comments": [
         {
           "author": "chris-wood",
@@ -26853,25 +26853,49 @@
       "id": "MDExOlB1bGxSZXF1ZXN0NDIyMzM1ODA0",
       "title": "Domain separation discussion in Security Considerations",
       "url": "https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/pull/264",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "kwantam",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "This PR:\r\n\r\n- updates acknowledgments\r\n- slightly tweaks and clarifies the domain separation requirements\r\n- adds a discussion of \"external\" domain separation in the Security Recommendations section\r\n\r\ncloses #256",
       "createdAt": "2020-05-23T22:38:49Z",
-      "updatedAt": "2020-05-24T13:26:06Z",
+      "updatedAt": "2020-05-28T21:15:03Z",
       "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
       "baseRefName": "master",
-      "baseRefOid": "e5642d7ad475232ee6de9a68eed1f43469a513e4",
+      "baseRefOid": "da6db8b0e3ed731af1199420f87b8cd903c1321a",
       "headRepository": "kwantam/draft-irtf-cfrg-hash-to-curve",
       "headRefName": "domain_separation_considerations",
-      "headRefOid": "e6addd680e782af22bb58279fb3e76bc96e8ed0f",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
-      "comments": [],
+      "headRefOid": "123128058f2a04a54fa34c70195af1ab967ada73",
+      "closedAt": "2020-05-28T21:15:03Z",
+      "mergedAt": "2020-05-28T21:15:03Z",
+      "mergedBy": "armfazh",
+      "mergeCommit": {
+        "oid": "136c6d46c0061e4b3efb1f6d8ad26b2de1d7ba1b"
+      },
+      "comments": [
+        {
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "body": "OK, I have done a heavy editing pass on this section based on offline feedback from @reyzin. Sorry that this causes extra reviewing work, but I think the result is a more coherent description.",
+          "createdAt": "2020-05-28T05:05:29Z",
+          "updatedAt": "2020-05-28T05:05:29Z"
+        },
+        {
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Thanks! Simpler indeed. I'm happy.",
+          "createdAt": "2020-05-28T21:04:12Z",
+          "updatedAt": "2020-05-28T21:04:12Z"
+        },
+        {
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@armfazh please merge if you're OK with the changes!",
+          "createdAt": "2020-05-28T21:04:20Z",
+          "updatedAt": "2020-05-28T21:04:20Z"
+        }
+      ],
       "reviews": [
         {
           "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDE3MzE1Mzkw",
@@ -26889,55 +26913,55 @@
               "originalPosition": 116,
               "body": "```suggestion\r\n1. For each use of H outside hash\\_to\\_field, choose a unique domain\r\n   separation tag DST\\_ext. Augment each invocation of H with input msg by\r\n   computing H(DST\\_ext || msg || I2OSP(0, 1)).\r\n```",
               "createdAt": "2020-05-23T23:23:56Z",
-              "updatedAt": "2020-05-24T06:38:01Z"
+              "updatedAt": "2020-05-28T21:00:48Z"
             },
             {
               "originalPosition": 121,
               "body": "```suggestion\r\n   required to be nonzero ({{domain-separation}}, requirement 2), and DST\\_prime is always\r\n```",
               "createdAt": "2020-05-23T23:25:29Z",
-              "updatedAt": "2020-05-24T06:38:01Z"
+              "updatedAt": "2020-05-28T21:00:48Z"
             },
             {
               "originalPosition": 126,
               "body": "```suggestion\r\n   For example, for two uses of H whose inputs are msg1 and msg2,\r\n```",
               "createdAt": "2020-05-23T23:25:59Z",
-              "updatedAt": "2020-05-24T06:38:01Z"
+              "updatedAt": "2020-05-28T21:00:48Z"
             },
             {
               "originalPosition": 126,
               "body": "To me, an invocation is a single call to H, e.g., H(msg), whereas (as I understand it) what we mean here is that we want to clone H twice using DST_ext1 and DST_ext2.",
               "createdAt": "2020-05-23T23:28:08Z",
-              "updatedAt": "2020-05-24T06:38:01Z"
+              "updatedAt": "2020-05-28T21:00:48Z"
             },
             {
               "originalPosition": 149,
               "body": "```suggestion\r\n   For example, for two uses of H whose inputs are msg1 and msg2,\r\n```",
               "createdAt": "2020-05-23T23:28:57Z",
-              "updatedAt": "2020-05-24T06:38:01Z"
+              "updatedAt": "2020-05-28T21:00:48Z"
             },
             {
               "originalPosition": 158,
               "body": "```suggestion\r\n{{hashtofield-expand-other}} are expected to have similar properties.\r\nHowever, these should be analyzed on a case-by-case basis.\r\n```",
               "createdAt": "2020-05-23T23:29:46Z",
-              "updatedAt": "2020-05-24T06:38:01Z"
+              "updatedAt": "2020-05-28T21:00:48Z"
             },
             {
               "originalPosition": 166,
               "body": "```suggestion\r\nexpand\\_message\\_xmd guards against these attacks.\r\nApplications can use it as a random oracle outside of hash\\_to\\_field\r\nwith proper domain separation from invocations inside hash\\_to\\_field\r\nby choosing a different DST.\r\n```",
               "createdAt": "2020-05-23T23:30:14Z",
-              "updatedAt": "2020-05-24T06:38:01Z"
+              "updatedAt": "2020-05-28T21:00:48Z"
             },
             {
               "originalPosition": 168,
               "body": "This is another possibility to use expand_message_xmd outside of hash_to_field? I'm not sure I follow this example. The above paragraph says, as I understand it, \"feel free to crib expand_message_xmd for your purposes so long as you apply domain separation with a separate tag.\" It's not clear to me how this example follows. Can you clarify?",
               "createdAt": "2020-05-23T23:34:55Z",
-              "updatedAt": "2020-05-24T06:38:01Z"
+              "updatedAt": "2020-05-28T21:00:48Z"
             },
             {
               "originalPosition": 204,
               "body": "\ud83d\udc4d ",
               "createdAt": "2020-05-23T23:36:27Z",
-              "updatedAt": "2020-05-24T06:38:01Z"
+              "updatedAt": "2020-05-28T21:00:48Z"
             }
           ]
         },
@@ -26957,7 +26981,7 @@
               "originalPosition": 168,
               "body": "Ah, yes, sorry. What I meant was, an alternative to using expand_msg_xmd is to use HMAC. And then the idea is, this is how you'd domain separate HMAC from expand_message_xmd. I will clarify",
               "createdAt": "2020-05-24T03:59:33Z",
-              "updatedAt": "2020-05-24T06:38:01Z"
+              "updatedAt": "2020-05-28T21:00:48Z"
             }
           ]
         },
@@ -26977,7 +27001,7 @@
               "originalPosition": 168,
               "body": "OK, I took a crack at clarifying. Does this make sense now?\r\n\r\nThe reason I want to include \"how to domain separate HMAC from expand_message_xmd\" is that I suspect this might be something that protocols will want to do.",
               "createdAt": "2020-05-24T05:12:49Z",
-              "updatedAt": "2020-05-24T06:38:01Z"
+              "updatedAt": "2020-05-28T21:00:48Z"
             }
           ]
         },
@@ -26997,7 +27021,7 @@
               "originalPosition": 168,
               "body": "Did some further simplification.",
               "createdAt": "2020-05-24T05:44:05Z",
-              "updatedAt": "2020-05-24T06:38:01Z"
+              "updatedAt": "2020-05-28T21:00:48Z"
             }
           ]
         },
@@ -27030,9 +27054,308 @@
               "originalPosition": 168,
               "body": "Yep! All good now.",
               "createdAt": "2020-05-24T13:26:05Z",
-              "updatedAt": "2020-05-24T13:26:06Z"
+              "updatedAt": "2020-05-28T21:00:48Z"
             }
           ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDE5NTg2ODc5",
+          "commit": {
+            "abbreviatedOid": "e6addd6"
+          },
+          "author": "armfazh",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2020-05-27T20:34:18Z",
+          "updatedAt": "2020-05-27T20:35:03Z",
+          "comments": [
+            {
+              "originalPosition": 131,
+              "body": "I think you might want to say two hash functions H0, H1 created from H. So each hash function has different `DST_ext` prefix.\r\n\r\nOtherwise, this makes me think that every time Alice wants to hash using say H0 (derived from H), she needs to append a different DST_ext (per message). Rather than a DST_ext that is the same for all invocations of H0.\r\n",
+              "createdAt": "2020-05-27T20:34:18Z",
+              "updatedAt": "2020-05-28T21:00:48Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDE5NjE1OTg0",
+          "commit": {
+            "abbreviatedOid": "e6addd6"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-05-27T21:18:23Z",
+          "updatedAt": "2020-05-27T21:18:24Z",
+          "comments": [
+            {
+              "originalPosition": 131,
+              "body": "Wouldn't those be identical? Namely, Alice could append the DST, or the implementation of H0 could do it internally, no?",
+              "createdAt": "2020-05-27T21:18:23Z",
+              "updatedAt": "2020-05-28T21:00:48Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDE5NjI0OTA4",
+          "commit": {
+            "abbreviatedOid": "e6addd6"
+          },
+          "author": "armfazh",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-05-27T21:33:04Z",
+          "updatedAt": "2020-05-27T21:33:05Z",
+          "comments": [
+            {
+              "originalPosition": 131,
+              "body": "The difference is whether the `DTS_ext` is different per message rather than per hash H0,H1,...",
+              "createdAt": "2020-05-27T21:33:04Z",
+              "updatedAt": "2020-05-28T21:00:48Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDE5NjI2Mjgz",
+          "commit": {
+            "abbreviatedOid": "e6addd6"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-05-27T21:35:31Z",
+          "updatedAt": "2020-05-27T21:35:31Z",
+          "comments": [
+            {
+              "originalPosition": 131,
+              "body": "Sorry, I'm not following. How are these not identical? \r\n\r\n```\r\nH0(msg) = H(msg || DST1) // Library appends and calls H directly\r\nH1(msg) = H(msg || DST2) // ^^\r\n```\r\n\r\nand\r\n\r\n```\r\nH0(msg || DST1) = H(msg || DST1) // Alice appends and calls H directly\r\nH1(msg || DST2) = H(msg || DST2) // ^^\r\n```",
+              "createdAt": "2020-05-27T21:35:31Z",
+              "updatedAt": "2020-05-28T21:00:48Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDE5NjM2MDYx",
+          "commit": {
+            "abbreviatedOid": "e6addd6"
+          },
+          "author": "armfazh",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-05-27T21:53:06Z",
+          "updatedAt": "2020-05-27T21:53:07Z",
+          "comments": [
+            {
+              "originalPosition": 131,
+              "body": "This is not the point. \r\n\r\n> For example, for two uses of H whose inputs are msg1 and msg2, one might choose distinct DST\\_ext1 and DST\\_ext2 and compute\r\n>\r\n>        hash1 = H(DST_ext1 || msg1 || I2OSP(0, 1))\r\n>        hash2 = H(DST_ext2 || msg2 || I2OSP(0, 1))\r\n\r\nEvery time Alice wants to hash with H0 defined as H0(msg) = H( DST_ex || msg ),  she must choose a different DST_ex. \r\n\r\nSo, which one is the correct way?\r\nH0(msg1) = H( DST_ex1 || msg1 )\r\nH0(msg2) = H( DST_ex2 || msg2 )\r\nH0(msg3) = H( DST_ex3 || msg3 )\r\nor this one\r\nH0(msg1) = H( DST_ex || msg1 )\r\nH0(msg2) = H( DST_ex || msg2 )\r\nH0(msg3) = H( DST_ex || msg3 )\r\n\r\nI think the correct way is the second one, but the text it seems to me is saying the first one.\r\n  \r\n\r\n",
+              "createdAt": "2020-05-27T21:53:06Z",
+              "updatedAt": "2020-05-28T21:00:48Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDE5NjM3MTQw",
+          "commit": {
+            "abbreviatedOid": "e6addd6"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-05-27T21:55:14Z",
+          "updatedAt": "2020-05-27T21:55:15Z",
+          "comments": [
+            {
+              "originalPosition": 131,
+              "body": "Ah, I see! Certainly the second one is the recommendation here. Maybe this clears it up?\r\n\r\n```\r\nhash1 = H1(msg) = H(DST_ext1 || msg || I2OSP(0, 1))\r\nhash2 = H2(msg) = H(DST_ext2 || msg || I2OSP(0, 1))\r\n```",
+              "createdAt": "2020-05-27T21:55:14Z",
+              "updatedAt": "2020-05-28T21:00:48Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDE5NjQ5Njg1",
+          "commit": {
+            "abbreviatedOid": "e6addd6"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-05-27T22:20:11Z",
+          "updatedAt": "2020-05-27T22:20:11Z",
+          "comments": [
+            {
+              "originalPosition": 131,
+              "body": "@kwantam if this works for you, would you mind adding it? I'll merge when done!",
+              "createdAt": "2020-05-27T22:20:11Z",
+              "updatedAt": "2020-05-28T21:00:48Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDE5NzI4Njc1",
+          "commit": {
+            "abbreviatedOid": "e6addd6"
+          },
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-05-28T02:05:05Z",
+          "updatedAt": "2020-05-28T02:05:05Z",
+          "comments": [
+            {
+              "originalPosition": 131,
+              "body": "Great catch. I will clarify.",
+              "createdAt": "2020-05-28T02:05:05Z",
+              "updatedAt": "2020-05-28T21:00:48Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDIwMjgwODUw",
+          "commit": {
+            "abbreviatedOid": "7837730"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "These latest changes look good! I have a couple suggestions, but nothing blocking.",
+          "createdAt": "2020-05-28T16:20:04Z",
+          "updatedAt": "2020-05-28T16:55:00Z",
+          "comments": [
+            {
+              "originalPosition": 125,
+              "body": "```suggestion\r\ndistinct from DST\\_prime and augment calls to H with DST\\_ext.\r\n```",
+              "createdAt": "2020-05-28T16:20:05Z",
+              "updatedAt": "2020-05-28T21:00:48Z"
+            },
+            {
+              "originalPosition": 126,
+              "body": "```suggestion\r\nEach method augments calls to H differently, and each may impose\r\n```",
+              "createdAt": "2020-05-28T16:20:38Z",
+              "updatedAt": "2020-05-28T21:00:48Z"
+            },
+            {
+              "originalPosition": 143,
+              "body": "```suggestion\r\n    encoding the length of DST\\_ext) to make it infeasible to find distinct\r\n```",
+              "createdAt": "2020-05-28T16:25:33Z",
+              "updatedAt": "2020-05-28T21:00:48Z"
+            },
+            {
+              "originalPosition": 157,
+              "body": "```suggestion\r\n    encoding the length of DST\\_ext) to make it infeasible to find distinct\r\n```",
+              "createdAt": "2020-05-28T16:25:43Z",
+              "updatedAt": "2020-05-28T21:00:48Z"
+            },
+            {
+              "originalPosition": 162,
+              "body": "```suggestion\r\n    are distinct from those inside expand\\_message. Specifically, the final byte of\r\n```",
+              "createdAt": "2020-05-28T16:30:48Z",
+              "updatedAt": "2020-05-28T21:00:49Z"
+            },
+            {
+              "originalPosition": 147,
+              "body": "```suggestion\r\n    H have distinct suffixes. Namely, two suffixes are only equal if their length and value is the same, which\r\n    is not possible if DST\\_ext is different from DST\\_prime.\r\n```",
+              "createdAt": "2020-05-28T16:50:14Z",
+              "updatedAt": "2020-05-28T21:00:49Z"
+            },
+            {
+              "originalPosition": 170,
+              "body": "```suggestion\r\n    It does not give domain separation for expand\\_message\\_xof or HMAC-H.\r\n```",
+              "createdAt": "2020-05-28T16:50:46Z",
+              "updatedAt": "2020-05-28T21:00:49Z"
+            },
+            {
+              "originalPosition": 198,
+              "body": "Should we note something about HMAC-H when used with a secret key? (HPKE, for example, assumes HMAC is indifferentiable from a RO.)",
+              "createdAt": "2020-05-28T16:54:12Z",
+              "updatedAt": "2020-05-28T21:00:49Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDIwMzI2NjI4",
+          "commit": {
+            "abbreviatedOid": "7837730"
+          },
+          "author": "armfazh",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "some suggested edits",
+          "createdAt": "2020-05-28T17:15:15Z",
+          "updatedAt": "2020-05-28T17:46:20Z",
+          "comments": [
+            {
+              "originalPosition": 108,
+              "body": "I think this line could be better sited at the start of the section. \r\nSo, first recalling the objective of domain separation, \r\nthen showing how we achieve this objective _inside_ expand_message,\r\nand then pointing out how others can  _externally_ use H preserving domain separation.  ",
+              "createdAt": "2020-05-28T17:15:15Z",
+              "updatedAt": "2020-05-28T21:00:49Z"
+            },
+            {
+              "originalPosition": 115,
+              "body": "```suggestion\r\nEach method proceeds in a similar way: first, it chooses a tag DST\\_ext\r\n```",
+              "createdAt": "2020-05-28T17:20:24Z",
+              "updatedAt": "2020-05-28T21:00:49Z"
+            },
+            {
+              "originalPosition": 123,
+              "body": "Is there a reason for using parentheses?",
+              "createdAt": "2020-05-28T17:22:16Z",
+              "updatedAt": "2020-05-28T21:00:49Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDIwNDYyNzIx",
+          "commit": {
+            "abbreviatedOid": "7837730"
+          },
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "I've pushed a revision that responds to all of these comments. Thank you!!!",
+          "createdAt": "2020-05-28T20:21:41Z",
+          "updatedAt": "2020-05-28T21:01:22Z",
+          "comments": [
+            {
+              "originalPosition": 123,
+              "body": "To make clear that it's a heading rather than text. Since we don't have \"description\" lists, I went with something roughly analogous to what's frequently used in papers, e.g.,\r\n\r\n    Definition 1 (Soundness.)\r\n\r\nI'm not extremely committed to keeping this, but I do think the parens are slightly better for clarity.",
+              "createdAt": "2020-05-28T20:21:41Z",
+              "updatedAt": "2020-05-28T21:01:22Z"
+            },
+            {
+              "originalPosition": 147,
+              "body": "I'm going to push an edit with something slightly simpler; please let me know if you prefer more detail.",
+              "createdAt": "2020-05-28T20:24:44Z",
+              "updatedAt": "2020-05-28T21:01:22Z"
+            },
+            {
+              "originalPosition": 115,
+              "body": "I'm going to push a commit with a similar edit, except that the subject of the verb \"chooses\" is not the method, it's the protocol designer. Please let me know if my edit doesn't capture the spirit of this suggestion.",
+              "createdAt": "2020-05-28T20:25:56Z",
+              "updatedAt": "2020-05-28T21:01:22Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDIwNDkwNDg0",
+          "commit": {
+            "abbreviatedOid": "1231280"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2020-05-28T21:03:54Z",
+          "updatedAt": "2020-05-28T21:03:54Z",
+          "comments": []
         }
       ]
     },
@@ -27048,7 +27371,7 @@
       "labels": [],
       "body": "This PR addresses the issue in #265 and also updates the data dumped out in the expand_message test vectors:\r\n\r\n- adds `len_in_bytes` argument for each invocation\r\n- removes `security_param`, which is an internal variable for sanity checking and not part of the API\r\n\r\nAlso, this PR updates `printer.py` to wrap correctly when the label is longer than 7 chars.\r\n\r\ncloses #265 ",
       "createdAt": "2020-05-26T16:42:39Z",
-      "updatedAt": "2020-05-26T17:47:01Z",
+      "updatedAt": "2020-05-28T02:00:03Z",
       "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
       "baseRefName": "master",
       "baseRefOid": "e5642d7ad475232ee6de9a68eed1f43469a513e4",
