@@ -14,7 +14,7 @@
        This document specifies a number of algorithms that may be used to encode or hash an
 arbitrary string to a point on an elliptic curve. 
     " name="description">
-<meta content="xml2rfc 2.44.0" name="generator">
+<meta content="xml2rfc 2.45.0" name="generator">
 <meta content="Internet-Draft" name="keyword">
 <meta content="draft-irtf-cfrg-hash-to-curve-latest" name="ietf.draft">
 <link href="draft-irtf-cfrg-hash-to-curve.xml" rel="alternate" type="application/rfc+xml">
@@ -478,14 +478,10 @@ hr.addr {
 }
 @media (min-width: 500px) {
   #authors-addresses > section {
-    display: relative;
-    padding: 32px 0 0;
     column-count: 2;
     column-gap: 20px;
   }
-  #name-authors-addresses {
-    position: absolute;
-    top: 0px;
+  #authors-addresses > section > h2 {
     column-span: all;
   }
   /* hack for break-inside: avoid-column */
@@ -495,21 +491,8 @@ hr.addr {
   }
 }
 
-/* temporary notes */
-.rfcEditorRemove::before {
-  position: absolute;
-  top: 0.2em;
-  right: 0.2em;
-  padding: 0.2em;
-  content: "The RFC Editor will remove this note";
-  color: #b76427;
-  background-color: rgba(249, 232, 105, 0.3);
-}
-.rfcEditorRemove {
-  position: relative;
-  padding-top: 1.8em;
-  background-color: rgba(249, 232, 105, 0.3);
-  border-radius: 3px;
+.rfcEditorRemove p:first-of-type {
+  font-style: italic;
 }
 .cref {
   background-color: rgba(249, 232, 105, 0.3);
@@ -836,7 +819,7 @@ table.left {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Faz-Hernandez, et al.</td>
-<td class="center">Expires 27 November 2020</td>
+<td class="center">Expires 29 November 2020</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -849,12 +832,12 @@ table.left {
 <dd class="internet-draft">draft-irtf-cfrg-hash-to-curve-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2020-05-26" class="published">26 May 2020</time>
+<time datetime="2020-05-28" class="published">28 May 2020</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2020-11-27">27 November 2020</time></dd>
+<dd class="expires"><time datetime="2020-11-29">29 November 2020</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -905,7 +888,7 @@ arbitrary string to a point on an elliptic curve.<a href="#section-abstract-1" c
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 27 November 2020.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 29 November 2020.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1126,7 +1109,10 @@ arbitrary string to a point on an elliptic curve.<a href="#section-abstract-1" c
                 <p id="section-toc.1-1.10.2.2.1"><a href="#section-10.2" class="xref">10.2</a>.  <a href="#name-expand_message_xmd-security" class="xref">expand_message_xmd security</a><a href="#section-toc.1-1.10.2.2.1" class="pilcrow">¶</a></p>
 </li>
 <li class="toc ulEmpty" id="section-toc.1-1.10.2.3">
-                <p id="section-toc.1-1.10.2.3.1"><a href="#section-10.3" class="xref">10.3</a>.  <a href="#name-target-security-levels" class="xref">Target security levels</a><a href="#section-toc.1-1.10.2.3.1" class="pilcrow">¶</a></p>
+                <p id="section-toc.1-1.10.2.3.1"><a href="#section-10.3" class="xref">10.3</a>.  <a href="#name-domain-separation-recommend" class="xref">Domain separation recommendations</a><a href="#section-toc.1-1.10.2.3.1" class="pilcrow">¶</a></p>
+</li>
+<li class="toc ulEmpty" id="section-toc.1-1.10.2.4">
+                <p id="section-toc.1-1.10.2.4.1"><a href="#section-10.4" class="xref">10.4</a>.  <a href="#name-target-security-levels" class="xref">Target security levels</a><a href="#section-toc.1-1.10.2.4.1" class="pilcrow">¶</a></p>
 </li>
 </ul>
 </li>
@@ -1767,33 +1753,39 @@ The following requirements apply:<a href="#section-3.1-3" class="pilcrow">¶</a>
           <li id="section-3.1-4.1">Tags MUST be supplied as the DST parameter to hash_to_field, as
 described in <a href="#hashtofield" class="xref">Section 5</a>.<a href="#section-3.1-4.1" class="pilcrow">¶</a>
 </li>
-<li id="section-3.1-4.2">Tags MUST begin with a fixed protocol identification string.
-This identification string should be unique to the protocol.<a href="#section-3.1-4.2" class="pilcrow">¶</a>
+<li id="section-3.1-4.2">Tags MUST have nonzero length. A minimum length of 16 bytes
+is RECOMMENDED to reduce the chance of collisions with other
+protocols.<a href="#section-3.1-4.2" class="pilcrow">¶</a>
 </li>
-<li id="section-3.1-4.3">Tags SHOULD include a protocol version number.<a href="#section-3.1-4.3" class="pilcrow">¶</a>
+<li id="section-3.1-4.3">Tags SHOULD begin with a fixed protocol identification string
+that is unique to the protocol.<a href="#section-3.1-4.3" class="pilcrow">¶</a>
 </li>
-<li id="section-3.1-4.4">For protocols that define multiple ciphersuites, each ciphersuite's
+<li id="section-3.1-4.4">Tags SHOULD include a protocol version number.<a href="#section-3.1-4.4" class="pilcrow">¶</a>
+</li>
+<li id="section-3.1-4.5">For protocols that define multiple ciphersuites, each ciphersuite's
 tag MUST be different. For this purpose, it is RECOMMENDED to
-include a ciphersuite identifier in each tag.<a href="#section-3.1-4.4" class="pilcrow">¶</a>
+include a ciphersuite identifier in each tag.<a href="#section-3.1-4.5" class="pilcrow">¶</a>
 </li>
-<li id="section-3.1-4.5">For protocols that use multiple encodings, either to the same curve
+<li id="section-3.1-4.6">For protocols that use multiple encodings, either to the same curve
 or to different curves, each encoding MUST use a different tag.
 For this purpose, it is RECOMMENDED to include the encoding's
 Suite ID (<a href="#suites" class="xref">Section 8</a>) in the domain separation tag.
 For independent encodings based on the same suite, each tag should
-also include a distinct identifier, e.g., "ENC1" and "ENC2".<a href="#section-3.1-4.5" class="pilcrow">¶</a>
+also include a distinct identifier, e.g., "ENC1" and "ENC2".<a href="#section-3.1-4.6" class="pilcrow">¶</a>
 </li>
 </ol>
 <p id="section-3.1-5">As an example, consider a fictional protocol named Quux
 that defines several different ciphersuites.
-A reasonable choice of tag is "QUUX-V&lt;xx&gt;-CS&lt;yy&gt;", where &lt;xx&gt; and &lt;yy&gt;
-are two-digit numbers indicating the version and ciphersuite, respectively.<a href="#section-3.1-5" class="pilcrow">¶</a></p>
+A reasonable choice of tag is "QUUX-V&lt;xx&gt;-CS&lt;yy&gt;-&lt;suiteID&gt;", where
+&lt;xx&gt; and &lt;yy&gt; are two-digit numbers indicating the version and
+ciphersuite, respectively, and &lt;suiteID&gt; is the Suite ID of the
+encoding used in ciphersuite &lt;yy&gt;.<a href="#section-3.1-5" class="pilcrow">¶</a></p>
 <p id="section-3.1-6">As another example, consider a fictional protocol named Baz that requires
 two independent random oracles, where one oracle outputs points on the curve
 E1 and the other outputs points on the curve E2.
 Reasonable choices of tags for the E1 and E2 oracles are
-"BAZ-V&lt;xx&gt;-CS&lt;yy&gt;-E1" and "BAZ-V&lt;xx&gt;-CS&lt;yy&gt;-E2", respectively,
-where &lt;xx&gt; and &lt;yy&gt; are as described above.<a href="#section-3.1-6" class="pilcrow">¶</a></p>
+"BAZ-V&lt;xx&gt;-CS&lt;yy&gt;-&lt;suiteID&gt;-E1" and "BAZ-V&lt;xx&gt;-CS&lt;yy&gt;-&lt;suiteID&gt;-E2",
+respectively, where &lt;xx&gt;, &lt;yy&gt;, and &lt;suiteID&gt; are as described above.<a href="#section-3.1-6" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -2004,7 +1996,7 @@ For example, for a 255-bit prime p, and k = 128-bit security,
 L = ceil((255 + 128) / 8) = 48 bytes.<a href="#section-5.1-2" class="pilcrow">¶</a></p>
 <p id="section-5.1-3">Note that k is an upper bound on the security level for the
 corresponding curve.
-See <a href="#security-considerations-targets" class="xref">Section 10.3</a> for more details, and
+See <a href="#security-considerations-targets" class="xref">Section 10.4</a> for more details, and
 <a href="#new-suite" class="xref">Section 8.9</a> for guidelines on choosing k for a given curve.<a href="#section-5.1-3" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -2834,7 +2826,7 @@ See <a href="#roadmap" class="xref">Section 3</a> for definitions of these encod
 <li id="section-8-5.5">m, the extension degree of the field F.<a href="#section-8-5.5" class="pilcrow">¶</a>
 </li>
 <li id="section-8-5.6">k, the target security level of the suite in bits.
-(See <a href="#security-considerations-targets" class="xref">Section 10.3</a> for discussion.)<a href="#section-8-5.6" class="pilcrow">¶</a>
+(See <a href="#security-considerations-targets" class="xref">Section 10.4</a> for discussion.)<a href="#section-8-5.6" class="pilcrow">¶</a>
 </li>
 <li id="section-8-5.7">L, the length parameter for hash_to_field (<a href="#hashtofield-sec" class="xref">Section 5.1</a>).<a href="#section-8-5.7" class="pilcrow">¶</a>
 </li>
@@ -3374,7 +3366,7 @@ to the curve E' isogenous to BLS12-381 G2 is given in <a href="#sswu-map-to-9mod
           <li id="section-8.9-2.1">E, F, p, and m are determined by the elliptic curve and its base field.<a href="#section-8.9-2.1" class="pilcrow">¶</a>
 </li>
 <li id="section-8.9-2.2">k is an upper bound on the target security level of the suite
-(<a href="#security-considerations-targets" class="xref">Section 10.3</a>).
+(<a href="#security-considerations-targets" class="xref">Section 10.4</a>).
 A reasonable choice of k is ceil(log2(r) / 2), where r is
 the order of the subgroup G of the curve E (<a href="#bg-curves" class="xref">Section 2.1</a>).<a href="#section-8.9-2.2" class="pilcrow">¶</a>
 </li>
@@ -3512,7 +3504,8 @@ channels (e.g., power or electromagnetic side channels) may be pertinent.
 Defending against such leakage is outside the scope of this document, because
 the nature of the leakage and the appropriate defense depends on the protocol
 from which a hash-to-curve function is invoked.<a href="#section-10-1" class="pilcrow">¶</a></p>
-<p id="section-10-2"><a href="#domain-separation" class="xref">Section 3.1</a> describes considerations related to domain separation.<a href="#section-10-2" class="pilcrow">¶</a></p>
+<p id="section-10-2"><a href="#domain-separation" class="xref">Section 3.1</a> describes considerations related to domain separation.
+See <a href="#security-considerations-domain-separation" class="xref">Section 10.3</a> for further discussion.<a href="#section-10-2" class="pilcrow">¶</a></p>
 <p id="section-10-3"><a href="#hashtofield" class="xref">Section 5</a> describes considerations for uniformly hashing to field elements;
 see <a href="#security-considerations-hash-to-field" class="xref">Section 10.1</a> and <a href="#security-considerations-expand-xmd" class="xref">Section 10.2</a>
 for further discussion.<a href="#section-10-3" class="pilcrow">¶</a></p>
@@ -3562,15 +3555,6 @@ For each integer mod p that hash_to_field returns, the simulator samples
 one member of this equivalence class at random and outputs the byte string
 returned by I2OSP.
 (Notice that this is essentially the inverse of the hash_to_field procedure.)<a href="#section-10.1-2" class="pilcrow">¶</a></p>
-<p id="section-10.1-3">Finally, the expand_message variants in this document (<a href="#hashtofield-expand" class="xref">Section 5.3</a>)
-always append the domain separation tag DST to the strings hashed by H, the
-underlying hash or extensible output function.
-This means that invocations of H outside of hash_to_field can be separated
-from those inside of hash_to_field by appending a tag distinct from DST to
-their inputs.
-Other expand_message variants that follow the guidelines in
-<a href="#hashtofield-expand-other" class="xref">Section 5.3.4</a> are expected to have similar properties,
-but these should be analyzed on a case-by-case basis.<a href="#section-10.1-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="security-considerations-expand-xmd">
@@ -3604,24 +3588,190 @@ second, because each such input has a unique suffix (because of the inclusion
 of the counter byte I2OSP(i, 1)).<a href="#section-10.2-4" class="pilcrow">¶</a></p>
 <p id="section-10.2-5">The essential difference between the construction of <span>[<a href="#CDMP05" class="xref">CDMP05</a>]</span> and
 expand_message_xmd is that the latter hashes a counter appended to
-strxor(b_0, b_(i - 1)) (step 9) rather than to b_0.
+strxor(b_0, b_(i - 1)) (step 10) rather than to b_0.
 This approach increases the Hamming distance between inputs to different
 invocations of H, which reduces the likelihood that nonidealities in H
 affect the distribution of the b_i values.<a href="#section-10.2-5" class="pilcrow">¶</a></p>
+<p id="section-10.2-6">We note that expand_message_xmd can be used to instantiate a general-purpose
+indifferentiable functionality with variable-length output based on any hash
+function meeting one of the above criteria.
+Applications that use expand_message_xmd outside of hash_to_field should
+ensure domain separation by picking a distinct value for DST.<a href="#section-10.2-6" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="security-considerations-domain-separation">
+<section id="section-10.3">
+        <h3 id="name-domain-separation-recommend">
+<a href="#section-10.3" class="section-number selfRef">10.3. </a><a href="#name-domain-separation-recommend" class="section-name selfRef">Domain separation recommendations</a>
+        </h3>
+<p id="section-10.3-1">As discussed in {{term-domain-separation}, the purpose of domain separation is
+to ensure that security analyses of protocols that query multiple independent
+random oracles remain valid even if all of these random oracles are instantiated
+base on one underlying function H.
+The expand_message variants in this document (<a href="#hashtofield-expand" class="xref">Section 5.3</a>) ensure
+domain separation by appending a suffix-free-encoded domain separation tag
+DST_prime to all strings hashed by H, an underlying hash or extensible
+output function.
+(Other expand_message variants that follow the guidelines in
+<a href="#hashtofield-expand-other" class="xref">Section 5.3.4</a> are expected to behave similarly,
+but these should be analyzed on a case-by-case basis.)
+For security, protocols that use the same function H outside of expand_message
+should enforce domain separation between those uses of H and expand_message,
+and should separate all of these from uses of H in other protocols.<a href="#section-10.3-1" class="pilcrow">¶</a></p>
+<p id="section-10.3-2">This section suggests four methods for enforcing domain separation
+from expand_message variants, explains how each method achieves domain
+separation, and lists the situations in which each is appropriate.
+These methods share a high-level structure: the protocol designer fixes a tag
+DST_ext distinct from DST_prime and augments calls to H with DST_ext.
+Each method augments calls to H differently, and each may impose
+additional requirements on DST_ext.<a href="#section-10.3-2" class="pilcrow">¶</a></p>
+<p id="section-10.3-3">These methods can be used to instantiate multiple domain separated functions
+(e.g., H1 and H2) by selecting distinct DST_ext values for each
+(e.g., DST_ext1, DST_ext2).<a href="#section-10.3-3" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="normal type-1" id="section-10.3-4">
+          <li id="section-10.3-4.1">
+            <p id="section-10.3-4.1.1">(Suffix-only domain separation.)
+This method is useful when domain separating invocations of H
+from expand_message_xmd or expand_message_xof.
+It is not appropriate for domain separating expand_message from HMAC-H
+<span>[<a href="#RFC2104" class="xref">RFC2104</a>]</span>; for that purpose, see method 4.<a href="#section-10.3-4.1.1" class="pilcrow">¶</a></p>
+<p id="section-10.3-4.1.2">
+To instantiate a suffix-only domain separated function Hso, compute<a href="#section-10.3-4.1.2" class="pilcrow">¶</a></p>
+<div class="artwork art-text alignLeft" id="section-10.3-4.1.3">
+<pre>
+Hso(msg) = H(msg || DST_ext)
+</pre><a href="#section-10.3-4.1.3" class="pilcrow">¶</a>
+</div>
+<p id="section-10.3-4.1.4">
+DST_ext should be suffix-free encoded (e.g., by appending one byte
+encoding the length of DST_ext) to make it infeasible to find distinct
+(msg, DST_ext) pairs that hash to the same value.<a href="#section-10.3-4.1.4" class="pilcrow">¶</a></p>
+<p id="section-10.3-4.1.5">
+This method ensures domain separation because all distinct invocations of
+H have distinct suffixes, since DST_ext is distinct from DST_prime.<a href="#section-10.3-4.1.5" class="pilcrow">¶</a></p>
+</li>
+<li id="section-10.3-4.2">
+            <p id="section-10.3-4.2.1">(Prefix-suffix domain separation.)
+This method can be used in the same cases as the suffix-only method.<a href="#section-10.3-4.2.1" class="pilcrow">¶</a></p>
+<p id="section-10.3-4.2.2">
+To instantiate a prefix-suffix domain separated function Hps, compute<a href="#section-10.3-4.2.2" class="pilcrow">¶</a></p>
+<div class="artwork art-text alignLeft" id="section-10.3-4.2.3">
+<pre>
+Hps(msg) = H(DST_ext || msg || I2OSP(0, 1))
+</pre><a href="#section-10.3-4.2.3" class="pilcrow">¶</a>
+</div>
+<p id="section-10.3-4.2.4">
+DST_ext should be prefix-free encoded (e.g., by prepending one byte
+encoding the length of DST_ext) to make it infeasible to find distinct
+(msg, DST_ext) pairs that hash to the same value.<a href="#section-10.3-4.2.4" class="pilcrow">¶</a></p>
+<p id="section-10.3-4.2.5">
+This method ensures domain separation because
+appending the byte I2OSP(0, 1) ensures that inputs to H inside Hps
+are distinct from those inside expand_message.
+Specifically, the final byte of DST_prime encodes the length of DST, which
+is required to be nonzero (<a href="#domain-separation" class="xref">Section 3.1</a>, requirement 2), and
+DST_prime is always appended to invocations of H inside expand_message.<a href="#section-10.3-4.2.5" class="pilcrow">¶</a></p>
+</li>
+<li id="section-10.3-4.3">
+            <p id="section-10.3-4.3.1">(Prefix-only domain separation.)
+This method is only useful for domain separating invocations of H
+from expand_message_xmd.
+It does not give domain separation for expand_message_xof or HMAC-H.<a href="#section-10.3-4.3.1" class="pilcrow">¶</a></p>
+<p id="section-10.3-4.3.2">
+To instantiate a prefix-only domain separated function Hpo, compute<a href="#section-10.3-4.3.2" class="pilcrow">¶</a></p>
+<div class="artwork art-text alignLeft" id="section-10.3-4.3.3">
+<pre>
+Hpo(msg) = H(DST_ext || msg)
+</pre><a href="#section-10.3-4.3.3" class="pilcrow">¶</a>
+</div>
+<p id="section-10.3-4.3.4">
+In order for this method to give domain separation, DST_ext should
+be at least b bits long, where b is the number of bits output by the
+hash function H.
+In addition, at least one of the first b bits must be nonzero.
+Finally, DST_ext should be prefix-free encoded (e.g., by prepending
+one byte encoding the length of DST_ext) to make it infeasible to
+find distinct (msg, DST_ext) pairs that hash to the same value.<a href="#section-10.3-4.3.4" class="pilcrow">¶</a></p>
+<p id="section-10.3-4.3.5">
+This method ensures domain separation as follows.
+First, since DST_ext contains at least one nonzero bit among its first b bits,
+it is guaranteed to be distinct from the value Z_pad
+(<a href="#hashtofield-expand-xmd" class="xref">Section 5.3.1</a>, step 4), which ensures that all inputs to H
+are distinct from the input used to generate b_0 in expand_message_xmd.
+Second, since DST_ext is at least b bits long, it is almost certainly
+distinct from the values b_0 and strxor(b_0, b_(i - 1)), and therefore
+all inputs to H are distinct from the inputs used to generate b_i, i &gt;= 1,
+with high probability.<a href="#section-10.3-4.3.5" class="pilcrow">¶</a></p>
+</li>
+<li id="section-10.3-4.4">
+            <p id="section-10.3-4.4.1">(XMD-HMAC domain separation.)
+This method is useful for domain separating invocations of H inside
+HMAC-H (i.e., HMAC <span>[<a href="#RFC2104" class="xref">RFC2104</a>]</span> instantiated with hash function H) from
+expand_message_xmd.
+It also applies to HKDF-H <span>[<a href="#RFC5869" class="xref">RFC5869</a>]</span>, as discussed below.<a href="#section-10.3-4.4.1" class="pilcrow">¶</a></p>
+<p id="section-10.3-4.4.2">
+Specifically, this method applies when HMAC-H is used with a non-secret
+key to instantiate a random oracle based on a hash function H
+(note that expand_message_xmd can also be used for this purpose; see
+<a href="#security-considerations-expand-xmd" class="xref">Section 10.2</a>).
+When using HMAC-H with a high-entropy secret key, domain separation is not
+necessary; see discussion below.<a href="#section-10.3-4.4.2" class="pilcrow">¶</a></p>
+<p id="section-10.3-4.4.3">
+To choose a non-secret HMAC key DST_key that ensures domain separation
+from expand_message_xmd, compute<a href="#section-10.3-4.4.3" class="pilcrow">¶</a></p>
+<div class="artwork art-text alignLeft" id="section-10.3-4.4.4">
+<pre>
+DST_key_preimage = "DERIVE-HMAC-KEY-" || DST_ext || I2OSP(0, 1)
+DST_key = H(DST_key_preimage)
+</pre><a href="#section-10.3-4.4.4" class="pilcrow">¶</a>
+</div>
+<p id="section-10.3-4.4.5">
+Then, to instantiate the random oracle Hro using HMAC-H, compute<a href="#section-10.3-4.4.5" class="pilcrow">¶</a></p>
+<div class="artwork art-text alignLeft" id="section-10.3-4.4.6">
+<pre>
+Hro(msg) = HMAC-H(DST_key, msg)
+</pre><a href="#section-10.3-4.4.6" class="pilcrow">¶</a>
+</div>
+<p id="section-10.3-4.4.7">
+The trailing zero byte in DST_key_preimage ensures that this value
+is distinct from inputs to H inside expand_message_xmd (because all
+such inputs have suffix DST_prime, which cannot end with a zero byte
+as discussed above).
+This ensures domain separation because, with overwhelming probability,
+all inputs to H inside of HMAC-H using key DST_key have prefixes that
+are distinct from the values Z_pad, b_0, and strxor(b_0, b_(i - 1))
+inside of expand_message_xmd.<a href="#section-10.3-4.4.7" class="pilcrow">¶</a></p>
+<p id="section-10.3-4.4.8">
+For uses of HMAC-H that instantiate a private random oracle by fixing
+a high-entropy secret key, domain separation from expand_message_xmd
+is not necessary.
+This is because, similarly to the case above, all inputs to H inside
+HMAC-H using this secret key almost certainly have distinct prefixes
+from all inputs to H inside expand_message_xmd.<a href="#section-10.3-4.4.8" class="pilcrow">¶</a></p>
+<p id="section-10.3-4.4.9">
+Finally, this method can be used with HKDF-H <span>[<a href="#RFC5869" class="xref">RFC5869</a>]</span> by fixing
+the salt input to HKDF-Extract to DST_key, computed as above.
+This ensures domain separation for HKDF-Extract by the same argument
+as for HMAC-H using DST_key.
+Moreover, assuming that the IKM input to HKDF-Extract has sufficiently
+high entropy (say, commensurate with the security parameter), the
+HKDF-Expand step is domain separated by the same argument as for
+HMAC-H with a high-entropy secret key (since PRK is exactly that).<a href="#section-10.3-4.4.9" class="pilcrow">¶</a></p>
+</li>
+</ol>
 </section>
 </div>
 <div id="security-considerations-targets">
-<section id="section-10.3">
+<section id="section-10.4">
         <h3 id="name-target-security-levels">
-<a href="#section-10.3" class="section-number selfRef">10.3. </a><a href="#name-target-security-levels" class="section-name selfRef">Target security levels</a>
+<a href="#section-10.4" class="section-number selfRef">10.4. </a><a href="#name-target-security-levels" class="section-name selfRef">Target security levels</a>
         </h3>
-<p id="section-10.3-1">Each ciphersuite specifies a target security level (in bits) for the underlying
+<p id="section-10.4-1">Each ciphersuite specifies a target security level (in bits) for the underlying
 curve. This parameter ensures the corresponding hash_to_field instantiation is
 conservative and correct. We stress that this parameter is only an upper bound on
-the security level of the curve. It is neither a guarantee nor endorsement of its
-longevity. Mathematical and cryptographic advancements may lower the security level
-for any curve. In such cases, applications SHOULD choose curves and, consequently,
-ciphersuites with higher security levels.<a href="#section-10.3-1" class="pilcrow">¶</a></p>
+the security level of the curve, and is neither a guarantee nor endorsement of its
+suitability for a given application. Mathematical and cryptographic advancements
+may reduce the effective security level for any curve.<a href="#section-10.4-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -3634,8 +3784,9 @@ ciphersuites with higher security levels.<a href="#section-10.3-1" class="pilcro
 <p id="section-11-1">The authors would like to thank Adam Langley for his detailed writeup of Elligator 2 with
 Curve25519 <span>[<a href="#L13" class="xref">L13</a>]</span>;
 Dan Boneh, Christopher Patton, and Benjamin Lipp for educational discussions; and
-David Benjamin, Frank Denis, Sean Devlin, Justin Drake, Dan Harkins, Thomas Icart,
-Andy Polyakov, Leonid Reyzin, Michael Scott, and Mathy Vanhoef for helpful feedback.<a href="#section-11-1" class="pilcrow">¶</a></p>
+David Benjamin, Frank Denis, Sean Devlin, Justin Drake, Bjoern Haase, Mike Hamburg,
+Dan Harkins, Thomas Icart, Andy Polyakov, Mamy Ratsimbazafy, Leonid Reyzin, Michael Scott,
+and Mathy Vanhoef for helpful feedback.<a href="#section-11-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="contributors">
@@ -3861,6 +4012,14 @@ michele.orru@ens.fr<a href="#section-12-1.3.2" class="pilcrow">¶</a></p>
 <dt id="p1363a">[p1363a]</dt>
 <dd>
 <span class="refAuthor">IEEE Computer Society</span>, <span class="refTitle">"IEEE Standard Specifications for Public-Key Cryptography---Amendment 1: Additional Techniques"</span>, <time datetime="2004-03">March 2004</time>, <span>&lt;<a href="https://standards.ieee.org/standard/1363a-2004.html">https://standards.ieee.org/standard/1363a-2004.html</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC2104">[RFC2104]</dt>
+<dd>
+<span class="refAuthor">Krawczyk, H.</span><span class="refAuthor">, Bellare, M.</span><span class="refAuthor">, and R. Canetti</span>, <span class="refTitle">"HMAC: Keyed-Hashing for Message Authentication"</span>, <span class="seriesInfo">RFC 2104</span>, <span class="seriesInfo">DOI 10.17487/RFC2104</span>, <time datetime="1997-02">February 1997</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc2104">https://www.rfc-editor.org/info/rfc2104</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC5869">[RFC5869]</dt>
+<dd>
+<span class="refAuthor">Krawczyk, H.</span><span class="refAuthor"> and P. Eronen</span>, <span class="refTitle">"HMAC-based Extract-and-Expand Key Derivation Function (HKDF)"</span>, <span class="seriesInfo">RFC 5869</span>, <span class="seriesInfo">DOI 10.17487/RFC5869</span>, <time datetime="2010-05">May 2010</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc5869">https://www.rfc-editor.org/info/rfc5869</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC7693">[RFC7693]</dt>
 <dd>
