@@ -242,7 +242,7 @@ Internet-Draft                hash-to-curve                     May 2020
    suitable for a given scheme is not necessarily included in the
    description of the protocol.  Compounding this problem is the need to
    pick a suitable curve for the specific protocol.  Incorrect choice of
-   hash function or curve can have disastrous consequences on the
+   hash function or curve can have disastrous consequences for the
    security of a protocol.
 
    This document aims to bridge this gap by providing a comprehensive
