@@ -1990,14 +1990,19 @@ level for the suite in bits.
 Reducing such integers mod p gives bias at most 2^-k for any p; this bias
 is appropriate when targeting k-bit security.
 For each such integer, hash_to_field uses expand_message to obtain
-L uniform bytes, where L = ceil((ceil(log2(p)) + k) / 8); this
-byte string is then interpreted as an integer via OS2IP <span>[<a href="#RFC8017" class="xref">RFC8017</a>]</span>.
+L uniform bytes, where<a href="#section-5.1-2" class="pilcrow">¶</a></p>
+<div class="artwork art-text alignLeft" id="section-5.1-3">
+<pre>
+L = ceil((ceil(log2(p)) + k) / 8)
+</pre><a href="#section-5.1-3" class="pilcrow">¶</a>
+</div>
+<p id="section-5.1-4">These uniform bytes are then interpreted as an integer via OS2IP <span>[<a href="#RFC8017" class="xref">RFC8017</a>]</span>.
 For example, for a 255-bit prime p, and k = 128-bit security,
-L = ceil((255 + 128) / 8) = 48 bytes.<a href="#section-5.1-2" class="pilcrow">¶</a></p>
-<p id="section-5.1-3">Note that k is an upper bound on the security level for the
+L = ceil((255 + 128) / 8) = 48 bytes.<a href="#section-5.1-4" class="pilcrow">¶</a></p>
+<p id="section-5.1-5">Note that k is an upper bound on the security level for the
 corresponding curve.
 See <a href="#security-considerations-targets" class="xref">Section 10.4</a> for more details, and
-<a href="#new-suite" class="xref">Section 8.9</a> for guidelines on choosing k for a given curve.<a href="#section-5.1-3" class="pilcrow">¶</a></p>
+<a href="#new-suite" class="xref">Section 8.9</a> for guidelines on choosing k for a given curve.<a href="#section-5.1-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="hashtofield-impl">

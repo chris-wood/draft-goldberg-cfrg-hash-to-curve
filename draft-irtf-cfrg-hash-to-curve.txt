@@ -903,10 +903,13 @@ Internet-Draft                hash-to-curve                     May 2020
    security level for the suite in bits.  Reducing such integers mod p
    gives bias at most 2^-k for any p; this bias is appropriate when
    targeting k-bit security.  For each such integer, hash_to_field uses
-   expand_message to obtain L uniform bytes, where L =
-   ceil((ceil(log2(p)) + k) / 8); this byte string is then interpreted
-   as an integer via OS2IP [RFC8017].  For example, for a 255-bit prime
-   p, and k = 128-bit security, L = ceil((255 + 128) / 8) = 48 bytes.
+   expand_message to obtain L uniform bytes, where
+
+   L = ceil((ceil(log2(p)) + k) / 8)
+
+   These uniform bytes are then interpreted as an integer via OS2IP
+   [RFC8017].  For example, for a 255-bit prime p, and k = 128-bit
+   security, L = ceil((255 + 128) / 8) = 48 bytes.
 
    Note that k is an upper bound on the security level for the
    corresponding curve.  See Section 10.4 for more details, and
@@ -922,9 +925,6 @@ Internet-Draft                hash-to-curve                     May 2020
    Section 3.1 discusses requirements for domain separation and
    recommendations for choosing DST, the domain separation tag.  This is
    the REQUIRED method for applying domain separation.
-
-
-
 
 
 
