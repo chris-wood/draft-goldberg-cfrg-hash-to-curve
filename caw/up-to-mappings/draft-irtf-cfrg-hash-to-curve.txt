@@ -619,7 +619,8 @@ Internet-Draft                hash-to-curve                     May 2020
 
 
    Domain separation is enforced with a domain separation tag (DST),
-   which is a byte string constructed using the following requirements:
+   which is a byte string constructed according to the following
+   requirements:
 
    1.  Tags MUST be supplied as the DST parameter to hash_to_field, as
        described in Section 5.
@@ -662,7 +663,6 @@ Internet-Draft                hash-to-curve                     May 2020
 
    Algorithms in this document make use of utility functions described
    below.
-
 
 
 
