@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2020-05-28T21:15:50.479416+00:00",
+  "timestamp": "2020-05-29T20:39:29.402026+00:00",
   "repo": "cfrg/draft-irtf-cfrg-hash-to-curve",
   "labels": [
     {
@@ -27413,6 +27413,108 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 267,
+      "id": "MDExOlB1bGxSZXF1ZXN0NDI0ODE5ODA0",
+      "title": "Edits up to Deterministic Mappings.",
+      "url": "https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/pull/267",
+      "state": "OPEN",
+      "author": "chris-wood",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "I'll continue my pass separately from this PR. I wanted to keep things somewhat small.",
+      "createdAt": "2020-05-29T00:24:13Z",
+      "updatedAt": "2020-05-29T20:21:10Z",
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "094784ed6e314b1c4d1cf075d44c23f998113f86",
+      "headRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "caw/up-to-mappings",
+      "headRefOid": "f234bd65d96670ef3301c2c0fd6a06d91e0d688b",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDIxMjYzMDgx",
+          "commit": {
+            "abbreviatedOid": "f234bd6"
+          },
+          "author": "armfazh",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2020-05-29T20:21:10Z",
+          "updatedAt": "2020-05-29T20:21:10Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 268,
+      "id": "MDExOlB1bGxSZXF1ZXN0NDI1Mjk5MjM0",
+      "title": "Merging section 4 and 4.1.",
+      "url": "https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/pull/268",
+      "state": "OPEN",
+      "author": "armfazh",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "In the past section 4.1 descried two sgn0 variants. Now there is only one, so I merged into section 4.\r\n\r\nIt also reorders items of section 4, first functions on bit strings followed by operations on field elements. (the reverse order is interesting too).\r\n\r\n* This is on top of #267 for easily seeing changes.",
+      "createdAt": "2020-05-29T19:56:40Z",
+      "updatedAt": "2020-05-29T20:38:05Z",
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "caw/up-to-mappings",
+      "baseRefOid": "f234bd65d96670ef3301c2c0fd6a06d91e0d688b",
+      "headRepository": "armfazh/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "sug/mergeSec4",
+      "headRefOid": "b672cc965b79b0c5a421e00d7bb26870c293a363",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Is this change necessary? It seems like `sgn0` is complicated enough and the description is long enough that a separate sub-section makes sense...",
+          "createdAt": "2020-05-29T20:38:05Z",
+          "updatedAt": "2020-05-29T20:38:05Z"
+        }
+      ],
+      "reviews": []
+    },
+    {
+      "number": 269,
+      "id": "MDExOlB1bGxSZXF1ZXN0NDI1MzAzNDU3",
+      "title": "Highlighting L value.",
+      "url": "https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/pull/269",
+      "state": "MERGED",
+      "author": "armfazh",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Makes the L parameter easier to find.",
+      "createdAt": "2020-05-29T20:07:43Z",
+      "updatedAt": "2020-05-29T20:38:52Z",
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "094784ed6e314b1c4d1cf075d44c23f998113f86",
+      "headRepository": "armfazh/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "sug/HighlightL",
+      "headRefOid": "474422c30c5b44c555e30ff7d6a143bc394957e4",
+      "closedAt": "2020-05-29T20:38:52Z",
+      "mergedAt": "2020-05-29T20:38:52Z",
+      "mergedBy": "kwantam",
+      "mergeCommit": {
+        "oid": "34e1f06b8dc81682953f7e93057db804ab0b2db2"
+      },
+      "comments": [],
+      "reviews": []
     }
   ]
 }
