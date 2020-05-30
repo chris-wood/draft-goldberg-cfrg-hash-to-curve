@@ -819,7 +819,7 @@ table.left {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Faz-Hernandez, et al.</td>
-<td class="center">Expires 30 November 2020</td>
+<td class="center">Expires 1 December 2020</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -832,12 +832,12 @@ table.left {
 <dd class="internet-draft">draft-irtf-cfrg-hash-to-curve-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2020-05-29" class="published">29 May 2020</time>
+<time datetime="2020-05-30" class="published">30 May 2020</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2020-11-30">30 November 2020</time></dd>
+<dd class="expires"><time datetime="2020-12-01">1 December 2020</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -888,7 +888,7 @@ arbitrary string to a point on an elliptic curve.<a href="#section-abstract-1" c
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 30 November 2020.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 1 December 2020.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -2842,55 +2842,84 @@ These MUST be specified when applicable.<a href="#section-8-6" class="pilcrow">�
 relies on a random oracle. Applications using nonuniform encodings SHOULD carefully
 analyze the security implications of using such an encoding. When the required
 encoding is not clear, applications SHOULD use a random oracle.<a href="#section-8-7" class="pilcrow">¶</a></p>
-<p id="section-8-8">The below table lists the curves for which suites are defined and
-the subsection that gives the corresponding parameters.<a href="#section-8-8" class="pilcrow">¶</a></p>
+<p id="section-8-8">The below table lists suites RECOMMENDED for some elliptic curves. The
+corresponding parameters are given in the following subsections.<a href="#section-8-8" class="pilcrow">¶</a></p>
 <table class="center" id="table-2">
         <caption><a href="#table-2" class="selfRef">Table 2</a></caption>
 <thead>
           <tr>
             <th class="text-left" rowspan="1" colspan="1">E</th>
+            <th class="text-left" rowspan="1" colspan="1">Suites</th>
             <th class="text-left" rowspan="1" colspan="1">Section</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">NIST P-256</td>
+            <td class="text-left" rowspan="1" colspan="1">P256_XMD:SHA-256_SSWU_RO_ P256_XMD:SHA-256_SSWU_NU_</td>
             <td class="text-left" rowspan="1" colspan="1">
               <a href="#suites-p256" class="xref">Section 8.2</a>
 </td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">NIST P-384</td>
+            <td class="text-left" rowspan="1" colspan="1">P384_XMD:SHA-512_SSWU_RO_ P384_XMD:SHA-512_SSWU_NU_</td>
             <td class="text-left" rowspan="1" colspan="1">
               <a href="#suites-p384" class="xref">Section 8.3</a>
 </td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">NIST P-521</td>
+            <td class="text-left" rowspan="1" colspan="1">P521_XMD:SHA-512_SSWU_RO_ P521_XMD:SHA-512_SSWU_NU_</td>
             <td class="text-left" rowspan="1" colspan="1">
               <a href="#suites-p521" class="xref">Section 8.4</a>
 </td>
           </tr>
           <tr>
-            <td class="text-left" rowspan="1" colspan="1">curve25519 / edwards25519</td>
+            <td class="text-left" rowspan="1" colspan="1">curve25519</td>
+            <td class="text-left" rowspan="1" colspan="1">curve25519_XMD:SHA-512_ELL2_RO_ curve25519_XMD:SHA-512_ELL2_NU_</td>
             <td class="text-left" rowspan="1" colspan="1">
               <a href="#suites-25519" class="xref">Section 8.5</a>
 </td>
           </tr>
           <tr>
-            <td class="text-left" rowspan="1" colspan="1">curve448 / edwards448</td>
+            <td class="text-left" rowspan="1" colspan="1">edwards25519</td>
+            <td class="text-left" rowspan="1" colspan="1">edwards25519_XMD:SHA-512_ELL2_RO_ edwards25519_XMD:SHA-512_ELL2_NU_</td>
+            <td class="text-left" rowspan="1" colspan="1">
+              <a href="#suites-25519" class="xref">Section 8.5</a>
+</td>
+          </tr>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">curve448</td>
+            <td class="text-left" rowspan="1" colspan="1">curve448_XMD:SHA-512_ELL2_RO_ curve448_XMD:SHA-512_ELL2_NU_</td>
+            <td class="text-left" rowspan="1" colspan="1">
+              <a href="#suites-448" class="xref">Section 8.6</a>
+</td>
+          </tr>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">edwards448</td>
+            <td class="text-left" rowspan="1" colspan="1">edwards448_XMD:SHA-512_ELL2_RO_ edwards448_XMD:SHA-512_ELL2_NU_</td>
             <td class="text-left" rowspan="1" colspan="1">
               <a href="#suites-448" class="xref">Section 8.6</a>
 </td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">secp256k1</td>
+            <td class="text-left" rowspan="1" colspan="1">secp256k1_XMD:SHA-256_SSWU_RO_ secp256k1_XMD:SHA-256_SSWU_NU_</td>
             <td class="text-left" rowspan="1" colspan="1">
               <a href="#suites-secp256k1" class="xref">Section 8.7</a>
 </td>
           </tr>
           <tr>
-            <td class="text-left" rowspan="1" colspan="1">BLS12-381</td>
+            <td class="text-left" rowspan="1" colspan="1">BLS12-381 G1</td>
+            <td class="text-left" rowspan="1" colspan="1">BLS12381G1_XMD:SHA-256_SSWU_RO_ BLS12381G1_XMD:SHA-256_SSWU_NU_</td>
+            <td class="text-left" rowspan="1" colspan="1">
+              <a href="#suites-bls12381" class="xref">Section 8.8</a>
+</td>
+          </tr>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">BLS12-381 G2</td>
+            <td class="text-left" rowspan="1" colspan="1">BLS12381G2_XMD:SHA-256_SSWU_RO_ BLS12381G2_XMD:SHA-256_SSWU_NU_</td>
             <td class="text-left" rowspan="1" colspan="1">
               <a href="#suites-bls12381" class="xref">Section 8.8</a>
 </td>
