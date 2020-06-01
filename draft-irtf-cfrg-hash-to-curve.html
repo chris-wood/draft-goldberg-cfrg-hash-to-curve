@@ -815,11 +815,11 @@ table.left {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">hash-to-curve</td>
-<td class="right">May 2020</td>
+<td class="right">June 2020</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Faz-Hernandez, et al.</td>
-<td class="center">Expires 1 December 2020</td>
+<td class="center">Expires 3 December 2020</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -832,12 +832,12 @@ table.left {
 <dd class="internet-draft">draft-irtf-cfrg-hash-to-curve-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2020-05-30" class="published">30 May 2020</time>
+<time datetime="2020-06-01" class="published">1 June 2020</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2020-12-01">1 December 2020</time></dd>
+<dd class="expires"><time datetime="2020-12-03">3 December 2020</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -888,7 +888,7 @@ arbitrary string to a point on an elliptic curve.<a href="#section-abstract-1" c
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 1 December 2020.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 3 December 2020.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1401,16 +1401,15 @@ arbitrary string to a point on an elliptic curve.<a href="#section-abstract-1" c
 <p id="section-1-1">Many cryptographic protocols require a procedure that encodes an arbitrary input,
 e.g., a password, to a point on an elliptic curve. This procedure is known
 as hashing to an elliptic curve. Prominent examples of cryptosystems that
-hash to elliptic curves include Simple Password Exponential Key Exchange
-<span>[<a href="#J96" class="xref">J96</a>]</span>, Password Authenticated Key Exchange <span>[<a href="#BMP00" class="xref">BMP00</a>]</span>, Identity-Based
+hash to elliptic curves include password-authenticated
+key exchanges <span>[<a href="#BM92" class="xref">BM92</a>]</span> <span>[<a href="#J96" class="xref">J96</a>]</span> <span>[<a href="#BMP00" class="xref">BMP00</a>]</span> <span>[<a href="#p1363.2" class="xref">p1363.2</a>]</span>, Identity-Based
 Encryption <span>[<a href="#BF01" class="xref">BF01</a>]</span>, Boneh-Lynn-Shacham signatures <span>[<a href="#BLS01" class="xref">BLS01</a>]</span> <span>[<a href="#I-D.irtf-cfrg-bls-signature" class="xref">I-D.irtf-cfrg-bls-signature</a>]</span>,
-Verifiable Random Functions <span>[<a href="#I-D.irtf-cfrg-vrf" class="xref">I-D.irtf-cfrg-vrf</a>]</span>, and Oblivious Pseudorandom
-Functions <span>[<a href="#I-D.irtf-cfrg-voprf" class="xref">I-D.irtf-cfrg-voprf</a>]</span>.<a href="#section-1-1" class="pilcrow">¶</a></p>
-<p id="section-1-2">Unfortunately for implementors, the precise hash function that is suitable for a
-given scheme is not necessarily included in the description of the protocol.
-Compounding this problem is the need to pick a suitable curve for the specific
-protocol. Incorrect choice of hash function or curve can have disastrous
-consequences for the security of a protocol.<a href="#section-1-2" class="pilcrow">¶</a></p>
+Verifiable Random Functions <span>[<a href="#MRV99" class="xref">MRV99</a>]</span> <span>[<a href="#I-D.irtf-cfrg-vrf" class="xref">I-D.irtf-cfrg-vrf</a>]</span>, and Oblivious Pseudorandom
+Functions <span>[<a href="#NR97" class="xref">NR97</a>]</span> <span>[<a href="#I-D.irtf-cfrg-voprf" class="xref">I-D.irtf-cfrg-voprf</a>]</span>.<a href="#section-1-1" class="pilcrow">¶</a></p>
+<p id="section-1-2">Unfortunately for implementors, the precise hash function that is suitable
+for a given protocol implemented using a given elliptic curve is often unclear
+from the protocol's description. Meanwhile, an incorrect choice of hash
+function can have disastrous consequences for security.<a href="#section-1-2" class="pilcrow">¶</a></p>
 <p id="section-1-3">This document aims to bridge this gap by providing a comprehensive set of
 recommended algorithms for a range of curve types.
 Each algorithm conforms to a common interface: it takes as input an arbitrary-length
@@ -1476,9 +1475,9 @@ with coordinates (x, y) satisfying the curve equation, and where x and y
 are elements of F.
 This group has order n, meaning that there are n distinct points.
 This document uses additive notation for the elliptic curve group operation.<a href="#section-2.1-4" class="pilcrow">¶</a></p>
-<p id="section-2.1-5">For security reasons, protocols using elliptic curves often require a group
-of prime order. Elliptic curves induce subgroups of prime order.
-Let G be a subgroup of the curve of prime order r, where n = h * r.
+<p id="section-2.1-5">For security reasons, cryptographic uses of elliptic curves generally require
+using a (sub)group of prime order.
+Let G be such a subgroup of the curve of prime order r, where n = h * r.
 In this equation, h is an integer called the cofactor.
 An algorithm that takes as input an arbitrary point on the curve E and
 produces as output a point in the subgroup G of E is said to "clear
@@ -1514,13 +1513,13 @@ algorithm presented, this document lists the relevant restrictions.<a href="#sec
             </tr>
             <tr>
               <td class="text-center" rowspan="1" colspan="1">G</td>
-              <td class="text-left" rowspan="1" colspan="1">A subgroup of the elliptic curve.</td>
+              <td class="text-left" rowspan="1" colspan="1">A prime-order subgroup of the points on E.</td>
               <td class="text-left" rowspan="1" colspan="1">Destination group to which byte strings are encoded.</td>
             </tr>
             <tr>
               <td class="text-center" rowspan="1" colspan="1">r</td>
               <td class="text-left" rowspan="1" colspan="1">Order of G.</td>
-              <td class="text-left" rowspan="1" colspan="1">This number MUST be prime.</td>
+              <td class="text-left" rowspan="1" colspan="1">r is a prime factor of n (usually, the largest such factor).</td>
             </tr>
             <tr>
               <td class="text-center" rowspan="1" colspan="1">h</td>
@@ -1568,24 +1567,25 @@ document does not discuss inversion algorithms.<a href="#section-2.2.1-3" class=
 <p id="section-2.2.2-1">Encodings are closely related to mappings.
 Like a mapping, an encoding is a function that outputs a point on an elliptic curve.
 In contrast to a mapping, however, the input to an encoding is an arbitrary-length
-byte string. Encodings can be deterministic or probabilistic.
-Deterministic encodings are preferred for security, because probabilistic
-ones are more likely to leak information through side channels. See <span>[<a href="#VR20" class="xref">VR20</a>]</span>
-as an example of this type of leakage leading to a security vulnerability.<a href="#section-2.2.2-1" class="pilcrow">¶</a></p>
-<p id="section-2.2.2-2">This document constructs deterministic encodings by composing a hash function H'
+byte string.<a href="#section-2.2.2-1" class="pilcrow">¶</a></p>
+<p id="section-2.2.2-2">This document constructs deterministic encodings by composing a hash function Hf
 with a deterministic mapping.
-In particular, H' takes as input an arbitrary string and outputs an element of F.
+In particular, Hf takes as input an arbitrary string and outputs an element of F.
 The deterministic mapping takes that element as input and outputs a point on an
 elliptic curve E defined over F.
-Since H' takes arbitrary-length byte strings as inputs, it cannot be injective:
+Since Hf takes arbitrary-length byte strings as inputs, it cannot be injective:
 the set of inputs is larger than the set of outputs, so there must
 be distinct inputs that give the same output (i.e., there must be collisions).
-Thus, any encoding built from H' is also not injective.<a href="#section-2.2.2-2" class="pilcrow">¶</a></p>
+Thus, any encoding built from Hf is also not injective.<a href="#section-2.2.2-2" class="pilcrow">¶</a></p>
 <p id="section-2.2.2-3">Like mappings, encodings may be invertible, meaning that there is an efficient
 algorithm that, for any point P output by the encoding, outputs a string s
 such that applying the encoding to s outputs P.
-The instantiation of H' used by all encodings specified in this document (<a href="#hashtofield" class="xref">Section 5</a>)
+The instantiation of Hf used by all encodings specified in this document (<a href="#hashtofield" class="xref">Section 5</a>)
 is not invertible. Thus, the encodings are also not invertible.<a href="#section-2.2.2-3" class="pilcrow">¶</a></p>
+<p id="section-2.2.2-4">In some applications of hashing to elliptic curves, it is important that
+encodings do not leak information through side channels.
+<span>[<a href="#VR20" class="xref">VR20</a>]</span> is one example of this type of leakage leading to a security vulnerability.
+<a href="#security-considerations" class="xref">Section 10</a> discusses further.<a href="#section-2.2.2-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="term-rom">
@@ -1593,20 +1593,19 @@ is not invertible. Thus, the encodings are also not invertible.<a href="#section
           <h4 id="name-random-oracle-encodings">
 <a href="#section-2.2.3" class="section-number selfRef">2.2.3. </a><a href="#name-random-oracle-encodings" class="section-name selfRef">Random oracle encodings</a>
           </h4>
-<p id="section-2.2.3-1">Two different types of encodings are possible: nonuniform encodings,
-whose output distribution of points is not uniformly random, and random
-oracle encodings, whose output distribution is indistinguishable from uniformly
-random points. Some protocols require a random oracle encoding for security, while
-others can be securely instantiated with a nonuniform encoding. When the required
-encoding is not clear, applications SHOULD use a random oracle.<a href="#section-2.2.3-1" class="pilcrow">¶</a></p>
-<p id="section-2.2.3-2">Care is required when constructing a random oracle from a mapping function.
-Brier et al. <span>[<a href="#BCIMRT10" class="xref">BCIMRT10</a>]</span> describe two generic methods for constructing
-random oracle encodings. Farashahi et al. <span>[<a href="#FFSTV13" class="xref">FFSTV13</a>]</span> and Tibouchi and
-Kim <span>[<a href="#TK17" class="xref">TK17</a>]</span> refine the analysis of one of these constructions.
-That construction is described in <a href="#roadmap" class="xref">Section 3</a>. Both constructions are
-indifferentiable from a random oracle <span>[<a href="#MRH04" class="xref">MRH04</a>]</span> when instantiated
-with appropriate hash functions modeled as random oracles.
-See <a href="#security-considerations" class="xref">Section 10</a> for further discussion.<a href="#section-2.2.3-2" class="pilcrow">¶</a></p>
+<p id="section-2.2.3-1">Two different types of encodings are possible, nonuniform encodings and random oracle encodings.
+Nonuniform encodings induce a distribution of points that is not uniformly random.
+Random oracle encodings, in contrast, induce a distribution of points that
+is statistically close to uniformly random.
+They also satisfy a stronger property: a random oracle encoding can be proved
+indifferentiable from a random oracle <span>[<a href="#MRH04" class="xref">MRH04</a>]</span> under a suitable assumption,
+meaning it is appropriate for use in many cryptographic protocols proven secure
+in the random oracle model.
+(Note, however, that indifferentiability is not always sufficient for security;
+see <a href="#security-considerations" class="xref">Section 10</a> for further discussion.)<a href="#section-2.2.3-1" class="pilcrow">¶</a></p>
+<p id="section-2.2.3-2">The construction described in <a href="#roadmap" class="xref">Section 3</a> <span>[<a href="#BCIMRT10" class="xref">BCIMRT10</a>]</span> is indifferentiable from a random
+oracle <span>[<a href="#MRH04" class="xref">MRH04</a>]</span> when instantiated following the guidelines in this document.
+<a href="#security-considerations" class="xref">Section 10</a> and <a href="#related" class="xref">Appendix A</a> discuss this construction further.<a href="#section-2.2.3-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="term-serialization">
@@ -1630,11 +1629,11 @@ This document does not cover serialization or deserialization.<a href="#section-
           <h4 id="name-domain-separation">
 <a href="#section-2.2.5" class="section-number selfRef">2.2.5. </a><a href="#name-domain-separation" class="section-name selfRef">Domain separation</a>
           </h4>
-<p id="section-2.2.5-1">Cryptographic protocols that use random oracles are often analyzed
-under the assumption that random oracles answer only queries generated
-by that protocol.
-In practice, this assumption does not hold if two protocols query the
-same random oracle.
+<p id="section-2.2.5-1">Cryptographic protocols proven secure in the random oracle model are often analyzed
+under the assumption that the random oracle only answers queries generated
+by the protocol.
+In practice, this assumption does not hold if two protocols use the
+same function to instantiate the random oracle.
 Concretely, consider protocols P1 and P2 that query a random oracle RO:
 if P1 and P2 both query RO on the same value x, the security analysis of
 one or both protocols may be invalidated.<a href="#section-2.2.5-1" class="pilcrow">¶</a></p>
@@ -1682,8 +1681,8 @@ the subgroup G of E. <a href="#cofactor-clearing" class="xref">Section 7</a> des
 this operation.<a href="#section-3-2.3" class="pilcrow">¶</a>
 </li>
 </ul>
-<p id="section-3-3">We describe two high-level encoding functions (<a href="#term-encoding" class="xref">Section 2.2.2</a>): nonuniform
-and random oracle encoding. Although these functions have the same interface, the
+<p id="section-3-3">We describe two high-level encoding functions (<a href="#term-encoding" class="xref">Section 2.2.2</a>), a nonuniform encoding
+and a random oracle encoding. Although these functions have the same interface, the
 distributions of their outputs are different.<a href="#section-3-3" class="pilcrow">¶</a></p>
 <ul>
 <li id="section-3-4.1">Nonuniform encoding (encode_to_curve). This function encodes byte strings to points in G.
@@ -1706,9 +1705,8 @@ Steps:
 </div>
 <ul>
 <li id="section-3-6.1">Random oracle encoding (hash_to_curve). This function encodes byte strings to points in G.
-This function is suitable for applications requiring a random oracle returning points in G,
-provided that map_to_curve is "well distributed" (<span>[<a href="#FFSTV13" class="xref">FFSTV13</a>]</span>, Def. 1).
-All of the map_to_curve functions defined in <a href="#mappings" class="xref">Section 6</a> meet this requirement.<a href="#section-3-6.1" class="pilcrow">¶</a>
+This function is suitable for applications requiring a random oracle returning points in G
+when instantiated with any of the map_to_curve functions described in <a href="#mappings" class="xref">Section 6</a>.<a href="#section-3-6.1" class="pilcrow">¶</a>
 </li>
 </ul>
 <div class="artwork art-text alignLeft" id="section-3-7">
@@ -1727,9 +1725,8 @@ Steps:
 6. return P
 </pre><a href="#section-3-7" class="pilcrow">¶</a>
 </div>
-<p id="section-3-8">Instances of these encoding functions are given in <a href="#suites" class="xref">Section 8</a>, which defines a
-list of suites that specify a full set of parameters matching elliptic curves
-and algorithms.<a href="#section-3-8" class="pilcrow">¶</a></p>
+<p id="section-3-8">Each hash-to-curve suite in <a href="#suites" class="xref">Section 8</a> instantiates one of these encoding
+functions for a specifc elliptic curve.<a href="#section-3-8" class="pilcrow">¶</a></p>
 <div id="domain-separation">
 <section id="section-3.1">
         <h3 id="name-domain-separation-requireme">
@@ -1738,7 +1735,7 @@ and algorithms.<a href="#section-3-8" class="pilcrow">¶</a></p>
 <p id="section-3.1-1">All uses of the encoding functions defined in this document MUST include
 domain separation (<a href="#term-domain-separation" class="xref">Section 2.2.5</a>) to avoid interfering with
 other uses of similar functionality.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
-<p id="section-3.1-2">Protocols that instantiate multiple, independent instances of either
+<p id="section-3.1-2">Applications that instantiate multiple, independent instances of either
 hash_to_curve or encode_to_curve MUST enforce domain separation
 between those instances.
 This requirement applies both in the case of multiple instances targeting
@@ -1753,18 +1750,18 @@ described in <a href="#hashtofield" class="xref">Section 5</a>.<a href="#section
 </li>
 <li id="section-3.1-4.2">Tags MUST have nonzero length. A minimum length of 16 bytes
 is RECOMMENDED to reduce the chance of collisions with other
-protocols.<a href="#section-3.1-4.2" class="pilcrow">¶</a>
+applications.<a href="#section-3.1-4.2" class="pilcrow">¶</a>
 </li>
-<li id="section-3.1-4.3">Tags SHOULD begin with a fixed protocol identification string
-that is unique to the protocol.<a href="#section-3.1-4.3" class="pilcrow">¶</a>
+<li id="section-3.1-4.3">Tags SHOULD begin with a fixed identification string
+that is unique to the application.<a href="#section-3.1-4.3" class="pilcrow">¶</a>
 </li>
-<li id="section-3.1-4.4">Tags SHOULD include a protocol version number.<a href="#section-3.1-4.4" class="pilcrow">¶</a>
+<li id="section-3.1-4.4">Tags SHOULD include a version number.<a href="#section-3.1-4.4" class="pilcrow">¶</a>
 </li>
-<li id="section-3.1-4.5">For protocols that define multiple ciphersuites, each ciphersuite's
+<li id="section-3.1-4.5">For applications that define multiple ciphersuites, each ciphersuite's
 tag MUST be different. For this purpose, it is RECOMMENDED to
 include a ciphersuite identifier in each tag.<a href="#section-3.1-4.5" class="pilcrow">¶</a>
 </li>
-<li id="section-3.1-4.6">For protocols that use multiple encodings, either to the same curve
+<li id="section-3.1-4.6">For applications that use multiple encodings, either to the same curve
 or to different curves, each encoding MUST use a different tag.
 For this purpose, it is RECOMMENDED to include the encoding's
 Suite ID (<a href="#suites" class="xref">Section 8</a>) in the domain separation tag.
@@ -1772,17 +1769,16 @@ For independent encodings based on the same suite, each tag should
 also include a distinct identifier, e.g., "ENC1" and "ENC2".<a href="#section-3.1-4.6" class="pilcrow">¶</a>
 </li>
 </ol>
-<p id="section-3.1-5">As an example, consider a fictional protocol named Quux
+<p id="section-3.1-5">As an example, consider a fictional application named Quux
 that defines several different ciphersuites.
 A reasonable choice of tag is "QUUX-V&lt;xx&gt;-CS&lt;yy&gt;-&lt;suiteID&gt;", where
 &lt;xx&gt; and &lt;yy&gt; are two-digit numbers indicating the version and
 ciphersuite, respectively, and &lt;suiteID&gt; is the Suite ID of the
 encoding used in ciphersuite &lt;yy&gt;.<a href="#section-3.1-5" class="pilcrow">¶</a></p>
-<p id="section-3.1-6">As another example, consider a fictional protocol named Baz that requires
-two independent random oracles, where one oracle outputs points on the curve
-E1 and the other outputs points on the curve E2.
-Reasonable choices of tags for the E1 and E2 oracles are
-"BAZ-V&lt;xx&gt;-CS&lt;yy&gt;-&lt;suiteID&gt;-E1" and "BAZ-V&lt;xx&gt;-CS&lt;yy&gt;-&lt;suiteID&gt;-E2",
+<p id="section-3.1-6">As another example, consider a fictional application named Baz that requires
+two independent random oracles to the same curve.
+Reasonable choices of tags for these oracles are
+"BAZ-V&lt;xx&gt;-CS&lt;yy&gt;-&lt;suiteID&gt;-ENC1" and "BAZ-V&lt;xx&gt;-CS&lt;yy&gt;-&lt;suiteID&gt;-ENC2",
 respectively, where &lt;xx&gt;, &lt;yy&gt;, and &lt;suiteID&gt; are as described above.<a href="#section-3.1-6" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1794,18 +1790,17 @@ respectively, where &lt;xx&gt;, &lt;yy&gt;, and &lt;suiteID&gt; are as described
 <a href="#section-4" class="section-number selfRef">4. </a><a href="#name-utility-functions" class="section-name selfRef">Utility functions</a>
       </h2>
 <p id="section-4-1">Algorithms in this document make use of utility functions described below.<a href="#section-4-1" class="pilcrow">¶</a></p>
-<p id="section-4-2">For security reasons, all field operations, comparisons, and assignments
-MUST be implemented in constant time (i.e., execution time MUST NOT depend
-on the values of the inputs). Guidance on implementing these low-level
-operations in constant time is beyond the scope of this document.<a href="#section-4-2" class="pilcrow">¶</a></p>
+<p id="section-4-2">For security, implementations of these functions SHOULD be constant-time,
+i.e., execution time SHOULD NOT depend on the values of the inputs.
+For such constant-time implementations, all field operations, comparisons, and
+assignments MUST be implemented in constant time.
+<a href="#security-considerations" class="xref">Section 10</a> briefly discusses constant-time security issues.
+Guidance on implementing these low-level operations in constant time is
+beyond the scope of this document.<a href="#section-4-2" class="pilcrow">¶</a></p>
 <ul>
 <li id="section-4-3.1">CMOV(a, b, c): If c is False, CMOV returns a, otherwise it returns b.
-To prevent against timing attacks, this operation must run in constant
-time, without revealing the value of c.
-Commonly, implementations assume that the selector c is 1 for True or
-0 for False. In this case, given a bit string C, the desired selector c can
-be computed by OR-ing all bits of C together. The resulting selector will be
-either 0 if all bits of C are zero, or 1 if at least one bit of C is 1.<a href="#section-4-3.1" class="pilcrow">¶</a>
+For constant-time implementations, this operation must run in
+time independent of the value of c.<a href="#section-4-3.1" class="pilcrow">¶</a>
 </li>
 <li id="section-4-3.2">
           <p id="section-4-3.2.1">is_square(x): This function returns True whenever the value x is a
@@ -1828,14 +1823,11 @@ time more quickly than by the above exponentiation.
 two roots of x in the field F whenever x is square.
 To maintain compatibility across implementations while allowing implementors
 leeway for optimizations, this document does not require sqrt() to return a
-particular value. Instead, as explained in <a href="#point-sign" class="xref">Section 6.4</a>, any higher-level
-function that computes square roots also specifies how to determine the sign
-of the result.<a href="#section-4-3.3.1" class="pilcrow">¶</a></p>
+particular value. Instead, as explained in <a href="#point-sign" class="xref">Section 6.4</a>, any function that
+calls sqrt also specifies how to determine the correct root.<a href="#section-4-3.3.1" class="pilcrow">¶</a></p>
 <p id="section-4-3.3.2">
 The preferred way of computing square roots is to fix a deterministic
-algorithm particular to F. We give several algorithms in <a href="#appx-sqrt" class="xref">Appendix G</a>.
-Regardless of the method chosen, the sqrt function should be implemented
-in constant time.<a href="#section-4-3.3.2" class="pilcrow">¶</a></p>
+algorithm particular to F. We give several algorithms in <a href="#appx-sqrt" class="xref">Appendix G</a>.<a href="#section-4-3.3.2" class="pilcrow">¶</a></p>
 </li>
 <li id="section-4-3.4">sgn0(x): This function returns either 0 or 1 indicating the "sign" of x,
 where sgn0(x) == 1 just when x is "negative".
@@ -2148,7 +2140,7 @@ of the fact that Z_pad depends only on H, and not on the arguments to
 expand_message_xmd.
 To do so, first precompute and save the internal state of H after ingesting
 Z_pad. Then, when computing b_0, initialize H using the saved state.
-Further details are beyond the scope of this document.<a href="#section-5.3.1-7" class="pilcrow">¶</a></p>
+Further details are implementation dependent, and beyond the scope of this document.<a href="#section-5.3.1-7" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="hashtofield-expand-xof">
@@ -2799,12 +2791,11 @@ generally give the same result as the fast method, and SHOULD NOT be used.<a hre
 <p id="section-8-2">A hash-to-curve suite fully specifies the procedure for hashing byte strings
 to points on a specific elliptic curve group.
 <a href="#suites-howto" class="xref">Section 8.1</a> describes how to implement a suite.
-Designers specifying a protocol that requires hashing to an elliptic curve
-should either choose an existing suite or specify a new one as described
-in <a href="#new-suite" class="xref">Section 8.9</a>.<a href="#section-8-2" class="pilcrow">¶</a></p>
-<p id="section-8-3">All protocols and applications using a hash-to-curve suite MUST choose a domain
+Applications that require hashing to an elliptic curve should use either
+an existing suite or a new suite specified as described in <a href="#new-suite" class="xref">Section 8.9</a>.<a href="#section-8-2" class="pilcrow">¶</a></p>
+<p id="section-8-3">All applications using a hash-to-curve suite MUST choose a domain
 separation tag (DST) in accordance with the guidelines in <a href="#domain-separation" class="xref">Section 3.1</a>.
-In addition, protocols and applications whose security requires a random oracle
+In addition, applications whose security requires a random oracle
 that returns points on the target curve MUST use a suite whose encoding type
 is hash_to_curve; see <a href="#roadmap" class="xref">Section 3</a> and immediately below for more information.<a href="#section-8-3" class="pilcrow">¶</a></p>
 <p id="section-8-4">A hash-to-curve suite comprises the following parameters:<a href="#section-8-4" class="pilcrow">¶</a></p>
@@ -2838,12 +2829,14 @@ the underlying hash function).<a href="#section-8-5.8" class="pilcrow">¶</a>
 <p id="section-8-6">In addition to the above parameters, the mapping f may require
 additional parameters Z, M, rational_map, E', and/or iso_map.
 These MUST be specified when applicable.<a href="#section-8-6" class="pilcrow">¶</a></p>
-<p id="section-8-7">Suites with nonuniform encodings MUST NOT be used in applications whose security
-relies on a random oracle. Applications using nonuniform encodings SHOULD carefully
-analyze the security implications of using such an encoding. When the required
-encoding is not clear, applications SHOULD use a random oracle.<a href="#section-8-7" class="pilcrow">¶</a></p>
-<p id="section-8-8">The below table lists suites RECOMMENDED for some elliptic curves. The
-corresponding parameters are given in the following subsections.<a href="#section-8-8" class="pilcrow">¶</a></p>
+<p id="section-8-7">The below table lists suites RECOMMENDED for some elliptic curves.
+The corresponding parameters are given in the following subsections.
+Applications instantiating cryptographic protocols whose security analysis
+relies on a random oracle MUST NOT use a nonuniform encoding.
+Moreover, applications that use a nonuniform encoding SHOULD carefully
+analyze the security implications of nonuniformity.
+When the required encoding is not clear, applications SHOULD use a
+random oracle for security.<a href="#section-8-7" class="pilcrow">¶</a></p>
 <table class="center" id="table-2">
         <caption><a href="#table-2" class="selfRef">Table 2</a></caption>
 <thead>
@@ -3430,7 +3423,7 @@ CURVE_ID || "_" || HASH_ID || "_" || MAP_ID || "_" || ENC_VAR || "_"
 <p id="section-8.10-3">The fields CURVE_ID, HASH_ID, MAP_ID, and ENC_VAR are
 ASCII-encoded strings of at most 64 characters each.
 Fields MUST contain only ASCII characters between 0x21 and 0x7E (inclusive)
-other underscore (i.e., 0x5f).<a href="#section-8.10-3" class="pilcrow">¶</a></p>
+except that underscore (i.e., 0x5f) is not allowed.<a href="#section-8.10-3" class="pilcrow">¶</a></p>
 <p id="section-8.10-4">As indicated above, each field (including the last) is followed by an underscore
 ("_", ASCII 0x5f).
 This helps to ensure that Suite IDs are prefix free.
@@ -3521,43 +3514,53 @@ ENC_VAR MAY also be used to encode other information used to identify
       <h2 id="name-security-considerations-2">
 <a href="#section-10" class="section-number selfRef">10. </a><a href="#name-security-considerations-2" class="section-name selfRef">Security considerations</a>
       </h2>
-<p id="section-10-1">When constant-time implementations are required, all basic operations and
-utility functions must be implemented in constant time, as discussed in
-<a href="#utility" class="xref">Section 4</a>.
-In some applications (e.g., embedded systems), leakage through other side
-channels (e.g., power or electromagnetic side channels) may be pertinent.
-Defending against such leakage is outside the scope of this document, because
-the nature of the leakage and the appropriate defense depends on the protocol
-from which a hash-to-curve function is invoked.<a href="#section-10-1" class="pilcrow">¶</a></p>
-<p id="section-10-2"><a href="#domain-separation" class="xref">Section 3.1</a> describes considerations related to domain separation.
-See <a href="#security-considerations-domain-separation" class="xref">Section 10.3</a> for further discussion.<a href="#section-10-2" class="pilcrow">¶</a></p>
-<p id="section-10-3"><a href="#hashtofield" class="xref">Section 5</a> describes considerations for uniformly hashing to field elements;
+<p id="section-10-1"><a href="#domain-separation" class="xref">Section 3.1</a> describes considerations related to domain separation.
+See <a href="#security-considerations-domain-separation" class="xref">Section 10.3</a> for further discussion.<a href="#section-10-1" class="pilcrow">¶</a></p>
+<p id="section-10-2"><a href="#hashtofield" class="xref">Section 5</a> describes considerations for uniformly hashing to field elements;
 see <a href="#security-considerations-hash-to-field" class="xref">Section 10.1</a> and <a href="#security-considerations-expand-xmd" class="xref">Section 10.2</a>
-for further discussion.<a href="#section-10-3" class="pilcrow">¶</a></p>
-<p id="section-10-4">Each encoding type (<a href="#roadmap" class="xref">Section 3</a>) accepts an arbitrary byte string and maps
+for further discussion.<a href="#section-10-2" class="pilcrow">¶</a></p>
+<p id="section-10-3">Each encoding type (<a href="#roadmap" class="xref">Section 3</a>) accepts an arbitrary byte string and maps
 it to a point on the curve sampled from a distribution that depends on the
 encoding type.
-It is important to note that directly evaluating the mappings of <a href="#mappings" class="xref">Section 6</a>
-produces an output that is distinguishable from random.<a href="#section-10-4" class="pilcrow">¶</a></p>
-<p id="section-10-5">When the hash_to_curve function (<a href="#roadmap" class="xref">Section 3</a>) is instantiated with a
+It is important to note that using a nonuniform encoding or directly
+evaluating one of the mappings of <a href="#mappings" class="xref">Section 6</a> produces an output that is
+easily distinguished from a uniformly random point.
+Applications that use a nonuniform encoding SHOULD carefully analyze the security
+implications of nonuniformity.
+When the required encoding is not clear, applications SHOULD use a random
+oracle encoding.<a href="#section-10-3" class="pilcrow">¶</a></p>
+<p id="section-10-4">When the hash_to_curve function (<a href="#roadmap" class="xref">Section 3</a>) is instantiated with a
 hash_to_field function that is indifferentiable from a random oracle
 (<a href="#hashtofield" class="xref">Section 5</a>), the resulting function is indifferentiable from a random
-oracle (<span>[<a href="#FFSTV13" class="xref">FFSTV13</a>]</span>, <span>[<a href="#LBB19" class="xref">LBB19</a>]</span>, <span>[<a href="#MRH04" class="xref">MRH04</a>]</span>).
-In most cases such a function can be safely used in protocols whose security
-analysis assumes a random oracle that outputs points on an elliptic curve.
+oracle (<span>[<a href="#MRH04" class="xref">MRH04</a>]</span>, <span>[<a href="#BCIMRT10" class="xref">BCIMRT10</a>]</span>, <span>[<a href="#FFSTV13" class="xref">FFSTV13</a>]</span>, <span>[<a href="#LBB19" class="xref">LBB19</a>]</span>).
+In many cases such a function can be safely used in cryptographic protocols
+whose security analysis assumes a random oracle that outputs points on an
+elliptic curve.
 As Ristenpart et al. discuss in <span>[<a href="#RSS11" class="xref">RSS11</a>]</span>, however, not all security proofs
 that rely on random oracles continue to hold when those oracles are replaced
 by indifferentiable functionalities.
 This limitation should be considered when analyzing the security of protocols
-relying on the hash_to_curve function.<a href="#section-10-5" class="pilcrow">¶</a></p>
-<p id="section-10-6">When hashing passwords using any function described in this document, an adversary
+relying on the hash_to_curve function.<a href="#section-10-4" class="pilcrow">¶</a></p>
+<p id="section-10-5">When hashing passwords using any function described in this document, an adversary
 who learns the output of the hash function (or potentially any intermediate value,
 e.g., the output of hash_to_field) may be able to carry out a dictionary attack.
 To mitigate such attacks, it is recommended to first execute a more costly key
 derivation function (e.g., PBKDF2 <span>[<a href="#RFC2898" class="xref">RFC2898</a>]</span> or scrypt <span>[<a href="#RFC7914" class="xref">RFC7914</a>]</span>) on the password,
 then hash the output of that function to the target elliptic curve.
 For collision resistance, the hash underlying the key derivation function
-should be chosen according to the guidelines listed in <a href="#hashtofield-expand" class="xref">Section 5.3</a>.<a href="#section-10-6" class="pilcrow">¶</a></p>
+should be chosen according to the guidelines listed in <a href="#hashtofield-expand" class="xref">Section 5.3</a>.<a href="#section-10-5" class="pilcrow">¶</a></p>
+<p id="section-10-6">Constant-time implementations of all functions in this document are STRONGLY
+RECOMMENDED for all uses, to avoid leaking information via side channels.
+It is especially important to use a constant-time implementation when inputs to
+an encoding are secret values; in such cases, constant-time implementations
+are REQUIRED for security against timing attacks (e.g., <span>[<a href="#VR20" class="xref">VR20</a>]</span>).
+When constant-time implementations are required, all basic operations and
+utility functions must be implemented in constant time, as discussed in
+<a href="#utility" class="xref">Section 4</a>.
+In some applications (e.g., embedded systems), leakage through other side
+channels (e.g., power or electromagnetic side channels) may be pertinent.
+Defending against such leakage is outside the scope of this document, because
+the nature of the leakage and the appropriate defense depends on the application.<a href="#section-10-6" class="pilcrow">¶</a></p>
 <div id="security-considerations-hash-to-field">
 <section id="section-10.1">
         <h3 id="name-hash_to_field-security">
@@ -3629,10 +3632,10 @@ ensure domain separation by picking a distinct value for DST.<a href="#section-1
         <h3 id="name-domain-separation-recommend">
 <a href="#section-10.3" class="section-number selfRef">10.3. </a><a href="#name-domain-separation-recommend" class="section-name selfRef">Domain separation recommendations</a>
         </h3>
-<p id="section-10.3-1">As discussed in <a href="#term-domain-separation" class="xref">Section 2.2.5</a>, the purpose of domain separation is
-to ensure that security analyses of protocols that query multiple independent
-random oracles remain valid even if all of these random oracles are instantiated
-base on one underlying function H.
+<p id="section-10.3-1">As discussed in <a href="#term-domain-separation" class="xref">Section 2.2.5</a>, the purpose of domain separation
+is to ensure that security analyses of cryptographic protocols that query
+multiple independent random oracles remain valid even if all of these random
+oracles are instantiated based on one underlying function H.
 The expand_message variants in this document (<a href="#hashtofield-expand" class="xref">Section 5.3</a>) ensure
 domain separation by appending a suffix-free-encoded domain separation tag
 DST_prime to all strings hashed by H, an underlying hash or extensible
@@ -3640,13 +3643,13 @@ output function.
 (Other expand_message variants that follow the guidelines in
 <a href="#hashtofield-expand-other" class="xref">Section 5.3.4</a> are expected to behave similarly,
 but these should be analyzed on a case-by-case basis.)
-For security, protocols that use the same function H outside of expand_message
+For security, applications that use the same function H outside of expand_message
 should enforce domain separation between those uses of H and expand_message,
-and should separate all of these from uses of H in other protocols.<a href="#section-10.3-1" class="pilcrow">¶</a></p>
+and should separate all of these from uses of H in other applications.<a href="#section-10.3-1" class="pilcrow">¶</a></p>
 <p id="section-10.3-2">This section suggests four methods for enforcing domain separation
 from expand_message variants, explains how each method achieves domain
 separation, and lists the situations in which each is appropriate.
-These methods share a high-level structure: the protocol designer fixes a tag
+These methods share a high-level structure: the application designer fixes a tag
 DST_ext distinct from DST_prime and augments calls to H with DST_ext.
 Each method augments calls to H differently, and each may impose
 additional requirements on DST_ext.<a href="#section-10.3-2" class="pilcrow">¶</a></p>
@@ -3808,9 +3811,9 @@ may reduce the effective security level for any curve.<a href="#section-10.4-1" 
       </h2>
 <p id="section-11-1">The authors would like to thank Adam Langley for his detailed writeup of Elligator 2 with
 Curve25519 <span>[<a href="#L13" class="xref">L13</a>]</span>;
-Dan Boneh, Christopher Patton, and Benjamin Lipp for educational discussions; and
-David Benjamin, Frank Denis, Sean Devlin, Justin Drake, Bjoern Haase, Mike Hamburg,
-Dan Harkins, Thomas Icart, Andy Polyakov, Mamy Ratsimbazafy, Leonid Reyzin, Michael Scott,
+Dan Boneh, Christopher Patton, Benjamin Lipp, and Leonid Reyzin for educational discussions;
+and David Benjamin, Frank Denis, Sean Devlin, Justin Drake, Bjoern Haase, Mike Hamburg,
+Dan Harkins, Thomas Icart, Andy Polyakov, Mamy Ratsimbazafy, Michael Scott,
 and Mathy Vanhoef for helpful feedback.<a href="#section-11-1" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -3863,17 +3866,9 @@ michele.orru@ens.fr<a href="#section-12-1.3.2" class="pilcrow">¶</a></p>
 <dd>
 <span class="refAuthor">Bradner, S.</span>, <span class="refTitle">"Key words for use in RFCs to Indicate Requirement Levels"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 2119</span>, <span class="seriesInfo">DOI 10.17487/RFC2119</span>, <time datetime="1997-03">March 1997</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc2119">https://www.rfc-editor.org/info/rfc2119</a>&gt;</span>. </dd>
 <dd class="break"></dd>
-<dt id="RFC2898">[RFC2898]</dt>
-<dd>
-<span class="refAuthor">Kaliski, B.</span>, <span class="refTitle">"PKCS #5: Password-Based Cryptography Specification Version 2.0"</span>, <span class="seriesInfo">RFC 2898</span>, <span class="seriesInfo">DOI 10.17487/RFC2898</span>, <time datetime="2000-09">September 2000</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc2898">https://www.rfc-editor.org/info/rfc2898</a>&gt;</span>. </dd>
-<dd class="break"></dd>
 <dt id="RFC7748">[RFC7748]</dt>
 <dd>
 <span class="refAuthor">Langley, A.</span><span class="refAuthor">, Hamburg, M.</span><span class="refAuthor">, and S. Turner</span>, <span class="refTitle">"Elliptic Curves for Security"</span>, <span class="seriesInfo">RFC 7748</span>, <span class="seriesInfo">DOI 10.17487/RFC7748</span>, <time datetime="2016-01">January 2016</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7748">https://www.rfc-editor.org/info/rfc7748</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="RFC7914">[RFC7914]</dt>
-<dd>
-<span class="refAuthor">Percival, C.</span><span class="refAuthor"> and S. Josefsson</span>, <span class="refTitle">"The scrypt Password-Based Key Derivation Function"</span>, <span class="seriesInfo">RFC 7914</span>, <span class="seriesInfo">DOI 10.17487/RFC7914</span>, <time datetime="2016-08">August 2016</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7914">https://www.rfc-editor.org/info/rfc7914</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC8017">[RFC8017]</dt>
 <dd>
@@ -3937,6 +3932,10 @@ michele.orru@ens.fr<a href="#section-12-1.3.2" class="pilcrow">¶</a></p>
 <dt id="BLS12-381">[BLS12-381]</dt>
 <dd>
 <span class="refAuthor">Bowe, S.</span>, <span class="refTitle">"BLS12-381: New zk-SNARK Elliptic Curve Construction"</span>, <time datetime="2017-03">March 2017</time>, <span>&lt;<a href="https://electriccoin.co/blog/new-snark-curve/">https://electriccoin.co/blog/new-snark-curve/</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="BM92">[BM92]</dt>
+<dd>
+<span class="refAuthor">Bellovin, S.M.</span><span class="refAuthor"> and M. Merritt</span>, <span class="refTitle">"Encrypted key exchange: Password-based protocols secure against dictionary attacks"</span>, <span class="seriesInfo">DOI 10.1109/RISP.1992.213269</span>, <span class="seriesInfo">pages 72-84</span>, <span class="seriesInfo">In IEEE Symposium on Security and Privacy - Oakland 1992</span>, <time datetime="1992">1992</time>, <span>&lt;<a href="https://doi.org/10.1109/RISP.1992.213269">https://doi.org/10.1109/RISP.1992.213269</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="BMP00">[BMP00]</dt>
 <dd>
@@ -4050,9 +4049,21 @@ michele.orru@ens.fr<a href="#section-12-1.3.2" class="pilcrow">¶</a></p>
 <dd>
 <span class="refAuthor">Maurer, U.</span><span class="refAuthor">, Renner, R.</span><span class="refAuthor">, and C. Holenstein</span>, <span class="refTitle">"Indifferentiability, impossibility results on reductions, and applications to the random oracle methodology"</span>, <span class="seriesInfo">DOI 10.1007/978-3-540-24638-1_2</span>, <span class="seriesInfo">pages 21-39</span>, <span class="seriesInfo">In TCC 2004: Theory of Cryptography</span>, <time datetime="2004-02">February 2004</time>, <span>&lt;<a href="https://doi.org/10.1007/978-3-540-24638-1_2">https://doi.org/10.1007/978-3-540-24638-1_2</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="MRV99">[MRV99]</dt>
+<dd>
+<span class="refAuthor">Micali, S.</span><span class="refAuthor">, Rabin, M.</span><span class="refAuthor">, and S. Vadhan</span>, <span class="refTitle">"Verifiable Random Functions"</span>, <span class="seriesInfo">DOI 10.1109/SFFCS.1999.814584</span>, <span class="seriesInfo">In Symposium on the Foundations of Computer Science</span>, <time datetime="1999-10">October 1999</time>, <span>&lt;<a href="https://doi.org/10.1109/SFFCS.1999.814584">https://doi.org/10.1109/SFFCS.1999.814584</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="MT98">[MT98]</dt>
 <dd>
 <span class="refAuthor">Matsumoto, M.</span><span class="refAuthor"> and T. Nishimura</span>, <span class="refTitle">"Mersenne twister: A 623-dimensionally equidistributed uniform pseudo-random number generator"</span>, <span class="seriesInfo">DOI 10.1145/272991.272995</span>, <span class="seriesInfo">pages 3-30</span>, <span class="seriesInfo">In ACM Transactions on Modeling and Computer Simulation (TOMACS), Volume 8, Issue 1</span>, <time datetime="1998-01">January 1998</time>, <span>&lt;<a href="https://doi.org/10.1145/272991.272995">https://doi.org/10.1145/272991.272995</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="NR97">[NR97]</dt>
+<dd>
+<span class="refAuthor">Naor, M.</span><span class="refAuthor"> and O. Reingold</span>, <span class="refTitle">"Number-theoretic constructions of efficient pseudo-random functions"</span>, <span class="seriesInfo">DOI 10.1109/SFCS.1997.646134</span>, <span class="seriesInfo">In Symposium on the Foundations of Computer Science</span>, <time datetime="1997-10">October 1997</time>, <span>&lt;<a href="https://doi.org/10.1109/SFCS.1997.646134">https://doi.org/10.1109/SFCS.1997.646134</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="p1363.2">[p1363.2]</dt>
+<dd>
+<span class="refAuthor">IEEE Computer Society</span>, <span class="refTitle">"IEEE Standard Specification for Password-Based Public-Key Cryptography Techniques"</span>, <time datetime="2008-09">September 2008</time>, <span>&lt;<a href="https://standards.ieee.org/standard/1363_2-2008.html">https://standards.ieee.org/standard/1363_2-2008.html</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="p1363a">[p1363a]</dt>
 <dd>
@@ -4062,6 +4073,10 @@ michele.orru@ens.fr<a href="#section-12-1.3.2" class="pilcrow">¶</a></p>
 <dd>
 <span class="refAuthor">Krawczyk, H.</span><span class="refAuthor">, Bellare, M.</span><span class="refAuthor">, and R. Canetti</span>, <span class="refTitle">"HMAC: Keyed-Hashing for Message Authentication"</span>, <span class="seriesInfo">RFC 2104</span>, <span class="seriesInfo">DOI 10.17487/RFC2104</span>, <time datetime="1997-02">February 1997</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc2104">https://www.rfc-editor.org/info/rfc2104</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="RFC2898">[RFC2898]</dt>
+<dd>
+<span class="refAuthor">Kaliski, B.</span>, <span class="refTitle">"PKCS #5: Password-Based Cryptography Specification Version 2.0"</span>, <span class="seriesInfo">RFC 2898</span>, <span class="seriesInfo">DOI 10.17487/RFC2898</span>, <time datetime="2000-09">September 2000</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc2898">https://www.rfc-editor.org/info/rfc2898</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="RFC5869">[RFC5869]</dt>
 <dd>
 <span class="refAuthor">Krawczyk, H.</span><span class="refAuthor"> and P. Eronen</span>, <span class="refTitle">"HMAC-based Extract-and-Expand Key Derivation Function (HKDF)"</span>, <span class="seriesInfo">RFC 5869</span>, <span class="seriesInfo">DOI 10.17487/RFC5869</span>, <time datetime="2010-05">May 2010</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc5869">https://www.rfc-editor.org/info/rfc5869</a>&gt;</span>. </dd>
@@ -4069,6 +4084,10 @@ michele.orru@ens.fr<a href="#section-12-1.3.2" class="pilcrow">¶</a></p>
 <dt id="RFC7693">[RFC7693]</dt>
 <dd>
 <span class="refAuthor">Saarinen, M-J., Ed.</span><span class="refAuthor"> and J-P. Aumasson</span>, <span class="refTitle">"The BLAKE2 Cryptographic Hash and Message Authentication Code (MAC)"</span>, <span class="seriesInfo">RFC 7693</span>, <span class="seriesInfo">DOI 10.17487/RFC7693</span>, <time datetime="2015-11">November 2015</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7693">https://www.rfc-editor.org/info/rfc7693</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC7914">[RFC7914]</dt>
+<dd>
+<span class="refAuthor">Percival, C.</span><span class="refAuthor"> and S. Josefsson</span>, <span class="refTitle">"The scrypt Password-Based Key Derivation Function"</span>, <span class="seriesInfo">RFC 7914</span>, <span class="seriesInfo">DOI 10.17487/RFC7914</span>, <time datetime="2016-08">August 2016</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7914">https://www.rfc-editor.org/info/rfc7914</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RSS11">[RSS11]</dt>
 <dd>
@@ -4812,6 +4831,9 @@ map_to_curve_elligator2(u)
 
 Input: u, an element of F.
 Output: (s, t), a point on M.
+
+Notation:
+- XOR is a logical operator.
 
 Constants:
 1.   c1 = J / K
