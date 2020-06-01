@@ -3556,8 +3556,8 @@ e.g., the output of hash_to_field) may be able to carry out a dictionary attack.
 To mitigate such attacks, it is recommended to first execute a more costly key
 derivation function (e.g., PBKDF2 <span>[<a href="#RFC2898" class="xref">RFC2898</a>]</span> or scrypt <span>[<a href="#RFC7914" class="xref">RFC7914</a>]</span>) on the password,
 then hash the output of that function to the target elliptic curve.
-For domain separation, the hash underlying the key derivation function
-should be chosen according to the guidelines listed in <a href="#domain-separation" class="xref">Section 3.1</a>.<a href="#section-10-6" class="pilcrow">¶</a></p>
+For collision resistance, the hash underlying the key derivation function
+should be chosen according to the guidelines listed in <a href="#hashtofield-expand-xmd" class="xref">Section 5.3.1</a>.<a href="#section-10-6" class="pilcrow">¶</a></p>
 <div id="security-considerations-hash-to-field">
 <section id="section-10.1">
         <h3 id="name-hash_to_field-security">
