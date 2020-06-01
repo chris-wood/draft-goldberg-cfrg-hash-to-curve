@@ -1403,7 +1403,7 @@ Internet-Draft                hash-to-curve                    June 2020
 
 
    Sign of y: Inputs u and -u give the same x-coordinate for many values
-   of u, so sgn0(y) == sgn0(u).
+   of u.  Thus, we set sgn0(y) == sgn0(u).
 
    Exceptions: The exceptional cases for u occur when (1 + u^2 * g(Z)) *
    (1 - u^2 * g(Z)) == 0.  The restrictions on Z given above ensure that
@@ -1464,8 +1464,8 @@ Internet-Draft                hash-to-curve                    June 2020
 
       4.  g(B / (Z * A)) is square in F.
 
-   Sign of y: Inputs u and -u give the same x-coordinate, so sgn0(y) ==
-   sgn0(u).
+   Sign of y: Inputs u and -u give the same x-coordinate.  Thus, we set
+   sgn0(y) == sgn0(u).
 
    Exceptions: The exceptional cases are values of u such that Z^2 * u^4
    + Z * u^2 == 0.  This includes u == 0, and may include other values
