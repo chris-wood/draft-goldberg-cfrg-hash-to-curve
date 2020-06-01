@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2020-06-01T12:54:07.817928+00:00",
+  "timestamp": "2020-06-01T21:56:12.929399+00:00",
   "repo": "cfrg/draft-irtf-cfrg-hash-to-curve",
   "labels": [
     {
@@ -4856,7 +4856,7 @@
       "id": "MDU6SXNzdWU1NzM1ODUzNjk=",
       "title": "Test vectors",
       "url": "https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/issues/216",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "dot-asm",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [
@@ -4865,8 +4865,8 @@
       "labels": [],
       "body": "I'd like to argue that it wouldn't be inappropriate to have test vectors exercise conditions in algorithms, or more specifically both outcomes of CMOVs/if conditions. As opposite to just a limited number of specific strings fed to all algorithms,the set that is obviously too small to trigger all conditions in any chosen algorithm. Given current state [when test input is passed to hash_to_field] it naturally ~causes~ poses a challenge, as one would have to search for inputs that trigger specific conditions, but it shouldn't be a heavy computational problem.\r\n\r\nOn related note one can also wonder if it would be beneficial to ensure that [sufficient amount of] inputs to sgn0 are \"endian-unambiguous\". By \"endian ambiguity\" I mean that a specific input can yield same sign for both little- and big-endian variants of sgn0, in which case implementation invoking wrong sgn0 would pass the corresponding test.\r\n\r\nAlso, it might be useful to provide intermediate results from inputs to corresponding map_to_curves, as opposite for complete stack, so that map_to_curves can be tested by themselves. Does it make sense?\r\n",
       "createdAt": "2020-03-01T17:40:48Z",
-      "updatedAt": "2020-06-01T06:41:33Z",
-      "closedAt": null,
+      "updatedAt": "2020-06-01T21:44:08Z",
+      "closedAt": "2020-06-01T21:44:08Z",
       "comments": [
         {
           "author": "mratsim",
@@ -4920,9 +4920,9 @@
         {
           "author": "kwantam",
           "authorAssociation": "COLLABORATOR",
-          "body": "Action items so far from this thread:\r\n\r\n- [x] make sure that poc code is linked in an obvious place in the doc (say, in the test vectors appendix)\r\n- [x] add intermediate values (output of hash-to-field, output of map-to-curve before cofactor clearing) to test vectors\r\n- [ ] choose test vectors that give reasonable branch coverage (e.g., different signs, x1 vs x2, etc)\r\n- [x] ~choose test vectors such that sgn0 result is distinct for sgn0_le vs sgn0_be~ no longer needed, only one sgn0 now\r\n- [ ] incorporate @jedisct1's suggestions below\r\n\r\nPlease let me know if I'm missing any.",
+          "body": "Action items so far from this thread:\r\n\r\n- [x] make sure that poc code is linked in an obvious place in the doc (say, in the test vectors appendix)\r\n- [x] add intermediate values (output of hash-to-field, output of map-to-curve before cofactor clearing) to test vectors\r\n- [x] ~choose test vectors that give reasonable branch coverage (e.g., different signs, x1 vs x2, etc)~ see #276 (but note that as described there we don't try to cover signs or exceptional cases)\r\n- [x] ~choose test vectors such that sgn0 result is distinct for sgn0_le vs sgn0_be~ no longer needed, only one sgn0 now\r\n- [ ] incorporate @jedisct1's suggestions below\r\n\r\nPlease let me know if I'm missing any.",
           "createdAt": "2020-03-02T17:44:05Z",
-          "updatedAt": "2020-05-21T19:19:05Z"
+          "updatedAt": "2020-06-01T21:29:09Z"
         },
         {
           "author": "mratsim",
@@ -5028,6 +5028,27 @@
           "body": "Argh, OK, not much progress tonight. I'll spend some more time on this tomorrow evening.",
           "createdAt": "2020-06-01T06:41:33Z",
           "updatedAt": "2020-06-01T06:41:33Z"
+        },
+        {
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I think #276 takes care of everything here except an example of a DST longer than 255 bytes (which would require pre-hashing).\r\n\r\nIf we decide not to add that, then we can close this issue. Thoughts @chris-wood @armfazh ?",
+          "createdAt": "2020-06-01T21:36:07Z",
+          "updatedAt": "2020-06-01T21:36:07Z"
+        },
+        {
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I think we can close it as is. Both `expand_message` variants demand DSTs be less than 256 bytes, so anything longer seems like it wouldn't add much value. ",
+          "createdAt": "2020-06-01T21:42:38Z",
+          "updatedAt": "2020-06-01T21:42:38Z"
+        },
+        {
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Great. I'm closing, but anyone should feel free to reopen if this seems incorrect!",
+          "createdAt": "2020-06-01T21:44:08Z",
+          "updatedAt": "2020-06-01T21:44:08Z"
         }
       ]
     },
@@ -6024,15 +6045,15 @@
       "id": "MDU6SXNzdWU2Mjc1NjgwNjg=",
       "title": "Compliance with draft",
       "url": "https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/issues/271",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "armfazh",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Is there some part in the document that talks about what a library needs to implement in order to be compliant or compatible with the document?\r\n\r\n",
       "createdAt": "2020-05-29T22:00:08Z",
-      "updatedAt": "2020-05-30T00:37:38Z",
-      "closedAt": null,
+      "updatedAt": "2020-06-01T16:37:31Z",
+      "closedAt": "2020-06-01T16:37:31Z",
       "comments": [
         {
           "author": "kwantam",
@@ -6061,6 +6082,13 @@
           "body": "Yeah, I don't think we ought to specify any sort of \"mandatory to implement\" suites. If an application implements any one of the suites (per the spec), it's compatible.",
           "createdAt": "2020-05-30T00:37:38Z",
           "updatedAt": "2020-05-30T00:37:38Z"
+        },
+        {
+          "author": "armfazh",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Closing as no action is required.",
+          "createdAt": "2020-06-01T16:37:31Z",
+          "updatedAt": "2020-06-01T16:37:31Z"
         }
       ]
     },
@@ -27677,21 +27705,21 @@
       "id": "MDExOlB1bGxSZXF1ZXN0NDI1Mjk5MjM0",
       "title": "Merging section 4 and 4.1.",
       "url": "https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/pull/268",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "armfazh",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "In the past section 4.1 descried two sgn0 variants. Now there is only one, so I merged into section 4.\r\n\r\nIt also reorders items of section 4, first functions on bit strings followed by operations on field elements. (the reverse order is interesting too).\r\n\r\n* This is on top of #267 for easily seeing changes.",
       "createdAt": "2020-05-29T19:56:40Z",
-      "updatedAt": "2020-06-01T00:58:08Z",
+      "updatedAt": "2020-06-01T16:38:44Z",
       "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
       "baseRefName": "caw/up-to-mappings",
       "baseRefOid": "f234bd65d96670ef3301c2c0fd6a06d91e0d688b",
       "headRepository": "armfazh/draft-irtf-cfrg-hash-to-curve",
       "headRefName": "sug/mergeSec4",
       "headRefOid": "b672cc965b79b0c5a421e00d7bb26870c293a363",
-      "closedAt": null,
+      "closedAt": "2020-06-01T16:38:43Z",
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
@@ -27730,6 +27758,13 @@
           "body": "Are we OK leaving Section 4.1 as-is?",
           "createdAt": "2020-06-01T00:58:08Z",
           "updatedAt": "2020-06-01T00:58:08Z"
+        },
+        {
+          "author": "armfazh",
+          "authorAssociation": "COLLABORATOR",
+          "body": "The description of sgn0 deserves its own section.",
+          "createdAt": "2020-06-01T16:38:43Z",
+          "updatedAt": "2020-06-01T16:38:43Z"
         }
       ],
       "reviews": []
@@ -28436,24 +28471,26 @@
       "id": "MDExOlB1bGxSZXF1ZXN0NDI1NzAzNDUx",
       "title": "Pass up to related work",
       "url": "https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/pull/274",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "chris-wood",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "I'll finish the rest this evening!",
       "createdAt": "2020-06-01T01:16:44Z",
-      "updatedAt": "2020-06-01T12:53:41Z",
+      "updatedAt": "2020-06-01T18:27:13Z",
       "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
       "baseRefName": "master",
       "baseRefOid": "9b15875a9aba00b5891aca490876057f8bef9c20",
       "headRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
       "headRefName": "caw/remainder",
-      "headRefOid": "ef954681a84055d86d91e39f51822124938cbc97",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "4914182604706c872f38b9fdb5b0b04c06db65d1",
+      "closedAt": "2020-06-01T18:21:42Z",
+      "mergedAt": "2020-06-01T18:21:42Z",
+      "mergedBy": "kwantam",
+      "mergeCommit": {
+        "oid": "c8f7cfc0d9c8a69398370f56b86b0dda3ee27187"
+      },
       "comments": [
         {
           "author": "kwantam",
@@ -28480,25 +28517,25 @@
               "originalPosition": 38,
               "body": "The \"we set\" made clear that this was a decision, whereas the proposed wording feels like it implies that \"sgn0(y) == sgn0(u)\" follows from \"u and -u give the same x-coordinate\". Is it possible to recover the explicit we-made-this-decision statement?",
               "createdAt": "2020-06-01T06:44:40Z",
-              "updatedAt": "2020-06-01T12:53:41Z"
+              "updatedAt": "2020-06-01T16:27:23Z"
             },
             {
               "originalPosition": 48,
               "body": "Same as prior comment---can we keep explicit that this is a decision?",
               "createdAt": "2020-06-01T06:44:58Z",
-              "updatedAt": "2020-06-01T12:53:41Z"
+              "updatedAt": "2020-06-01T16:27:23Z"
             },
             {
               "originalPosition": 67,
               "body": "\"The prime-order (sub)group of the curve\" reads like there's only one, but that might not be true. Would it make sense to make an explicit reference to G?\r\n\r\n```suggestion\r\nprime-order (sub)group G ({{bg-curves}}).\r\n```",
               "createdAt": "2020-06-01T06:47:26Z",
-              "updatedAt": "2020-06-01T12:53:41Z"
+              "updatedAt": "2020-06-01T16:27:23Z"
             },
             {
               "originalPosition": 89,
               "body": "Hmm... I think the original intent of this sentence really was about collision resistance. For example, it wouldn't be great to use a hash with 160-bit output (i.e., 80-bit collision resistance) for a cryptosystem targeting 128-bit security.\r\n\r\nOn the other hand, not totally clear to me that domain separation is a huge issue here since H isn't being used as a random oracle and the password is secret from the adversary.\r\n\r\nI think maybe it makes sense to keep \"collision resistance\" and fix the target of the link... thoughts?\r\n\r\n```suggestion\r\nFor collision resistance, the hash underlying the key derivation function\r\nshould be chosen according to the guidelines listed in {{hashtofield-expand-xmd}}.\r\n```",
               "createdAt": "2020-06-01T06:52:51Z",
-              "updatedAt": "2020-06-01T12:53:41Z"
+              "updatedAt": "2020-06-01T16:27:23Z"
             }
           ]
         },
@@ -28518,7 +28555,7 @@
               "originalPosition": 38,
               "body": "Yep, that's fine. I'll revert it.",
               "createdAt": "2020-06-01T12:52:44Z",
-              "updatedAt": "2020-06-01T12:53:41Z"
+              "updatedAt": "2020-06-01T16:27:23Z"
             }
           ]
         },
@@ -28538,9 +28575,236 @@
               "originalPosition": 48,
               "body": "Same!",
               "createdAt": "2020-06-01T12:52:48Z",
-              "updatedAt": "2020-06-01T12:53:41Z"
+              "updatedAt": "2020-06-01T16:27:23Z"
             }
           ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDIxODE5MzQw",
+          "commit": {
+            "abbreviatedOid": "ef95468"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-06-01T12:55:13Z",
+          "updatedAt": "2020-06-01T12:55:13Z",
+          "comments": [
+            {
+              "originalPosition": 89,
+              "body": "It was the link that made me think we meant something else, so we can update it. That said, should we not *also* mention domain separation here, as any KDF will surely have a hash that likely ought to be domain separated, too. ",
+              "createdAt": "2020-06-01T12:55:13Z",
+              "updatedAt": "2020-06-01T16:27:23Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDIyMDAyNDgx",
+          "commit": {
+            "abbreviatedOid": "4914182"
+          },
+          "author": "armfazh",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "I like these changes.",
+          "createdAt": "2020-06-01T16:36:46Z",
+          "updatedAt": "2020-06-01T16:36:46Z",
+          "comments": []
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDIyMDcxOTQ5",
+          "commit": {
+            "abbreviatedOid": "4914182"
+          },
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-06-01T18:15:55Z",
+          "updatedAt": "2020-06-01T18:15:55Z",
+          "comments": [
+            {
+              "originalPosition": 89,
+              "body": "Probably not necessary to use domain separation there because the password input to the KDF is secret. In particular, for something like PBKDF2 or scrypt the password is used as the key for an HMAC invocation. As long as the password is secret life is fine, by a similar argument to the one we give in the domain separation recommendations.",
+              "createdAt": "2020-06-01T18:15:55Z",
+              "updatedAt": "2020-06-01T18:20:40Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDIyMDc1NjY0",
+          "commit": {
+            "abbreviatedOid": "4914182"
+          },
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2020-06-01T18:21:34Z",
+          "updatedAt": "2020-06-01T18:21:34Z",
+          "comments": []
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDIyMDc5MjI2",
+          "commit": {
+            "abbreviatedOid": "4914182"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-06-01T18:26:49Z",
+          "updatedAt": "2020-06-01T18:26:50Z",
+          "comments": [
+            {
+              "originalPosition": 89,
+              "body": "Oh, that's a good point. Never mind then!",
+              "createdAt": "2020-06-01T18:26:50Z",
+              "updatedAt": "2020-06-01T18:27:13Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 275,
+      "id": "MDExOlB1bGxSZXF1ZXN0NDI2MjAwNDA4",
+      "title": "edits from offline conversation",
+      "url": "https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/pull/275",
+      "state": "MERGED",
+      "author": "kwantam",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2020-06-01T20:34:38Z",
+      "updatedAt": "2020-06-01T21:14:14Z",
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "c8f7cfc0d9c8a69398370f56b86b0dda3ee27187",
+      "headRepository": "kwantam/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "caw_questions",
+      "headRefOid": "e58fb0a04a46addfac783f6d1f00d8e7c3bd0008",
+      "closedAt": "2020-06-01T20:42:01Z",
+      "mergedAt": "2020-06-01T20:42:01Z",
+      "mergedBy": "chris-wood",
+      "mergeCommit": {
+        "oid": "cf6327c7725269a1c95c68e16f809198305f2b1c"
+      },
+      "comments": [
+        {
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Thanks!",
+          "createdAt": "2020-06-01T20:41:56Z",
+          "updatedAt": "2020-06-01T20:41:56Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDIyMTY2MTI0",
+          "commit": {
+            "abbreviatedOid": "e58fb0a"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2020-06-01T20:41:51Z",
+          "updatedAt": "2020-06-01T20:41:51Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 276,
+      "id": "MDExOlB1bGxSZXF1ZXN0NDI2MjI0Mjgz",
+      "title": "add one test vector",
+      "url": "https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/pull/276",
+      "state": "MERGED",
+      "author": "kwantam",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "This PR adds one extra test vector. With this new vector, all of the gx1/gx2 branches are covered in all suites.\r\n\r\nI'm explicitly not trying to cover branches in exceptional cases or in choosing sign of y. For exceptional cases, it's infeasible to find inputs that trigger the cases (we test our code by generating inputs for the map functions rather than the end-to-end hash function). For sign of y, the branch taken depends on the sqrt implementation, so it's not clear to me that it makes sense to try and cover these.",
+      "createdAt": "2020-06-01T21:28:23Z",
+      "updatedAt": "2020-06-01T21:55:43Z",
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "cf6327c7725269a1c95c68e16f809198305f2b1c",
+      "headRepository": "kwantam/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "add_one_vector",
+      "headRefOid": "b3cd2213b5358a4ea8cc864fe7ed2ed1144d5f7c",
+      "closedAt": "2020-06-01T21:55:43Z",
+      "mergedAt": "2020-06-01T21:55:43Z",
+      "mergedBy": "kwantam",
+      "mergeCommit": {
+        "oid": "48361fc663dd5dbea585d0871a4f39fba4247a07"
+      },
+      "comments": [
+        {
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "body": "By the way, I took a super simple approach to this, which I've stored in my [test_vector_coverage](https://github.com/kwantam/draft-irtf-cfrg-hash-to-curve/tree/test_vector_coverage) branch.\r\n\r\nI don't think we should pull the changes in that branch into the master branch, because I think we'd rather have the code in `poc/` be as close as possible to mechanically translated from the code listings in the document (currently that is how all of the `*_generic.sage` files are done).",
+          "createdAt": "2020-06-01T21:33:02Z",
+          "updatedAt": "2020-06-01T21:33:02Z"
+        },
+        {
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> By the way, I took a super simple approach to this, which I've stored in my test_vector_coverage branch.\r\n\r\nHah! I like it. \r\n\r\n> I don't think we should pull the changes in that branch into the master branch, because I think we'd rather have the code in poc/ be as close as possible to mechanically translated from the code listings in the document (currently that is how all of the *_generic.sage files are done).\r\n\r\nAgreed. It's cute, but a bit cumbersome.",
+          "createdAt": "2020-06-01T21:35:13Z",
+          "updatedAt": "2020-06-01T21:35:47Z"
+        },
+        {
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@kwantam the test vector is fine. Out of curiosity, how'd you pick it? Did you just try some random things and check the resulting coverage?",
+          "createdAt": "2020-06-01T21:36:45Z",
+          "updatedAt": "2020-06-01T21:36:45Z"
+        },
+        {
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Yup, exactly. Found something that worked on the second or third guess. I suppose we could try to find a smaller one...",
+          "createdAt": "2020-06-01T21:39:49Z",
+          "updatedAt": "2020-06-01T21:40:03Z"
+        },
+        {
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> I suppose we could try to find a smaller one...\r\n\r\nNah, I think it's fine as is. :)",
+          "createdAt": "2020-06-01T21:40:09Z",
+          "updatedAt": "2020-06-01T21:40:09Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDIyMjAxMzI5",
+          "commit": {
+            "abbreviatedOid": "b3cd221"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2020-06-01T21:39:50Z",
+          "updatedAt": "2020-06-01T21:39:50Z",
+          "comments": []
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDIyMjA0MzM0",
+          "commit": {
+            "abbreviatedOid": "b3cd221"
+          },
+          "author": "armfazh",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "NIce",
+          "createdAt": "2020-06-01T21:45:14Z",
+          "updatedAt": "2020-06-01T21:45:14Z",
+          "comments": []
         }
       ]
     }
