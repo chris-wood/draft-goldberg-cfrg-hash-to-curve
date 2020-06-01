@@ -4202,7 +4202,7 @@ Faz-Hernandez, et al.    Expires 3 December 2020               [Page 75]
 Internet-Draft                hash-to-curve                    June 2020
 
 
-   The resulting point (x, y) is given by (xn / xd, yn / yd).
+   The resulting affine point (x, y) is given by (xn / xd, yn / yd).
 
    The reason for this modified interface is that it enables further
    optimizations when working with points in a projective coordinate
