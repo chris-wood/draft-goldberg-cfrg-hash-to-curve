@@ -1184,8 +1184,8 @@ Internet-Draft                hash-to-curve                    June 2020
 
 6.  Deterministic mappings
 
-   The mappings in this section are suitable for constructing either
-   nonuniform or random oracle encodings using the constructions of
+   The mappings in this section are suitable for implementing either
+   nonuniform or random oracle encodings using the constructions in
    Section 3.  Certain mappings restrict the form of the curve or its
    parameters.  For each mapping presented, this document lists the
    relevant restrictions.
@@ -1237,10 +1237,10 @@ Internet-Draft                hash-to-curve                    June 2020
        (x, y) = map_to_curve(u)
 
    The input u and outputs x and y are elements of the field F.  The
-   coordinates (x, y) specify a point on an elliptic curve defined over
-   F.  Note that the point (x, y) is not a uniformly random point.  If
-   uniformity is required for security, the random oracle construction
-   of Section 3 MUST be used instead.
+   affine coordinates (x, y) specify a point on an elliptic curve
+   defined over F.  Note that the point (x, y) is not a uniformly random
+   point.  If uniformity is required for security, the random oracle
+   construction of Section 3 MUST be used instead.
 
 6.3.  Notation
 
@@ -1272,7 +1272,7 @@ Internet-Draft                hash-to-curve                    June 2020
    by specifying the sign of the y-coordinate in terms of the input to
    the mapping function.  Two main reasons support this approach: first,
    this covers elliptic curves over any field in a uniform way, and
-   second, it gives implementors leeway to optimize their square-root
+   second, it gives implementors leeway in optimizing square-root
    implementations.
 
 6.5.  Exceptional cases
@@ -1460,10 +1460,10 @@ Internet-Draft                hash-to-curve                    June 2020
 
        y'^2 = g'(x') = x'^3 + A' * x' + B'
 
-   that is isogenous to E and has A' != 0 and B' != 0.  (One might do
-   this, for example, using [SAGE]; for details, see [WB19],
-   Appendix A.)  This isogeny defines a map iso_map(x', y') that takes
-   as input a point on E' and produces as output a point on E.
+   that is isogenous to E and has A' != 0 and B' != 0.  (See [WB19],
+   Appendix A, for one way of finding E' using [SAGE].)  This isogeny
+   defines a map iso_map(x', y') that takes as input a point on E' and
+   produces as output a point on E.
 
    Once E' and iso_map are identified, this mapping works as follows: on
    input u, first apply the simplified SWU mapping to get a point on E',
@@ -1657,7 +1657,9 @@ Internet-Draft                hash-to-curve                    June 2020
    The mappings of Section 6 always output a point on the elliptic
    curve, i.e., a point in a group of order h * r (Section 2.1).
    Obtaining a point in G may require a final operation commonly called
-   "clearing the cofactor," which takes as input any point on the curve.
+   "clearing the cofactor," which takes as input any point on the curve
+   and produces as output a point in the prime-order (sub)group G
+   (Section 2.1).
 
    The cofactor can always be cleared via scalar multiplication by h.
    For elliptic curves where h = 1, i.e., the curves with a prime number
@@ -1670,10 +1672,8 @@ Internet-Draft                hash-to-curve                    June 2020
    whose value is determined by the method and the curve.  Examples of
    fast cofactor clearing methods include the following:
 
-   *  For certain pairing-friendly curves having subgroup G2 over an
-      extension field, Scott et al.  [SBCDK09] describe a method for
-      fast cofactor clearing that exploits an efficiently-computable
-      endomorphism.  Fuentes-Castaneda et al.  [FKR11] propose an
+
+
 
 
 
@@ -1682,6 +1682,10 @@ Faz-Hernandez, et al.    Expires 3 December 2020               [Page 30]
 Internet-Draft                hash-to-curve                    June 2020
 
 
+   *  For certain pairing-friendly curves having subgroup G2 over an
+      extension field, Scott et al.  [SBCDK09] describe a method for
+      fast cofactor clearing that exploits an efficiently-computable
+      endomorphism.  Fuentes-Castaneda et al.  [FKR11] propose an
       alternative method that is sometimes more efficient.  Budroni and
       Pintore [BP17] give concrete instantiations of these methods for
       Barreto-Lynn-Scott pairing-friendly curves [BLS03].  This method
@@ -1726,10 +1730,6 @@ Internet-Draft                hash-to-curve                    June 2020
    suite whose encoding type is hash_to_curve; see Section 3 and
    immediately below for more information.
 
-   A hash-to-curve suite comprises the following parameters:
-
-   *  Suite ID, a short name used to refer to a given suite.
-      Section 8.10 discusses the naming conventions for suite IDs.
 
 
 
@@ -1737,6 +1737,11 @@ Faz-Hernandez, et al.    Expires 3 December 2020               [Page 31]
 
 Internet-Draft                hash-to-curve                    June 2020
 
+
+   A hash-to-curve suite comprises the following parameters:
+
+   *  Suite ID, a short name used to refer to a given suite.
+      Section 8.10 discusses the naming conventions for suite IDs.
 
    *  encoding type, either random oracle (hash_to_curve) or nonuniform
       (encode_to_curve).  See Section 3 for definitions of these
@@ -1762,8 +1767,8 @@ Internet-Draft                hash-to-curve                    June 2020
    *  h_eff, the scalar parameter for clear_cofactor (Section 7).
 
    In addition to the above parameters, the mapping f may require
-   additional parameters Z, M, rational_map, E', and/or iso_map.  These
-   MUST be specified when applicable.
+   additional parameters Z, M, rational_map, E', or iso_map.  When
+   applicable, these MUST be specified.
 
    The below table lists suites RECOMMENDED for some elliptic curves.
    The corresponding parameters are given in the following subsections.
@@ -1773,11 +1778,6 @@ Internet-Draft                hash-to-curve                    June 2020
    SHOULD carefully analyze the security implications of nonuniformity.
    When the required encoding is not clear, applications SHOULD use a
    random oracle for security.
-
-
-
-
-
 
 
 
@@ -2492,7 +2492,7 @@ Internet-Draft                hash-to-curve                    June 2020
    [RFC7914]) on the password, then hash the output of that function to
    the target elliptic curve.  For collision resistance, the hash
    underlying the key derivation function should be chosen according to
-   the guidelines listed in Section 5.3.
+   the guidelines listed in Section 5.3.1.
 
    Constant-time implementations of all functions in this document are
    STRONGLY RECOMMENDED for all uses, to avoid leaking information via
@@ -4161,7 +4161,7 @@ E.1.  Interface and projective coordinate systems
 
        (xn, xd, yn, yd) = map_to_curve(u)
 
-   The resulting point (x, y) is given by (xn / xd, yn / yd).
+   The resulting affine point (x, y) is given by (xn / xd, yn / yd).
 
    The reason for this modified interface is that it enables further
    optimizations when working with points in a projective coordinate
