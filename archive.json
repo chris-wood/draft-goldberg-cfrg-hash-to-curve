@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2020-05-29T20:39:29.402026+00:00",
+  "timestamp": "2020-06-01T00:56:26.447019+00:00",
   "repo": "cfrg/draft-irtf-cfrg-hash-to-curve",
   "labels": [
     {
@@ -5981,6 +5981,89 @@
           "body": "Aha! found it. I'll open a PR now.",
           "createdAt": "2020-05-26T15:28:58Z",
           "updatedAt": "2020-05-26T15:28:58Z"
+        }
+      ]
+    },
+    {
+      "number": 271,
+      "id": "MDU6SXNzdWU2Mjc1NjgwNjg=",
+      "title": "Compliance with draft",
+      "url": "https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/issues/271",
+      "state": "OPEN",
+      "author": "armfazh",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Is there some part in the document that talks about what a library needs to implement in order to be compliant or compatible with the document?\r\n\r\n",
+      "createdAt": "2020-05-29T22:00:08Z",
+      "updatedAt": "2020-05-30T00:37:38Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I might be misunderstanding the question, but: does {{suites-howto}} do this?",
+          "createdAt": "2020-05-29T22:13:22Z",
+          "updatedAt": "2020-05-29T22:13:22Z"
+        },
+        {
+          "author": "armfazh",
+          "authorAssociation": "COLLABORATOR",
+          "body": "The section {{suites-howto}} tells the pieces that a library needs to implement. And this section is **useful**.\r\n\r\nHowever, my question is regarding the following situation;\r\nSuppose a library XX claims that has _compatible_  methods for hashing to curves. \r\nThen, what is the minimal functionality an auditor of XX must look for in order to approve or disprove the claim?\r\n\r\n-- I consider that the implementation of suites must be enough, and this should be pointed somewhere in the document. \r\n\r\nNothing prevents that a library YY only implements part of the suite, say e.g. only the SSWU map, but without implementing the full suite (which could or not violate the security guarantees we provide with the full suite). Hence, does library YY is _compatible_ with the document?\r\n",
+          "createdAt": "2020-05-29T22:26:12Z",
+          "updatedAt": "2020-05-29T22:26:12Z"
+        },
+        {
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I agree, anything that implements a suite according to the guidelines in section 8 should be considered compatible.",
+          "createdAt": "2020-05-30T00:14:38Z",
+          "updatedAt": "2020-05-30T00:14:38Z"
+        },
+        {
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Yeah, I don't think we ought to specify any sort of \"mandatory to implement\" suites. If an application implements any one of the suites (per the spec), it's compatible.",
+          "createdAt": "2020-05-30T00:37:38Z",
+          "updatedAt": "2020-05-30T00:37:38Z"
+        }
+      ]
+    },
+    {
+      "number": 273,
+      "id": "MDU6SXNzdWU2Mjc2MTkxMzQ=",
+      "title": "protocol vs application",
+      "url": "https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/issues/273",
+      "state": "OPEN",
+      "author": "kwantam",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "@grittygrease and @chris-wood have both pointed out that we are not consistent on protocol vs application. We should decide one one and then do a consistency sweep.",
+      "createdAt": "2020-05-30T01:13:27Z",
+      "updatedAt": "2020-05-30T05:30:44Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "body": "https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/pull/272/files#r432791682",
+          "createdAt": "2020-05-30T01:14:04Z",
+          "updatedAt": "2020-05-30T01:14:04Z"
+        },
+        {
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I'd go with application since it's more generic. ",
+          "createdAt": "2020-05-30T01:31:08Z",
+          "updatedAt": "2020-05-30T01:31:08Z"
+        },
+        {
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I did a sweep through the document and pushed a commit in #272 that tries to address this.\r\n\r\nMy take is that there are clear cases where \"protocol\" is the right word (i.e., where we mean \"cryptographic protocol\" in an abstract sense---so, when we're talking about a security analysis, etc.), and there are clear cases where \"application\" is the right word (i.e., where we mean a concrete instantiation). I looked at each instance of each word and tweaked where it seemed appropriate.\r\n\r\nAt this point I can imagine disagreements over individual uess of the words---and I certainly don't think I got them all \"right\"!---but I think a blanket search-and-replace in either direction would reduce clarity / precision.",
+          "createdAt": "2020-05-30T05:30:24Z",
+          "updatedAt": "2020-05-30T05:30:44Z"
         }
       ]
     }
@@ -26860,7 +26943,7 @@
       "labels": [],
       "body": "This PR:\r\n\r\n- updates acknowledgments\r\n- slightly tweaks and clarifies the domain separation requirements\r\n- adds a discussion of \"external\" domain separation in the Security Recommendations section\r\n\r\ncloses #256",
       "createdAt": "2020-05-23T22:38:49Z",
-      "updatedAt": "2020-05-28T21:15:03Z",
+      "updatedAt": "2020-05-29T23:28:42Z",
       "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
       "baseRefName": "master",
       "baseRefOid": "da6db8b0e3ed731af1199420f87b8cd903c1321a",
@@ -27419,24 +27502,26 @@
       "id": "MDExOlB1bGxSZXF1ZXN0NDI0ODE5ODA0",
       "title": "Edits up to Deterministic Mappings.",
       "url": "https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/pull/267",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "chris-wood",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "I'll continue my pass separately from this PR. I wanted to keep things somewhat small.",
       "createdAt": "2020-05-29T00:24:13Z",
-      "updatedAt": "2020-05-29T20:21:10Z",
+      "updatedAt": "2020-05-29T22:31:59Z",
       "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
       "baseRefName": "master",
       "baseRefOid": "094784ed6e314b1c4d1cf075d44c23f998113f86",
       "headRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
       "headRefName": "caw/up-to-mappings",
-      "headRefOid": "f234bd65d96670ef3301c2c0fd6a06d91e0d688b",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "c1b25c53fc9c0e6dc99585483fdaf03ce4efab18",
+      "closedAt": "2020-05-29T22:31:59Z",
+      "mergedAt": "2020-05-29T22:31:59Z",
+      "mergedBy": "chris-wood",
+      "mergeCommit": {
+        "oid": "590f252e2e5fa7df15d9e027ff5aa01abbaf8bed"
+      },
       "comments": [],
       "reviews": [
         {
@@ -27451,6 +27536,90 @@
           "createdAt": "2020-05-29T20:21:10Z",
           "updatedAt": "2020-05-29T20:21:10Z",
           "comments": []
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDIxMjczOTQ2",
+          "commit": {
+            "abbreviatedOid": "f234bd6"
+          },
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "state": "CHANGES_REQUESTED",
+          "body": "Nice edits. Just a few nits and tiny questions.",
+          "createdAt": "2020-05-29T20:41:12Z",
+          "updatedAt": "2020-05-29T20:55:11Z",
+          "comments": [
+            {
+              "originalPosition": 59,
+              "body": "```suggestion\r\nconsequences for the security of a protocol.\r\n```",
+              "createdAt": "2020-05-29T20:41:12Z",
+              "updatedAt": "2020-05-29T22:29:21Z"
+            },
+            {
+              "originalPosition": 104,
+              "body": "```suggestion\r\nFor security reasons, protocols using elliptic curves often require a group\r\nof prime order. Elliptic curves induce subgroups of prime order.\r\n```",
+              "createdAt": "2020-05-29T20:45:26Z",
+              "updatedAt": "2020-05-29T22:29:21Z"
+            },
+            {
+              "originalPosition": 155,
+              "body": "As an alternative, I was going to suggest `Hf`. Maybe slightly easier to read than H'?",
+              "createdAt": "2020-05-29T20:46:56Z",
+              "updatedAt": "2020-05-29T22:29:21Z"
+            },
+            {
+              "originalPosition": 297,
+              "body": "```suggestion\r\nwhich is a byte string constructed according to the following requirements:\r\n```",
+              "createdAt": "2020-05-29T20:50:29Z",
+              "updatedAt": "2020-05-29T22:29:21Z"
+            },
+            {
+              "originalPosition": 523,
+              "body": "Does `||` need escaping as elsewhere?\r\n\r\nOr maybe the escaping is unnecessary?",
+              "createdAt": "2020-05-29T20:54:28Z",
+              "updatedAt": "2020-05-29T22:29:21Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDIxMzMxMDcx",
+          "commit": {
+            "abbreviatedOid": "5b0fecf"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-05-29T22:29:16Z",
+          "updatedAt": "2020-05-29T22:29:16Z",
+          "comments": [
+            {
+              "originalPosition": 155,
+              "body": "That'll work too! Want to make that change in your pass after rebasing?\r\n",
+              "createdAt": "2020-05-29T22:29:16Z",
+              "updatedAt": "2020-05-29T22:29:21Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDIxMzMxODQ5",
+          "commit": {
+            "abbreviatedOid": "c1b25c5"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-05-29T22:31:35Z",
+          "updatedAt": "2020-05-29T22:31:36Z",
+          "comments": [
+            {
+              "originalPosition": 523,
+              "body": "It doesn't look like it (I see it render fine)?",
+              "createdAt": "2020-05-29T22:31:35Z",
+              "updatedAt": "2020-05-29T22:31:36Z"
+            }
+          ]
         }
       ]
     },
@@ -27466,7 +27635,7 @@
       "labels": [],
       "body": "In the past section 4.1 descried two sgn0 variants. Now there is only one, so I merged into section 4.\r\n\r\nIt also reorders items of section 4, first functions on bit strings followed by operations on field elements. (the reverse order is interesting too).\r\n\r\n* This is on top of #267 for easily seeing changes.",
       "createdAt": "2020-05-29T19:56:40Z",
-      "updatedAt": "2020-05-29T20:38:05Z",
+      "updatedAt": "2020-05-29T22:34:24Z",
       "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
       "baseRefName": "caw/up-to-mappings",
       "baseRefOid": "f234bd65d96670ef3301c2c0fd6a06d91e0d688b",
@@ -27484,6 +27653,27 @@
           "body": "Is this change necessary? It seems like `sgn0` is complicated enough and the description is long enough that a separate sub-section makes sense...",
           "createdAt": "2020-05-29T20:38:05Z",
           "updatedAt": "2020-05-29T20:38:05Z"
+        },
+        {
+          "author": "armfazh",
+          "authorAssociation": "COLLABORATOR",
+          "body": "\r\n\r\n> `sgn0` is complicated enough and the description is long enough that a separate sub-section makes sense...\r\n\r\nit is not entirely necessary, but it doesn't hurt to revisit again. Thumbs up/down?\r\n\r\n\r\n",
+          "createdAt": "2020-05-29T20:49:05Z",
+          "updatedAt": "2020-05-29T20:49:05Z"
+        },
+        {
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Hmm, I think it's a big enough chunk that it's clearer in its own subsection, so I guess I'd vote against this change.",
+          "createdAt": "2020-05-29T20:56:42Z",
+          "updatedAt": "2020-05-29T20:56:42Z"
+        },
+        {
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I think it should also stay separate.",
+          "createdAt": "2020-05-29T22:34:24Z",
+          "updatedAt": "2020-05-29T22:34:24Z"
         }
       ],
       "reviews": []
@@ -27515,6 +27705,675 @@
       },
       "comments": [],
       "reviews": []
+    },
+    {
+      "number": 270,
+      "id": "MDExOlB1bGxSZXF1ZXN0NDI1MzUwNjQ2",
+      "title": "Suites on Table 2.",
+      "url": "https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/pull/270",
+      "state": "MERGED",
+      "author": "armfazh",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Table 2 can also lists the suites recommended for each curve.\r\nThe line right before the table can be rewritten, suggestions? \r\n",
+      "createdAt": "2020-05-29T21:56:38Z",
+      "updatedAt": "2020-05-30T00:07:35Z",
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "34e1f06b8dc81682953f7e93057db804ab0b2db2",
+      "headRepository": "armfazh/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "sug/Tab8",
+      "headRefOid": "2cd4b6cc6754ae7b9d330a36563258edf83f2a97",
+      "closedAt": "2020-05-30T00:07:35Z",
+      "mergedAt": "2020-05-30T00:07:35Z",
+      "mergedBy": "chris-wood",
+      "mergeCommit": {
+        "oid": "c1582256394e58a89a71f1d7b09f245a05dd6f5a"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDIxMzI2MjUx",
+          "commit": {
+            "abbreviatedOid": "ceb07cd"
+          },
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "state": "CHANGES_REQUESTED",
+          "body": "I think this is a great idea! One small comment.",
+          "createdAt": "2020-05-29T22:14:38Z",
+          "updatedAt": "2020-05-29T22:15:21Z",
+          "comments": [
+            {
+              "originalPosition": 25,
+              "body": "It might be nice to break these up into separate lines in the table: one line for curve25519 that lists relevant suites, one for edwards25519, etc.",
+              "createdAt": "2020-05-29T22:14:38Z",
+              "updatedAt": "2020-05-29T22:38:59Z"
+            },
+            {
+              "originalPosition": 27,
+              "body": "Here, maybe separate \"BLS12-381 G1\" and \"BLS12-381 G2\" lines?",
+              "createdAt": "2020-05-29T22:15:01Z",
+              "updatedAt": "2020-05-29T22:38:59Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDIxMzMyNTYw",
+          "commit": {
+            "abbreviatedOid": "ceb07cd"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "CHANGES_REQUESTED",
+          "body": "",
+          "createdAt": "2020-05-29T22:33:46Z",
+          "updatedAt": "2020-05-29T22:33:51Z",
+          "comments": [
+            {
+              "originalPosition": 16,
+              "body": "I'd swap the Section and Suites columns, too, to match this sentence. Namely, each table row identities a curve, the suite, and a pointer to more details.",
+              "createdAt": "2020-05-29T22:33:47Z",
+              "updatedAt": "2020-05-29T22:38:59Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDIxMzU1MzQ4",
+          "commit": {
+            "abbreviatedOid": "2cd4b6c"
+          },
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2020-05-30T00:05:51Z",
+          "updatedAt": "2020-05-30T00:05:51Z",
+          "comments": []
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDIxMzU1NjA5",
+          "commit": {
+            "abbreviatedOid": "2cd4b6c"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2020-05-30T00:07:29Z",
+          "updatedAt": "2020-05-30T00:07:29Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 272,
+      "id": "MDExOlB1bGxSZXF1ZXN0NDI1MzU2OTc4",
+      "title": "suggested edits",
+      "url": "https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/pull/272",
+      "state": "MERGED",
+      "author": "kwantam",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Here are my suggested edits for everything through the relwork section.",
+      "createdAt": "2020-05-29T22:16:32Z",
+      "updatedAt": "2020-06-01T00:56:15Z",
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "c1582256394e58a89a71f1d7b09f245a05dd6f5a",
+      "headRepository": "kwantam/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "rsw_edits",
+      "headRefOid": "d176640eb1e7122de14ffdcce84b4e792ee6e563",
+      "closedAt": "2020-06-01T00:56:00Z",
+      "mergedAt": "2020-06-01T00:56:00Z",
+      "mergedBy": "chris-wood",
+      "mergeCommit": {
+        "oid": "9b15875a9aba00b5891aca490876057f8bef9c20"
+      },
+      "comments": [
+        {
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "body": "FYI, this is now rebased.",
+          "createdAt": "2020-05-30T00:12:53Z",
+          "updatedAt": "2020-05-30T00:12:53Z"
+        },
+        {
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@chris-wood I made some more edits to address the protocol/application concern. In the process I ended up revising the 'random oracle encodings' definition, because it wasn't quite correct.\r\n\r\nI ended up removing the SHOULD language from the definition, because it doesn't seem like a definitions section is the right place to state requirements, but I'm happy to put back those sentences if you'd prefer.",
+          "createdAt": "2020-05-31T19:18:42Z",
+          "updatedAt": "2020-05-31T19:18:42Z"
+        },
+        {
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@kwantam shall we merge? :)",
+          "createdAt": "2020-06-01T00:55:04Z",
+          "updatedAt": "2020-06-01T00:55:04Z"
+        },
+        {
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Sounds good to me :)",
+          "createdAt": "2020-06-01T00:55:27Z",
+          "updatedAt": "2020-06-01T00:55:27Z"
+        },
+        {
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I'm nearly done with my pass, too. I'll submit a PR for that when complete!",
+          "createdAt": "2020-06-01T00:56:15Z",
+          "updatedAt": "2020-06-01T00:56:15Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDIxMzMzNDM0",
+          "commit": {
+            "abbreviatedOid": "94cd4f9"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "LGTM so far!",
+          "createdAt": "2020-05-29T22:36:47Z",
+          "updatedAt": "2020-05-29T22:37:33Z",
+          "comments": [
+            {
+              "originalPosition": 204,
+              "body": "Reading this piece out of context, I wonder if someone might conclude, \"oh, so if I don't want constant time, I can ignore these steps.\" The previous text made it clear that this is necessary \"for security reasons.\" Maybe we can bring that back by saying, \"Each function MUST be implemented in constant time. To do so, all field operations...\"?",
+              "createdAt": "2020-05-29T22:36:47Z",
+              "updatedAt": "2020-06-01T00:54:06Z"
+            },
+            {
+              "originalPosition": 132,
+              "body": "\ud83d\udc4d ",
+              "createdAt": "2020-05-29T22:37:16Z",
+              "updatedAt": "2020-06-01T00:54:06Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDIxMzM4NjA4",
+          "commit": {
+            "abbreviatedOid": "94cd4f9"
+          },
+          "author": "armfazh",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "some suggestions",
+          "createdAt": "2020-05-29T22:54:22Z",
+          "updatedAt": "2020-05-29T23:13:59Z",
+          "comments": [
+            {
+              "originalPosition": 79,
+              "body": "> Most cryptographic protocols operate on G.\r\n\r\nIt is also important to say that G is the destination group rather than E.",
+              "createdAt": "2020-05-29T22:54:22Z",
+              "updatedAt": "2020-06-01T00:54:06Z"
+            },
+            {
+              "originalPosition": 112,
+              "body": "Does the document needs to warn implementers something along the lines\r\n\"do not be tempted to chose encode_to_curve over hash_to_curve due its performance\" ?\r\n",
+              "createdAt": "2020-05-29T23:01:52Z",
+              "updatedAt": "2020-06-01T00:54:06Z"
+            },
+            {
+              "originalPosition": 132,
+              "body": "We should also give credit to {{BCIMRT10}} as it was proposed earlier.",
+              "createdAt": "2020-05-29T23:04:49Z",
+              "updatedAt": "2020-06-01T00:54:06Z"
+            },
+            {
+              "originalPosition": 144,
+              "body": "It this more accurate?\r\n\r\n```suggestion\r\nCryptographic protocols proven secure in the random oracle model are often analyzed\r\n```",
+              "createdAt": "2020-05-29T23:08:09Z",
+              "updatedAt": "2020-06-01T00:54:06Z"
+            },
+            {
+              "originalPosition": 287,
+              "body": "```suggestion\r\n    calls sqrt also specifies how to determine the correct root.\r\n```",
+              "createdAt": "2020-05-29T23:12:31Z",
+              "updatedAt": "2020-06-01T00:54:06Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDIxMzQ0ODE3",
+          "commit": {
+            "abbreviatedOid": "440b518"
+          },
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-05-29T23:17:53Z",
+          "updatedAt": "2020-05-29T23:17:53Z",
+          "comments": [
+            {
+              "originalPosition": 204,
+              "body": "Good point. I was intending to flag this edit as something we should discuss:\r\n\r\nI'm not convinced it makes sense to say that implementations MUST be constant time, for a few reasons. First, it's not always the case that protocols require constant-time implementations, which I think implies SHOULD rather than must. Second, it's not obvious what it means to require something like this---do we mean that one is just not allowed to implement hash-to-curve in (say) Python, where it's basically impossible to guarantee constant time? (In this case, our reference implementations aren't technically conforming!)",
+              "createdAt": "2020-05-29T23:17:53Z",
+              "updatedAt": "2020-06-01T00:54:06Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDIxMzQ1NzA4",
+          "commit": {
+            "abbreviatedOid": "440b518"
+          },
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-05-29T23:21:41Z",
+          "updatedAt": "2020-05-29T23:21:41Z",
+          "comments": [
+            {
+              "originalPosition": 204,
+              "body": "Related to the above: in other places in the document it seems like we're more ambivalent about SHOULD vs MUST for constant time. So if we decide that this will be a MUST rather than a SHOULD, we should (must? :smile:) do a sweep for consistency.",
+              "createdAt": "2020-05-29T23:21:41Z",
+              "updatedAt": "2020-06-01T00:54:06Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDIxMzQ2Mzg3",
+          "commit": {
+            "abbreviatedOid": "92c1a82"
+          },
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-05-29T23:24:26Z",
+          "updatedAt": "2020-05-29T23:24:27Z",
+          "comments": [
+            {
+              "originalPosition": 204,
+              "body": "See also the very first sentence of security considerations:\r\n\r\n    When constant-time implementations are required, all basic operations and\r\n    utility functions must be implemented in constant time, as discussed in\r\n    {{utility}}.",
+              "createdAt": "2020-05-29T23:24:27Z",
+              "updatedAt": "2020-06-01T00:54:06Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDIxMzUwNDAx",
+          "commit": {
+            "abbreviatedOid": "0dd655c"
+          },
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-05-29T23:41:49Z",
+          "updatedAt": "2020-05-29T23:41:50Z",
+          "comments": [
+            {
+              "originalPosition": 79,
+              "body": "The reason I suggested this change is that it seems like talking about G as a destination for an encoding is use-before-def: we haven't defined the term encoding or mapping yet.",
+              "createdAt": "2020-05-29T23:41:49Z",
+              "updatedAt": "2020-06-01T00:54:06Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDIxMzUwNTAy",
+          "commit": {
+            "abbreviatedOid": "0dd655c"
+          },
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-05-29T23:42:12Z",
+          "updatedAt": "2020-05-29T23:42:13Z",
+          "comments": [
+            {
+              "originalPosition": 112,
+              "body": "Sorry, this was a bad edit on my part. I put the sentence back.",
+              "createdAt": "2020-05-29T23:42:13Z",
+              "updatedAt": "2020-06-01T00:54:06Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDIxMzUwNTY3",
+          "commit": {
+            "abbreviatedOid": "0dd655c"
+          },
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-05-29T23:42:32Z",
+          "updatedAt": "2020-05-29T23:42:32Z",
+          "comments": [
+            {
+              "originalPosition": 144,
+              "body": "I pushed another commit that addresses this.",
+              "createdAt": "2020-05-29T23:42:32Z",
+              "updatedAt": "2020-06-01T00:54:06Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDIxMzUxMjYx",
+          "commit": {
+            "abbreviatedOid": "6b08f37"
+          },
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-05-29T23:45:51Z",
+          "updatedAt": "2020-05-29T23:45:52Z",
+          "comments": [
+            {
+              "originalPosition": 79,
+              "body": "hmm, I think you're right. I will revert.",
+              "createdAt": "2020-05-29T23:45:51Z",
+              "updatedAt": "2020-06-01T00:54:06Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDIxMzUyMDc2",
+          "commit": {
+            "abbreviatedOid": "8e51acc"
+          },
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-05-29T23:49:38Z",
+          "updatedAt": "2020-05-29T23:49:38Z",
+          "comments": [
+            {
+              "originalPosition": 204,
+              "body": "Thinking about this more: it seems like it might make sense to add or expand a paragraph in the Security Considerations section to address constant timeness.",
+              "createdAt": "2020-05-29T23:49:38Z",
+              "updatedAt": "2020-06-01T00:54:06Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDIxMzU1MTMy",
+          "commit": {
+            "abbreviatedOid": "77907cc"
+          },
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-05-30T00:04:50Z",
+          "updatedAt": "2020-05-30T00:04:51Z",
+          "comments": [
+            {
+              "originalPosition": 204,
+              "body": "Just pushed a slightly expanded discussion in security considerations.",
+              "createdAt": "2020-05-30T00:04:50Z",
+              "updatedAt": "2020-06-01T00:54:06Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDIxMzU5Mjg2",
+          "commit": {
+            "abbreviatedOid": "14fadee"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "Nice set of changes! I only have a few clarifying questions and comments.",
+          "createdAt": "2020-05-30T00:31:21Z",
+          "updatedAt": "2020-05-30T00:35:38Z",
+          "comments": [
+            {
+              "originalPosition": 293,
+              "body": "We include an examples of how to compute is_square and inv0 in constant time using -- why drop the example here?",
+              "createdAt": "2020-05-30T00:31:21Z",
+              "updatedAt": "2020-06-01T00:54:06Z"
+            },
+            {
+              "originalPosition": 337,
+              "body": "Did this not render correctly for you? It was fine in the txt and html files for me.",
+              "createdAt": "2020-05-30T00:31:50Z",
+              "updatedAt": "2020-06-01T00:54:06Z"
+            },
+            {
+              "originalPosition": 437,
+              "body": "```suggestion\r\nIt is important to note that using a nonuniform encoding or directly\r\n```",
+              "createdAt": "2020-05-30T00:32:16Z",
+              "updatedAt": "2020-06-01T00:54:06Z"
+            },
+            {
+              "originalPosition": 442,
+              "body": "Unrelated to this change, but we should probably unify on terminology regarding the callers of hash-to-curve: we use applications and protocols in different places. I prefer applications, as it's more general and includes protocols. ",
+              "createdAt": "2020-05-30T00:33:29Z",
+              "updatedAt": "2020-06-01T00:54:06Z"
+            },
+            {
+              "originalPosition": 458,
+              "body": "Should we reference {{VR20}} again here (or after \"for security against timing attacks\" below)?",
+              "createdAt": "2020-05-30T00:33:46Z",
+              "updatedAt": "2020-06-01T00:54:06Z"
+            },
+            {
+              "originalPosition": 520,
+              "body": "\ud83d\udc4d ",
+              "createdAt": "2020-05-30T00:34:31Z",
+              "updatedAt": "2020-06-01T00:54:06Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDIxMzU5OTc5",
+          "commit": {
+            "abbreviatedOid": "14fadee"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-05-30T00:36:33Z",
+          "updatedAt": "2020-05-30T00:36:34Z",
+          "comments": [
+            {
+              "originalPosition": 204,
+              "body": "The new text works for me!",
+              "createdAt": "2020-05-30T00:36:33Z",
+              "updatedAt": "2020-06-01T00:54:06Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDIxMzYzOTYw",
+          "commit": {
+            "abbreviatedOid": "14fadee"
+          },
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-05-30T01:08:35Z",
+          "updatedAt": "2020-05-30T01:08:35Z",
+          "comments": [
+            {
+              "originalPosition": 337,
+              "body": "I think this one rendered correctly, but then I went through and removed all the escapes and some of them didn't render correctly (I think kramdown thought they were starting tables or something weird). So then I went back through and escaped all of them because I wasn't sure which ones would work and which ones wouldn't...",
+              "createdAt": "2020-05-30T01:08:35Z",
+              "updatedAt": "2020-06-01T00:54:06Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDIxMzY0MzY3",
+          "commit": {
+            "abbreviatedOid": "b058c68"
+          },
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-05-30T01:12:35Z",
+          "updatedAt": "2020-05-30T01:15:18Z",
+          "comments": [
+            {
+              "originalPosition": 293,
+              "body": "Ah, I actually didn't realize it was intended as an example. When I read through this it seemed like a low-level implementation detail rather than an example. Also, I'm pretty sure at this point all of the uses of CMOV in the document actually pass in a boolean value, which means it's not necessary to describe the case where there's a bitstring C rather than a boolean c. I can double check this...",
+              "createdAt": "2020-05-30T01:12:35Z",
+              "updatedAt": "2020-06-01T00:54:06Z"
+            },
+            {
+              "originalPosition": 442,
+              "body": "Good point. Opened #273.",
+              "createdAt": "2020-05-30T01:13:35Z",
+              "updatedAt": "2020-06-01T00:54:06Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDIxMzc4NTc5",
+          "commit": {
+            "abbreviatedOid": "695bcc9"
+          },
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-05-30T05:00:09Z",
+          "updatedAt": "2020-05-30T05:00:10Z",
+          "comments": [
+            {
+              "originalPosition": 293,
+              "body": "I went back and checked. Every use of CMOV in this document takes a boolean value as its third operand, so there shouldn't be any need for the extra explanation that I cut here. We could still bring it back if you want, but it does not seem necessary given the rest of the text.",
+              "createdAt": "2020-05-30T05:00:09Z",
+              "updatedAt": "2020-06-01T00:54:06Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDIxNDkzMDI2",
+          "commit": {
+            "abbreviatedOid": "fb289e9"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "All of these changes look good, I'm just not sure we've landed on the right application/protocol split yet. The choice appears arbitrary in some places. (I'm sure they were intentional, I just don't understand the intention! We also don't need to block on that, so I'm approving to move us forward.)",
+          "createdAt": "2020-05-31T13:07:22Z",
+          "updatedAt": "2020-05-31T13:14:54Z",
+          "comments": [
+            {
+              "originalPosition": 192,
+              "body": "I feel like this should be \"protocols\", given that the choice of which is made by \"protocol designers\" (below).",
+              "createdAt": "2020-05-31T13:07:22Z",
+              "updatedAt": "2020-06-01T00:54:06Z"
+            },
+            {
+              "originalPosition": 293,
+              "body": "\ud83d\udc4d Thanks! I think this was leftover from a previous draft where the value was non-binary. ",
+              "createdAt": "2020-05-31T13:09:35Z",
+              "updatedAt": "2020-06-01T00:54:06Z"
+            },
+            {
+              "originalPosition": 369,
+              "body": "We use \"protocol designers\" above and \"application designers\" here -- why the difference?",
+              "createdAt": "2020-05-31T13:10:21Z",
+              "updatedAt": "2020-06-01T00:54:06Z"
+            },
+            {
+              "originalPosition": 391,
+              "body": "We flip from using applications before the suite details, to protocols after. I don't understand the difference. (A protocol whose security depends on hash-to-curve is an application of hash-to-curve, in my view.)",
+              "createdAt": "2020-05-31T13:12:28Z",
+              "updatedAt": "2020-06-01T00:54:06Z"
+            },
+            {
+              "originalPosition": 393,
+              "body": "And we use applications here. ",
+              "createdAt": "2020-05-31T13:12:45Z",
+              "updatedAt": "2020-06-01T00:54:06Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDIxNTIwNTAz",
+          "commit": {
+            "abbreviatedOid": "89c49de"
+          },
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-05-31T19:17:02Z",
+          "updatedAt": "2020-05-31T19:17:03Z",
+          "comments": [
+            {
+              "originalPosition": 391,
+              "body": "I revisited this with fresh eyes and pushed some more edits.",
+              "createdAt": "2020-05-31T19:17:02Z",
+              "updatedAt": "2020-06-01T00:54:06Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDIxNTIwNTE2",
+          "commit": {
+            "abbreviatedOid": "89c49de"
+          },
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-05-31T19:17:10Z",
+          "updatedAt": "2020-05-31T19:17:11Z",
+          "comments": [
+            {
+              "originalPosition": 393,
+              "body": "Revisited this, too.",
+              "createdAt": "2020-05-31T19:17:10Z",
+              "updatedAt": "2020-06-01T00:54:06Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDIxNTQ2MzEw",
+          "commit": {
+            "abbreviatedOid": "89c49de"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-06-01T00:50:32Z",
+          "updatedAt": "2020-06-01T00:50:32Z",
+          "comments": [
+            {
+              "originalPosition": 129,
+              "body": "```suggestion\r\noracles are instantiated based on one underlying function H.\r\n```",
+              "createdAt": "2020-06-01T00:50:32Z",
+              "updatedAt": "2020-06-01T00:54:06Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDIxNTQ2Mzgz",
+          "commit": {
+            "abbreviatedOid": "0e7974d"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "The latest text looks good!",
+          "createdAt": "2020-06-01T00:51:03Z",
+          "updatedAt": "2020-06-01T00:51:33Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
