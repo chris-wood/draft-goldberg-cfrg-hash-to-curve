@@ -184,38 +184,38 @@ Internet-Draft                hash-to-curve                    June 2020
      H.1.  NIST P-256  . . . . . . . . . . . . . . . . . . . . . . .  97
        H.1.1.  P256_XMD:SHA-256_SSWU_RO_ . . . . . . . . . . . . . .  97
        H.1.2.  P256_XMD:SHA-256_SSWU_NU_ . . . . . . . . . . . . . .  99
-     H.2.  NIST P-384  . . . . . . . . . . . . . . . . . . . . . . . 100
-       H.2.1.  P384_XMD:SHA-512_SSWU_RO_ . . . . . . . . . . . . . . 100
-       H.2.2.  P384_XMD:SHA-512_SSWU_NU_ . . . . . . . . . . . . . . 102
-     H.3.  NIST P-521  . . . . . . . . . . . . . . . . . . . . . . . 104
-       H.3.1.  P521_XMD:SHA-512_SSWU_RO_ . . . . . . . . . . . . . . 104
-       H.3.2.  P521_XMD:SHA-512_SSWU_NU_ . . . . . . . . . . . . . . 106
-     H.4.  curve25519  . . . . . . . . . . . . . . . . . . . . . . . 108
-       H.4.1.  curve25519_XMD:SHA-512_ELL2_RO_ . . . . . . . . . . . 108
-       H.4.2.  curve25519_XMD:SHA-512_ELL2_NU_ . . . . . . . . . . . 110
-     H.5.  edwards25519  . . . . . . . . . . . . . . . . . . . . . . 111
-       H.5.1.  edwards25519_XMD:SHA-512_ELL2_RO_ . . . . . . . . . . 111
-       H.5.2.  edwards25519_XMD:SHA-512_ELL2_NU_ . . . . . . . . . . 113
-     H.6.  curve448  . . . . . . . . . . . . . . . . . . . . . . . . 114
-       H.6.1.  curve448_XMD:SHA-512_ELL2_RO_ . . . . . . . . . . . . 114
-       H.6.2.  curve448_XMD:SHA-512_ELL2_NU_ . . . . . . . . . . . . 117
-     H.7.  edwards448  . . . . . . . . . . . . . . . . . . . . . . . 118
-       H.7.1.  edwards448_XMD:SHA-512_ELL2_RO_ . . . . . . . . . . . 118
-       H.7.2.  edwards448_XMD:SHA-512_ELL2_NU_ . . . . . . . . . . . 121
-     H.8.  secp256k1 . . . . . . . . . . . . . . . . . . . . . . . . 122
-       H.8.1.  secp256k1_XMD:SHA-256_SSWU_RO_  . . . . . . . . . . . 122
-       H.8.2.  secp256k1_XMD:SHA-256_SSWU_NU_  . . . . . . . . . . . 124
-     H.9.  BLS12-381 G1  . . . . . . . . . . . . . . . . . . . . . . 126
-       H.9.1.  BLS12381G1_XMD:SHA-256_SSWU_RO_ . . . . . . . . . . . 126
-       H.9.2.  BLS12381G1_XMD:SHA-256_SSWU_NU_ . . . . . . . . . . . 127
-     H.10. BLS12-381 G2  . . . . . . . . . . . . . . . . . . . . . . 129
-       H.10.1.  BLS12381G2_XMD:SHA-256_SSWU_RO_  . . . . . . . . . . 129
-       H.10.2.  BLS12381G2_XMD:SHA-256_SSWU_NU_  . . . . . . . . . . 132
-   Appendix I.  Expand test vectors  . . . . . . . . . . . . . . . . 134
-     I.1.  expand_message_xmd(SHA-256) . . . . . . . . . . . . . . . 134
-     I.2.  expand_message_xmd(SHA-512) . . . . . . . . . . . . . . . 138
-     I.3.  expand_message_xof(SHAKE-128) . . . . . . . . . . . . . . 142
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . . 145
+     H.2.  NIST P-384  . . . . . . . . . . . . . . . . . . . . . . . 101
+       H.2.1.  P384_XMD:SHA-512_SSWU_RO_ . . . . . . . . . . . . . . 101
+       H.2.2.  P384_XMD:SHA-512_SSWU_NU_ . . . . . . . . . . . . . . 103
+     H.3.  NIST P-521  . . . . . . . . . . . . . . . . . . . . . . . 105
+       H.3.1.  P521_XMD:SHA-512_SSWU_RO_ . . . . . . . . . . . . . . 105
+       H.3.2.  P521_XMD:SHA-512_SSWU_NU_ . . . . . . . . . . . . . . 108
+     H.4.  curve25519  . . . . . . . . . . . . . . . . . . . . . . . 110
+       H.4.1.  curve25519_XMD:SHA-512_ELL2_RO_ . . . . . . . . . . . 110
+       H.4.2.  curve25519_XMD:SHA-512_ELL2_NU_ . . . . . . . . . . . 112
+     H.5.  edwards25519  . . . . . . . . . . . . . . . . . . . . . . 114
+       H.5.1.  edwards25519_XMD:SHA-512_ELL2_RO_ . . . . . . . . . . 114
+       H.5.2.  edwards25519_XMD:SHA-512_ELL2_NU_ . . . . . . . . . . 116
+     H.6.  curve448  . . . . . . . . . . . . . . . . . . . . . . . . 118
+       H.6.1.  curve448_XMD:SHA-512_ELL2_RO_ . . . . . . . . . . . . 118
+       H.6.2.  curve448_XMD:SHA-512_ELL2_NU_ . . . . . . . . . . . . 121
+     H.7.  edwards448  . . . . . . . . . . . . . . . . . . . . . . . 123
+       H.7.1.  edwards448_XMD:SHA-512_ELL2_RO_ . . . . . . . . . . . 123
+       H.7.2.  edwards448_XMD:SHA-512_ELL2_NU_ . . . . . . . . . . . 126
+     H.8.  secp256k1 . . . . . . . . . . . . . . . . . . . . . . . . 128
+       H.8.1.  secp256k1_XMD:SHA-256_SSWU_RO_  . . . . . . . . . . . 128
+       H.8.2.  secp256k1_XMD:SHA-256_SSWU_NU_  . . . . . . . . . . . 130
+     H.9.  BLS12-381 G1  . . . . . . . . . . . . . . . . . . . . . . 132
+       H.9.1.  BLS12381G1_XMD:SHA-256_SSWU_RO_ . . . . . . . . . . . 132
+       H.9.2.  BLS12381G1_XMD:SHA-256_SSWU_NU_ . . . . . . . . . . . 134
+     H.10. BLS12-381 G2  . . . . . . . . . . . . . . . . . . . . . . 136
+       H.10.1.  BLS12381G2_XMD:SHA-256_SSWU_RO_  . . . . . . . . . . 136
+       H.10.2.  BLS12381G2_XMD:SHA-256_SSWU_NU_  . . . . . . . . . . 140
+   Appendix I.  Expand test vectors  . . . . . . . . . . . . . . . . 142
+     I.1.  expand_message_xmd(SHA-256) . . . . . . . . . . . . . . . 143
+     I.2.  expand_message_xmd(SHA-512) . . . . . . . . . . . . . . . 147
+     I.3.  expand_message_xof(SHAKE-128) . . . . . . . . . . . . . . 152
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . . 155
 
 
 
@@ -5480,8 +5480,8 @@ Internet-Draft                hash-to-curve                    June 2020
    Q1.y    = b765696b2913e36db3016c47edb99e24b1da30e761a8a3215dc0ec
              4d8f96e6f9
 
-   msg     = a512_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+   msg     = q128_qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
+             qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
 
 
 
@@ -5490,6 +5490,26 @@ Faz-Hernandez, et al.    Expires 3 December 2020               [Page 98]
 Internet-Draft                hash-to-curve                    June 2020
 
 
+             qqqqqqqqqqqqqqqqqqqqqqqqq
+   P.x     = 4be61ee205094282ba8a2042bcb48d88dfbb609301c49aa8b07853
+             3dc65a0b5d
+   P.y     = 98f8df449a072c4721d241a3b1236d3caccba603f916ca680f4539
+             d2bfb3c29e
+   u[0]    = 3bbc30446f39a7befad080f4d5f32ed116b9534626993d2cc5033f
+             6f8d805919
+   u[1]    = 76bb02db019ca9d3c1e02f0c17f8baf617bbdae5c393a81d9ce11e
+             3be1bf1d33
+   Q0.x    = c76aaa823aeadeb3f356909cb08f97eee46ecb157c1f56699b5efe
+             bddf0e6398
+   Q0.y    = 776a6f45f528a0e8d289a4be12c4fab80762386ec644abf2bffb9b
+             627e4352b1
+   Q1.x    = 418ac3d85a5ccc4ea8dec14f750a3a9ec8b85176c95a7022f39182
+             6794eb5a75
+   Q1.y    = fd6604f69e9d9d2b74b072d14ea13050db72c932815523305cb9e8
+             07cc900aff
+
+   msg     = a512_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -5517,6 +5537,15 @@ Internet-Draft                hash-to-curve                    June 2020
 
 H.1.2.  P256_XMD:SHA-256_SSWU_NU_
 
+
+
+
+
+Faz-Hernandez, et al.    Expires 3 December 2020               [Page 99]
+
+Internet-Draft                hash-to-curve                    June 2020
+
+
    suite   = P256_XMD:SHA-256_SSWU_NU_
    dst     = QUUX-V01-CS02-with-P256_XMD:SHA-256_SSWU_NU_
 
@@ -5538,14 +5567,6 @@ H.1.2.  P256_XMD:SHA-256_SSWU_NU_
    P.y     = fe4d197ecf5a62645b9690599e1d80e82c500b22ac705a0b421fac
              7b47157866
    u[0]    = c7f96eadac763e176629b09ed0c11992225b3a5ae99479760601cb
-
-
-
-Faz-Hernandez, et al.    Expires 3 December 2020               [Page 99]
-
-Internet-Draft                hash-to-curve                    June 2020
-
-
              d69c221e58
    Q.x     = fc3f5d734e8dce41ddac49f47dd2b8a57257522a865c124ed02b92
              b5237befa4
@@ -5563,6 +5584,28 @@ Internet-Draft                hash-to-curve                    June 2020
              7e5d8faa84
    Q.y     = 3aa274881d30db70485368c0467e97da0e73c18c1d00f34775d012
              b6fcee7f97
+
+   msg     = q128_qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
+             qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
+             qqqqqqqqqqqqqqqqqqqqqqqqq
+   P.x     = 324532006312be4f162614076460315f7a54a6f85544da773dc659
+             aca0311853
+   P.y     = 8d8197374bcd52de2acfefc8a54fe2c8d8bebd2a39f16be9b710e4
+             b1af6ef883
+   u[0]    = 752d8eaa38cd785a799a31d63d99c2ae4261823b4a367b133b2c66
+             27f48858ab
+
+
+
+Faz-Hernandez, et al.    Expires 3 December 2020              [Page 100]
+
+Internet-Draft                hash-to-curve                    June 2020
+
+
+   Q.x     = 324532006312be4f162614076460315f7a54a6f85544da773dc659
+             aca0311853
+   Q.y     = 8d8197374bcd52de2acfefc8a54fe2c8d8bebd2a39f16be9b710e4
+             b1af6ef883
 
    msg     = a512_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -5589,19 +5632,6 @@ H.2.  NIST P-384
 
 H.2.1.  P384_XMD:SHA-512_SSWU_RO_
 
-
-
-
-
-
-
-
-
-Faz-Hernandez, et al.    Expires 3 December 2020              [Page 100]
-
-Internet-Draft                hash-to-curve                    June 2020
-
-
    suite   = P384_XMD:SHA-512_SSWU_RO_
    dst     = QUUX-V01-CS02-with-P384_XMD:SHA-512_SSWU_RO_
 
@@ -5620,6 +5650,14 @@ Internet-Draft                hash-to-curve                    June 2020
              20268bf71e610c9533e3f4f438ba4b64f66f6fbed9
    Q1.x    = cbd6c34a12a266b447b444b303d577cd5d61e3c0af19d4676ababb
              470bb795741ebf167caa9f0910a4fcc899134596d7
+
+
+
+Faz-Hernandez, et al.    Expires 3 December 2020              [Page 101]
+
+Internet-Draft                hash-to-curve                    June 2020
+
+
    Q1.y    = 63df08d5d3aa8090cbb94222b34aad35e1b11414d3aef8f1a26205
              c81b4d15bbbe4faf25d77924705bf09afd8812d2f0
 
@@ -5650,14 +5688,6 @@ Internet-Draft                hash-to-curve                    June 2020
              fb13d0b7d9af036d28804175cba83facb79fa1969d
    u[1]    = a6f12666eca45f0d206eea969e91ae2ffe375669f43c917326b263
              1f5e57c578ca6e64ff5a3a290cdc377114f33d1924
-
-
-
-Faz-Hernandez, et al.    Expires 3 December 2020              [Page 101]
-
-Internet-Draft                hash-to-curve                    June 2020
-
-
    Q0.x    = d2e7df676ceaf3db77ef48d823da1d05d00f424d2b8d0e785f8f59
              721fb3fa24f744fde77a896f692d8997d2dc52f72c
    Q0.y    = 4cf7e647de29c60d852b0103f636bed22e67e83476be1e285dae54
@@ -5666,6 +5696,34 @@ Internet-Draft                hash-to-curve                    June 2020
              31c7167841858247864ddd717dea77b6d4d8c7836b
    Q1.y    = 8b6a2d1de2a46354737393a7b69c21d97b7f9f7671e94cfadcea2d
              fea3f8b2793cfffea5addb10a491ad55f0e47b2494
+
+   msg     = q128_qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
+             qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
+             qqqqqqqqqqqqqqqqqqqqqqqqq
+   P.x     = 5c24f67b2175279f4e94a0af9cf09213f0e7e2e3ccb6d4feae9403
+             281c1962507ba0588ef895c9b7c6cff28ce1d15a1f
+   P.y     = 259ce2c65f35f5fb3a611e5bbf56d2979ce9de429afd6271fbda57
+             c3d412c78292d0cb6f27e0ee96f91fba9f0af54327
+   u[0]    = c9e58d977e7cb5def41070f5c3b17aaf56602ace0ed8db0a2a3297
+             976a5c0bb4bc10579179f6438ff0d8d80b5def127c
+
+
+
+Faz-Hernandez, et al.    Expires 3 December 2020              [Page 102]
+
+Internet-Draft                hash-to-curve                    June 2020
+
+
+   u[1]    = a9c2015bd301a3add705f1a2174ea4a536cbfa1600bd7de0cec8d6
+             ce39fdd6bcaa377341093bf281e1f4dd767e0a0983
+   Q0.x    = 8285def22b86477eee1c2e38accd2ed2ad88c95932d6add09fbd53
+             1f4359bee33d0ab804ee728efe56d0dd17f08bfd5b
+   Q0.y    = 6364bd0542c5709dbf0cada4b14b85a68c9eae4b4bc3ec45034b2d
+             4abdc95f7cafe466deac1f6246f16d3c16f89c4d6a
+   Q1.x    = 4cf8c46511ade2c91caaaddd23a7a6fee04f76c8bc9467b39e3bdd
+             acb3ce852c9783b7d2cefa872e42e520f59895d404
+   Q1.y    = c399b62266a0e827c7bd15774d2203b967e994d8323eb89bddda5d
+             1c7a44270f62b1152d9f44cdc960ea4c7ea190ff4b
 
    msg     = a512_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -5704,16 +5762,16 @@ H.2.2.  P384_XMD:SHA-512_SSWU_NU_
              371b70279d3155514580300f77a23dbeaa70eeda32
    P.y     = 9094b16177a04f5c5afac87efc78b6e65a2583a5adc91c04cd508f
              d602d528530eb54932dff8b7e156d470996606cd9c
-   u[0]    = fcbb8741d963930b5e6438a9724db6023c157d6091c113d80bd9fa
-             05ea70d677a3cd81aa6efbeccc8f6ef3404cc87468
 
 
 
-Faz-Hernandez, et al.    Expires 3 December 2020              [Page 102]
+Faz-Hernandez, et al.    Expires 3 December 2020              [Page 103]
 
 Internet-Draft                hash-to-curve                    June 2020
 
 
+   u[0]    = fcbb8741d963930b5e6438a9724db6023c157d6091c113d80bd9fa
+             05ea70d677a3cd81aa6efbeccc8f6ef3404cc87468
    Q.x     = 5b87392cdbf306d62141cf266a1fcc8b6a8129469b1e4a56a16db6
              371b70279d3155514580300f77a23dbeaa70eeda32
    Q.y     = 9094b16177a04f5c5afac87efc78b6e65a2583a5adc91c04cd508f
@@ -5743,9 +5801,31 @@ Internet-Draft                hash-to-curve                    June 2020
    Q.y     = b5e24b855275729db25cecc83ec5fc1dcf8f055ad981a0901448d8
              4c6278cd10a28f65316db5ae1f5738ed06ae9c2f55
 
+   msg     = q128_qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
+             qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
+             qqqqqqqqqqqqqqqqqqqqqqqqq
+   P.x     = a0ed20ca2c7c69a6b7a3e5b9cf77d8f9bd979aa83a7f75e5f90d6b
+             ecd107925e5dcbbd96978ab74a7b5e96b48135d04c
+   P.y     = 4c9ed613516ae3e818139b6c9aea2ac42063c06ff0303a38c101ab
+             822c15d5fe6413e64adbac82a0da770cf110d7ace9
+   u[0]    = a5b9f4ed453690db8efdebf31bf33371519a4ba8756ac02060cbca
+             44ef882d0fe9ce8439965a83f17b11e58a1f537b19
+   Q.x     = a0ed20ca2c7c69a6b7a3e5b9cf77d8f9bd979aa83a7f75e5f90d6b
+             ecd107925e5dcbbd96978ab74a7b5e96b48135d04c
+   Q.y     = 4c9ed613516ae3e818139b6c9aea2ac42063c06ff0303a38c101ab
+             822c15d5fe6413e64adbac82a0da770cf110d7ace9
+
    msg     = a512_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+
+
+
+Faz-Hernandez, et al.    Expires 3 December 2020              [Page 104]
+
+Internet-Draft                hash-to-curve                    June 2020
+
+
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -5762,14 +5842,6 @@ Internet-Draft                hash-to-curve                    June 2020
    Q.x     = bc36cda196f8084052fc41a5c4ef5c9e1c724cc0bd83ef8eaef07b
              b2cbc3db99ff5cdb31ba3018a6afe59b0db040c980
    Q.y     = 5106450163d90d99d3191bc92f8a3d116f15b18b23eff8e9996481
-
-
-
-Faz-Hernandez, et al.    Expires 3 December 2020              [Page 103]
-
-Internet-Draft                hash-to-curve                    June 2020
-
-
              c6878bd16c8e202f44abc3d09325c2016b5dacc8f0
 
 H.3.  NIST P-521
@@ -5802,6 +5874,14 @@ H.3.1.  P521_XMD:SHA-512_SSWU_RO_
              d2a56df92be942660b532b2aa59a9c635ae6b30e803c45a6ac8714
              32452e685d661cd41cf67214
    Q1.y    = 00ff75515df265e996d702a5380defffab1a6d2bc232234c7bcffa
+
+
+
+Faz-Hernandez, et al.    Expires 3 December 2020              [Page 105]
+
+Internet-Draft                hash-to-curve                    June 2020
+
+
              433cd8aa791fbc8dcf667f08818bffa739ae25773b32073213cae9
              a0f2a917a0b1301a242dda0c
 
@@ -5818,14 +5898,6 @@ H.3.1.  P521_XMD:SHA-512_SSWU_RO_
    u[1]    = 01f3cbd3df3893a45a2f1fecdac4d525eb16f345b03e2820d69bc5
              80f5cbe9cb89196fdf720ef933c4c0361fcfe29940fd0db0a5da6b
              afb0bee8876b589c41365f15
-
-
-
-Faz-Hernandez, et al.    Expires 3 December 2020              [Page 104]
-
-Internet-Draft                hash-to-curve                    June 2020
-
-
    Q0.x    = 01b254e1c99c835836f0aceebba7d77750c48366ecb07fb658e4f5
              b76e229ae6ca5d271bb0006ffcc42324e15a6d3daae587f9049de2
              dbb0494378ffb60279406f56
@@ -5858,12 +5930,48 @@ Internet-Draft                hash-to-curve                    June 2020
    Q0.y    = 0177e2d8c6356b7de06e0b5712d8387d529b848748e54a8bc0ef5f
              1475aa569f8f492fa85c3ad1c5edc51faf7911f11359bfa2a12d2e
              f0bd73df9cb5abd1b101c8b1
+
+
+
+Faz-Hernandez, et al.    Expires 3 December 2020              [Page 106]
+
+Internet-Draft                hash-to-curve                    June 2020
+
+
    Q1.x    = 00abeafb16fdbb5eb95095678d5a65c1f293291dfd20a3751dbe05
              d0a9bfe2d2eef19449fe59ec32cdd4a4adc3411177c0f2dffd0159
              438706159a1bbd0567d9b3d0
    Q1.y    = 007cc657f847db9db651d91c801741060d63dab4056d0a1d3524e2
              eb0e819954d8f677aa353bd056244a88f00017e00c3ce8beeedb43
              82d83d74418bd48930c6c182
+
+   msg     = q128_qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
+             qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
+             qqqqqqqqqqqqqqqqqqqqqqqqq
+   P.x     = 01b264a630bd6555be537b000b99a06761a9325c53322b65bdc41b
+             f196711f9708d58d34b3b90faf12640c27b91c70a507998e559406
+             48caa8e71098bf2bc8d24664
+   P.y     = 01ea9f445bee198b3ee4c812dcf7b0f91e0881f0251aab272a1220
+             1fd89b1a95733fd2a699c162b639e9acdcc54fdc2f6536129b6beb
+             0432be01aa8da02df5e59aaa
+   u[0]    = 0159871e222689aad7694dc4c3480a49807b1eedd9c8cb4ae1b219
+             d5ba51655ea5b38e2e4f56b36bf3e3da44a7b139849d28f598c816
+             fe1bc7ed15893b22f63363c3
+   u[1]    = 004ef0cffd475152f3858c0a8ccbdf7902d8261da92744e98df9b7
+             fadb0a5502f29c5086e76e2cf498f47321434a40b1504911552ce4
+             4ad7356a04e08729ad9411f5
+   Q0.x    = 0005eac7b0b81e38727efcab1e375f6779aea949c3e409b53a1d37
+             aa2acbac87a7e6ad24aafbf3c52f82f7f0e21b872e88c55e17b7fa
+             21ce08a94ea2121c42c2eb73
+   Q0.y    = 00a173b6a53a7420dbd61d4a21a7c0a52de7a5c6ce05f31403bef7
+             47d16cc8604a039a73bdd6e114340e55dacd6bea8e217ffbadfb8c
+             292afa3e1b2afc839a6ce7bb
+   Q1.x    = 01881e3c193a69e4d88d8180a6879b74782a0bc7e529233e9f84bf
+             7f17d2f319c36920ffba26f9e57a1e045cc7822c834c239593b6e1
+             42a694aa00c757b0db79e5e8
+   Q1.y    = 01558b16d396d866e476e001f2dd0758927655450b84e12f154032
+             c7c2a6db837942cd9f44b814f79b4d729996ced61eec61d85c6751
+             39cbffe3fbf071d2c21cfecb
 
    msg     = a512_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -5874,18 +5982,18 @@ Internet-Draft                hash-to-curve                    June 2020
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-
-
-
-Faz-Hernandez, et al.    Expires 3 December 2020              [Page 105]
-
-Internet-Draft                hash-to-curve                    June 2020
-
-
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
    P.x     = 00c12bc3e28db07b6b4d2a2b1167ab9e26fc2fa85c7b0498a17b03
              47edf52392856d7e28b8fa7a2dd004611159505835b687ecf1a764
              857e27e9745848c436ef3925
+
+
+
+Faz-Hernandez, et al.    Expires 3 December 2020              [Page 107]
+
+Internet-Draft                hash-to-curve                    June 2020
+
+
    P.y     = 01cd287df9a50c22a9231beb452346720bb163344a41c5f5a24e83
              35b6ccc595fd436aea89737b1281aecb411eb835f0b939073fdd1d
              d4d5a2492e91ef4a3c55bcbd
@@ -5930,18 +6038,18 @@ H.3.2.  P521_XMD:SHA-512_SSWU_NU_
              12fef9fb21508568aedcdd8d2490472df4bbafd79081c81e99f4da
              3286eddf19be47e9c4cf0e91
 
-
-
-
-Faz-Hernandez, et al.    Expires 3 December 2020              [Page 106]
-
-Internet-Draft                hash-to-curve                    June 2020
-
-
    msg     = abc
    P.x     = 00c720ab56aa5a7a4c07a7732a0a4e1b909e32d063ae1b58db5f0e
              b5e09f08a9884bff55a2bef4668f715788e692c18c1915cd034a6b
              998311fcf46924ce66a2be9a
+
+
+
+Faz-Hernandez, et al.    Expires 3 December 2020              [Page 108]
+
+Internet-Draft                hash-to-curve                    June 2020
+
+
    P.y     = 003570e87f91a4f3c7a56be2cb2a078ffc153862a53d5e03e5dad5
              bccc6c529b8bab0b7dbb157499e1949e4edab21cf5d10b782bc1e9
              45e13d7421ad8121dbc72b1d
@@ -5972,6 +6080,32 @@ Internet-Draft                hash-to-curve                    June 2020
              25694ef8ebd4696343f0bc27006834d2517215ecf79482a84111f5
              0c1bae25044fe1dd77744bbd
 
+   msg     = q128_qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
+             qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
+             qqqqqqqqqqqqqqqqqqqqqqqqq
+   P.x     = 001ac69014869b6c4ad7aa8c443c255439d36b0e48a0f57b03d6fe
+             9c40a66b4e2eaed2a93390679a5cc44b3a91862b34b673f0e92c83
+             187da02bf3db967d867ce748
+   P.y     = 00d5603d530e4d62b30fccfa1d90c2206654d74291c1db1c25b86a
+             051ee3fffc294e5d56f2e776853406bd09206c63d40f37ad882952
+             4cf89ad70b5d6e0b4a3b7341
+   u[0]    = 00844da980675e1244cb209dcf3ea0aabec23bd54b2cda69fff86e
+             b3acc318bf3d01bae96e9cd6f4c5ceb5539df9a7ad7fcc5e9d5469
+             6081ba9782f3a0f6d14987e3
+   Q.x     = 001ac69014869b6c4ad7aa8c443c255439d36b0e48a0f57b03d6fe
+             9c40a66b4e2eaed2a93390679a5cc44b3a91862b34b673f0e92c83
+             187da02bf3db967d867ce748
+   Q.y     = 00d5603d530e4d62b30fccfa1d90c2206654d74291c1db1c25b86a
+             051ee3fffc294e5d56f2e776853406bd09206c63d40f37ad882952
+             4cf89ad70b5d6e0b4a3b7341
+
+
+
+Faz-Hernandez, et al.    Expires 3 December 2020              [Page 109]
+
+Internet-Draft                hash-to-curve                    June 2020
+
+
    msg     = a512_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -5986,14 +6120,6 @@ Internet-Draft                hash-to-curve                    June 2020
              721f96e4310e4a828206d9cdeaa8f2d476705cc3bbc490a6165c68
              7668f15ec178a17e3d27349b
    P.y     = 0068889ea2e1442245fe42bfda9e58266828c0263119f35a61631a
-
-
-
-Faz-Hernandez, et al.    Expires 3 December 2020              [Page 107]
-
-Internet-Draft                hash-to-curve                    June 2020
-
-
              3358330f3bb84443fcb54fcd53a1d097fccbe310489b74ee143fc2
              938959a83a1f7dd4a6fd395b
    u[0]    = 01aab1fb7e5cd44ba4d9f32353a383cb1bb9eb763ed40b32bdd5f6
@@ -6028,6 +6154,14 @@ H.4.1.  curve25519_XMD:SHA-512_ELL2_RO_
              5d15c3983d
    Q1.x    = 3fa114783a505c0b2b2fbeef0102853c0b494e7757f2a089d0daae
              7ed9a0db2b
+
+
+
+Faz-Hernandez, et al.    Expires 3 December 2020              [Page 110]
+
+Internet-Draft                hash-to-curve                    June 2020
+
+
    Q1.y    = 76c0fe7fec932aaafb8eefb42d9cbb32eb931158f469ff3050af15
              cfdbbeff94
 
@@ -6042,14 +6176,6 @@ H.4.1.  curve25519_XMD:SHA-512_ELL2_RO_
              ce5ae851b6
    Q0.x    = 16b3d86e056b7970fa00165f6f48d90b619ad618791661b7b5e1ec
              78be10eac1
-
-
-
-Faz-Hernandez, et al.    Expires 3 December 2020              [Page 108]
-
-Internet-Draft                hash-to-curve                    June 2020
-
-
    Q0.y    = 4ab256422d84c5120b278cbdfc4e1facc5baadffeccecf8ee9bf39
              46106d50ca
    Q1.x    = 7ec29ddbf34539c40adfa98fcb39ec36368f47f30e8f888cc7e86f
@@ -6075,6 +6201,34 @@ Internet-Draft                hash-to-curve                    June 2020
    Q1.y    = 50483c7540f64fb4497619c050f2c7fe55454ec0f0e79870bb4430
              2e34232210
 
+   msg     = q128_qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
+             qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
+             qqqqqqqqqqqqqqqqqqqqqqqqq
+   P.x     = 096e9c8bae6c06b554c1ee69383bb0e82267e064236b3a30608d4e
+             d20b73ac5a
+   P.y     = 1eb5a62612cafb32b16c3329794645b5b948d9f8ffe501d4e26b07
+             3fef6de355
+   u[0]    = 5e123990f11bbb5586613ffabdb58d47f64bb5f2fa115f8ea8df01
+             88e0c9e1b5
+
+
+
+Faz-Hernandez, et al.    Expires 3 December 2020              [Page 111]
+
+Internet-Draft                hash-to-curve                    June 2020
+
+
+   u[1]    = 5e8553eb00438a0bb1e7faa59dec6d8087f9c8011e5fb8ed9df31c
+             b6c0d4ac19
+   Q0.x    = 7a94d45a198fb5daa381f45f2619ab279744efdd8bd8ed587fc5b6
+             5d6cea1df0
+   Q0.y    = 67d44f85d376e64bb7d713585230cdbfafc8e2676f7568e0b6ee59
+             361116a6e1
+   Q1.x    = 30506fb7a32136694abd61b6113770270debe593027a968a01f271
+             e146e60c18
+   Q1.y    = 7eeee0e706b40c6b5174e551426a67f975ad5a977ee2f01e8e20a6
+             d612458c3b
+
    msg     = a512_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -6098,14 +6252,6 @@ Internet-Draft                hash-to-curve                    June 2020
    Q0.y    = 29e9dc92297231ef211245db9e31767996c5625dfbf92e1c8107ef
              887365de1e
    Q1.x    = 38920e9b988d1ab7449c0fa9a6058192c0c797bb3d42ac34572434
-
-
-
-Faz-Hernandez, et al.    Expires 3 December 2020              [Page 109]
-
-Internet-Draft                hash-to-curve                    June 2020
-
-
              1a1aa98745
    Q1.y    = 24dcc1be7c4d591d307e89049fd2ed30aae8911245a9d8554bf603
              2e5aa40d3d
@@ -6120,6 +6266,14 @@ H.4.2.  curve25519_XMD:SHA-512_ELL2_NU_
              76edfe4d08
    P.y     = 4548368f4f983243e747b62a600840ae7c1dab5c723991f85d3a97
              68479f3ec4
+
+
+
+Faz-Hernandez, et al.    Expires 3 December 2020              [Page 112]
+
+Internet-Draft                hash-to-curve                    June 2020
+
+
    u[0]    = 608d892b641f0328523802a6603427c26e55e6f27e71a91a478148
              d45b5093cd
    Q.x     = 51125222da5e763d97f3c10fcc92ea6860b9ccbbd2eb1285728f56
@@ -6151,13 +6305,27 @@ H.4.2.  curve25519_XMD:SHA-512_ELL2_NU_
    Q.y     = 08ec476147c9a0a3ff312d303dbbd076abb7551e5fce82b48ab14b
              433f8d0a7b
 
+   msg     = q128_qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
+             qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
+             qqqqqqqqqqqqqqqqqqqqqqqqq
+   P.x     = 027877759d155b1997d0d84683a313eb78bdb493271d935b622900
+             459d52ceaa
+   P.y     = 54d691731a53baa30707f4a87121d5169fb5d587d70fb0292b5830
+             dedbec4c18
+   u[0]    = 001e92a544463bda9bd04ddbe3d6eed248f82de32f522669efc5dd
+             ce95f46f5b
+   Q.x     = 227e0bb89de700385d19ec40e857db6e6a3e634b1c32962f370d26
+             f84ff19683
+   Q.y     = 5f86ff3851d262727326a32c1bf7655a03665830fa7f1b8b1e5a09
+             d85bc66e4a
+
    msg     = a512_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 
 
 
-Faz-Hernandez, et al.    Expires 3 December 2020              [Page 110]
+Faz-Hernandez, et al.    Expires 3 December 2020              [Page 113]
 
 Internet-Draft                hash-to-curve                    June 2020
 
@@ -6213,7 +6381,7 @@ H.5.1.  edwards25519_XMD:SHA-512_ELL2_RO_
 
 
 
-Faz-Hernandez, et al.    Expires 3 December 2020              [Page 111]
+Faz-Hernandez, et al.    Expires 3 December 2020              [Page 114]
 
 Internet-Draft                hash-to-curve                    June 2020
 
@@ -6249,6 +6417,34 @@ Internet-Draft                hash-to-curve                    June 2020
    Q1.y    = 50026c96930a24961e9d86aa91ea1465398ff8e42015e2ec1fa397
              d416f6a1c0
 
+   msg     = q128_qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
+             qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
+             qqqqqqqqqqqqqqqqqqqqqqqqq
+   P.x     = 5fb0b92acedd16f3bcb0ef83f5c7b7a9466b5f1e0d8d217421878e
+             a3686f8524
+   P.y     = 2eca15e355fcfa39d2982f67ddb0eea138e2994f5956ed37b7f72e
+             ea5e89d2f7
+   u[0]    = 4fedd25431c41f2a606952e2945ef5e3ac905a42cf64b8b4d4a83c
+             533bf321af
+   u[1]    = 02f20716a5801b843987097a8276b6d869295b2e11253751ca72c1
+             09d37485a9
+   Q0.x    = 703e69787ea7524541933edf41f94010a201cc841c1cce60205ec3
+             8513458872
+   Q0.y    = 32bb192c4f89106466f0874f5fd56a0d6b6f101cb714777983336c
+             159a9bec75
+   Q1.x    = 0c9077c5c31720ed9413abe59bf49ce768506128d810cb882435aa
+             90f713ef6b
+
+
+
+Faz-Hernandez, et al.    Expires 3 December 2020              [Page 115]
+
+Internet-Draft                hash-to-curve                    June 2020
+
+
+   Q1.y    = 7d5aec5210db638c53f050597964b74d6dda4be5b54fa73041bf90
+             9ccb3826cb
+
    msg     = a512_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -6266,14 +6462,6 @@ Internet-Draft                hash-to-curve                    June 2020
    u[0]    = 6e34e04a5106e9bd59f64aba49601bf09d23b27f7b594e56d5de06
              df4a4ea33b
    u[1]    = 1c1c2cb59fc053f44b86c5d5eb8c1954b64976d0302d3729ff66e8
-
-
-
-Faz-Hernandez, et al.    Expires 3 December 2020              [Page 112]
-
-Internet-Draft                hash-to-curve                    June 2020
-
-
              4068f5fd96
    Q0.x    = 21091b2e3f9258c7dfa075e7ae513325a94a3d8a28e1b1cb3b5b6f
              5d65675592
@@ -6302,6 +6490,14 @@ H.5.2.  edwards25519_XMD:SHA-512_ELL2_NU_
              63d6d42a95
 
    msg     = abc
+
+
+
+Faz-Hernandez, et al.    Expires 3 December 2020              [Page 116]
+
+Internet-Draft                hash-to-curve                    June 2020
+
+
    P.x     = 5f13cc69c891d86927eb37bd4afc6672360007c63f68a33ab423a3
              aa040fd2a8
    P.y     = 67732d50f9a26f73111dd1ed5dba225614e538599db58ba30aaea1
@@ -6322,16 +6518,22 @@ H.5.2.  edwards25519_XMD:SHA-512_ELL2_NU_
              d33edba941
    Q.x     = 55186c242c78e7d0ec5b6c9553f04c6aeef64e69ec2e824472394d
              a32647cfc6
-
-
-
-Faz-Hernandez, et al.    Expires 3 December 2020              [Page 113]
-
-Internet-Draft                hash-to-curve                    June 2020
-
-
    Q.y     = 5b9ea3c265ee42256a8f724f616307ef38496ef7eba391c08f99f3
              bea6fa88f0
+
+   msg     = q128_qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
+             qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
+             qqqqqqqqqqqqqqqqqqqqqqqqq
+   P.x     = 35fbdc5143e8a97afd3096f2b843e07df72e15bfca2eaf6879bf97
+             c5d3362f73
+   P.y     = 2af6ff6ef5ebba128b0774f4296cb4c2279a074658b083b8dcca91
+             f57a603450
+   u[0]    = 049a1c8bd51bcb2aec339f387d1ff51428b88d0763a91bcdf69298
+             14ac95d03d
+   Q.x     = 024b6e1621606dca8071aa97b43dce4040ca78284f2a527dcf5d0f
+             bfac2b07e7
+   Q.y     = 5102353883d739bdc9f8a3af650342b171217167dcce34f8db5720
+             8ec1dfdbf2
 
    msg     = a512_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -6344,6 +6546,14 @@ Internet-Draft                hash-to-curve                    June 2020
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
    P.x     = 6e5e1f37e99345887fc12111575fc1c3e36df4b289b8759d23af14
+
+
+
+Faz-Hernandez, et al.    Expires 3 December 2020              [Page 117]
+
+Internet-Draft                hash-to-curve                    June 2020
+
+
              d774b66bff
    P.y     = 2c90c3d39eb18ff291d33441b35f3262cdd307162cc97c31bfcc7a
              4245891a37
@@ -6378,14 +6588,6 @@ H.6.1.  curve448_XMD:SHA-512_ELL2_RO_
              3ec7e61fc2d458a81846385080febb458695746c0ffc04e080b2fd
              ecf2
    Q0.y    = 9712f659ce8ddbd2bc581af3c6c359038d877174805b8772a647b3
-
-
-
-Faz-Hernandez, et al.    Expires 3 December 2020              [Page 114]
-
-Internet-Draft                hash-to-curve                    June 2020
-
-
              b0bc9d66a579f72bc9ada3b836aaf2642d909ed9b96dc686ae668a
              b5c1
    Q1.x    = 2730fc1f5ea277c6ee5096eece84901d42fa3f78c018b1174c4685
@@ -6400,6 +6602,14 @@ Internet-Draft                hash-to-curve                    June 2020
              7f08fadb3fd00d107455bd5a032c682d8a80b4f796960d61fc01e3
              9faf
    P.y     = d973b5f9d4babfb95e1e28484068fdd3314b2e334f8bfcbccb9878
+
+
+
+Faz-Hernandez, et al.    Expires 3 December 2020              [Page 118]
+
+Internet-Draft                hash-to-curve                    June 2020
+
+
              a1b9d0247bb4294c035caf1558c7d5fe140fb440fc32f7c4637f56
              2db5
    u[0]    = c0f1c170cea7276b72c0e744f4b1d6974da6a57b50bf3e0551f208
@@ -6434,14 +6644,6 @@ Internet-Draft                hash-to-curve                    June 2020
    u[1]    = 8816db97222c7cf1a728ae635542497683c6959f042e51c62ba270
              eb437d7e9cce9080e5c8e05b05e0b0a298823bd661d5272258c7f6
              d76e
-
-
-
-Faz-Hernandez, et al.    Expires 3 December 2020              [Page 115]
-
-Internet-Draft                hash-to-curve                    June 2020
-
-
    Q0.x    = e6d0c0fd0e30e1a27d9bbee310398e2461e9199000476e57d819be
              2f343a32165bcc5e524c3feffca3b272bc801367b47032b6f5ae21
              b514
@@ -6454,6 +6656,42 @@ Internet-Draft                hash-to-curve                    June 2020
    Q1.y    = 47a95cb1361c02caeaac9d036b99bb11e733fa2f140c9831694057
              eab0e7878b0b823891b02428ee2cb09627bb6cbf860bf72cad6b44
              61c4
+
+   msg     = q128_qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
+
+
+
+Faz-Hernandez, et al.    Expires 3 December 2020              [Page 119]
+
+Internet-Draft                hash-to-curve                    June 2020
+
+
+             qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
+             qqqqqqqqqqqqqqqqqqqqqqqqq
+   P.x     = 9b12ca7cc0fbb013278d7ff476c64983baf7494ddec6c01e4df643
+             a3ca5aff2842c5122986ed4bb0ca9f9439d497fa8615747e1dfa5d
+             9788
+   P.y     = 80c9ba33dc4b549b1e4342c4f7ed5bcb53e5a2caf6b322bf2518c1
+             3d27cfd7770200ace0af3f8f9c8fa5408b467661fd724cb770e5b1
+             27dc
+   u[0]    = 9f3656bf8698d3da48fe5920145fa6b38e4ac91891ae6fcc36f1dd
+             057a7e653d39eaade8f0009adbf3d47abfb3b4821d8331f50e8e85
+             2859
+   u[1]    = 601f6005529f083544cd79bef793c8240fddb35ed35aa6a9d6bce0
+             3a782f59a020ce4ae7a89a2a1cb3fbbcfbdc8fd5228afba13b1776
+             3d22
+   Q0.x    = 4c961329e6aae24e793c9579fb9035d36f02e634e5dc7010eb4cfd
+             fdf394adb56a6b09ea63127ea1c14b5ff0eaa5e7d1be81832a9e1e
+             b4ff
+   Q0.y    = b9afd57b25c525e193a4305b77bef349368f7e9248851a84db2a3b
+             0367098b30599fc5d396a93da7dfb1ad67cf2fdc8f9c988f95e422
+             d1ba
+   Q1.x    = 0147be9e6313e84dba7e9b86218e5ed2e280cd84bd2b9ab65f26dd
+             2010f8fc8ccb904884a8fc9c63ec6bb428c04bdc049cfae7ef920d
+             4249
+   Q1.y    = 265038ec80101c9cec9fc10fc3c740ff9a0f27bd6969f6cbe1dbaa
+             11e4fbd86cc2971728bf0672f01daed6c639454c6a5c1e56303aa6
+             a6cf
 
    msg     = a512_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -6476,6 +6714,14 @@ Internet-Draft                hash-to-curve                    June 2020
              3868
    u[1]    = 8b5ff5b833a4655293cc8f8feb940bc84e8f2e240370a002457346
              628a892cbb8abd96c1140ca044a1bca85181a0a4ffcaf8a42a95ef
+
+
+
+Faz-Hernandez, et al.    Expires 3 December 2020              [Page 120]
+
+Internet-Draft                hash-to-curve                    June 2020
+
+
              f4c9
    Q0.x    = 3d94294cbb050707f5ad5a0dfc596445848c05a81d2a175a05b34e
              409748cbe98970d1a0fd4bcdc030969481d669f0ce8befe72e0e7a
@@ -6489,14 +6735,6 @@ Internet-Draft                hash-to-curve                    June 2020
    Q1.y    = 7bebe0e4520198e026127cf8bd4308db737358afaca143788637c6
              75812282336699de18e4b239e7c5e95797154b8cd00aa51b830993
              9abc
-
-
-
-
-Faz-Hernandez, et al.    Expires 3 December 2020              [Page 116]
-
-Internet-Draft                hash-to-curve                    June 2020
-
 
 H.6.2.  curve448_XMD:SHA-512_ELL2_NU_
 
@@ -6532,6 +6770,14 @@ H.6.2.  curve448_XMD:SHA-512_ELL2_NU_
              0384
    Q.x     = 8e4ff7f3bf4e42202441a441da4afaa6d4f32f95d0406742172e88
              af8ffa304022eb3d2fddc5cffbb0241466daf3f152fddc26184074
+
+
+
+Faz-Hernandez, et al.    Expires 3 December 2020              [Page 121]
+
+Internet-Draft                hash-to-curve                    June 2020
+
+
              12fb
    Q.y     = 22e7d04d6dabbf15eee6529bf1f6a3a9efaa3a772956de1c08441d
              94ef63b163ecea2065aebb004e8cfc12cfd2f946de05277caabba1
@@ -6546,14 +6792,6 @@ H.6.2.  curve448_XMD:SHA-512_ELL2_NU_
              f7e4
    u[0]    = fe602896e4a559685e0deb1c7c8ff4eec02cda9037bb6bd009d003
              31b0b51227b64704e2462fd9cad0ebc24cb8817c5758703f720125
-
-
-
-Faz-Hernandez, et al.    Expires 3 December 2020              [Page 117]
-
-Internet-Draft                hash-to-curve                    June 2020
-
-
              1c94
    Q.x     = 1f1aefee6f36a913a0c63a69439400e00d6b900554489e3a25eaa6
              6d4b68cafd0dc63e5645701b37edd7535b1b38305efb0460d8f103
@@ -6562,6 +6800,25 @@ Internet-Draft                hash-to-curve                    June 2020
              4beb89b57f3edbb823bdc4fa94e15e9bbf9f644137bf865ec7659b
              deb9
 
+   msg     = q128_qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
+             qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
+             qqqqqqqqqqqqqqqqqqqqqqqqq
+   P.x     = b1e9ec646a3d80bbb9fe4893ad6499835d926141892deae28a1099
+             b7d3c8bf1b973babd5cdc59cbb1740ff3818369573e7005b5d8abe
+             84af
+   P.y     = 73268f982e98e27091ac79d1c20f5cf0a678bf56f990788427306d
+             ef1dd5a6cbf49605614429cb7948b09a19028d09c38fc6ecc28dd5
+             43fb
+   u[0]    = 8fb83575d02983a80e69abf9592bb4fcb2f7d0a15c3899b569d276
+             798d0dee60d81646dfef632f529770d162e045935e63f73a586157
+             5366
+   Q.x     = 7c5cd86fe37dc942089a3e4983b71173ceb37353fe1e0f1b5d207b
+             3183b595348a72860b3343ab20b3b9d6dd5ec5b8a36817e1f0ec1b
+             6dba
+   Q.y     = 2bd01a61674d241f1e5c7dab88028b3055cf849ede4c6781c7c5fc
+             f22ad7e65bbcf0cb2cbee89b1caeb6f616c81346564a00611f4731
+             f9dc
+
    msg     = a512_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -6569,6 +6826,14 @@ Internet-Draft                hash-to-curve                    June 2020
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+
+
+
+Faz-Hernandez, et al.    Expires 3 December 2020              [Page 122]
+
+Internet-Draft                hash-to-curve                    June 2020
+
+
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -6602,14 +6867,6 @@ H.7.1.  edwards448_XMD:SHA-512_ELL2_RO_
    P.y     = 12165b672a52370f21268ce2c261c3ed32adac6a3404fbd50d31a5
              51a9111d109b0c691868aa6e9d92fd94dfa2a7397a2c111be9c432
              c0cd
-
-
-
-Faz-Hernandez, et al.    Expires 3 December 2020              [Page 118]
-
-Internet-Draft                hash-to-curve                    June 2020
-
-
    u[0]    = 6369f90cf2806a86841398114dccf2ffd06d2d57c782a449df5297
              189de02384b22cf73a0b5f678fe486ad59280d15431f4a65fec93d
              0039
@@ -6625,6 +6882,14 @@ Internet-Draft                hash-to-curve                    June 2020
    Q1.x    = cc44d47637c8fcbe1dc1020b87eb21205f055d6dec872efcc09b8c
              50935cdb38342340f389d6284a2b4bc5486f8c05a3fec6c7ef59c0
              2e2f
+
+
+
+Faz-Hernandez, et al.    Expires 3 December 2020              [Page 123]
+
+Internet-Draft                hash-to-curve                    June 2020
+
+
    Q1.y    = c875e0cb547828c2707097c2cb6e3d7f03f92a715d6c66c370b08d
              09be11b69cc07c4798ff3ed30e64b5c1742bed375bb51b61963617
              9adb
@@ -6658,14 +6923,6 @@ Internet-Draft                hash-to-curve                    June 2020
    msg     = abcdef0123456789
    P.x     = 01a04ed1b758a20245ea227827350eaedef92ef2860e58e5c5a982
              0a1fc6157082b3722d25c9754bc2642b126c4a9188a1fe9c8b2b39
-
-
-
-Faz-Hernandez, et al.    Expires 3 December 2020              [Page 119]
-
-Internet-Draft                hash-to-curve                    June 2020
-
-
              6b53
    P.y     = 88ac7496b9ebc2b446695324e2f76ad54f4b8b21d0077ac15b69ad
              7a4abcd00e881cadbd829db2d2d0f28fc84eac4fc59264b2d14063
@@ -6681,6 +6938,14 @@ Internet-Draft                hash-to-curve                    June 2020
              e738
    Q0.y    = 774c9a9f0f4143ca2779b4bbb4ef397da643db7b74ac8bad1a54fb
              c86f728571fc401ca5b2a8432a018a5d545b526387f364701b232e
+
+
+
+Faz-Hernandez, et al.    Expires 3 December 2020              [Page 124]
+
+Internet-Draft                hash-to-curve                    June 2020
+
+
              3dbd
    Q1.x    = e0fa0e6ff453760f52ea77ae9d605d00fc9930e9302a7779243fd6
              5e29970c3ebc26799a17ce7a24b7ea18f2c5b572fc29d6dbf73a89
@@ -6688,6 +6953,34 @@ Internet-Draft                hash-to-curve                    June 2020
    Q1.y    = 6b5b06e9ab686c8377ac404f142444ded5adcd68daafde1bdfa7ef
              671708636da22adba4fda2b2472e37cddebec47fe30e38a11dcd06
              d10d
+
+   msg     = q128_qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
+             qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
+             qqqqqqqqqqqqqqqqqqqqqqqqq
+   P.x     = 547a8928866ea7fdd556f9fe228eb414e3337338608bbf5746c1cf
+             d39ad5ffa1a8f7c5c9dbd39043484a820453ee518801c38a7ec83f
+             f69d
+   P.y     = d8b9295825b37781ba0503242951154c31fc9457f6b2a67ec5cde8
+             ea577bd8214bc5525d1df3171202ef43782a7fc72982069c858357
+             519b
+   u[0]    = 2d1aa960178c6b26f0c40648d9c8072640b449182b55b72446980b
+             7cd78b81c6dd0a4195564546d0633934e74b9d73057954a77820af
+             5ff7
+   u[1]    = 138d93e220a6c35b7afbc2329eb7e5d027f2e64551c41c0550a378
+             143ae0a6b49855cf9ce5886cfb8dfc6bff6cb62139161e90868359
+             b566
+   Q0.x    = 39ffc36783c6db4113f60c6754398c95fec611f4a8e05fe479e7f0
+             df2f89556f8090bb713b57f51e3e68b02670390054656e7cbf06ea
+             bd1e
+   Q0.y    = 1ef77f01c770dae258a5af1d08ed7f72311487e4aa273c8ce08f89
+             808de5ced5ff83241199265bab4cea11a9d4ea0feed61858b4573f
+             6916
+   Q1.x    = c7b100d6c0a39411a7d3fa37d0e1a1673d3c19af5cc721db2f1342
+             607e5d860d96fab2313e0f4987f839baa3293c8a4d6fa2f30e51ba
+             fa7d
+   Q1.y    = f6a2294965922a98247d066926b265cfc168c9a66861c07f4ac867
+             5cab13a1486d1d614ac8a56095531ebc4f8233e9d5942436d6d61e
+             5a1c
 
    msg     = a512_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -6701,6 +6994,14 @@ Internet-Draft                hash-to-curve                    June 2020
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
    P.x     = c7c7899dab9813b5d10cadf43aa0cf5f26c21e98e5c0ffbe690059
              67dbfd066e5564bdc6c67adeb87f55951c4a077c8d4a6095a23559
+
+
+
+Faz-Hernandez, et al.    Expires 3 December 2020              [Page 125]
+
+Internet-Draft                hash-to-curve                    June 2020
+
+
              3201
    P.y     = 547c2293a8b8489270957118e69a241227dc32c5587819269630ff
              687bb88284b88376fa8f86e0dbafc09d8dbba49a4a433fbd379d10
@@ -6714,14 +7015,6 @@ Internet-Draft                hash-to-curve                    June 2020
    Q0.x    = 5f238a69135b8207607ea4dcebed925425adb75dfdb86e6e7f1279
              6f2086cba1add20f36a2e38176dd4feda1ad25aa8657728d390ce4
              b818
-
-
-
-Faz-Hernandez, et al.    Expires 3 December 2020              [Page 120]
-
-Internet-Draft                hash-to-curve                    June 2020
-
-
    Q0.y    = 225a31f6a260be2b81b735ea1bdaaa65486a50777e3e3b83265e69
              a572e2054e63f0519a06537fba0d15076c993c6e19121fd077e8e4
              5ee9
@@ -6757,6 +7050,14 @@ H.7.2.  edwards448_XMD:SHA-512_ELL2_NU_
    msg     = abc
    P.x     = 2df5a5ee45640cc4e297f969c9771b36e4358463d47a530e375fe1
              3d442a17cc5f27818365eead72adee48c5911eb4ad7ed4e242f81d
+
+
+
+Faz-Hernandez, et al.    Expires 3 December 2020              [Page 126]
+
+Internet-Draft                hash-to-curve                    June 2020
+
+
              37b8
    P.y     = a1ba8d111dd6338338f88c552d3338077fc5fe037860f2eb2b7496
              6a4a96f7fc59f859518caba87a1cf3fefbcace608e7b651ab5cb9e
@@ -6770,13 +7071,6 @@ H.7.2.  edwards448_XMD:SHA-512_ELL2_NU_
    Q.y     = 711909a05b086efe857ec86729a667a531d958d17f5f7a4b9d9fa1
              59d3d7668d74ae4f4dd1b7273e2a26c68029c881255e462d046f89
              ebe0
-
-
-
-Faz-Hernandez, et al.    Expires 3 December 2020              [Page 121]
-
-Internet-Draft                hash-to-curve                    June 2020
-
 
    msg     = abcdef0123456789
    P.x     = 7120e8a2d8f4c34743b8afc1ec9f72fee0e9fd60d25f776fabc9a8
@@ -6794,6 +7088,33 @@ Internet-Draft                hash-to-curve                    June 2020
    Q.y     = 8c9e09b8a17559a59cf3071f48e68c5d1fa1836f66c59bc3b76df0
              9a62df5ebb5c0ac1a6f6f71e51f876241b3e7d459f45b142891057
              eb63
+
+   msg     = q128_qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
+             qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
+             qqqqqqqqqqqqqqqqqqqqqqqqq
+   P.x     = 1fe7630fdd70fcc20ef2463e07ab5ec990c8a60a625de07b8114d4
+             d960d1ab3c3ad5e8d4e98d991bb35a4c257f31d8e9f7951112172f
+             5a3b
+   P.y     = b81d594af4ed69062aa35c2a3ca5f8fbbcc1ea13a893ff79873958
+             b48a79dde9b2a9422376d66d1bb1321c6bb90e18ae413c4669e16b
+             63c7
+   u[0]    = 9849d55e9866d3ffb6f2bcbd45dfba339fc02138f07b30b669b088
+             be9a8d17bcb639943fcd2e920f6eda62f32b1aca5c871d93013cdf
+             1d01
+   Q.x     = cd18e60afd20ce97349af7732e50f2d8da587187dbabf767abbffc
+             be08abef5c60f300a502f8d4b841c6076e218a301fad6c58da3b81
+             61f5
+   Q.y     = 6dac55c4fdde9118fb8f64d02b1268467fe709eac8b84d2cef0db2
+             c786b51916fdccdc7d0999ab073b1e743603dfba27425d282570bb
+
+
+
+Faz-Hernandez, et al.    Expires 3 December 2020              [Page 127]
+
+Internet-Draft                hash-to-curve                    June 2020
+
+
+             6373
 
    msg     = a512_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -6825,15 +7146,6 @@ H.8.  secp256k1
 
 H.8.1.  secp256k1_XMD:SHA-256_SSWU_RO_
 
-
-
-
-
-Faz-Hernandez, et al.    Expires 3 December 2020              [Page 122]
-
-Internet-Draft                hash-to-curve                    June 2020
-
-
    suite   = secp256k1_XMD:SHA-256_SSWU_RO_
    dst     = QUUX-V01-CS02-with-secp256k1_XMD:SHA-256_SSWU_RO_
 
@@ -6850,6 +7162,14 @@ Internet-Draft                hash-to-curve                    June 2020
              1857b99f1e
    Q0.y    = c174fa322ab7c192e11748beed45b508e9fdb1ce046dee9c2cd3a2
              a86b410936
+
+
+
+Faz-Hernandez, et al.    Expires 3 December 2020              [Page 128]
+
+Internet-Draft                hash-to-curve                    June 2020
+
+
    Q1.x    = 44548adb1b399263ded3510554d28b4bead34b8cf9a37b4bd0bd2b
              a4db87ae63
    Q1.y    = 96eb8e2faf05e368efe5957c6167001760233e6dd2487516b46ae7
@@ -6882,14 +7202,6 @@ Internet-Draft                hash-to-curve                    June 2020
              380e2f98b9
    u[1]    = 7434d0d1a500d38380d1f9615c021857ac8d546925f5f2355319d8
              23a478da18
-
-
-
-Faz-Hernandez, et al.    Expires 3 December 2020              [Page 123]
-
-Internet-Draft                hash-to-curve                    June 2020
-
-
    Q0.x    = 576d43ab0260275adf11af990d130a5752704f7947862876172080
              8862544b5d
    Q0.y    = 643c4a7fb68ae6cff55edd66b809087434bbaff0c07f3f9ec4d49b
@@ -6898,6 +7210,34 @@ Internet-Draft                hash-to-curve                    June 2020
              f8b0e29ff8
    Q1.y    = b33855e0cc34a9176ead91c6c3acb1aacb1ce936d563bc1cee1dcf
              fc806caf57
+
+   msg     = q128_qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
+             qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
+             qqqqqqqqqqqqqqqqqqqqqqqqq
+   P.x     = e2167bc785333a37aa562f021f1e881defb853839babf52a7f72b1
+             02e41890e9
+   P.y     = f2401dd95cc35867ffed4f367cd564763719fbc6a53e969fb8496a
+             1e6685d873
+
+
+
+Faz-Hernandez, et al.    Expires 3 December 2020              [Page 129]
+
+Internet-Draft                hash-to-curve                    June 2020
+
+
+   u[0]    = eda89a5024fac0a8207a87e8cc4e85aa3bce10745d501a30deb873
+             41b05bcdf5
+   u[1]    = dfe78cd116818fc2c16f3837fedbe2639fab012c407eac9dfe9245
+             bf650ac51d
+   Q0.x    = 9c91513ccfe9520c9c645588dff5f9b4e92eaf6ad4ab6f1cd720d1
+             92eb58247a
+   Q0.y    = c7371dcd0134412f221e386f8d68f49e7fa36f9037676e163d4a06
+             3fbf8a1fb8
+   Q1.x    = 10fee3284d7be6bd5912503b972fc52bf4761f47141a0015f1c6ae
+             36848d869b
+   Q1.y    = 0b163d9b4bf21887364332be3eff3c870fa053cf508732900fc69a
+             6eb0e1b672
 
    msg     = a512_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -6934,18 +7274,18 @@ H.8.2.  secp256k1_XMD:SHA-256_SSWU_NU_
    msg     =
    P.x     = a4792346075feae77ac3b30026f99c1441b4ecf666ded19b7522cf
              65c4c55c5b
-   P.y     = 62c59e2a6aeed1b23be5883e833912b08ba06be7f57c0e9cdc663f
-             31639ff3a7
-   u[0]    = 0137fcd23bc3da962e8808f97474d097a6c8aa2881fceef4514173
-             635872cf3b
 
 
 
-Faz-Hernandez, et al.    Expires 3 December 2020              [Page 124]
+Faz-Hernandez, et al.    Expires 3 December 2020              [Page 130]
 
 Internet-Draft                hash-to-curve                    June 2020
 
 
+   P.y     = 62c59e2a6aeed1b23be5883e833912b08ba06be7f57c0e9cdc663f
+             31639ff3a7
+   u[0]    = 0137fcd23bc3da962e8808f97474d097a6c8aa2881fceef4514173
+             635872cf3b
    Q.x     = a4792346075feae77ac3b30026f99c1441b4ecf666ded19b7522cf
              65c4c55c5b
    Q.y     = 62c59e2a6aeed1b23be5883e833912b08ba06be7f57c0e9cdc663f
@@ -6975,7 +7315,29 @@ Internet-Draft                hash-to-curve                    June 2020
    Q.y     = c79f8d1dad79b6540426922f7fbc9579c3018dafeffcd4552b1626
              b506c21e7b
 
+   msg     = q128_qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
+             qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
+             qqqqqqqqqqqqqqqqqqqqqqqqq
+   P.x     = b734f05e9b9709ab631d960fa26d669c4aeaea64ae62004b9d34f4
+             83aa9acc33
+   P.y     = 03fc8a4a5a78632e2eb4d8460d69ff33c1d72574b79a35e402e801
+             f2d0b1d6ee
+   u[0]    = d97cf3d176a2f26b9614a704d7d434739d194226a706c886c5c3c3
+             9806bc323c
+   Q.x     = b734f05e9b9709ab631d960fa26d669c4aeaea64ae62004b9d34f4
+             83aa9acc33
+   Q.y     = 03fc8a4a5a78632e2eb4d8460d69ff33c1d72574b79a35e402e801
+             f2d0b1d6ee
+
    msg     = a512_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+
+
+
+Faz-Hernandez, et al.    Expires 3 December 2020              [Page 131]
+
+Internet-Draft                hash-to-curve                    June 2020
+
+
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -6994,14 +7356,6 @@ Internet-Draft                hash-to-curve                    June 2020
    Q.x     = 17d22b867658977b5002dbe8d0ee70a8cfddec3eec50fb93f36136
              070fd9fa6c
    Q.y     = e9178ff02f4dab73480f8dd590328aea99856a7b6cc8e5a6cdf289
-
-
-
-Faz-Hernandez, et al.    Expires 3 December 2020              [Page 125]
-
-Internet-Draft                hash-to-curve                    June 2020
-
-
              ecc2a51718
 
 H.9.  BLS12-381 G1
@@ -7032,6 +7386,14 @@ H.9.1.  BLS12381G1_XMD:SHA-256_SSWU_RO_
    msg     = abc
    P.x     = 03567bc5ef9c690c2ab2ecdf6a96ef1c139cc0b2f284dca0a9a794
              3388a49a3aee664ba5379a7655d3c68900be2f6903
+
+
+
+Faz-Hernandez, et al.    Expires 3 December 2020              [Page 132]
+
+Internet-Draft                hash-to-curve                    June 2020
+
+
    P.y     = 0b9c15f3fe6e5cf4211f346271d7b01c8f3b28be689c8429c85b67
              af215533311f0b8dfaaa154fa6b88176c229f2885d
    u[0]    = 0d921c33f2bad966478a03ca35d05719bdf92d347557ea166e5bba
@@ -7050,14 +7412,6 @@ H.9.1.  BLS12381G1_XMD:SHA-256_SSWU_RO_
    msg     = abcdef0123456789
    P.x     = 11e0b079dea29a68f0383ee94fed1b940995272407e3bb916bbf26
              8c263ddd57a6a27200a784cbc248e84f357ce82d98
-
-
-
-Faz-Hernandez, et al.    Expires 3 December 2020              [Page 126]
-
-Internet-Draft                hash-to-curve                    June 2020
-
-
    P.y     = 03a87ae2caf14e8ee52e51fa2ed8eefe80f02457004ba4d486d6aa
              1f517c0889501dc7413753f9599b099ebcbbd2d709
    u[0]    = 062d1865eb80ebfa73dcfc45db1ad4266b9f3a93219976a3790ab8
@@ -7072,6 +7426,34 @@ Internet-Draft                hash-to-curve                    June 2020
              8d6e2694fedceb7011b3c2b192f23e2a44b2bd106e
    Q1.y    = 1879074f344471fac5f839e2b4920789643c075792bec5af4282c7
              3f7941cda5aa77b00085eb10e206171b9787c4169f
+
+   msg     = q128_qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
+             qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
+             qqqqqqqqqqqqqqqqqqqqqqqqq
+   P.x     = 15f68eaa693b95ccb85215dc65fa81038d69629f70aeee0d0f677c
+             f22285e7bf58d7cb86eefe8f2e9bc3f8cb84fac488
+   P.y     = 1807a1d50c29f430b8cafc4f8638dfeeadf51211e1602a5f184443
+             076715f91bb90a48ba1e370edce6ae1062f5e6dd38
+   u[0]    = 010476f6a060453c0b1ad0b628f3e57c23039ee16eea5e71bb87c3
+             b5419b1255dc0e5883322e563b84a29543823c0e86
+   u[1]    = 0b1a912064fb0554b180e07af7e787f1f883a0470759c03c1b6509
+             eb8ce980d1670305ae7b928226bb58fdc0a419f46e
+   Q0.x    = 0cbd7f84ad2c99643fea7a7ac8f52d63d66cefa06d9a56148e58b9
+             84b3dd25e1f41ff47154543343949c64f88d48a710
+   Q0.y    = 052c00e4ed52d000d94881a5638ae9274d3efc8bc77bc0e5c650de
+             04a000b2c334a9e80b85282a00f3148dfdface0865
+
+
+
+Faz-Hernandez, et al.    Expires 3 December 2020              [Page 133]
+
+Internet-Draft                hash-to-curve                    June 2020
+
+
+   Q1.x    = 06493fb68f0d513af08be0372f849436a787e7b701ae31cb964d96
+             8021d6ba6bd7d26a38aaa5a68e8c21a6b17dc8b579
+   Q1.y    = 02e98f2ccf5802b05ffaac7c20018bc0c0b2fd580216c4aa2275d2
+             909dc0c92d0d0bdc979226adeb57a29933536b6bb4
 
    msg     = a512_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -7102,18 +7484,6 @@ Internet-Draft                hash-to-curve                    June 2020
 
 H.9.2.  BLS12381G1_XMD:SHA-256_SSWU_NU_
 
-
-
-
-
-
-
-
-Faz-Hernandez, et al.    Expires 3 December 2020              [Page 127]
-
-Internet-Draft                hash-to-curve                    June 2020
-
-
    suite   = BLS12381G1_XMD:SHA-256_SSWU_NU_
    dst     = QUUX-V01-CS02-with-BLS12381G1_XMD:SHA-256_SSWU_NU_
 
@@ -7128,6 +7498,13 @@ Internet-Draft                hash-to-curve                    June 2020
              656096d61d8a2f9a23cdb18a4dd11cd1d66f41f709
    Q.y     = 19316b6fb2ba7717355d5d66a361899057e1e84a6823039efc7bec
              cefe09d023fb2713b1c415fcf278eb0c39a89b4f72
+
+
+
+Faz-Hernandez, et al.    Expires 3 December 2020              [Page 134]
+
+Internet-Draft                hash-to-curve                    June 2020
+
 
    msg     = abc
    P.x     = 009769f3ab59bfd551d53a5f846b9984c59b97d6842b20a2c565ba
@@ -7153,6 +7530,20 @@ Internet-Draft                hash-to-curve                    June 2020
    Q.y     = 109019902ae93a8732abecf2ff7fecd2e4e305eb91f41c9c3267f1
              6b6c19de138c7272947f25512745da6c466cdfd1ac
 
+   msg     = q128_qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
+             qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
+             qqqqqqqqqqqqqqqqqqqqqqqqq
+   P.x     = 0a7a047c4a8397b3446450642c2ac64d7239b61872c9ae7a59707a
+             8f4f950f101e766afe58223b3bff3a19a7f754027c
+   P.y     = 1383aebba1e4327ccff7cf9912bda0dbc77de048b71ef8c8a81111
+             d71dc33c5e3aa6edee9cf6f5fe525d50cc50b77cc9
+   u[0]    = 08dccd088ca55b8bfbc96fb50bb25c592faa867a8bb78d4e94a8cc
+             2c92306190244532e91feba2b7fed977e3c3bb5a1f
+   Q.x     = 112eb92dd2b3aa9cd38b08de4bef603f2f9fb0ca226030626a9a2e
+             47ad1e9847fe0a5ed13766c339e38f514bba143b21
+   Q.y     = 17542ce2f8d0a54f2c5ba8c4b14e10b22d5bcd7bae2af3c965c8c8
+             72b571058c720eac448276c99967ded2bf124490e1
+
    msg     = a512_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -7162,15 +7553,15 @@ Internet-Draft                hash-to-curve                    June 2020
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 
 
 
-Faz-Hernandez, et al.    Expires 3 December 2020              [Page 128]
+Faz-Hernandez, et al.    Expires 3 December 2020              [Page 135]
 
 Internet-Draft                hash-to-curve                    June 2020
 
 
-             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
    P.x     = 0e7a16a975904f131682edbb03d9560d3e48214c9986bd50417a77
              108d13dc957500edf96462a3d01e62dc6cd468ef11
    P.y     = 0ae89e677711d05c30a48d6d75e76ca9fb70fe06c6dd6ff988683d
@@ -7218,15 +7609,15 @@ H.10.1.  BLS12381G2_XMD:SHA-256_SSWU_RO_
              677cfb8a3e99c24222c406128c91296ef6b45608be
        + I * 13855912321c5cb793e9d1e88f6f8d342d49c0b0dbac613ee9e17e
              3c0b3c97dfbb5a49cc3fb45102fdbaf65e0efe2632
+   Q1.y    = 0fd3def0b7574a1d801be44fde617162aa2e89da47f464317d9bb5
 
 
 
-Faz-Hernandez, et al.    Expires 3 December 2020              [Page 129]
+Faz-Hernandez, et al.    Expires 3 December 2020              [Page 136]
 
 Internet-Draft                hash-to-curve                    June 2020
 
 
-   Q1.y    = 0fd3def0b7574a1d801be44fde617162aa2e89da47f464317d9bb5
              abc3a7071763ce74180883ad7ad9a723a9afafcdca
        + I * 056f617902b3c0d0f78a9a8cbda43a26b65f602f8786540b9469b0
              60db7b38417915b413ca65f875c130bebfaa59790c
@@ -7274,15 +7665,15 @@ Internet-Draft                hash-to-curve                    June 2020
              56a6acf17574518acb506e435b639353c2e14827c8
        + I * 0bb5e7572275c567462d91807de765611490205a941a5a6af3b169
              1bfe596c31225d3aabdf15faff860cb4ef17c7c3be
+   u[0]    = 0313d9325081b415bfd4e5364efaef392ecf69b087496973b22930
 
 
 
-Faz-Hernandez, et al.    Expires 3 December 2020              [Page 130]
+Faz-Hernandez, et al.    Expires 3 December 2020              [Page 137]
 
 Internet-Draft                hash-to-curve                    June 2020
 
 
-   u[0]    = 0313d9325081b415bfd4e5364efaef392ecf69b087496973b22930
              3e1816d2080971470f7da112c4eb43053130b785e1
        + I * 062f84cb21ed89406890c051a0e8b9cf6c575cf6e8e18ecf63ba86
              826b0ae02548d83b483b79e48512b82a6c0686df8f
@@ -7307,6 +7698,50 @@ Internet-Draft                hash-to-curve                    June 2020
        + I * 169585e164c131103d85324f2d7747b23b91d66ae5d947c449c819
              4a347969fc6bbd967729768da485ba71868df8aed2
 
+   msg     = q128_qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
+             qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
+             qqqqqqqqqqqqqqqqqqqqqqqqq
+   P.x     = 19a84dd7248a1066f737cc34502ee5555bd3c19f2ecdb3c7d9e24d
+             c65d4e25e50d83f0f77105e955d78f4762d33c17da
+       + I * 0934aba516a52d8ae479939a91998299c76d39cc0c035cd18813be
+             c433f587e2d7a4fef038260eef0cef4d02aae3eb91
+   P.y     = 14f81cd421617428bc3b9fe25afbb751d934a00493524bc4e06563
+             5b0555084dd54679df1536101b2c979c0152d09192
+       + I * 09bcccfa036b4847c9950780733633f13619994394c23ff0b32fa6
+             b795844f4a0673e20282d07bc69641cee04f5e5662
+   u[0]    = 025820cefc7d06fd38de7d8e370e0da8a52498be9b53cba9927b2e
+             f5c6de1e12e12f188bbc7bc923864883c57e49e253
+       + I * 034147b77ce337a52e5948f66db0bab47a8d038e712123bb381899
+             b6ab5ad20f02805601e6104c29df18c254b8618c7b
+   u[1]    = 0930315cae1f9a6017c3f0c8f2314baa130e1cf13f6532bff0a8a1
+             790cd70af918088c3db94bda214e896e1543629795
+       + I * 10c4df2cacf67ea3cb3108b00d4cbd0b3968031ebc8eac4b1ebcef
+             e84d6b715fde66bef0219951ece29d1facc8a520ef
+   Q0.x    = 09eccbc53df677f0e5814e3f86e41e146422834854a224bf5a83a5
+             0e4cc0a77bfc56718e8166ad180f53526ea9194b57
+       + I * 0c3633943f91daee715277bd644fba585168a72f96ded64fc5a384
+             cce4ec884a4c3c30f08e09cd2129335dc8f67840ec
+   Q0.y    = 0eb6186a0457d5b12d132902d4468bfeb7315d83320b6c32f1c875
+
+
+
+Faz-Hernandez, et al.    Expires 3 December 2020              [Page 138]
+
+Internet-Draft                hash-to-curve                    June 2020
+
+
+             f344efcba979952b4aa418589cb01af712f98cc555
+       + I * 119e3cf167e69eb16c1c7830e8df88856d48be12e3ff0a40791a5c
+             d2f7221311d4bf13b1847f371f467357b3f3c0b4c7
+   Q1.x    = 0eb3aabc1ddfce17ff18455fcc7167d15ce6b60ddc9eb9b59f8d40
+             ab49420d35558686293d046fc1e42f864b7f60e381
+       + I * 198bdfb19d7441ebcca61e8ff774b29d17da16547d2c10c273227a
+             635cacea3f16826322ae85717630f0867539b5ed8b
+   Q1.y    = 0aaf1dee3adf3ed4c80e481c09b57ea4c705e1b8d25b897f0ceeec
+             3990748716575f92abff22a1c8f4582aff7b872d52
+       + I * 0d058d9061ed27d4259848a06c96c5ca68921a5d269b078650c882
+             cb3c2bd424a8702b7a6ee4e0ead9982baf6843e924
+
    msg     = a512_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -7330,14 +7765,6 @@ Internet-Draft                hash-to-curve                    June 2020
        + I * 12ab625b0fe0ebd1367fe9fac57bb1168891846039b4216b9d9400
              7b674de2d79126870e88aeef54b2ec717a887dcf39
    u[1]    = 0e6a42010cf435fb5bacc156a585e1ea3294cc81d0ceb81924d950
-
-
-
-Faz-Hernandez, et al.    Expires 3 December 2020              [Page 131]
-
-Internet-Draft                hash-to-curve                    June 2020
-
-
              40298380b164f702275892cedd81b62de3aba3f6b5
        + I * 117d9a0defc57a33ed208428cb84e54c85a6840e7648480ae42883
              8989d25d97a0af8e3255be62b25c2a85630d2dddd8
@@ -7351,6 +7778,14 @@ Internet-Draft                hash-to-curve                    June 2020
              496bb725807531b44b34b59b3ae5495e5a2dcbd5c8
    Q1.x    = 16ec57b7fe04c71dfe34fb5ad84dbce5a2dbbd6ee085f1d8cd17f4
              5e8868976fc3c51ad9eeda682c7869024d24579bfd
+
+
+
+Faz-Hernandez, et al.    Expires 3 December 2020              [Page 139]
+
+Internet-Draft                hash-to-curve                    June 2020
+
+
        + I * 13103f7aace1ae1420d208a537f7d3a9679c287208026e4e3439ab
              8cd534c12856284d95e27f5e1f33eec2ce656533b0
    Q1.y    = 0958b2c4c2c10fcef5a6c59b9e92c4a67b0fae3e2e0f1b6b5edad9
@@ -7386,14 +7821,6 @@ H.10.2.  BLS12381G2_XMD:SHA-256_SSWU_NU_
              bc2e47c50b36edd86c685a60c20a2bd584a82b011a
 
    msg     = abc
-
-
-
-Faz-Hernandez, et al.    Expires 3 December 2020              [Page 132]
-
-Internet-Draft                hash-to-curve                    June 2020
-
-
    P.x     = 108ed59fd9fae381abfd1d6bce2fd2fa220990f0f837fa30e0f279
              14ed6e1454db0d1ee957b219f61da6ff8be0d6441f
        + I * 0296238ea82c6d4adb3c838ee3cb2346049c90b96d602d7bb1b469
@@ -7407,6 +7834,14 @@ Internet-Draft                hash-to-curve                    June 2020
        + I * 0a1ae7999ea9bab1dcc9ef8887a6cb6e8f1e22566015428d220b7e
              ec90ffa70ad1f624018a9ad11e78d588bd3617f9f2
    Q.x     = 0f40e1d5025ecef0d850aa0bb7bbeceab21a3d4e85e6bee857805b
+
+
+
+Faz-Hernandez, et al.    Expires 3 December 2020              [Page 140]
+
+Internet-Draft                hash-to-curve                    June 2020
+
+
              09693051f5b25428c6be343edba5f14317fcc30143
        + I * 02e0d261f2b9fee88b82804ec83db330caa75fbb12719cfa71ccce
              1c532dc4e1e79b0a6a281ed8d3817524286c8bc04c
@@ -7437,19 +7872,43 @@ Internet-Draft                hash-to-curve                    June 2020
        + I * 0c6ee170ab766d11fa9457cef53253f2628010b2cffc102b3b2835
              1eb9df6c281d3cfc78e9934769d661b72a5265338d
 
+   msg     = q128_qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
+             qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
+             qqqqqqqqqqqqqqqqqqqqqqqqq
+   P.x     = 0c5ae723be00e6c3f0efe184fdc0702b64588fe77dda152ab13099
+             a3bacd3876767fa7bbad6d6fd90b3642e902b208f9
+       + I * 12c8c05c1d5fc7bfa847f4d7d81e294e66b9a78bc9953990c35894
+             5e1f042eedafce608b67fdd3ab0cb2e6e263b9b1ad
+   P.y     = 04e77ddb3ede41b5ec4396b7421dd916efc68a358a0d7425bddd25
+             3547f2fb4830522358491827265dfc5bcc1928a569
+       + I * 11c624c56dbe154d759d021eec60fab3d8b852395a89de497e4850
+             4366feedd4662d023af447d66926a28076813dd646
+   u[0]    = 08d4a0997b9d52fecf99427abb721f0fa779479963315fe21c6445
+             250de7183e3f63bfdf86570da8929489e421d4ee95
+       + I * 16cb4ccad91ec95aab070f22043916cd6a59c4ca94097f7f510043
+             d48515526dc8eaaea27e586f09151ae613688d5a89
+   Q.x     = 0a08b2f639855dfdeaaed972702b109e2241a54de198b2b4cd12ad
+             9f88fa419a6086a58d91fc805de812ea29bee427c2
+       + I * 04a7442e4cb8b42ef0f41dac9ee74e65ecad3ce0851f0746dc4756
+
+
+
+Faz-Hernandez, et al.    Expires 3 December 2020              [Page 141]
+
+Internet-Draft                hash-to-curve                    June 2020
+
+
+             8b0e7a8134121ed09ba054509232c49148aef62cda
+   Q.y     = 05d60b1f04212b2c87607458f71d770f43973511c260f0540eef3a
+             565f42c7ce59aa1cea684bb2a7bcab84acd2f36c8c
+       + I * 1017aa5747ba15505ece266a86b0ca9c712f41a254b76ca04094ca
+             442ce45ecd224bd5544cd16685d0d1b9d156dd0531
+
    msg     = a512_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-
-
-
-Faz-Hernandez, et al.    Expires 3 December 2020              [Page 133]
-
-Internet-Draft                hash-to-curve                    June 2020
-
-
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -7482,6 +7941,19 @@ Appendix I.  Expand test vectors
    in Section 5.3.  The test vectors in this section were generated
    using code that is available from [hash2curve-repo].
 
+
+
+
+
+
+
+
+
+Faz-Hernandez, et al.    Expires 3 December 2020              [Page 142]
+
+Internet-Draft                hash-to-curve                    June 2020
+
+
    Each test vector in this section lists the expand_message name, hash
    function, and DST, along with a series of tuples of the function
    inputs (msg and len_in_bytes), output (uniform_bytes), and
@@ -7498,14 +7970,6 @@ I.1.  expand_message_xmd(SHA-256)
    msg     =
    len_in_bytes = 0x20
    DST_prime = 515555582d5630312d435330322d776974682d657870616e6465
-
-
-
-Faz-Hernandez, et al.    Expires 3 December 2020              [Page 134]
-
-Internet-Draft                hash-to-curve                    June 2020
-
-
              721b
    msg_prime = 0000000000000000000000000000000000000000000000000000
              000000000000000000000000000000000000000000000000000000
@@ -7537,6 +8001,32 @@ Internet-Draft                hash-to-curve                    June 2020
    uniform_bytes = 8f7e7b66791f0da0dbb5ec7c22ec637f79758c0a48170bfb
              7c4611bd304ece89
 
+   msg     = q128_qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
+
+
+
+Faz-Hernandez, et al.    Expires 3 December 2020              [Page 143]
+
+Internet-Draft                hash-to-curve                    June 2020
+
+
+             qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
+             qqqqqqqqqqqqqqqqqqqqqqqqq
+   len_in_bytes = 0x20
+   DST_prime = 515555582d5630312d435330322d776974682d657870616e6465
+             721b
+   msg_prime = 0000000000000000000000000000000000000000000000000000
+             000000000000000000000000000000000000000000000000000000
+             0000000000000000000000713132385f7171717171717171717171
+             717171717171717171717171717171717171717171717171717171
+             717171717171717171717171717171717171717171717171717171
+             717171717171717171717171717171717171717171717171717171
+             717171717171717171717171717171717171717171717171717171
+             717171717171717171002000515555582d5630312d435330322d77
+             6974682d657870616e6465721b
+   uniform_bytes = 72d5aa5ec810370d1f0013c0df2f1d65699494ee2a39f72e
+             1716b1b964e1c642
+
    msg     = a512_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -7554,28 +8044,28 @@ Internet-Draft                hash-to-curve                    June 2020
              000000000000000000000000000000000000000000000000000000
              0000000000000000000000613531325f6161616161616161616161
              616161616161616161616161616161616161616161616161616161
+             616161616161616161616161616161616161616161616161616161
+             616161616161616161616161616161616161616161616161616161
+             616161616161616161616161616161616161616161616161616161
+             616161616161616161616161616161616161616161616161616161
+             616161616161616161616161616161616161616161616161616161
+             616161616161616161616161616161616161616161616161616161
+             616161616161616161616161616161616161616161616161616161
+             616161616161616161616161616161616161616161616161616161
+             616161616161616161616161616161616161616161616161616161
+             616161616161616161616161616161616161616161616161616161
+             616161616161616161616161616161616161616161616161616161
+             616161616161616161616161616161616161616161616161616161
+             616161616161616161616161616161616161616161616161616161
+             616161616161616161616161616161616161616161616161616161
 
 
 
-Faz-Hernandez, et al.    Expires 3 December 2020              [Page 135]
+Faz-Hernandez, et al.    Expires 3 December 2020              [Page 144]
 
 Internet-Draft                hash-to-curve                    June 2020
 
 
-             616161616161616161616161616161616161616161616161616161
-             616161616161616161616161616161616161616161616161616161
-             616161616161616161616161616161616161616161616161616161
-             616161616161616161616161616161616161616161616161616161
-             616161616161616161616161616161616161616161616161616161
-             616161616161616161616161616161616161616161616161616161
-             616161616161616161616161616161616161616161616161616161
-             616161616161616161616161616161616161616161616161616161
-             616161616161616161616161616161616161616161616161616161
-             616161616161616161616161616161616161616161616161616161
-             616161616161616161616161616161616161616161616161616161
-             616161616161616161616161616161616161616161616161616161
-             616161616161616161616161616161616161616161616161616161
-             616161616161616161616161616161616161616161616161616161
              616161616161616161616161616161616161616161616161616161
              616161616161616161616161616161616161616161616161616161
              616161616161616161616161616161616161616161616161616161
@@ -7610,14 +8100,6 @@ Internet-Draft                hash-to-curve                    June 2020
              fbb713933acc29c186f316baecf7ea22212f2496ef3f785a27e84a
              40d8b299cec56032763eceeff4c61bd1fe65ed81decafff4a31d01
              98619c0aa0c6c51fca15520789925e813dcfd318b542f879944127
-
-
-
-Faz-Hernandez, et al.    Expires 3 December 2020              [Page 136]
-
-Internet-Draft                hash-to-curve                    June 2020
-
-
              1f4db9ee3b8092a7a2e8d5b75b73e28fb1ab6b4573c192
 
    msg     = abcdef0123456789
@@ -7632,8 +8114,37 @@ Internet-Draft                hash-to-curve                    June 2020
    uniform_bytes = c9ec7941811b1e19ce98e21db28d22259354d4d0643e3011
              75e2f474e030d32694e9dd5520dde93f3600d8edad94e5c3649030
              88a7228cc9eff685d7eaac50d5a5a8229d083b51de4ccc3733917f
+
+
+
+Faz-Hernandez, et al.    Expires 3 December 2020              [Page 145]
+
+Internet-Draft                hash-to-curve                    June 2020
+
+
              4b9535a819b445814890b7029b5de805bf62b33a4dc7e24acdf2c9
              24e9fe50d55a6b832c8c84c7f82474b34e48c6d43867be
+
+   msg     = q128_qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
+             qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
+             qqqqqqqqqqqqqqqqqqqqqqqqq
+   len_in_bytes = 0x80
+   DST_prime = 515555582d5630312d435330322d776974682d657870616e6465
+             721b
+   msg_prime = 0000000000000000000000000000000000000000000000000000
+             000000000000000000000000000000000000000000000000000000
+             0000000000000000000000713132385f7171717171717171717171
+             717171717171717171717171717171717171717171717171717171
+             717171717171717171717171717171717171717171717171717171
+             717171717171717171717171717171717171717171717171717171
+             717171717171717171717171717171717171717171717171717171
+             717171717171717171008000515555582d5630312d435330322d77
+             6974682d657870616e6465721b
+   uniform_bytes = 48e256ddba722053ba462b2b93351fc966026e6d6db49318
+             9798181c5f3feea377b5a6f1d8368d7453faef715f9aecb078cd40
+             2cbd548c0e179c4ed1e4c7e5b048e0a39d31817b5b24f50db58bb3
+             720fe96ba53db947842120a068816ac05c159bb5266c63658b4f00
+             0cbf87b1209a225def8ef1dca917bcda79a1e42acd8069
 
    msg     = a512_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -7659,21 +8170,21 @@ Internet-Draft                hash-to-curve                    June 2020
              616161616161616161616161616161616161616161616161616161
              616161616161616161616161616161616161616161616161616161
              616161616161616161616161616161616161616161616161616161
-             616161616161616161616161616161616161616161616161616161
-             616161616161616161616161616161616161616161616161616161
-             616161616161616161616161616161616161616161616161616161
-             616161616161616161616161616161616161616161616161616161
-             616161616161616161616161616161616161616161616161616161
-             616161616161616161616161616161616161616161616161616161
-             616161616161616161616161616161616161616161616161616161
 
 
 
-Faz-Hernandez, et al.    Expires 3 December 2020              [Page 137]
+Faz-Hernandez, et al.    Expires 3 December 2020              [Page 146]
 
 Internet-Draft                hash-to-curve                    June 2020
 
 
+             616161616161616161616161616161616161616161616161616161
+             616161616161616161616161616161616161616161616161616161
+             616161616161616161616161616161616161616161616161616161
+             616161616161616161616161616161616161616161616161616161
+             616161616161616161616161616161616161616161616161616161
+             616161616161616161616161616161616161616161616161616161
+             616161616161616161616161616161616161616161616161616161
              616161616161616161616161616161616161616161616161616161
              616161616161616161616161616161616161616161616161616161
              616161616161616161616161616161616161616161616161616161
@@ -7715,6 +8226,14 @@ I.2.  expand_message_xmd(SHA-512)
              000000000000000000000000000000000000000000616263002000
              515555582d5630312d435330322d776974682d657870616e646572
              1b
+
+
+
+Faz-Hernandez, et al.    Expires 3 December 2020              [Page 147]
+
+Internet-Draft                hash-to-curve                    June 2020
+
+
    uniform_bytes = 0eeda81f69376c80c0f8986496f22f21124cb3c562cf1dc6
              08d2c13005553b0f
 
@@ -7722,14 +8241,6 @@ I.2.  expand_message_xmd(SHA-512)
    len_in_bytes = 0x20
    DST_prime = 515555582d5630312d435330322d776974682d657870616e6465
              721b
-
-
-
-Faz-Hernandez, et al.    Expires 3 December 2020              [Page 138]
-
-Internet-Draft                hash-to-curve                    June 2020
-
-
    msg_prime = 0000000000000000000000000000000000000000000000000000
              000000000000000000000000000000000000000000000000000000
              000000000000000000000000000000000000000000000000000000
@@ -7739,6 +8250,26 @@ Internet-Draft                hash-to-curve                    June 2020
              776974682d657870616e6465721b
    uniform_bytes = 2e375fc05e05e80dbf3083796fde2911789d9e8847e1fceb
              f4ca4b36e239b338
+
+   msg     = q128_qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
+             qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
+             qqqqqqqqqqqqqqqqqqqqqqqqq
+   len_in_bytes = 0x20
+   DST_prime = 515555582d5630312d435330322d776974682d657870616e6465
+             721b
+   msg_prime = 0000000000000000000000000000000000000000000000000000
+             000000000000000000000000000000000000000000000000000000
+             000000000000000000000000000000000000000000000000000000
+             000000000000000000000000000000000000000000000000000000
+             000000000000000000000000000000000000000000713132385f71
+             717171717171717171717171717171717171717171717171717171
+             717171717171717171717171717171717171717171717171717171
+             717171717171717171717171717171717171717171717171717171
+             717171717171717171717171717171717171717171717171717171
+             71717171717171717171717171717171717171002000515555582d
+             5630312d435330322d776974682d657870616e6465721b
+   uniform_bytes = c37f9095fe7fe4f01c03c3540c1229e6ac8583b075100859
+             20f62ec66acc0197
 
    msg     = a512_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -7751,6 +8282,14 @@ Internet-Draft                hash-to-curve                    June 2020
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
    len_in_bytes = 0x20
+
+
+
+Faz-Hernandez, et al.    Expires 3 December 2020              [Page 148]
+
+Internet-Draft                hash-to-curve                    June 2020
+
+
    DST_prime = 515555582d5630312d435330322d776974682d657870616e6465
              721b
    msg_prime = 0000000000000000000000000000000000000000000000000000
@@ -7778,14 +8317,6 @@ Internet-Draft                hash-to-curve                    June 2020
              616161616161616161616161616161616161616161616161616161
              616161616161616161616161616161616161616161616161610020
              00515555582d5630312d435330322d776974682d657870616e6465
-
-
-
-Faz-Hernandez, et al.    Expires 3 December 2020              [Page 139]
-
-Internet-Draft                hash-to-curve                    June 2020
-
-
              721b
    uniform_bytes = af57a7f56e9ed2aa88c6eab45c8c6e7638ae02da7c92cc04
              f6648c874ebd560e
@@ -7807,6 +8338,14 @@ Internet-Draft                hash-to-curve                    June 2020
              4e88dbde3b0ba619d6214f47212b628f3e1b537b66efcf
 
    msg     = abc
+
+
+
+Faz-Hernandez, et al.    Expires 3 December 2020              [Page 149]
+
+Internet-Draft                hash-to-curve                    June 2020
+
+
    len_in_bytes = 0x80
    DST_prime = 515555582d5630312d435330322d776974682d657870616e6465
              721b
@@ -7834,19 +8373,42 @@ Internet-Draft                hash-to-curve                    June 2020
              000000000000000000000000000000000000000000616263646566
              30313233343536373839008000515555582d5630312d435330322d
              776974682d657870616e6465721b
-
-
-
-Faz-Hernandez, et al.    Expires 3 December 2020              [Page 140]
-
-Internet-Draft                hash-to-curve                    June 2020
-
-
    uniform_bytes = f0953d28846a50e9f88b7ae35b643fc43733c9618751b569
              a73960c655c068db7b9f044ad5a40d49d91c62302eaa26163c12ab
              fa982e2b5d753049e000adf7630ae117aeb1fb9b61fc724431ac68
              b369e12a9481b4294384c3c890d576a79264787bc8076e7cdabe50
              c044130e480501046920ff090c1a091c88391502f0fbac
+
+   msg     = q128_qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
+             qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
+             qqqqqqqqqqqqqqqqqqqqqqqqq
+   len_in_bytes = 0x80
+   DST_prime = 515555582d5630312d435330322d776974682d657870616e6465
+             721b
+   msg_prime = 0000000000000000000000000000000000000000000000000000
+             000000000000000000000000000000000000000000000000000000
+             000000000000000000000000000000000000000000000000000000
+             000000000000000000000000000000000000000000000000000000
+             000000000000000000000000000000000000000000713132385f71
+             717171717171717171717171717171717171717171717171717171
+             717171717171717171717171717171717171717171717171717171
+             717171717171717171717171717171717171717171717171717171
+             717171717171717171717171717171717171717171717171717171
+
+
+
+Faz-Hernandez, et al.    Expires 3 December 2020              [Page 150]
+
+Internet-Draft                hash-to-curve                    June 2020
+
+
+             71717171717171717171717171717171717171008000515555582d
+             5630312d435330322d776974682d657870616e6465721b
+   uniform_bytes = 64d3e59f0bc3c5e653011c914b419ba8310390a9585311fd
+             db26791d26663bd71971c347e1b5e88ba9274d2445ed9dcf48eea9
+             528d807b7952924159b7c27caa4f25a2ea94df9508e70a7012dfce
+             0e8021b37e59ea21b80aa9af7f1a1f2efa4fbe523c4266ce7d342a
+             caacd438e452c501c131156b4945515e9008d2b155c258
 
    msg     = a512_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -7888,16 +8450,16 @@ Internet-Draft                hash-to-curve                    June 2020
              00515555582d5630312d435330322d776974682d657870616e6465
              721b
    uniform_bytes = 01524feea5b22f6509f6b1e805c97df94faf4d821b01aade
-             ebc89e9daaed0733b4544e50852fd3e019d58eaad6d267a134c8bc
-             2c08bc46c10bfeff3ee03110bcd8a0d695d75a34092bd8b677bdd3
 
 
 
-Faz-Hernandez, et al.    Expires 3 December 2020              [Page 141]
+Faz-Hernandez, et al.    Expires 3 December 2020              [Page 151]
 
 Internet-Draft                hash-to-curve                    June 2020
 
 
+             ebc89e9daaed0733b4544e50852fd3e019d58eaad6d267a134c8bc
+             2c08bc46c10bfeff3ee03110bcd8a0d695d75a34092bd8b677bdd3
              69a13325549abab54f4ac907b712bdd3567f38c4554c51902b735b
              81f43a7ef6f938c7690d107c052c7e7b795ac635b3200a
 
@@ -7934,6 +8496,30 @@ I.3.  expand_message_xof(SHAKE-128)
    uniform_bytes = fb6f4af2a83f6276e9d41784f1e29da5e27566167c33e5cf
              2682c30096878b73
 
+   msg     = q128_qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
+             qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
+             qqqqqqqqqqqqqqqqqqqqqqqqq
+   len_in_bytes = 0x20
+   DST_prime = 515555582d5630312d435330322d776974682d657870616e6465
+             721b
+   msg_prime = 713132385f717171717171717171717171717171717171717171
+             717171717171717171717171717171717171717171717171717171
+             717171717171717171717171717171717171717171717171717171
+             717171717171717171717171717171717171717171717171717171
+
+
+
+Faz-Hernandez, et al.    Expires 3 December 2020              [Page 152]
+
+Internet-Draft                hash-to-curve                    June 2020
+
+
+             717171717171717171717171717171717171717171717171717100
+             20515555582d5630312d435330322d776974682d657870616e6465
+             721b
+   uniform_bytes = 125d05850db915e0683d17d044d87477e6e7b3f70a450dd0
+             97761e18d1d1dcdf
+
    msg     = a512_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -7946,14 +8532,6 @@ I.3.  expand_message_xof(SHAKE-128)
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
    len_in_bytes = 0x20
    DST_prime = 515555582d5630312d435330322d776974682d657870616e6465
-
-
-
-Faz-Hernandez, et al.    Expires 3 December 2020              [Page 142]
-
-Internet-Draft                hash-to-curve                    June 2020
-
-
              721b
    msg_prime = 613531325f616161616161616161616161616161616161616161
              616161616161616161616161616161616161616161616161616161
@@ -7984,6 +8562,14 @@ Internet-Draft                hash-to-curve                    June 2020
    DST_prime = 515555582d5630312d435330322d776974682d657870616e6465
              721b
    msg_prime = 0080515555582d5630312d435330322d776974682d657870616e
+
+
+
+Faz-Hernandez, et al.    Expires 3 December 2020              [Page 153]
+
+Internet-Draft                hash-to-curve                    June 2020
+
+
              6465721b
    uniform_bytes = 15733b3fb22fac0e0902c220aeea48e5e47d39f36c2cc03e
              ac34367c48f2a3ebbcb3baa8a0cf17ab12fff4defc7ce22aed4718
@@ -8003,13 +8589,6 @@ Internet-Draft                hash-to-curve                    June 2020
              b0666c607a31df05513ddaf4c8ee23b0ee7f395a6e8be32eb13ca9
              7da289f2643616ac30fe9104bb0d3a67a0a525837c2dc6
 
-
-
-Faz-Hernandez, et al.    Expires 3 December 2020              [Page 143]
-
-Internet-Draft                hash-to-curve                    June 2020
-
-
    msg     = abcdef0123456789
    len_in_bytes = 0x80
    DST_prime = 515555582d5630312d435330322d776974682d657870616e6465
@@ -8021,6 +8600,33 @@ Internet-Draft                hash-to-curve                    June 2020
              77990802018c8cdc7af6d00c86b66a3b3ccad3f18d90f4437a1651
              86f6601cf0bb281ea5d80d1de20fe22bb2e2d8acab0c043e76e3a0
              f34e0a1e66c9ade4fef9ef3b431130ad6f232babe9fe68
+
+   msg     = q128_qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
+             qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
+             qqqqqqqqqqqqqqqqqqqqqqqqq
+   len_in_bytes = 0x80
+   DST_prime = 515555582d5630312d435330322d776974682d657870616e6465
+             721b
+   msg_prime = 713132385f717171717171717171717171717171717171717171
+             717171717171717171717171717171717171717171717171717171
+             717171717171717171717171717171717171717171717171717171
+             717171717171717171717171717171717171717171717171717171
+             717171717171717171717171717171717171717171717171717100
+             80515555582d5630312d435330322d776974682d657870616e6465
+             721b
+   uniform_bytes = 3eebe6721b2ec746629856dc2dd3f03a830dabfefd7e2d1e
+             72aaf2127d6ad17c988b5762f32e6edf61972378a4106dc4b63fa1
+             08ad03b793eedf4588f34c4df2a95b30995a464cb3ee31d6dca30a
+             dbfc90ffdf5414d7893082c55b269d9ec9cd6d2a715b9c4fad4eb7
+
+
+
+Faz-Hernandez, et al.    Expires 3 December 2020              [Page 154]
+
+Internet-Draft                hash-to-curve                    June 2020
+
+
+             0ed56f878b55a17b5994ef0de5b338675aad35354195cd
 
    msg     = a512_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -8058,19 +8664,23 @@ Internet-Draft                hash-to-curve                    June 2020
              7870616e6465721b
    uniform_bytes = 858cb4a6a5668a97d0f7039b5d6d574dde18dd2323cf6b20
              3945c66df86477d1f747b46401903b3fa66d1276108ea7187b4411
-
-
-
-Faz-Hernandez, et al.    Expires 3 December 2020              [Page 144]
-
-Internet-Draft                hash-to-curve                    June 2020
-
-
              b7499acf4600080ce34ff6d21555c2af16f091adf8b285c8439f2e
              47fa0553c3a6ef5a4227a13f34406241b7d7fd8853a080bad25ec4
              804cdfe4fda500e1c872e71b8c61a8e160691894b96058
 
 Authors' Addresses
+
+
+
+
+
+
+
+
+Faz-Hernandez, et al.    Expires 3 December 2020              [Page 155]
+
+Internet-Draft                hash-to-curve                    June 2020
+
 
    Armando Faz-Hernandez
    Cloudflare
@@ -8117,4 +8727,10 @@ Authors' Addresses
 
 
 
-Faz-Hernandez, et al.    Expires 3 December 2020              [Page 145]
+
+
+
+
+
+
+Faz-Hernandez, et al.    Expires 3 December 2020              [Page 156]
