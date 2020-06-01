@@ -1714,8 +1714,8 @@ Internet-Draft                hash-to-curve                    June 2020
    curve, i.e., a point in a group of order h * r (Section 2.1).
    Obtaining a point in G may require a final operation commonly called
    "clearing the cofactor," which takes as input any point on the curve
-   and produces as output a point in the prime-order (sub)group of the
-   curve.
+   and produces as output a point in the prime-order (sub)group G
+   (Section 2.1).
 
    The cofactor can always be cleared via scalar multiplication by h.
    For elliptic curves where h = 1, i.e., the curves with a prime number
