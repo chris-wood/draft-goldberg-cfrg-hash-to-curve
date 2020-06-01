@@ -1789,75 +1789,82 @@ respectively, where &lt;xx&gt;, &lt;yy&gt;, and &lt;suiteID&gt; are as described
       <h2 id="name-utility-functions">
 <a href="#section-4" class="section-number selfRef">4. </a><a href="#name-utility-functions" class="section-name selfRef">Utility functions</a>
       </h2>
-<p id="section-4-1">Algorithms in this document make use of utility functions described below.<a href="#section-4-1" class="pilcrow">¶</a></p>
-<p id="section-4-2">For security, implementations of these functions SHOULD be constant-time,
+<p id="section-4-1">Algorithms in this document use the utility functions described below,
+plus standard arithmetic operations (addition, multiplication, modular
+reduction, etc.) and elliptic curve point operations (point addition and
+scalar multiplication).<a href="#section-4-1" class="pilcrow">¶</a></p>
+<p id="section-4-2">For security, implementations of these functions SHOULD be constant time,
 i.e., execution time SHOULD NOT depend on the values of the inputs.
-For such constant-time implementations, all field operations, comparisons, and
+For such constant-time implementations, all arithmetic, comparisons, and
 assignments MUST be implemented in constant time.
-<a href="#security-considerations" class="xref">Section 10</a> briefly discusses constant-time security issues.
-Guidance on implementing these low-level operations in constant time is
-beyond the scope of this document.<a href="#section-4-2" class="pilcrow">¶</a></p>
+<a href="#security-considerations" class="xref">Section 10</a> briefly discusses constant-time security issues.<a href="#section-4-2" class="pilcrow">¶</a></p>
+<p id="section-4-3">Guidance on implementing low-level operations (in constant time or otherwise)
+is beyond the scope of this document; readers should consult standard reference
+material <span>[<a href="#MOV96" class="xref">MOV96</a>]</span> <span>[<a href="#CFADLNV05" class="xref">CFADLNV05</a>]</span>.<a href="#section-4-3" class="pilcrow">¶</a></p>
 <ul>
-<li id="section-4-3.1">CMOV(a, b, c): If c is False, CMOV returns a, otherwise it returns b.
+<li id="section-4-4.1">CMOV(a, b, c): If c is False, CMOV returns a, otherwise it returns b.
 For constant-time implementations, this operation must run in
-time independent of the value of c.<a href="#section-4-3.1" class="pilcrow">¶</a>
+time independent of the value of c.<a href="#section-4-4.1" class="pilcrow">¶</a>
 </li>
-<li id="section-4-3.2">
-          <p id="section-4-3.2.1">is_square(x): This function returns True whenever the value x is a
+<li id="section-4-4.2">AND, OR, NOT, and XOR are standard bitwise logical operators.
+For constant-time implementations, short-circuit operators MUST be avoided.<a href="#section-4-4.2" class="pilcrow">¶</a>
+</li>
+<li id="section-4-4.3">
+          <p id="section-4-4.3.1">is_square(x): This function returns True whenever the value x is a
 square in the field F. By Euler's criterion, this function can be
-calculated in constant time as<a href="#section-4-3.2.1" class="pilcrow">¶</a></p>
-<div class="artwork art-text alignLeft" id="section-4-3.2.2">
+calculated in constant time as<a href="#section-4-4.3.1" class="pilcrow">¶</a></p>
+<div class="artwork art-text alignLeft" id="section-4-4.3.2">
 <pre>
 is_square(x) := { True,  if x^((q - 1) / 2) is 0 or 1 in F;
                 { False, otherwise.
-</pre><a href="#section-4-3.2.2" class="pilcrow">¶</a>
+</pre><a href="#section-4-4.3.2" class="pilcrow">¶</a>
 </div>
-<p id="section-4-3.2.3">
+<p id="section-4-4.3.3">
 In certain extension fields, is_square can be computed in constant
 time more quickly than by the above exponentiation.
 <span>[<a href="#AR13" class="xref">AR13</a>]</span> and <span>[<a href="#S85" class="xref">S85</a>]</span> describe optimized methods for extension fields.
-<a href="#appx-sqrt-issq" class="xref">Appendix G.5</a> gives an optimized straight-line method for GF(p^2).<a href="#section-4-3.2.3" class="pilcrow">¶</a></p>
+<a href="#appx-sqrt-issq" class="xref">Appendix G.5</a> gives an optimized straight-line method for GF(p^2).<a href="#section-4-4.3.3" class="pilcrow">¶</a></p>
 </li>
-<li id="section-4-3.3">
-          <p id="section-4-3.3.1">sqrt(x): The sqrt operation is a multi-valued function, i.e., there exist
+<li id="section-4-4.4">
+          <p id="section-4-4.4.1">sqrt(x): The sqrt operation is a multi-valued function, i.e., there exist
 two roots of x in the field F whenever x is square.
 To maintain compatibility across implementations while allowing implementors
 leeway for optimizations, this document does not require sqrt() to return a
 particular value. Instead, as explained in <a href="#point-sign" class="xref">Section 6.4</a>, any function that
-calls sqrt also specifies how to determine the correct root.<a href="#section-4-3.3.1" class="pilcrow">¶</a></p>
-<p id="section-4-3.3.2">
+calls sqrt also specifies how to determine the correct root.<a href="#section-4-4.4.1" class="pilcrow">¶</a></p>
+<p id="section-4-4.4.2">
 The preferred way of computing square roots is to fix a deterministic
-algorithm particular to F. We give several algorithms in <a href="#appx-sqrt" class="xref">Appendix G</a>.<a href="#section-4-3.3.2" class="pilcrow">¶</a></p>
+algorithm particular to F. We give several algorithms in <a href="#appx-sqrt" class="xref">Appendix G</a>.<a href="#section-4-4.4.2" class="pilcrow">¶</a></p>
 </li>
-<li id="section-4-3.4">sgn0(x): This function returns either 0 or 1 indicating the "sign" of x,
+<li id="section-4-4.5">sgn0(x): This function returns either 0 or 1 indicating the "sign" of x,
 where sgn0(x) == 1 just when x is "negative".
 (In other words, this function always considers 0 to be positive.)
-<a href="#sgn0-function" class="xref">Section 4.1</a> defines this function and discusses its implementation.<a href="#section-4-3.4" class="pilcrow">¶</a>
+<a href="#sgn0-function" class="xref">Section 4.1</a> defines this function and discusses its implementation.<a href="#section-4-4.5" class="pilcrow">¶</a>
 </li>
-<li id="section-4-3.5">inv0(x): This function returns the multiplicative inverse of x in F,
+<li id="section-4-4.6">inv0(x): This function returns the multiplicative inverse of x in F,
 extended to all of F by fixing inv0(0) == 0.
 To implement inv0 in constant time, compute inv0(x) := x^(q - 2).
-Notice on input 0, the output is 0 as required.<a href="#section-4-3.5" class="pilcrow">¶</a>
+Notice on input 0, the output is 0 as required.<a href="#section-4-4.6" class="pilcrow">¶</a>
 </li>
-<li id="section-4-3.6">I2OSP and OS2IP: These functions are used to convert a byte string to
-and from a non-negative integer as described in <span>[<a href="#RFC8017" class="xref">RFC8017</a>]</span>.<a href="#section-4-3.6" class="pilcrow">¶</a>
+<li id="section-4-4.7">I2OSP and OS2IP: These functions are used to convert a byte string to
+and from a non-negative integer as described in <span>[<a href="#RFC8017" class="xref">RFC8017</a>]</span>.<a href="#section-4-4.7" class="pilcrow">¶</a>
 </li>
-<li id="section-4-3.7">a || b: denotes the concatenation of byte strings a and b. For example,
-"ABC" || "DEF" == "ABCDEF".<a href="#section-4-3.7" class="pilcrow">¶</a>
+<li id="section-4-4.8">a || b: denotes the concatenation of byte strings a and b. For example,
+"ABC" || "DEF" == "ABCDEF".<a href="#section-4-4.8" class="pilcrow">¶</a>
 </li>
-<li id="section-4-3.8">substr(str, sbegin, slen): for a byte string str, this function returns
+<li id="section-4-4.9">substr(str, sbegin, slen): for a byte string str, this function returns
 the slen-byte substring starting at position sbegin; positions are zero
 indexed.
-For example, substr("ABCDEFG", 2, 3) == "CDE".<a href="#section-4-3.8" class="pilcrow">¶</a>
+For example, substr("ABCDEFG", 2, 3) == "CDE".<a href="#section-4-4.9" class="pilcrow">¶</a>
 </li>
-<li id="section-4-3.9">len(str): for a byte string str, this function returns the length of str
-in bytes. For example, len("ABC") == 3.<a href="#section-4-3.9" class="pilcrow">¶</a>
+<li id="section-4-4.10">len(str): for a byte string str, this function returns the length of str
+in bytes. For example, len("ABC") == 3.<a href="#section-4-4.10" class="pilcrow">¶</a>
 </li>
-<li id="section-4-3.10">strxor(str1, str2): for byte strings str1 and str2, strxor(str1, str2)
+<li id="section-4-4.11">strxor(str1, str2): for byte strings str1 and str2, strxor(str1, str2)
 returns the bitwise XOR of the two strings.
 For example, strxor("abc", "XYZ") == "9;9" (the strings in this example
 are ASCII literals, but strxor is defined for arbitrary byte strings).
-In this document, strxor is only applied to inputs of equal length.<a href="#section-4-3.10" class="pilcrow">¶</a>
+In this document, strxor is only applied to inputs of equal length.<a href="#section-4-4.11" class="pilcrow">¶</a>
 </li>
 </ul>
 <div id="sgn0-function">
@@ -1880,17 +1887,13 @@ Parameters:
 Input: x, an element of F.
 Output: 0 or 1.
 
-Notation:
-- OR and AND are logical operators. Short-circuit operators
-  MUST be avoided in constant-time implementations.
-
 Steps:
 1. sign = 0
 2. zero = 1
 3. for i in (1, 2, ..., m):
 4.   sign_i = x_i mod 2
 5.   zero_i = x_i == 0
-6.   sign = sign OR (zero AND sign_i)
+6.   sign = sign OR (zero AND sign_i)    # Avoid short-circuit logic ops
 7.   zero = zero AND zero_i
 8. return sign
 </pre><a href="#section-4.1-3" class="pilcrow">¶</a>
@@ -1922,15 +1925,11 @@ sgn0_m_eq_2(x)
 Input: x, an element of GF(p^2).
 Output: 0 or 1.
 
-Notation:
-- OR and AND are logical operators. Short-circuit operators
-  MUST be avoided in constant-time implementations.
-
 Steps:
 1. sign_0 = x_0 mod 2
 2. zero_0 = x_0 == 0
 3. sign_1 = x_1 mod 2
-4. return sign_0 OR (zero_0 AND sign_1)
+4. return sign_0 OR (zero_0 AND sign_1)  # Avoid short-circuit logic ops
 </pre><a href="#section-4.1-8" class="pilcrow">¶</a>
 </div>
 </section>
@@ -2086,7 +2085,7 @@ In this case, security holds when the inner function is modeled as a
 random transformation or as a random permutation <span>[<a href="#BDPV08" class="xref">BDPV08</a>]</span>.<a href="#section-5.3.1-2.3" class="pilcrow">¶</a>
 </li>
 <li id="section-5.3.1-2.4">Otherwise, H MUST be a hash function that has been proved indifferentiable
-from a random oracle <span>[<a href="#MRH04" class="xref">MRH04</a>]</span> under a standard cryptographic assumption.<a href="#section-5.3.1-2.4" class="pilcrow">¶</a>
+from a random oracle <span>[<a href="#MRH04" class="xref">MRH04</a>]</span> under a reasonable cryptographic assumption.<a href="#section-5.3.1-2.4" class="pilcrow">¶</a>
 </li>
 </ul>
 <p id="section-5.3.1-3">SHA-2 <span>[<a href="#FIPS180-4" class="xref">FIPS180-4</a>]</span> and SHA-3 <span>[<a href="#FIPS202" class="xref">FIPS202</a>]</span> are typical and RECOMMENDED choices.
@@ -2228,7 +2227,8 @@ k is the target security level in bits.<a href="#section-5.3.3-6" class="pilcrow
 <p id="section-5.3.4-1">When defining a new expand_message variant, the most important consideration
 is that hash_to_field models expand_message as a random oracle.
 Thus, implementors SHOULD prove indifferentiability from a random oracle
-under an appropriate assumption about the underlying cryptographic primitives.<a href="#section-5.3.4-1" class="pilcrow">¶</a></p>
+under an appropriate assumption about the underlying cryptographic primitives;
+see <a href="#security-considerations-hash-to-field" class="xref">Section 10.1</a> for more information.<a href="#section-5.3.4-1" class="pilcrow">¶</a></p>
 <p id="section-5.3.4-2">In addition, expand_message variants:<a href="#section-5.3.4-2" class="pilcrow">¶</a></p>
 <ul>
 <li id="section-5.3.4-3.1">MUST give collision resistance commensurate with the security level of
@@ -2537,8 +2537,8 @@ curves in the Barreto-Lynn-Scott <span>[<a href="#BLS03" class="xref">BLS03</a>]
 </div>
 <p id="section-6.6.3-5">that is isogenous to E and has A' != 0 and B' != 0.
 (See <span>[<a href="#WB19" class="xref">WB19</a>]</span>, Appendix A, for one way of finding E' using <span>[<a href="#SAGE" class="xref">SAGE</a>]</span>.)
-This isogeny defines a map iso_map(x', y') that takes as input a point
-on E' and produces as output a point on E.<a href="#section-6.6.3-5" class="pilcrow">¶</a></p>
+This isogeny defines a map iso_map(x', y') given by a pair of rational functions.
+iso_map takes as input a point on E' and produces as output a point on E.<a href="#section-6.6.3-5" class="pilcrow">¶</a></p>
 <p id="section-6.6.3-6">Once E' and iso_map are identified, this mapping works as follows: on input
 u, first apply the simplified SWU mapping to get a point on E', then apply
 the isogeny map to that point to get a point on E.<a href="#section-6.6.3-6" class="pilcrow">¶</a></p>
@@ -2561,7 +2561,9 @@ E' to E.<a href="#section-6.6.3-8" class="pilcrow">¶</a></p>
 <p id="section-6.6.3-11">Sign of y: for this map, the sign is determined by map_to_curve_simple_swu.
 No further sign adjustments are necessary.<a href="#section-6.6.3-11" class="pilcrow">¶</a></p>
 <p id="section-6.6.3-12">Exceptions: map_to_curve_simple_swu handles its exceptional cases.
-Exceptional cases of iso_map MUST return the identity point on E.<a href="#section-6.6.3-12" class="pilcrow">¶</a></p>
+Exceptional cases of iso_map are inputs that cause the denominator of
+either rational function to evaluate to zero; such cases MUST return the
+identity point on E.<a href="#section-6.6.3-12" class="pilcrow">¶</a></p>
 <p id="section-6.6.3-13">Operations:<a href="#section-6.6.3-13" class="pilcrow">¶</a></p>
 <div class="artwork art-text alignLeft" id="section-6.6.3-14">
 <pre>
@@ -4046,6 +4048,10 @@ michele.orru@ens.fr<a href="#section-12-1.3.2" class="pilcrow">¶</a></p>
 <dd>
 <span class="refAuthor">Lipp, B.</span><span class="refAuthor">, Blanchet, B.</span><span class="refAuthor">, and K. Bhargavan</span>, <span class="refTitle">"A Mechanised Proof of the WireGuard Virtual Private Network Protocol"</span>, <span class="seriesInfo">In INRIA Research Report No. 9269</span>, <time datetime="2019-04">April 2019</time>, <span>&lt;<a href="https://hal.inria.fr/hal-02100345/">https://hal.inria.fr/hal-02100345/</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="MOV96">[MOV96]</dt>
+<dd>
+<span class="refAuthor">Menezes, A.J.</span><span class="refAuthor">, van Oorschot, P.C.</span><span class="refAuthor">, and S.A. Vanstone</span>, <span class="refTitle">"Handbook of Applied Cryptography"</span>, <span class="seriesInfo">ISBN 9780849385230</span>, <span class="seriesInfo">publisher CRC Press</span>, <time datetime="1996">1996</time>, <span>&lt;<a href="http://cacr.uwaterloo.ca/hac/">http://cacr.uwaterloo.ca/hac/</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="MRH04">[MRH04]</dt>
 <dd>
 <span class="refAuthor">Maurer, U.</span><span class="refAuthor">, Renner, R.</span><span class="refAuthor">, and C. Holenstein</span>, <span class="refTitle">"Indifferentiability, impossibility results on reductions, and applications to the random oracle methodology"</span>, <span class="seriesInfo">DOI 10.1007/978-3-540-24638-1_2</span>, <span class="seriesInfo">pages 21-39</span>, <span class="seriesInfo">In TCC 2004: Theory of Cryptography</span>, <time datetime="2004-02">February 2004</time>, <span>&lt;<a href="https://doi.org/10.1007/978-3-540-24638-1_2">https://doi.org/10.1007/978-3-540-24638-1_2</a>&gt;</span>. </dd>
@@ -4832,9 +4838,6 @@ map_to_curve_elligator2(u)
 
 Input: u, an element of F.
 Output: (s, t), a point on M.
-
-Notation:
-- XOR is a logical operator.
 
 Constants:
 1.   c1 = J / K
