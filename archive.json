@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2020-06-01T21:56:12.929399+00:00",
+  "timestamp": "2020-06-03T17:36:40.524419+00:00",
   "repo": "cfrg/draft-irtf-cfrg-hash-to-curve",
   "labels": [
     {
@@ -28729,7 +28729,7 @@
       "labels": [],
       "body": "This PR adds one extra test vector. With this new vector, all of the gx1/gx2 branches are covered in all suites.\r\n\r\nI'm explicitly not trying to cover branches in exceptional cases or in choosing sign of y. For exceptional cases, it's infeasible to find inputs that trigger the cases (we test our code by generating inputs for the map functions rather than the end-to-end hash function). For sign of y, the branch taken depends on the sqrt implementation, so it's not clear to me that it makes sense to try and cover these.",
       "createdAt": "2020-06-01T21:28:23Z",
-      "updatedAt": "2020-06-01T21:55:43Z",
+      "updatedAt": "2020-06-01T21:56:22Z",
       "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
       "baseRefName": "master",
       "baseRefOid": "cf6327c7725269a1c95c68e16f809198305f2b1c",
