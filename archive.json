@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2020-06-03T17:36:40.524419+00:00",
+  "timestamp": "2020-06-04T23:14:23.193369+00:00",
   "repo": "cfrg/draft-irtf-cfrg-hash-to-curve",
   "labels": [
     {
@@ -28807,6 +28807,32 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 277,
+      "id": "MDExOlB1bGxSZXF1ZXN0NDI4MTM2MzM5",
+      "title": "Updates reference implementations to draft-v08",
+      "url": "https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/pull/277",
+      "state": "OPEN",
+      "author": "armfazh",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Updates pointers to reference implementations both go and rust.",
+      "createdAt": "2020-06-04T23:14:00Z",
+      "updatedAt": "2020-06-04T23:14:00Z",
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "256dd6983f8ca9f4ce93eafcc1ec36269b3b8937",
+      "headRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "updateRefImpl08",
+      "headRefOid": "99e6e30b3ac6081ebfc6ffc5f64582644c85d62e",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
