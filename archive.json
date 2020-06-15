@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2020-06-04T23:14:23.193369+00:00",
+  "timestamp": "2020-06-15T18:06:31.415481+00:00",
   "repo": "cfrg/draft-irtf-cfrg-hash-to-curve",
   "labels": [
     {
@@ -1045,7 +1045,7 @@
       "labels": [],
       "body": "The Decaf approach \r\n\r\nhttps://www.shiftleft.org/papers/decaf/\r\n\r\nhttps://ristretto.group/",
       "createdAt": "2018-07-25T19:03:28Z",
-      "updatedAt": "2020-05-22T20:12:10Z",
+      "updatedAt": "2020-06-09T18:58:52Z",
       "closedAt": "2019-10-27T06:15:25Z",
       "comments": [
         {
@@ -1096,6 +1096,13 @@
           "body": "What's status of this? I don't see an alternative mentioned in current draft besides h_eff.",
           "createdAt": "2020-05-22T20:12:10Z",
           "updatedAt": "2020-05-22T20:12:10Z"
+        },
+        {
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "body": "The decision is that Ristretto will specify its own hash-to-group interface (FROM_UNIFORM_BYTES is what it's called in the current draft). I am not sure whether there will be a discussion of higher-level primitives, i.e., how to go from an arbitrary message to the input bytes. (In principle it's possible to do this using the expand_message variants in h2c, or with something like HKDF, a PRG, etc.)",
+          "createdAt": "2020-06-09T18:58:52Z",
+          "updatedAt": "2020-06-09T18:58:52Z"
         }
       ]
     },
@@ -28813,20 +28820,48 @@
       "id": "MDExOlB1bGxSZXF1ZXN0NDI4MTM2MzM5",
       "title": "Updates reference implementations to draft-v08",
       "url": "https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/pull/277",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "armfazh",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Updates pointers to reference implementations both go and rust.",
       "createdAt": "2020-06-04T23:14:00Z",
-      "updatedAt": "2020-06-04T23:14:00Z",
+      "updatedAt": "2020-06-04T23:29:16Z",
       "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
       "baseRefName": "master",
       "baseRefOid": "256dd6983f8ca9f4ce93eafcc1ec36269b3b8937",
       "headRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
       "headRefName": "updateRefImpl08",
       "headRefOid": "99e6e30b3ac6081ebfc6ffc5f64582644c85d62e",
+      "closedAt": "2020-06-04T23:29:16Z",
+      "mergedAt": "2020-06-04T23:29:16Z",
+      "mergedBy": "kwantam",
+      "mergeCommit": {
+        "oid": "ead9c9110b9b5eb611c1e6f6daeb7ed8c5cdd22c"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 278,
+      "id": "MDExOlB1bGxSZXF1ZXN0NDM0NjkxNzU2",
+      "title": "Export curve paramters (for code reuse).",
+      "url": "https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/pull/278",
+      "state": "OPEN",
+      "author": "chris-wood",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2020-06-15T18:06:11Z",
+      "updatedAt": "2020-06-15T18:06:11Z",
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "ead9c9110b9b5eb611c1e6f6daeb7ed8c5cdd22c",
+      "headRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "caw/export-parameters",
+      "headRefOid": "63b03df1c0abdfdffc660e362d465ef7fc7fe2af",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
