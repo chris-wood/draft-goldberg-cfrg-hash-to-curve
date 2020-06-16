@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2020-06-16T03:51:35.350185+00:00",
+  "timestamp": "2020-06-16T18:04:30.245923+00:00",
   "repo": "cfrg/draft-irtf-cfrg-hash-to-curve",
   "labels": [
     {
@@ -6156,15 +6156,15 @@
       "id": "MDU6SXNzdWU2MzkwNzExNjA=",
       "title": "Clean up Table 1 formatting",
       "url": "https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/issues/279",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "chris-wood",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "From the list:\r\n\r\n> a. I think Table 1 (Sec. 2.1) could be better formatted, using less \r\n> line breaks. Please consider redistributing the widths of the columns.\r\n",
       "createdAt": "2020-06-15T19:02:50Z",
-      "updatedAt": "2020-06-15T19:59:59Z",
-      "closedAt": null,
+      "updatedAt": "2020-06-16T03:51:43Z",
+      "closedAt": "2020-06-16T03:51:43Z",
       "comments": [
         {
           "author": "kwantam",
@@ -6255,15 +6255,15 @@
       "labels": [],
       "body": "I consider we can do only a slight modification on hash_to_field to support prime modulus.\r\nNamely modifying the amount of bytes requested to the `expand_message` function.\r\nSo we can avoid the use of an alternate method.\r\n\r\n\r\n",
       "createdAt": "2020-06-16T01:13:56Z",
-      "updatedAt": "2020-06-16T03:35:49Z",
+      "updatedAt": "2020-06-16T06:13:44Z",
       "closedAt": null,
       "comments": [
         {
           "author": "kwantam",
           "authorAssociation": "COLLABORATOR",
-          "body": "This is a great idea, but we have to be careful for a couple reasons:\r\n\r\n1. Any change we make to address this issue really really shouldn't change hash_to_field unless absolutely necessary, because we'd be breaking existing implementations (of which there are a bunch at this point!) just to address a corner case.\r\n\r\n2. It's not totally clear to me that it's possible to address this satisfactorily by requesting fewer bits from expand_message. The rest of my message discusses. (Some of this rehashes what I wrote in an email a few days ago.)\r\n\r\nTL;DR: I don't see a good way to give a unified hash_to_field that conveniently handles both small- and large-characteristic extension fields.\r\n\r\n---\r\n\r\nWe can regard hashing to GF(p^m), m >= 1 as selecting a random integer in the half-open range [0, p^m). When discussing uniformity, it's handy to think of this integer as comprising m digits in base p.\r\n\r\nTo sample an integer in [0, p^m) with statistical distance from uniform roughly 2^-k for arbitrary p without rejection sampling, we have a few choices:\r\n\r\n1. Select m values in [0, p) with statistical distance from uniform roughly 2^-k. Certainly for small m this gives statistical distance roughly 2^-k. This is the approach that hash_to_field uses: reduce a (k + log p)-bit integer mod p.\r\n\r\n2. Select one value in [0, p^m) with statistical distance from uniform roughly 2^-k. This is the approach that hash_to_field_divrem (proposed in #282) uses: reduce a (k + m log p)-bit integer mod p^m.\r\n\r\n3. Some interpolation between the above approaches. For example, we might select n integers in [0, p^(m/n)) with statistical distance from uniform roughly 2^-k, then regard each as comprising m/n digits in base p. This would require reducing (k + (m/n) log p)-bit integers mod p^(m/n).\r\n\r\nIt's also worth mentioning a class of approaches that *do not* work. It's tempting to think, for example, that since (k + m log p) bits is enough, we can hash to m digits by reducing m, (k/m + log p)-bit integers mod p. But this doesn't work---we get statistical distance upper bounded by 2^-(k/m) for each digit, which is *far* too big!\r\n\r\n---\r\n\r\nOf the above approaches, option (2) is the most efficient from a hashing standpoint---it only requires k + m log p bits, which is k * (m - 1) fewer bits than option (1).\r\n\r\nOn the other hand, when log p >= k, option (1) is *far* easier to implement. The reason is, multiplying two (log p)-bit integers requires reducing a (2 log p)-bit intermediate value mod p---so we can reuse the same modular reduction code when log p >= k, i.e., when 2 log p >= k + log p.\r\n\r\nWhen k is much greater than log p, option (1)'s simplicity advantage vanishes, because k + log p is significantly bigger than 2 log p, which means we'd need to implement a special modular reduction routine anyway. At this point, it seems like option (2) is better. (Note that I'm making the simplifying assumption that options (1) and (2) require similarly difficult implementations, which is not strictly true. But I don't see how to make finer distinctions without getting bogged down in details.)\r\n\r\n---\r\n\r\nSo it seems like, for curves over high-degree extensions of small-ish characteristic (e.g., GF(9767^19)---which is a pretty extreme example), we want a fundamentally different approach than for curves over low-degree extensions of large-ish characteristic. I don't see another way to reconcile this, because option (2) makes implementation *really* ugly when log p is big. For example, when hashing to GF((2^581)^8) (which one would do when hashing to G2 of BLS48-581), option (2) requires DIVREM to handle roughly 4900-bit integers (!!!), which seems like a non-starter.\r\n\r\n---\r\n\r\nIf we write down option (2) in the appendix as I've proposed in #282, we could add a subsection discussing option (3), which is easily implemented using option (2) as a subroutine. For the case of GF(9767^19), for example, one could hash to 2 elements of GF(9767^10) and convert that into an element of GF(9767^19) simply by concatenating the vector representations and throwing one digit away.\r\n\r\nThe reason to consider this approach is that it limits the size of the input that DIVREM needs to handle, which *may* make implementing DIVREM easier. For hashing to an element of GF(9767^19) in one shot, DIVREM needs to handle 394-bit inputs. By instead hashing to two elements of GF(9767^10), DIVREM only needs to handle 268-bit integers.\r\n\r\n(Note that I haven't thought carefully about how to implement DIVREM nicely, though, so maybe the difference between 268 bits and 394 bits is not worth the extra 140ish bits of hash output that it requires.)",
+          "body": "This is a great idea, but we have to be careful for a couple reasons:\r\n\r\n1. Any change we make to address this issue really really shouldn't change hash_to_field unless absolutely necessary, because we'd be breaking existing implementations (of which there are a bunch at this point!) just to address a corner case.\r\n\r\n2. It's not totally clear to me that it's possible to address this satisfactorily by requesting fewer bits from expand_message. The rest of my message discusses. (Some of this rehashes what I wrote in an email a few days ago.)\r\n\r\nTL;DR: I don't see a good way to give a unified hash_to_field that conveniently handles both small- and large-characteristic extension fields.\r\n\r\n---\r\n\r\nWe can regard hashing to GF(p^m), m >= 1 as selecting a random integer in the half-open range [0, p^m). When discussing uniformity, it's handy to think of this integer as comprising m digits in base p.\r\n\r\nTo sample an integer in [0, p^m) with statistical distance from uniform roughly 2^-k for arbitrary p without rejection sampling, we have a few choices:\r\n\r\n1. Select m values in [0, p) with statistical distance from uniform roughly 2^-k. At least for small m, this gives an integer in [0, p^m) with statistical distance roughly 2^-k. This is the approach that hash_to_field uses: reduce a bunch of (k + log p)-bit integers mod p.\r\n\r\n2. Select one value in [0, p^m) with statistical distance from uniform roughly 2^-k. This is the approach that hash_to_field_divrem (formerly proposed in #282) uses: reduce a (k + m log p)-bit integer mod p^m.\r\n\r\n3. Some interpolation between the above approaches. For example, we might select n integers in [0, p^(m/n)) with statistical distance from uniform roughly 2^-k, then regard each as comprising m/n digits in base p. This would require reducing (k + (m/n) log p)-bit integers mod p^(m/n).\r\n\r\nIt's also worth mentioning a class of approaches that *do not* work. It's tempting to think, for example, that since (k + m log p) bits is enough, we can hash to m digits by reducing m, (k/m + log p)-bit integers mod p. But this doesn't work---we get statistical distance upper bounded by 2^-(k/m) for each digit, which is *far* too big!\r\n\r\n---\r\n\r\nOf the above approaches, option (2) is the most efficient from a hashing standpoint---it only requires k + m log p bits, which is k * (m - 1) fewer bits than option (1).\r\n\r\nOn the other hand, when log p >= k, option (1) is *far* easier to implement. The reason is, multiplying two (log p)-bit integers requires reducing a (2 log p)-bit intermediate value mod p---so we can reuse the same modular reduction code when log p >= k, i.e., when 2 log p >= k + log p.\r\n\r\nWhen k is much greater than log p, option (1)'s simplicity advantage vanishes, because k + log p is significantly bigger than 2 log p, which means we'd need to implement a special modular reduction routine anyway. At this point, it seems like option (2) is better. (Note that I'm making the simplifying assumption that options (1) and (2) require similarly difficult implementations, which is not strictly true. But I don't see how to make finer distinctions without getting bogged down in details.)\r\n\r\n---\r\n\r\nSo it seems like, for curves over high-degree extensions of small-ish characteristic (e.g., GF(9767^19)---which is a pretty extreme example), we want a fundamentally different approach than for curves over low-degree extensions of large-ish characteristic. I don't see another way to reconcile this, because option (2) makes implementation *really* ugly when log p is big. For example, when hashing to GF((2^581)^8) (which one would do when hashing to G2 of BLS48-581), option (2) requires DIVREM to handle roughly 4900-bit integers (!!!), which seems like a non-starter.\r\n\r\n---\r\n\r\nIf we write down option (2) in the appendix as I've proposed in #282, we could add a subsection discussing option (3), which is easily implemented using option (2) as a subroutine. For the case of GF(9767^19), for example, one could hash to 2 elements of GF(9767^10) and convert that into an element of GF(9767^19) simply by concatenating the vector representations and throwing one vectory entry away.\r\n\r\nThe reason to consider this approach is that it limits the size of the input that DIVREM needs to handle, which *may* make implementing DIVREM easier. For hashing to an element of GF(9767^19) in one shot, DIVREM needs to handle 394-bit inputs. By instead hashing to two elements of GF(9767^10), DIVREM only needs to handle 268-bit integers.\r\n\r\n(Note that I haven't thought carefully about how to implement DIVREM nicely, though, so maybe the difference between 268 bits and 394 bits is not worth the extra 140ish bits of hash output that it requires.)",
           "createdAt": "2020-06-16T03:31:03Z",
-          "updatedAt": "2020-06-16T03:35:49Z"
+          "updatedAt": "2020-06-16T06:13:44Z"
         }
       ]
     }
@@ -29014,24 +29014,26 @@
       "id": "MDExOlB1bGxSZXF1ZXN0NDM0ODAyNjc1",
       "title": "respond to comments from Thomas Pornin",
       "url": "https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/pull/282",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "kwantam",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "This PR includes responses to most of the comments from Thomas Pornin's review for the crypto panel.\r\n\r\nIn the next comment in this thread I will quote Thomas's email and my responses to each point. There are a few cases (marked \"???\") where it's either not clear to me what the comment meant or it's otherwise not obvious how to respond. Let's discuss in this thread and I'll make edits as necessary.",
       "createdAt": "2020-06-15T21:16:28Z",
-      "updatedAt": "2020-06-16T03:40:43Z",
+      "updatedAt": "2020-06-16T18:03:58Z",
       "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
       "baseRefName": "master",
-      "baseRefOid": "d19b27740c0c7aed45e9d9336786986edb53433b",
+      "baseRefOid": "c09a3368610f5c7e420db0a42d9ee970d51f27a4",
       "headRepository": "kwantam/draft-irtf-cfrg-hash-to-curve",
       "headRefName": "crypto_review_panel",
-      "headRefOid": "b758173b4d6774f8e261919315ea7c5fd0309348",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "e2eaf1c86cd4dab7d953f7bba4c7e7fbe5e45294",
+      "closedAt": "2020-06-16T18:03:58Z",
+      "mergedAt": "2020-06-16T18:03:58Z",
+      "mergedBy": "chris-wood",
+      "mergeCommit": {
+        "oid": "f028204795218e1c9bc14356957b5562062b84c9"
+      },
       "comments": [
         {
           "author": "kwantam",
@@ -29060,6 +29062,13 @@
           "body": "> Can we remove the hash-to-field change and discuss that in a separate PR, @kwantam?\r\n\r\nYes! I'll do this and respond to your other feedback later tonight or tomorrow. Sorry for the delay; need to take care of some other stuff for a little while.",
           "createdAt": "2020-06-16T03:40:43Z",
           "updatedAt": "2020-06-16T03:40:43Z"
+        },
+        {
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "body": "OK, I've rewritten this branch so that it does not include the alternative hash_to_field function. We can discuss in #284 and then pull in the commit or not as we decide.",
+          "createdAt": "2020-06-16T06:06:00Z",
+          "updatedAt": "2020-06-16T06:06:00Z"
         }
       ],
       "reviews": [
@@ -29079,43 +29088,43 @@
               "originalPosition": 43,
               "body": "Not always there is one point at infinity. Neither the point at infinity is always the one chosen as the identity element.\r\n\r\n> Elements of an elliptic curve group are points with coordinates (x, y) satisfying the curve equation, where x and y are elements of F, together with a set of points at infinity (which doesn't have a representation as a coordinate pair).\r\nAll elliptic curve groups have a distinguished element, called the identity point, which acts as the identity element for the group operation.\r\n",
               "createdAt": "2020-06-15T23:57:57Z",
-              "updatedAt": "2020-06-16T02:20:23Z"
+              "updatedAt": "2020-06-16T15:28:16Z"
             },
             {
               "originalPosition": 94,
               "body": "```suggestion\r\ni.e., execution time SHOULD NOT depend on the\r\n```\r\nMemory access can be done in non-constant time provided it uses public values.\r\n\r\n\"A secure memory access pattern restricts the use of secret values (or values derived from secret data) to address the memory.\" \r\n\r\n",
               "createdAt": "2020-06-16T00:12:39Z",
-              "updatedAt": "2020-06-16T02:20:23Z"
+              "updatedAt": "2020-06-16T15:28:16Z"
             },
             {
               "originalPosition": 125,
               "body": "```suggestion\r\n    of such methods is out of the scope of this document.\r\n```",
               "createdAt": "2020-06-16T00:19:56Z",
-              "updatedAt": "2020-06-16T02:20:23Z"
+              "updatedAt": "2020-06-16T15:28:16Z"
             },
             {
               "originalPosition": 195,
               "body": "> ???\r\n> I'm not sure how to interpret this---truncating the output of H is still uniform if H is...\r\n\r\nSuppose there is a hash function that outputs `b=8n+1` bits, then after ceiling you have `b_in_bytes=n+1`, and then the last byte has almost all-zeros (except the first bit).\r\n-- I think Thomas' comment refers that this last byte is not uniform.\r\n\r\n",
               "createdAt": "2020-06-16T00:35:33Z",
-              "updatedAt": "2020-06-16T02:20:23Z"
+              "updatedAt": "2020-06-16T15:28:16Z"
             },
             {
               "originalPosition": 303,
               "body": "This expression is correct. But it took me a second to parse `7-byte` as a string of seven bytes, and not as a byte of seven bits. The confusion was increased as ASCII was originally a seven bit codification.\r\n\r\ncan we rewrite with something like this: \r\n> ... MUST indicate this by appending the ASCII literal \":H2F-DR\" (seven bytes) to the HASH\\_ID field.\r\n",
               "createdAt": "2020-06-16T00:48:57Z",
-              "updatedAt": "2020-06-16T02:20:23Z"
+              "updatedAt": "2020-06-16T15:28:16Z"
             },
             {
               "originalPosition": 496,
               "body": "> For now, just made clear that this is not restricted to even-order extensions. \r\n\r\nI think that is enough, as AR13 already describes the application of Frobenius operator.\r\n\r\n",
               "createdAt": "2020-06-16T00:56:43Z",
-              "updatedAt": "2020-06-16T02:20:23Z"
+              "updatedAt": "2020-06-16T15:28:16Z"
             },
             {
               "originalPosition": 29,
               "body": "> ???\r\n> Not clear that this is within the scope of the document, since right now we're not talking about the modulus M at all.\r\n\r\nIt might be good just to mention that there exists different irreducible polynomials to construct an extension field, even though they are isomorphic.\r\n\r\n",
               "createdAt": "2020-06-16T01:03:06Z",
-              "updatedAt": "2020-06-16T02:20:23Z"
+              "updatedAt": "2020-06-16T15:28:16Z"
             }
           ]
         },
@@ -29135,7 +29144,7 @@
               "originalPosition": 43,
               "body": "Ah, great point! I will clarify :)",
               "createdAt": "2020-06-16T01:55:37Z",
-              "updatedAt": "2020-06-16T02:20:23Z"
+              "updatedAt": "2020-06-16T15:28:16Z"
             }
           ]
         },
@@ -29155,7 +29164,7 @@
               "originalPosition": 43,
               "body": "(no pun intended :laughing: )\r\n",
               "createdAt": "2020-06-16T01:55:47Z",
-              "updatedAt": "2020-06-16T02:20:23Z"
+              "updatedAt": "2020-06-16T15:28:16Z"
             }
           ]
         },
@@ -29175,7 +29184,7 @@
               "originalPosition": 94,
               "body": "I think the issue is that my edit isn't clear enough about *which* inputs, intermediate values, and outputs the timing and memory access patterns are not allowed to depend upon.\r\n\r\nThe problems with removing \"and memory access patterns\" are, first, that it ends up ignoring Thomas's comment (which is a good one), and second (and relatedly), that it makes the statement incomplete, in the sense that secret-dependent memory accesses are not OK.\r\n\r\nI'll think more about how to address this. One way is for us to not attempt to inject a concise definition of \"constant time\" here, and instead cite a different document that discusses in more detail.",
               "createdAt": "2020-06-16T01:59:26Z",
-              "updatedAt": "2020-06-16T02:20:23Z"
+              "updatedAt": "2020-06-16T15:28:16Z"
             }
           ]
         },
@@ -29195,7 +29204,7 @@
               "originalPosition": 195,
               "body": "Ah! Thank you!!!",
               "createdAt": "2020-06-16T02:08:37Z",
-              "updatedAt": "2020-06-16T02:20:23Z"
+              "updatedAt": "2020-06-16T15:28:16Z"
             }
           ]
         },
@@ -29215,7 +29224,7 @@
               "originalPosition": 29,
               "body": "Right now we just say \"there is some basis\", but we don't go into any more detail. I guess we could add something like \"all choices of basis are isomorphic, but certain choices may result in a more efficient implementation\", but it's not clear to me what this adds to the document...\r\n\r\nHappy to add it if you think it's useful! :+1:",
               "createdAt": "2020-06-16T02:14:38Z",
-              "updatedAt": "2020-06-16T02:20:23Z"
+              "updatedAt": "2020-06-16T15:28:16Z"
             }
           ]
         },
@@ -29235,7 +29244,7 @@
               "originalPosition": 94,
               "body": "OK, I made a small edit to clarify that this applies to *secrets*. Does this address the concern?",
               "createdAt": "2020-06-16T02:20:41Z",
-              "updatedAt": "2020-06-16T02:20:53Z"
+              "updatedAt": "2020-06-16T15:28:16Z"
             }
           ]
         },
@@ -29255,63 +29264,369 @@
               "originalPosition": 29,
               "body": "Agreed -- noting the isomorphism, and perhaps reinforcing that this means the polynomial does not affect the basis, is sufficient.",
               "createdAt": "2020-06-16T02:30:41Z",
-              "updatedAt": "2020-06-16T02:38:04Z"
+              "updatedAt": "2020-06-16T15:28:16Z"
             },
             {
               "originalPosition": 40,
               "body": "```suggestion\r\nElements of an elliptic curve group are points with affine coordinates (x, y)\r\n```",
               "createdAt": "2020-06-16T02:31:01Z",
-              "updatedAt": "2020-06-16T02:38:04Z"
+              "updatedAt": "2020-06-16T15:28:16Z"
             },
             {
               "originalPosition": 126,
               "body": "\ud83d\udc4d ",
               "createdAt": "2020-06-16T02:32:50Z",
-              "updatedAt": "2020-06-16T02:38:04Z"
+              "updatedAt": "2020-06-16T15:28:16Z"
             },
             {
               "originalPosition": 130,
               "body": "Maybe network byte order? (Unclear if that's preferred for IETF documents.)",
               "createdAt": "2020-06-16T02:33:14Z",
-              "updatedAt": "2020-06-16T02:38:04Z"
+              "updatedAt": "2020-06-16T15:28:16Z"
             },
             {
               "originalPosition": 152,
               "body": "```suggestion\r\nwould prohibit a constant-time implementation.\r\n```",
               "createdAt": "2020-06-16T02:33:39Z",
-              "updatedAt": "2020-06-16T02:38:04Z"
+              "updatedAt": "2020-06-16T15:28:16Z"
             },
             {
               "originalPosition": 244,
               "body": "```suggestion\r\nof H. Adding DST as a suffix is the RECOMMENDED approach.\r\n```",
               "createdAt": "2020-06-16T02:34:44Z",
-              "updatedAt": "2020-06-16T02:38:04Z"
+              "updatedAt": "2020-06-16T15:28:16Z"
             },
             {
               "originalPosition": 262,
               "body": "Should we lift this to a constant, then?",
               "createdAt": "2020-06-16T02:35:06Z",
-              "updatedAt": "2020-06-16T02:38:04Z"
+              "updatedAt": "2020-06-16T15:28:16Z"
             },
             {
               "originalPosition": 273,
               "body": "Same here, r.e., it being a constant.",
               "createdAt": "2020-06-16T02:35:19Z",
-              "updatedAt": "2020-06-16T02:38:04Z"
+              "updatedAt": "2020-06-16T15:28:16Z"
             },
             {
               "originalPosition": 382,
               "body": "I'm less thrilled about adding this. What's the driving use case? ",
               "createdAt": "2020-06-16T02:36:38Z",
-              "updatedAt": "2020-06-16T02:38:04Z"
+              "updatedAt": "2020-06-16T15:28:16Z"
             },
             {
               "originalPosition": 5,
               "body": "Same constant here (and below) r.e. this being a constant.",
               "createdAt": "2020-06-16T02:37:03Z",
-              "updatedAt": "2020-06-16T02:38:04Z"
+              "updatedAt": "2020-06-16T15:28:16Z"
             }
           ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDMxMTczNDA3",
+          "commit": {
+            "abbreviatedOid": "b758173"
+          },
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-06-16T05:39:05Z",
+          "updatedAt": "2020-06-16T05:39:05Z",
+          "comments": [
+            {
+              "originalPosition": 29,
+              "body": "Cool. Added.",
+              "createdAt": "2020-06-16T05:39:05Z",
+              "updatedAt": "2020-06-16T15:28:16Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDMxMTc0Nzky",
+          "commit": {
+            "abbreviatedOid": "b758173"
+          },
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-06-16T05:42:55Z",
+          "updatedAt": "2020-06-16T05:42:55Z",
+          "comments": [
+            {
+              "originalPosition": 130,
+              "body": "RFC7748 uses \"little endian\", as does the current Ristretto draft. Other RFCs are mixed, but use of \"little-endian\" and \"big-endian\" seems to be pretty common even in older RFCs (e.g., RFC1071).\r\n\r\nMy guess is that implementors of this spec are more likely to understand \"big endian\" than \"network byte order,\" so I'd vote to keep as-is. Thoughts?",
+              "createdAt": "2020-06-16T05:42:55Z",
+              "updatedAt": "2020-06-16T15:28:16Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDMxMTc1Mzkx",
+          "commit": {
+            "abbreviatedOid": "b758173"
+          },
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-06-16T05:44:34Z",
+          "updatedAt": "2020-06-16T05:44:34Z",
+          "comments": [
+            {
+              "originalPosition": 152,
+              "body": "It's not *quite* true that it would \"prohibit\" it---it's possible, just in a painful way. How about \"would be incompatible with constant-time implementation\"?",
+              "createdAt": "2020-06-16T05:44:34Z",
+              "updatedAt": "2020-06-16T15:28:16Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDMxMTc3NDU4",
+          "commit": {
+            "abbreviatedOid": "b758173"
+          },
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-06-16T05:50:07Z",
+          "updatedAt": "2020-06-16T05:50:08Z",
+          "comments": [
+            {
+              "originalPosition": 262,
+              "body": "Hmmm... the problem with lifting this into the \"Constants\" list above is that it's a different kind of constant---the \"Constants\" list are parameters, whereas these are derived values that can be precomputed. I think it's clearer if we make a distinction between these two things, and I don't think the pseudocode suffers so much in the process...\r\n\r\nThoughts?",
+              "createdAt": "2020-06-16T05:50:07Z",
+              "updatedAt": "2020-06-16T15:28:16Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDMxMTgzNjA4",
+          "commit": {
+            "abbreviatedOid": "81921e2"
+          },
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-06-16T06:05:23Z",
+          "updatedAt": "2020-06-16T06:05:23Z",
+          "comments": [
+            {
+              "originalPosition": 382,
+              "body": "See #284 --- basically, the alternative method is much better for high-degree extension fields of small-ish characteristic, like [curve9767](https://github.com/pornin/curve9767), which is nice for microcontrollers.",
+              "createdAt": "2020-06-16T06:05:23Z",
+              "updatedAt": "2020-06-16T15:28:16Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDMxMzIyNzIz",
+          "commit": {
+            "abbreviatedOid": "81921e2"
+          },
+          "author": "mratsim",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-06-16T09:26:50Z",
+          "updatedAt": "2020-06-16T09:26:50Z",
+          "comments": [
+            {
+              "originalPosition": 94,
+              "body": "Would an example constant-time lookup with secret bit be interesting as an appendix?\r\n\r\nIn Mrabet and Joye book there is a  example in page 11-13 (Software Implementation, chapter -line11.6.2 \"Eliminating Secret Memory Addresses\") based on CMOV",
+              "createdAt": "2020-06-16T09:26:50Z",
+              "updatedAt": "2020-06-16T15:28:16Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDMxMzI3NjAy",
+          "commit": {
+            "abbreviatedOid": "81921e2"
+          },
+          "author": "mratsim",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-06-16T09:32:53Z",
+          "updatedAt": "2020-06-16T09:32:54Z",
+          "comments": [
+            {
+              "originalPosition": 130,
+              "body": "I strongly oppose any use similar to `htonl` / `ntohl` (host to network long and network to host long), those are machine dependent / implementation-defined and lead to situation like the C `int` datatypes which is at least 16-bit but almost always assume to be 32-bit i.e. `int16_t` and `int32_t` is clearer and less error prone (and for the spec big endian).",
+              "createdAt": "2020-06-16T09:32:53Z",
+              "updatedAt": "2020-06-16T15:28:16Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDMxNDk3NTYz",
+          "commit": {
+            "abbreviatedOid": "81921e2"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-06-16T13:24:22Z",
+          "updatedAt": "2020-06-16T13:24:23Z",
+          "comments": [
+            {
+              "originalPosition": 130,
+              "body": "Great point! Let's keep it as is.",
+              "createdAt": "2020-06-16T13:24:23Z",
+              "updatedAt": "2020-06-16T15:28:16Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDMxNDk4NTY1",
+          "commit": {
+            "abbreviatedOid": "81921e2"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-06-16T13:25:22Z",
+          "updatedAt": "2020-06-16T13:25:22Z",
+          "comments": [
+            {
+              "originalPosition": 152,
+              "body": "I'm honestly fine fibbing a little bit here, if only to get the point across. Your proposal also works. (Consider this bike shedding :))",
+              "createdAt": "2020-06-16T13:25:22Z",
+              "updatedAt": "2020-06-16T15:28:16Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDMxNTAyOTY4",
+          "commit": {
+            "abbreviatedOid": "81921e2"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-06-16T13:30:01Z",
+          "updatedAt": "2020-06-16T13:30:01Z",
+          "comments": [
+            {
+              "originalPosition": 262,
+              "body": "I'm not sure I see the difference. `tv4` depends only on `Z` and `A`, which are both themselves constants. Doesn't that make this the same type of constant? Even if we do consider these different, wouldn't we expect implementations to precompute all parameter and derived constants in practice?",
+              "createdAt": "2020-06-16T13:30:01Z",
+              "updatedAt": "2020-06-16T15:28:16Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDMxNjAzNzQy",
+          "commit": {
+            "abbreviatedOid": "81921e2"
+          },
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-06-16T15:06:37Z",
+          "updatedAt": "2020-06-16T15:06:37Z",
+          "comments": [
+            {
+              "originalPosition": 262,
+              "body": "Sorry, I was super unclear. What I meant was, the constants in the list (A, B, Z) are choices that you have to make to use this map, no matter how you implement the map.\r\n\r\nIn contrast, tv4 and tv5 are values you can precompute to speed up evaluating the map, but they're more like implementation details for this specific implementation rather than fundamental parameters. Someone implementing the map in projective coordinates would probably precompute different values, not tv4 and tv5.\r\n\r\nDoes this make sense?\r\n\r\nMore generally, I don't think we need to focus too much on precomputation here, because the point isn't to suggest that people follow the details of this implementation, just to make clearer what the high-level costs are (as Thomas says). So it seems like it's OK just to note \"can be precomputed,\" without suggesting that people actually *do* precompute---that's what the constants in the straight-line impl are for.",
+              "createdAt": "2020-06-16T15:06:37Z",
+              "updatedAt": "2020-06-16T15:28:16Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDMxNjIxNTAz",
+          "commit": {
+            "abbreviatedOid": "81921e2"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-06-16T15:20:03Z",
+          "updatedAt": "2020-06-16T15:20:03Z",
+          "comments": [
+            {
+              "originalPosition": 262,
+              "body": "Ah, yes, thanks for clarifying! I forgot that we already have these constants in the straight-line implementation.",
+              "createdAt": "2020-06-16T15:20:03Z",
+              "updatedAt": "2020-06-16T15:28:16Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDMxNjIxNjE3",
+          "commit": {
+            "abbreviatedOid": "81921e2"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-06-16T15:20:10Z",
+          "updatedAt": "2020-06-16T15:20:11Z",
+          "comments": [
+            {
+              "originalPosition": 248,
+              "body": "Should this be `tv6`?",
+              "createdAt": "2020-06-16T15:20:10Z",
+              "updatedAt": "2020-06-16T15:28:16Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDMxNjIyMjIy",
+          "commit": {
+            "abbreviatedOid": "81921e2"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM modulo one small aliasing comment.",
+          "createdAt": "2020-06-16T15:20:48Z",
+          "updatedAt": "2020-06-16T15:20:48Z",
+          "comments": []
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDMxNjI1NTY5",
+          "commit": {
+            "abbreviatedOid": "81921e2"
+          },
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-06-16T15:24:10Z",
+          "updatedAt": "2020-06-16T15:24:11Z",
+          "comments": [
+            {
+              "originalPosition": 248,
+              "body": "Sure, that might be clearer. I'll make the change :+1:",
+              "createdAt": "2020-06-16T15:24:10Z",
+              "updatedAt": "2020-06-16T15:28:16Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDMxNzYwNTk0",
+          "commit": {
+            "abbreviatedOid": "e2eaf1c"
+          },
+          "author": "armfazh",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2020-06-16T18:02:51Z",
+          "updatedAt": "2020-06-16T18:02:51Z",
+          "comments": []
         }
       ]
     },
@@ -29417,25 +29732,35 @@
       "id": "MDExOlB1bGxSZXF1ZXN0NDM0OTUyNzgx",
       "title": "Fixes column spacing of table 1",
       "url": "https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/pull/285",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "armfazh",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Closes #279 ",
       "createdAt": "2020-06-16T03:36:46Z",
-      "updatedAt": "2020-06-16T03:36:46Z",
+      "updatedAt": "2020-06-16T06:07:57Z",
       "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
       "baseRefName": "master",
       "baseRefOid": "d19b27740c0c7aed45e9d9336786986edb53433b",
       "headRepository": "armfazh/draft-irtf-cfrg-hash-to-curve",
       "headRefName": "fixTable1",
       "headRefOid": "296fba3336bfbfc1f1a0bfe88b9c9bc10e27dc4c",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
-      "comments": [],
+      "closedAt": "2020-06-16T03:51:43Z",
+      "mergedAt": "2020-06-16T03:51:43Z",
+      "mergedBy": "armfazh",
+      "mergeCommit": {
+        "oid": "c09a3368610f5c7e420db0a42d9ee970d51f27a4"
+      },
+      "comments": [
+        {
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Nice! :+1:",
+          "createdAt": "2020-06-16T06:07:56Z",
+          "updatedAt": "2020-06-16T06:07:56Z"
+        }
+      ],
       "reviews": []
     }
   ]
