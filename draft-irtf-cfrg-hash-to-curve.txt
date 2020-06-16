@@ -338,34 +338,34 @@ Faz-Hernandez, et al.   Expires 18 December 2020                [Page 6]
 Internet-Draft                hash-to-curve                    June 2020
 
 
-   +--------+----------------------------------+-----------------------+
-   | Symbol | Meaning                          | Relevance             |
-   +========+==================================+=======================+
-   | F,q,p  | Finite field F of                | For prime fields, q = |
-   |        | characteristic p                 | p; otherwise, q = p^m |
-   |        | and #F = q = p^m.                | and m>1.              |
-   +--------+----------------------------------+-----------------------+
-   |   E    | Elliptic curve.                  | E is specified by an  |
-   |        |                                  | equation and a field  |
-   |        |                                  | F.                    |
-   +--------+----------------------------------+-----------------------+
-   |   n    | Number of points                 | n = h * r, for h and  |
-   |        | on the elliptic                  | r defined below.      |
-   |        | curve E.                         |                       |
-   +--------+----------------------------------+-----------------------+
-   |   G    | A prime-order                    | Destination group to  |
-   |        | subgroup of the                  | which byte strings    |
-   |        | points on E.                     | are encoded.          |
-   +--------+----------------------------------+-----------------------+
-   |   r    | Order of G.                      | r is a prime factor   |
-   |        |                                  | of n (usually, the    |
-   |        |                                  | largest such factor). |
-   +--------+----------------------------------+-----------------------+
-   |   h    | Cofactor, h >= 1.                | An integer satisfying |
-   |        |                                  | n = h * r.            |
-   +--------+----------------------------------+-----------------------+
+         +--------+---------------------+-----------------------+
+         | Symbol | Meaning             | Relevance             |
+         +========+=====================+=======================+
+         | F,q,p  | A finite field F of | For prime fields, q = |
+         |        | characteristic p    | p; otherwise, q = p^m |
+         |        | and #F = q = p^m.   | and m>1.              |
+         +--------+---------------------+-----------------------+
+         |   E    | Elliptic curve.     | E is specified by an  |
+         |        |                     | equation and a field  |
+         |        |                     | F.                    |
+         +--------+---------------------+-----------------------+
+         |   n    | Number of points on | n = h * r, for h and  |
+         |        | the elliptic curve  | r defined below.      |
+         |        | E.                  |                       |
+         +--------+---------------------+-----------------------+
+         |   G    | A prime-order       | Destination group to  |
+         |        | subgroup of the     | which byte strings    |
+         |        | points on E.        | are encoded.          |
+         +--------+---------------------+-----------------------+
+         |   r    | Order of G.         | r is a prime factor   |
+         |        |                     | of n (usually, the    |
+         |        |                     | largest such factor). |
+         +--------+---------------------+-----------------------+
+         |   h    | Cofactor, h >= 1.   | An integer satisfying |
+         |        |                     | n = h * r.            |
+         +--------+---------------------+-----------------------+
 
-                                  Table 1
+                                 Table 1
 
 2.2.  Terminology
 
