@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2020-06-16T18:04:30.245923+00:00",
+  "timestamp": "2020-06-25T23:05:31.556002+00:00",
   "repo": "cfrg/draft-irtf-cfrg-hash-to-curve",
   "labels": [
     {
@@ -6194,31 +6194,39 @@
       "id": "MDU6SXNzdWU2MzkwNzI3MzA=",
       "title": "Consider NOT RECOMMENDing protocol versions in DSTs",
       "url": "https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/issues/280",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "chris-wood",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "For the sake of backwards compatibility. From the list:\r\n\r\n> e. Domain separation (Sec. 3.1): I believe that if needed for backwards \r\n> compatibility, it is not a disaster if we omit the version number from \r\n> the Tag. Maybe it is worth a \"NOT RECOMMENDED\".",
       "createdAt": "2020-06-15T19:05:43Z",
-      "updatedAt": "2020-06-15T19:05:43Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2020-06-19T22:48:51Z",
+      "closedAt": "2020-06-19T22:48:50Z",
+      "comments": [
+        {
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I didn't feel strongly about this, and @kwantam's comment over in #283 seemed similar. So, closing.",
+          "createdAt": "2020-06-19T22:48:50Z",
+          "updatedAt": "2020-06-19T22:48:50Z"
+        }
+      ]
     },
     {
       "number": 281,
       "id": "MDU6SXNzdWU2MzkwNzQyNTY=",
       "title": "s/MUST/SHOULD for rejection sampling",
       "url": "https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/issues/281",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "chris-wood",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "We discourage non-constant-time implementations with a SHOULD, yet prohibit rejection sampling with a MUST. This is somewhat inconsistent, and probably worth unifying. From the list:\r\n\r\n> f. It says that expand_message MUST NOT use rejection sampling (5.3.4). \r\n> To the best of my understanding, rejection sampling is to be avoided \r\n> for the sole purpose of mitigating side channel attacks; this is \r\n> defined (Sec. 4) as a SHOULD, so I believe this SHOULD should (no pun \r\n> intended :-) propagate there.",
       "createdAt": "2020-06-15T19:08:22Z",
-      "updatedAt": "2020-06-15T23:43:03Z",
-      "closedAt": null,
+      "updatedAt": "2020-06-17T00:13:21Z",
+      "closedAt": "2020-06-17T00:13:21Z",
       "comments": [
         {
           "author": "kwantam",
@@ -6240,6 +6248,20 @@
           "body": "For example, one can implement a constant-time version of rejection sampling by iterating `k` times and conditionally selecting the first x that is the x-coordinate of a point, and discarding the other values. This fails suceeds with probablity 2^-k, but still relies on generating x from a (possible corrupted) PRGN.",
           "createdAt": "2020-06-15T23:43:02Z",
           "updatedAt": "2020-06-15T23:43:02Z"
+        },
+        {
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I think this was settled by an updated in #282 that clarifies why it's a MUST NOT. Are we OK to close?",
+          "createdAt": "2020-06-16T23:34:31Z",
+          "updatedAt": "2020-06-16T23:34:31Z"
+        },
+        {
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Yep, let's do it!",
+          "createdAt": "2020-06-17T00:13:21Z",
+          "updatedAt": "2020-06-17T00:13:21Z"
         }
       ]
     },
@@ -6255,7 +6277,7 @@
       "labels": [],
       "body": "I consider we can do only a slight modification on hash_to_field to support prime modulus.\r\nNamely modifying the amount of bytes requested to the `expand_message` function.\r\nSo we can avoid the use of an alternate method.\r\n\r\n\r\n",
       "createdAt": "2020-06-16T01:13:56Z",
-      "updatedAt": "2020-06-16T06:13:44Z",
+      "updatedAt": "2020-06-16T19:24:42Z",
       "closedAt": null,
       "comments": [
         {
@@ -6264,6 +6286,13 @@
           "body": "This is a great idea, but we have to be careful for a couple reasons:\r\n\r\n1. Any change we make to address this issue really really shouldn't change hash_to_field unless absolutely necessary, because we'd be breaking existing implementations (of which there are a bunch at this point!) just to address a corner case.\r\n\r\n2. It's not totally clear to me that it's possible to address this satisfactorily by requesting fewer bits from expand_message. The rest of my message discusses. (Some of this rehashes what I wrote in an email a few days ago.)\r\n\r\nTL;DR: I don't see a good way to give a unified hash_to_field that conveniently handles both small- and large-characteristic extension fields.\r\n\r\n---\r\n\r\nWe can regard hashing to GF(p^m), m >= 1 as selecting a random integer in the half-open range [0, p^m). When discussing uniformity, it's handy to think of this integer as comprising m digits in base p.\r\n\r\nTo sample an integer in [0, p^m) with statistical distance from uniform roughly 2^-k for arbitrary p without rejection sampling, we have a few choices:\r\n\r\n1. Select m values in [0, p) with statistical distance from uniform roughly 2^-k. At least for small m, this gives an integer in [0, p^m) with statistical distance roughly 2^-k. This is the approach that hash_to_field uses: reduce a bunch of (k + log p)-bit integers mod p.\r\n\r\n2. Select one value in [0, p^m) with statistical distance from uniform roughly 2^-k. This is the approach that hash_to_field_divrem (formerly proposed in #282) uses: reduce a (k + m log p)-bit integer mod p^m.\r\n\r\n3. Some interpolation between the above approaches. For example, we might select n integers in [0, p^(m/n)) with statistical distance from uniform roughly 2^-k, then regard each as comprising m/n digits in base p. This would require reducing (k + (m/n) log p)-bit integers mod p^(m/n).\r\n\r\nIt's also worth mentioning a class of approaches that *do not* work. It's tempting to think, for example, that since (k + m log p) bits is enough, we can hash to m digits by reducing m, (k/m + log p)-bit integers mod p. But this doesn't work---we get statistical distance upper bounded by 2^-(k/m) for each digit, which is *far* too big!\r\n\r\n---\r\n\r\nOf the above approaches, option (2) is the most efficient from a hashing standpoint---it only requires k + m log p bits, which is k * (m - 1) fewer bits than option (1).\r\n\r\nOn the other hand, when log p >= k, option (1) is *far* easier to implement. The reason is, multiplying two (log p)-bit integers requires reducing a (2 log p)-bit intermediate value mod p---so we can reuse the same modular reduction code when log p >= k, i.e., when 2 log p >= k + log p.\r\n\r\nWhen k is much greater than log p, option (1)'s simplicity advantage vanishes, because k + log p is significantly bigger than 2 log p, which means we'd need to implement a special modular reduction routine anyway. At this point, it seems like option (2) is better. (Note that I'm making the simplifying assumption that options (1) and (2) require similarly difficult implementations, which is not strictly true. But I don't see how to make finer distinctions without getting bogged down in details.)\r\n\r\n---\r\n\r\nSo it seems like, for curves over high-degree extensions of small-ish characteristic (e.g., GF(9767^19)---which is a pretty extreme example), we want a fundamentally different approach than for curves over low-degree extensions of large-ish characteristic. I don't see another way to reconcile this, because option (2) makes implementation *really* ugly when log p is big. For example, when hashing to GF((2^581)^8) (which one would do when hashing to G2 of BLS48-581), option (2) requires DIVREM to handle roughly 4900-bit integers (!!!), which seems like a non-starter.\r\n\r\n---\r\n\r\nIf we write down option (2) in the appendix as I've proposed in #282, we could add a subsection discussing option (3), which is easily implemented using option (2) as a subroutine. For the case of GF(9767^19), for example, one could hash to 2 elements of GF(9767^10) and convert that into an element of GF(9767^19) simply by concatenating the vector representations and throwing one vectory entry away.\r\n\r\nThe reason to consider this approach is that it limits the size of the input that DIVREM needs to handle, which *may* make implementing DIVREM easier. For hashing to an element of GF(9767^19) in one shot, DIVREM needs to handle 394-bit inputs. By instead hashing to two elements of GF(9767^10), DIVREM only needs to handle 268-bit integers.\r\n\r\n(Note that I haven't thought carefully about how to implement DIVREM nicely, though, so maybe the difference between 268 bits and 394 bits is not worth the extra 140ish bits of hash output that it requires.)",
           "createdAt": "2020-06-16T03:31:03Z",
           "updatedAt": "2020-06-16T06:13:44Z"
+        },
+        {
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I opened #286 to make the proposed alternative method concrete. We can continue discussing here or discuss there as you like! @chris-wood @armfazh ",
+          "createdAt": "2020-06-16T19:24:42Z",
+          "updatedAt": "2020-06-16T19:24:42Z"
         }
       ]
     }
@@ -29021,7 +29050,7 @@
       "labels": [],
       "body": "This PR includes responses to most of the comments from Thomas Pornin's review for the crypto panel.\r\n\r\nIn the next comment in this thread I will quote Thomas's email and my responses to each point. There are a few cases (marked \"???\") where it's either not clear to me what the comment meant or it's otherwise not obvious how to respond. Let's discuss in this thread and I'll make edits as necessary.",
       "createdAt": "2020-06-15T21:16:28Z",
-      "updatedAt": "2020-06-16T18:03:58Z",
+      "updatedAt": "2020-06-16T19:22:23Z",
       "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
       "baseRefName": "master",
       "baseRefOid": "c09a3368610f5c7e420db0a42d9ee970d51f27a4",
@@ -29762,6 +29791,102 @@
         }
       ],
       "reviews": []
+    },
+    {
+      "number": 286,
+      "id": "MDExOlB1bGxSZXF1ZXN0NDM1NDIwNjcw",
+      "title": "add hash_to_field_divrem in appx",
+      "url": "https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/pull/286",
+      "state": "OPEN",
+      "author": "kwantam",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "This PR adds an alternative version of hash_to_field that is approriate for high-degree extensions of smallish characteristic. I'm posting this here so that we can refer to specifies in the discussion in #284. Not clear that we should actually apply this change, though.\r\n\r\ncloses #284",
+      "createdAt": "2020-06-16T19:23:42Z",
+      "updatedAt": "2020-06-25T22:50:09Z",
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "f028204795218e1c9bc14356957b5562062b84c9",
+      "headRepository": "kwantam/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "hash_to_field_alt",
+      "headRefOid": "45a8f2df74f95fe145b2d9249d541386f3dc89e2",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Just ACKing this for now. @kwantam, do we have a concrete use case for this? I wonder if we should ask folks on the list if they think it'd be helpful? ",
+          "createdAt": "2020-06-17T13:50:07Z",
+          "updatedAt": "2020-06-17T13:50:07Z"
+        },
+        {
+          "author": "armfazh",
+          "authorAssociation": "COLLABORATOR",
+          "body": "\r\nA different approach to handle this case, it could be to define and/or recommend what are the properties needed by an alternative algorithm for hash_to_field, instead of proposing the full description of an alternate method, which, at the end of the day, might or might not be the best method.\r\n\r\nThis would be similar to the way we described a variant for expand_message (other than XMD and XOF).\r\n\r\nFor example, we didn't describe any method for hashing to GF(2^n), (of course, the draft restricts to large prime characateristic), however, this is the other extreme and we could give some recommendations -- Imagine someone interested in using a binary curve for lightweight computing.\r\n\r\n",
+          "createdAt": "2020-06-17T16:39:41Z",
+          "updatedAt": "2020-06-17T16:39:41Z"
+        },
+        {
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> do we have a concrete use case for this?\r\n\r\nThe only one I know of is https://github.com/pornin/curve9767\r\n\r\n> A different approach to handle this case, it could be to define and/or recommend what are the properties needed by an alternative algorithm for hash_to_field, instead of proposing the full description of an alternate method, which, at the end of the day, might or might not be the best method\r\n\r\nThis is a good observation. This could be done, for example, by expanding the paragraph at the start of Section 5 that says impls must not use rejection sampling. We could also add a subsection describing the properties, but really there are not many: must be statistaically close to uniform, must not use rejection sampling, should be specified with straight line impls in mind.",
+          "createdAt": "2020-06-17T16:53:33Z",
+          "updatedAt": "2020-06-17T16:53:33Z"
+        },
+        {
+          "author": "armfazh",
+          "authorAssociation": "COLLABORATOR",
+          "body": "\r\n> This is a good observation. This could be done, for example, by expanding the paragraph at the start of Section 5 that says impls must not use rejection sampling. We could also add a subsection describing the properties, but really there are not many: must be statistaically close to uniform, must not use rejection sampling, should be specified with straight line impls in mind.\r\n\r\n\r\nAgree, so we can remove the alternative method.\r\n",
+          "createdAt": "2020-06-19T22:41:39Z",
+          "updatedAt": "2020-06-19T22:41:39Z"
+        },
+        {
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "body": "FWIW, I approved since this is a fairly simple algorithm, so I'm OK with the added complexity. But if you both think elaborating on the requirements would work, that's fine too. That we only know of one use case is, well, unfortunate. (So maybe I just talked myself in @armfazh's suggestion? :))",
+          "createdAt": "2020-06-19T22:44:06Z",
+          "updatedAt": "2020-06-19T22:44:06Z"
+        },
+        {
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@kwantam, quick question:\r\n\r\n> This is a good observation. This could be done, for example, by expanding the paragraph at the start of Section 5 that says impls must not use rejection sampling. We could also add a subsection describing the properties, but really there are not many: must be statistaically close to uniform, must not use rejection sampling, should be specified with straight line impls in mind.\r\n\r\nThe third paragraph in Section 5 starts with, \"Implementors MUST NOT use rejection sampling...\" Perhaps we could add the properties you list to 5.1 (security considerations)?",
+          "createdAt": "2020-06-25T22:50:09Z",
+          "updatedAt": "2020-06-25T22:50:09Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDM0MzUxNjA2",
+          "commit": {
+            "abbreviatedOid": "45a8f2d"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2020-06-19T21:34:44Z",
+          "updatedAt": "2020-06-19T22:28:06Z",
+          "comments": [
+            {
+              "originalPosition": 80,
+              "body": "```suggestion\r\nor greater than k as it is more difficult to implement\r\n```",
+              "createdAt": "2020-06-19T21:34:44Z",
+              "updatedAt": "2020-06-19T22:28:06Z"
+            },
+            {
+              "originalPosition": 163,
+              "body": "Should this be `ceil(log2(p))`?",
+              "createdAt": "2020-06-19T22:27:15Z",
+              "updatedAt": "2020-06-19T22:28:06Z"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
