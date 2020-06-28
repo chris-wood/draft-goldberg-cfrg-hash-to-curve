@@ -920,14 +920,13 @@ Internet-Draft                hash-to-curve                    June 2020
    The hash_to_field function described in this section is inefficient
    for certain extension fields.  Specifically, when hashing to an
    element of the extension field GF(p^m), hash_to_field requires
-   expanding msg into m * L bytes (for L as defined above).  For
-   extension fields where log2(p) is significantly smaller than the
-   security level k, this approach is inefficient: it requires
-   expand_message to output roughly m * log2(p) + m * k bits, whereas m
-   * log2(p) + k bytes suffices to generate an element of GF(p^m) with
-   bias at most 2^-k.  In such cases, an applications MAY use an
-   alternative hash_to_field function, provided it meets the following
-   security requirements:
+   expanding msg into m * L bytes.  For extension fields where log2(p)
+   is significantly smaller than the security level k, this approach is
+   inefficient: it requires expand_message to output roughly m * log2(p)
+   + m * k bits, whereas m * log2(p) + k bytes suffices to generate an
+   element of GF(p^m) with bias at most 2^-k.  In such cases, an
+   applications MAY use an alternative hash_to_field function, provided
+   it meets the following security requirements:
 
    *  The function MUST output field element(s) that are uniformly
       random except with bias at most 2^-k.
@@ -943,6 +942,7 @@ Internet-Draft                hash-to-curve                    June 2020
    The expand_message parameter to this function MUST conform to the
    requirements given in Section 5.4.  Section 3.1 discusses the
    REQUIRED method for constructing DST, the domain separation tag.
+
 
 
 
