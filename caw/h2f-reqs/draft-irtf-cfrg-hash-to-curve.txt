@@ -920,13 +920,14 @@ Internet-Draft                hash-to-curve                    June 2020
    The hash_to_field function described in this section is inefficient
    for certain extension fields.  Specifically, when hashing to an
    element of the extension field GF(p^m), hash_to_field requires
-   expanding msg into m * L bytes.  For extension fields where log2(p)
-   is significantly smaller than the security level k, this approach is
-   inefficient: it requires expand_message to output roughly m * log2(p)
-   + m * k bits, whereas m * log2(p) + k bytes suffices to generate an
-   element of GF(p^m) with bias at most 2^-k.  In such cases, an
-   applications MAY use an alternative hash_to_field function, provided
-   it meets the following security requirements:
+   expanding msg into m * L bytes (for L as defined above).  For
+   extension fields where log2(p) is significantly smaller than the
+   security level k, this approach is inefficient: it requires
+   expand_message to output roughly m * log2(p) + m * k bits, whereas m
+   * log2(p) + k bytes suffices to generate an element of GF(p^m) with
+   bias at most 2^-k.  In such cases, an applications MAY use an
+   alternative hash_to_field function, provided it meets the following
+   security requirements:
 
    *  The function MUST output field element(s) that are uniformly
       random except with bias at most 2^-k.
@@ -935,14 +936,13 @@ Internet-Draft                hash-to-curve                    June 2020
 
    *  The function SHOULD be amenable to straight line implementations.
 
+   For example, Pornin [P20] describes a method for hashing to
+   GF(9767^19) that meets these requirements while using fewer output
+   bits from expand_message than hash_to_field would for that field.
+
 5.3.  hash_to_field implementation
 
    The following procedure implements hash_to_field.
-
-   The expand_message parameter to this function MUST conform to the
-   requirements given in Section 5.4.  Section 3.1 discusses the
-   REQUIRED method for constructing DST, the domain separation tag.
-
 
 
 
@@ -953,6 +953,10 @@ Faz-Hernandez, et al.   Expires 30 December 2020               [Page 17]
 
 Internet-Draft                hash-to-curve                    June 2020
 
+
+   The expand_message parameter to this function MUST conform to the
+   requirements given in Section 5.4.  Section 3.1 discusses the
+   REQUIRED method for constructing DST, the domain separation tag.
 
    hash_to_field(msg, count)
 
@@ -998,10 +1002,6 @@ Internet-Draft                hash-to-curve                    June 2020
 
    This document defines the following two variants of expand_message:
 
-   *  expand_message_xmd (Section 5.4.1) is appropriate for use with a
-      wide range of hash functions, including SHA-2 [FIPS180-4], SHA-3
-      [FIPS202], BLAKE2 [RFC7693], and others.
-
 
 
 
@@ -1009,6 +1009,10 @@ Faz-Hernandez, et al.   Expires 30 December 2020               [Page 18]
 
 Internet-Draft                hash-to-curve                    June 2020
 
+
+   *  expand_message_xmd (Section 5.4.1) is appropriate for use with a
+      wide range of hash functions, including SHA-2 [FIPS180-4], SHA-3
+      [FIPS202], BLAKE2 [RFC7693], and others.
 
    *  expand_message_xof (Section 5.4.2) is appropriate for use with
       extensible-output functions (XOFs) including functions in the
@@ -1052,10 +1056,6 @@ Internet-Draft                hash-to-curve                    June 2020
    [FIPS202] is 72 bytes.
 
    The following procedure implements expand_message_xmd.
-
-
-
-
 
 
 
@@ -2469,6 +2469,10 @@ Internet-Draft                hash-to-curve                    June 2020
       2.  For expand_message_xmd (Section 5.4.1) with SHA3-256, HASH_ID
           is "XMD:SHA3-256".
 
+   Suites that use an alternative hash_to_field function that meets the
+   requirements in Section 5.2 MUST indicate this by choosing a unique
+   identifier for HASH_ID.
+
    *  MAP_ID: a human-readable representation of the map_to_curve
       function as defined in Section 6.  These are defined as follows:
 
@@ -2509,11 +2513,7 @@ Internet-Draft                hash-to-curve                    June 2020
    Section 5 describes considerations for uniformly hashing to field
    elements; see Section 10.1 and Section 10.2 for further discussion.
 
-   Each encoding type (Section 3) accepts an arbitrary byte string and
-   maps it to a point on the curve sampled from a distribution that
-   depends on the encoding type.  It is important to note that using a
-   nonuniform encoding or directly evaluating one of the mappings of
-   Section 6 produces an output that is easily distinguished from a
+
 
 
 
@@ -2522,6 +2522,11 @@ Faz-Hernandez, et al.   Expires 30 December 2020               [Page 45]
 Internet-Draft                hash-to-curve                    June 2020
 
 
+   Each encoding type (Section 3) accepts an arbitrary byte string and
+   maps it to a point on the curve sampled from a distribution that
+   depends on the encoding type.  It is important to note that using a
+   nonuniform encoding or directly evaluating one of the mappings of
+   Section 6 produces an output that is easily distinguished from a
    uniformly random point.  Applications that use a nonuniform encoding
    SHOULD carefully analyze the security implications of nonuniformity.
    When the required encoding is not clear, applications SHOULD use a
@@ -2563,11 +2568,6 @@ Internet-Draft                hash-to-curve                    June 2020
    channels) may be pertinent.  Defending against such leakage is
    outside the scope of this document, because the nature of the leakage
    and the appropriate defense depend on the application.
-
-
-
-
-
 
 
 
@@ -3250,6 +3250,10 @@ Faz-Hernandez, et al.   Expires 30 December 2020               [Page 58]
 Internet-Draft                hash-to-curve                    June 2020
 
 
+   [P20]      Pornin, T., "Efficient Elliptic Curve Operations On
+              Microcontrollers With Finite Field Extensions", 2020,
+              <https://eprint.iacr.org/2020/009>.
+
    [RCB16]    Renes, J., Costello, C., and L. Batina, "Complete addition
               formulas for prime order elliptic curves",
               DOI 10.1007/978-3-662-49890-3_16, pages 403-428,
@@ -3291,11 +3295,7 @@ Internet-Draft                hash-to-curve                    June 2020
               Arithmetica, vol 117 no 3, 2005,
               <https://doi.org/10.4064/aa117-3-7>.
 
-   [S85]      Schoof, R., "Elliptic Curves Over Finite Fields and the
-              Computation of Square Roots mod p",
-              DOI 10.1090/S0025-5718-1985-0777280-6, pages 483-494,
-              In Mathematics of Computation vol 44 issue 170, April
-              1985, <https://doi.org/10.1090/S0025-5718-1985-0777280-6>.
+
 
 
 
@@ -3305,6 +3305,12 @@ Faz-Hernandez, et al.   Expires 30 December 2020               [Page 59]
 
 Internet-Draft                hash-to-curve                    June 2020
 
+
+   [S85]      Schoof, R., "Elliptic Curves Over Finite Fields and the
+              Computation of Square Roots mod p",
+              DOI 10.1090/S0025-5718-1985-0777280-6, pages 483-494,
+              In Mathematics of Computation vol 44 issue 170, April
+              1985, <https://doi.org/10.1090/S0025-5718-1985-0777280-6>.
 
    [SAGE]     The Sage Developers, "SageMath, the Sage Mathematics
               Software System", 2019, <https://www.sagemath.org>.
@@ -3345,6 +3351,17 @@ Internet-Draft                hash-to-curve                    June 2020
               pages 161-177, In Designs, Codes, and Cryptography, vol
               82, 2017, <https://doi.org/10.1007/s10623-016-0288-2>.
 
+
+
+
+
+
+
+Faz-Hernandez, et al.   Expires 30 December 2020               [Page 60]
+
+Internet-Draft                hash-to-curve                    June 2020
+
+
    [U07]      Ulas, M., "Rational points on certain hyperelliptic curves
               over finite fields", DOI 10.4064/ba55-2-1, pages 97-104,
               In Bulletin Polish Acad. Sci. Math. vol 55, no 2, 2007,
@@ -3354,13 +3371,6 @@ Internet-Draft                hash-to-curve                    June 2020
               Dragonfly Handshake of WPA3 and EAP-pwd", In IEEE
               Symposium on Security & Privacy (SP), 2020,
               <https://eprint.iacr.org/2019/383>.
-
-
-
-Faz-Hernandez, et al.   Expires 30 December 2020               [Page 60]
-
-Internet-Draft                hash-to-curve                    June 2020
-
 
    [W08]      Washington, L.C., "Elliptic curves: Number theory and
               cryptography", ISBN 9781420071467, publisher Chapman and
@@ -3400,6 +3410,14 @@ Appendix A.  Related work
    MapToGroup, which works roughly as follows: first, use the input
    string to initialize a pseudorandom number generator, then use the
    generator to produce a value x in F.  If x is the x-coordinate of a
+
+
+
+Faz-Hernandez, et al.   Expires 30 December 2020               [Page 61]
+
+Internet-Draft                hash-to-curve                    June 2020
+
+
    point on the elliptic curve, output that point.  Otherwise, generate
    a new value x in F and try again.  Since a random value x in F has
    probability about 1/2 of corresponding to a point on the curve, the
@@ -3410,14 +3428,6 @@ Appendix A.  Related work
    Schinzel and Skalba [SS04] introduce a method of constructing
    elliptic curve points deterministically, for a restricted class of
    curves and a very small number of points.  Skalba [S05] generalizes
-
-
-
-Faz-Hernandez, et al.   Expires 30 December 2020               [Page 61]
-
-Internet-Draft                hash-to-curve                    June 2020
-
-
    this construction to more curves and more points on those curves.
    Shallue and van de Woestijne [SW06] further generalize and simplify
    Skalba's construction, yielding concretely efficient maps to a
@@ -3455,16 +3465,6 @@ Internet-Draft                hash-to-curve                    June 2020
    some fraction of the points.  This means that they cannot be used
    directly to construct a random oracle that outputs points on the
    curve.
-
-
-
-
-
-
-
-
-
-
 
 
 
