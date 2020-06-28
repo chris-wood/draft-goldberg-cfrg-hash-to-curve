@@ -80,12 +80,13 @@ Table of Contents
      4.1.  The sgn0 function . . . . . . . . . . . . . . . . . . . .  14
    5.  Hashing to a finite field . . . . . . . . . . . . . . . . . .  16
      5.1.  Security considerations . . . . . . . . . . . . . . . . .  16
-     5.2.  hash_to_field implementation  . . . . . . . . . . . . . .  17
-     5.3.  expand_message  . . . . . . . . . . . . . . . . . . . . .  18
-       5.3.1.  expand_message_xmd  . . . . . . . . . . . . . . . . .  19
-       5.3.2.  expand_message_xof  . . . . . . . . . . . . . . . . .  21
-       5.3.3.  Using DSTs longer than 255 bytes  . . . . . . . . . .  21
-       5.3.4.  Defining other expand_message variants  . . . . . . .  22
+     5.2.  Efficiency considerations in extension fields . . . . . .  17
+     5.3.  hash_to_field implementation  . . . . . . . . . . . . . .  17
+     5.4.  expand_message  . . . . . . . . . . . . . . . . . . . . .  18
+       5.4.1.  expand_message_xmd  . . . . . . . . . . . . . . . . .  19
+       5.4.2.  expand_message_xof  . . . . . . . . . . . . . . . . .  21
+       5.4.3.  Using DSTs longer than 255 bytes  . . . . . . . . . .  21
+       5.4.4.  Defining other expand_message variants  . . . . . . .  22
    6.  Deterministic mappings  . . . . . . . . . . . . . . . . . . .  23
      6.1.  Choosing a mapping function . . . . . . . . . . . . . . .  23
      6.2.  Interface . . . . . . . . . . . . . . . . . . . . . . . .  23
@@ -105,7 +106,6 @@ Table of Contents
    7.  Clearing the cofactor . . . . . . . . . . . . . . . . . . . .  31
    8.  Suites for hashing  . . . . . . . . . . . . . . . . . . . . .  32
      8.1.  Implementing a hash-to-curve suite  . . . . . . . . . . .  34
-     8.2.  Suites for NIST P-256 . . . . . . . . . . . . . . . . . .  35
 
 
 
@@ -114,6 +114,7 @@ Faz-Hernandez, et al.   Expires 30 December 2020                [Page 2]
 Internet-Draft                hash-to-curve                    June 2020
 
 
+     8.2.  Suites for NIST P-256 . . . . . . . . . . . . . . . . . .  35
      8.3.  Suites for NIST P-384 . . . . . . . . . . . . . . . . . .  36
      8.4.  Suites for NIST P-521 . . . . . . . . . . . . . . . . . .  37
      8.5.  Suites for curve25519 and edwards25519  . . . . . . . . .  37
@@ -161,7 +162,6 @@ Internet-Draft                hash-to-curve                    June 2020
        E.3.4.  edwards448  . . . . . . . . . . . . . . . . . . . . .  86
        E.3.5.  q = 3 (mod 4) . . . . . . . . . . . . . . . . . . . .  88
        E.3.6.  q = 5 (mod 8) . . . . . . . . . . . . . . . . . . . .  90
-     E.4.  Cofactor clearing for BLS12-381 G2  . . . . . . . . . . .  91
 
 
 
@@ -170,6 +170,7 @@ Faz-Hernandez, et al.   Expires 30 December 2020                [Page 3]
 Internet-Draft                hash-to-curve                    June 2020
 
 
+     E.4.  Cofactor clearing for BLS12-381 G2  . . . . . . . . . . .  91
    Appendix F.  Scripts for parameter generation . . . . . . . . . .  93
      F.1.  Finding Z for the Shallue-van de Woestijne map  . . . . .  93
      F.2.  Finding Z for Simplified SWU  . . . . . . . . . . . . . .  94
@@ -216,7 +217,6 @@ Internet-Draft                hash-to-curve                    June 2020
      I.2.  expand_message_xmd(SHA-512) . . . . . . . . . . . . . . . 149
      I.3.  expand_message_xof(SHAKE128)  . . . . . . . . . . . . . . 154
    Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . . 157
-
 
 
 
@@ -523,7 +523,7 @@ Internet-Draft                hash-to-curve                    June 2020
    "RO1" and "RO2" have the same length and thus satisfy this
    requirement when used as prefixes.  The algorithms specified in this
    document take a different approach to ensuring injectivity; see
-   Section 5.3 and Section 10.3 for more details.
+   Section 5.4 and Section 10.3 for more details.
 
 3.  Encoding byte strings to elliptic curves
 
@@ -867,7 +867,7 @@ Internet-Draft                hash-to-curve                    June 2020
    [FIPS180-4] or SHA-3 [FIPS202], and another appropriate for
    extensible-output functions such as SHAKE128 [FIPS202].  Security
    considerations for each expand_message variant are discussed below
-   (Section 5.3.1, Section 5.3.2).
+   (Section 5.4.1, Section 5.4.2).
 
    Implementors MUST NOT use rejection sampling to generate a uniformly
    random element of F, to ensure that the hash_to_field function is
@@ -881,7 +881,7 @@ Internet-Draft                hash-to-curve                    June 2020
 5.1.  Security considerations
 
    The hash_to_field function is designed to be indifferentiable from a
-   random oracle [MRH04] when expand_message (Section 5.3) is modeled as
+   random oracle [MRH04] when expand_message (Section 5.4) is modeled as
    a random oracle (see Section 10.1).  Ensuring indifferentiability
    requires care; to see why, consider a prime p that is close to 3/4 *
    2^256.  Reducing a random 256-bit integer modulo this p yields a
@@ -915,16 +915,19 @@ Internet-Draft                hash-to-curve                    June 2020
    corresponding curve.  See Section 10.4 for more details, and
    Section 8.9 for guidelines on choosing k for a given curve.
 
-   The hash_to_field function described below may not be most efficient
-   for all fields.  For example, when hashing to an element of the
-   extension field GF(p^m), hash_to_field requires expanding msg into m
-   * L bytes.  For extension fields where log2(p) is significantly
-   smaller than the security level k, this approach is inefficient: it
-   requires expand_message to output roughly m * log2(p) + m * k bits,
-   whereas m * log2(p) + k bytes suffices to generate an element of
-   GF(p^m) with bias at most 2^-k.  In such cases, an applications MAY
-   use an alternative hash_to_field function, provided it meets the
-   following security requirements:
+5.2.  Efficiency considerations in extension fields
+
+   The hash_to_field function described in this section is inefficient
+   for certain extension fields.  Specifically, when hashing to an
+   element of the extension field GF(p^m), hash_to_field requires
+   expanding msg into m * L bytes (for L as defined above).  For
+   extension fields where log2(p) is significantly smaller than the
+   security level k, this approach is inefficient: it requires
+   expand_message to output roughly m * log2(p) + m * k bits, whereas m
+   * log2(p) + k bytes suffices to generate an element of GF(p^m) with
+   bias at most 2^-k.  In such cases, an applications MAY use an
+   alternative hash_to_field function, provided it meets the following
+   security requirements:
 
    *  The function MUST output field element(s) that are uniformly
       random except with bias at most 2^-k.
@@ -933,16 +936,13 @@ Internet-Draft                hash-to-curve                    June 2020
 
    *  The function SHOULD be amenable to straight line implementations.
 
-5.2.  hash_to_field implementation
+5.3.  hash_to_field implementation
 
    The following procedure implements hash_to_field.
 
    The expand_message parameter to this function MUST conform to the
-   requirements given in Section 5.3.  Section 3.1 discusses the
+   requirements given in Section 5.4.  Section 3.1 discusses the
    REQUIRED method for constructing DST, the domain separation tag.
-
-
-
 
 
 
@@ -985,7 +985,7 @@ Internet-Draft                hash-to-curve                    June 2020
    8.   u_i = (e_0, ..., e_(m - 1))
    9. return (u_0, ..., u_(count - 1))
 
-5.3.  expand_message
+5.4.  expand_message
 
    expand_message is a function that generates a uniformly random byte
    string.  It takes three arguments:
@@ -998,7 +998,7 @@ Internet-Draft                hash-to-curve                    June 2020
 
    This document defines the following two variants of expand_message:
 
-   *  expand_message_xmd (Section 5.3.1) is appropriate for use with a
+   *  expand_message_xmd (Section 5.4.1) is appropriate for use with a
       wide range of hash functions, including SHA-2 [FIPS180-4], SHA-3
       [FIPS202], BLAKE2 [RFC7693], and others.
 
@@ -1010,14 +1010,14 @@ Faz-Hernandez, et al.   Expires 30 December 2020               [Page 18]
 Internet-Draft                hash-to-curve                    June 2020
 
 
-   *  expand_message_xof (Section 5.3.2) is appropriate for use with
+   *  expand_message_xof (Section 5.4.2) is appropriate for use with
       extensible-output functions (XOFs) including functions in the
       SHAKE [FIPS202] or BLAKE2X [BLAKE2X] families.
 
    These variants should suffice for the vast majority of use cases, but
-   other variants are possible; Section 5.3.4 discusses requirements.
+   other variants are possible; Section 5.4.4 discusses requirements.
 
-5.3.1.  expand_message_xmd
+5.4.1.  expand_message_xmd
 
    The expand_message_xmd function produces a uniformly random byte
    string using a cryptographic hash function H that outputs b bits.
@@ -1122,7 +1122,7 @@ Faz-Hernandez, et al.   Expires 30 December 2020               [Page 20]
 Internet-Draft                hash-to-curve                    June 2020
 
 
-5.3.2.  expand_message_xof
+5.4.2.  expand_message_xof
 
    The expand_message_xof function produces a uniformly random byte
    string using an extensible-output function (XOF) H.  For security, H
@@ -1160,7 +1160,7 @@ Internet-Draft                hash-to-curve                    June 2020
    3. uniform_bytes = H(msg_prime, len_in_bytes)
    4. return uniform_bytes
 
-5.3.3.  Using DSTs longer than 255 bytes
+5.4.3.  Using DSTs longer than 255 bytes
 
    The expand_message variants defined in this section accept domain
    separation tags of at most 255 bytes.  If applications require a
@@ -1189,7 +1189,7 @@ Internet-Draft                hash-to-curve                    June 2020
    bytes, "H2C-OVERSIZE-DST-" is a 17-byte ASCII string literal, and k
    is the target security level in bits.
 
-5.3.4.  Defining other expand_message variants
+5.4.4.  Defining other expand_message variants
 
    When defining a new expand_message variant, the most important
    consideration is that hash_to_field models expand_message as a random
@@ -1821,7 +1821,7 @@ Internet-Draft                hash-to-curve                    June 2020
 
    *  L, the length parameter for hash_to_field (Section 5.1).
 
-   *  expand_message, one of the variants specified in Section 5.3 plus
+   *  expand_message, one of the variants specified in Section 5.4 plus
       any parameters required for the specified variant (for example, H,
       the underlying hash function).
 
@@ -1907,7 +1907,7 @@ Internet-Draft                hash-to-curve                    June 2020
 
 
    3.  The hash_to_field function; see Section 5.  This includes the
-       expand_message variant (Section 5.3) and any constituent hash
+       expand_message variant (Section 5.4) and any constituent hash
        function or XOF.
 
    4.  The suite-specified mapping function; see the corresponding
@@ -1942,7 +1942,7 @@ Internet-Draft                hash-to-curve                    June 2020
 
    *  k: 128
 
-   *  expand_message: expand_message_xmd (Section 5.3.1)
+   *  expand_message: expand_message_xmd (Section 5.4.1)
 
    *  H: SHA-256
 
@@ -1990,7 +1990,7 @@ Internet-Draft                hash-to-curve                    June 2020
 
    *  k: 192
 
-   *  expand_message: expand_message_xmd (Section 5.3.1)
+   *  expand_message: expand_message_xmd (Section 5.4.1)
 
    *  H: SHA-512
 
@@ -2041,7 +2041,7 @@ Internet-Draft                hash-to-curve                    June 2020
 
    *  k: 256
 
-   *  expand_message: expand_message_xmd (Section 5.3.1)
+   *  expand_message: expand_message_xmd (Section 5.4.1)
 
    *  H: SHA-512
 
@@ -2088,7 +2088,7 @@ Internet-Draft                hash-to-curve                    June 2020
 
    *  k: 128
 
-   *  expand_message: expand_message_xmd (Section 5.3.1)
+   *  expand_message: expand_message_xmd (Section 5.4.1)
 
    *  H: SHA-512
 
@@ -2158,7 +2158,7 @@ Internet-Draft                hash-to-curve                    June 2020
 
    *  k: 224
 
-   *  expand_message: expand_message_xmd (Section 5.3.1)
+   *  expand_message: expand_message_xmd (Section 5.4.1)
 
    *  H: SHA-512
 
@@ -2220,7 +2220,7 @@ Internet-Draft                hash-to-curve                    June 2020
 
    *  k: 128
 
-   *  expand_message: expand_message_xmd (Section 5.3.1)
+   *  expand_message: expand_message_xmd (Section 5.4.1)
 
    *  H: SHA-256
 
@@ -2277,7 +2277,7 @@ Internet-Draft                hash-to-curve                    June 2020
 
    *  k: 128
 
-   *  expand_message: expand_message_xmd (Section 5.3.1)
+   *  expand_message: expand_message_xmd (Section 5.4.1)
 
    *  H: SHA-256
 
@@ -2338,7 +2338,7 @@ Internet-Draft                hash-to-curve                    June 2020
 
    *  k: 128
 
-   *  expand_message: expand_message_xmd (Section 5.3.1)
+   *  expand_message: expand_message_xmd (Section 5.4.1)
 
    *  H: SHA-256
 
@@ -2397,7 +2397,7 @@ Internet-Draft                hash-to-curve                    June 2020
 
    4.  Compute L as described in Section 5.1.
 
-   5.  Choose an expand_message variant from Section 5.3 plus any
+   5.  Choose an expand_message variant from Section 5.4 plus any
        underlying cryptographic primitives (e.g., a hash function H).
 
    6.  Choose a mapping following the guidelines in Section 6.1, and
@@ -2449,14 +2449,14 @@ Internet-Draft                hash-to-curve                    June 2020
 
       EXP_TAG indicates the expand_message variant:
 
-      -  "XMD" for expand_message_xmd (Section 5.3.1).
+      -  "XMD" for expand_message_xmd (Section 5.4.1).
 
-      -  "XOF" for expand_message_xof (Section 5.3.2).
+      -  "XOF" for expand_message_xof (Section 5.4.2).
 
       HASH_NAME is a human-readable name for the underlying hash
       primitive.  As examples:
 
-      1.  For expand_message_xof (Section 5.3.2) with SHAKE128, HASH_ID
+      1.  For expand_message_xof (Section 5.4.2) with SHAKE128, HASH_ID
           is "XOF:SHAKE128".
 
 
@@ -2466,7 +2466,7 @@ Faz-Hernandez, et al.   Expires 30 December 2020               [Page 44]
 Internet-Draft                hash-to-curve                    June 2020
 
 
-      2.  For expand_message_xmd (Section 5.3.1) with SHA3-256, HASH_ID
+      2.  For expand_message_xmd (Section 5.4.1) with SHA3-256, HASH_ID
           is "XMD:SHA3-256".
 
    *  MAP_ID: a human-readable representation of the map_to_curve
@@ -2548,7 +2548,7 @@ Internet-Draft                hash-to-curve                    June 2020
    [RFC7914], or Argon2 [I-D.irtf-cfrg-argon2]) on the password, then
    hash the output of that function to the target elliptic curve.  For
    collision resistance, the hash underlying the key derivation function
-   should be chosen according to the guidelines listed in Section 5.3.1.
+   should be chosen according to the guidelines listed in Section 5.4.1.
 
    Constant-time implementations of all functions in this document are
    STRONGLY RECOMMENDED for all uses, to avoid leaking information via
@@ -2581,12 +2581,12 @@ Internet-Draft                hash-to-curve                    June 2020
 10.1.  hash_to_field security
 
    The hash_to_field function defined in Section 5 is indifferentiable
-   from a random oracle [MRH04] when expand_message (Section 5.3) is
+   from a random oracle [MRH04] when expand_message (Section 5.4) is
    modeled as a random oracle.  By composability of indifferentiability
    proofs, this also holds when expand_message is proved
    indifferentiable from a random oracle relative to an underlying
    primitive that is modeled as a random oracle.  When following the
-   guidelines in Section 5.3, both variants of expand_message defined in
+   guidelines in Section 5.4, both variants of expand_message defined in
    that section meet this requirement (see also Section 10.2).
 
    We very briefly sketch the indifferentiability argument for
@@ -2601,7 +2601,7 @@ Internet-Draft                hash-to-curve                    June 2020
 
 10.2.  expand_message_xmd security
 
-   The expand_message_xmd function defined in Section 5.3.1 is
+   The expand_message_xmd function defined in Section 5.4.1 is
    indifferentiable from a random oracle [MRH04] when one of the
    following holds:
 
@@ -2653,11 +2653,11 @@ Internet-Draft                hash-to-curve                    June 2020
    ensure that security analyses of cryptographic protocols that query
    multiple independent random oracles remain valid even if all of these
    random oracles are instantiated based on one underlying function H.
-   The expand_message variants in this document (Section 5.3) ensure
+   The expand_message variants in this document (Section 5.4) ensure
    domain separation by appending a suffix-free-encoded domain
    separation tag DST_prime to all strings hashed by H, an underlying
    hash or extensible output function.  (Other expand_message variants
-   that follow the guidelines in Section 5.3.4 are expected to behave
+   that follow the guidelines in Section 5.4.4 are expected to behave
    similarly, but these should be analyzed on a case-by-case basis.)
    For security, applications that use the same function H outside of
    expand_message should enforce domain separation between those uses of
@@ -2757,7 +2757,7 @@ Internet-Draft                hash-to-curve                    June 2020
        This method ensures domain separation as follows.  First, since
        DST_ext contains at least one nonzero bit among its first b bits,
        it is guaranteed to be distinct from the value Z_pad
-       (Section 5.3.1, step 4), which ensures that all inputs to H are
+       (Section 5.4.1, step 4), which ensures that all inputs to H are
        distinct from the input used to generate b_0 in
        expand_message_xmd.  Second, since DST_ext is at least b bits
        long, it is almost certainly distinct from the values b_0 and
@@ -8050,7 +8050,7 @@ Internet-Draft                hash-to-curve                    June 2020
 Appendix I.  Expand test vectors
 
    This section gives test vectors for expand_message variants specified
-   in Section 5.3.  The test vectors in this section were generated
+   in Section 5.4.  The test vectors in this section were generated
    using code that is available from [hash2curve-repo].
 
 
