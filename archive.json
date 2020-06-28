@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2020-06-25T23:05:31.556002+00:00",
+  "timestamp": "2020-06-28T13:35:07.940973+00:00",
   "repo": "cfrg/draft-irtf-cfrg-hash-to-curve",
   "labels": [
     {
@@ -29797,21 +29797,21 @@
       "id": "MDExOlB1bGxSZXF1ZXN0NDM1NDIwNjcw",
       "title": "add hash_to_field_divrem in appx",
       "url": "https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/pull/286",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "kwantam",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "This PR adds an alternative version of hash_to_field that is approriate for high-degree extensions of smallish characteristic. I'm posting this here so that we can refer to specifies in the discussion in #284. Not clear that we should actually apply this change, though.\r\n\r\ncloses #284",
       "createdAt": "2020-06-16T19:23:42Z",
-      "updatedAt": "2020-06-25T22:50:09Z",
+      "updatedAt": "2020-06-28T00:00:37Z",
       "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
       "baseRefName": "master",
       "baseRefOid": "f028204795218e1c9bc14356957b5562062b84c9",
       "headRepository": "kwantam/draft-irtf-cfrg-hash-to-curve",
       "headRefName": "hash_to_field_alt",
       "headRefOid": "45a8f2df74f95fe145b2d9249d541386f3dc89e2",
-      "closedAt": null,
+      "closedAt": "2020-06-28T00:00:37Z",
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
@@ -29857,6 +29857,20 @@
           "body": "@kwantam, quick question:\r\n\r\n> This is a good observation. This could be done, for example, by expanding the paragraph at the start of Section 5 that says impls must not use rejection sampling. We could also add a subsection describing the properties, but really there are not many: must be statistaically close to uniform, must not use rejection sampling, should be specified with straight line impls in mind.\r\n\r\nThe third paragraph in Section 5 starts with, \"Implementors MUST NOT use rejection sampling...\" Perhaps we could add the properties you list to 5.1 (security considerations)?",
           "createdAt": "2020-06-25T22:50:09Z",
           "updatedAt": "2020-06-25T22:50:09Z"
+        },
+        {
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I made that change over in #287. @armfaz, @kwantam, please have a look!",
+          "createdAt": "2020-06-25T23:06:38Z",
+          "updatedAt": "2020-06-25T23:06:38Z"
+        },
+        {
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I think we're all agreed that #287 is the better way to go, so I'm going to close this in favor of that one.",
+          "createdAt": "2020-06-28T00:00:37Z",
+          "updatedAt": "2020-06-28T00:00:37Z"
         }
       ],
       "reviews": [
@@ -29883,6 +29897,136 @@
               "body": "Should this be `ceil(log2(p))`?",
               "createdAt": "2020-06-19T22:27:15Z",
               "updatedAt": "2020-06-19T22:28:06Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 287,
+      "id": "MDExOlB1bGxSZXF1ZXN0NDQwMjk5Njkz",
+      "title": "Specify alternative hash-to-field requirements.",
+      "url": "https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/pull/287",
+      "state": "OPEN",
+      "author": "chris-wood",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "This pulls some text from #286 (explaining why applications might want alternative hash-to-field functions) but replaces the description of one with some basic requirements. ",
+      "createdAt": "2020-06-25T23:05:54Z",
+      "updatedAt": "2020-06-28T13:34:56Z",
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "f028204795218e1c9bc14356957b5562062b84c9",
+      "headRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "caw/h2f-reqs",
+      "headRefOid": "baacd5a92682b1045022f109464fcb95759f6f5f",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDM3OTIwMDUx",
+          "commit": {
+            "abbreviatedOid": "1e20b7a"
+          },
+          "author": "armfazh",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "I like this, which is enough to avoid adding the full description of an alternative method. ",
+          "createdAt": "2020-06-25T23:14:50Z",
+          "updatedAt": "2020-06-25T23:14:50Z",
+          "comments": []
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDM4NzMxMTIx",
+          "commit": {
+            "abbreviatedOid": "1e20b7a"
+          },
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "state": "CHANGES_REQUESTED",
+          "body": "Probably this is cleaner than adding the appendix.\r\n\r\nThe only thing we don't do here is require suites using alternative hash_to_field functions to indicate that in the suite ID string. Do we want to ask them to include that information? Probably it would just take one sentence.",
+          "createdAt": "2020-06-27T23:38:19Z",
+          "updatedAt": "2020-06-27T23:58:55Z",
+          "comments": [
+            {
+              "originalPosition": 14,
+              "body": "```suggestion\r\n- The function MUST output field element(s) that are uniformly random except with bias at most 2^-k.\r\n```",
+              "createdAt": "2020-06-27T23:38:19Z",
+              "updatedAt": "2020-06-28T13:34:34Z"
+            },
+            {
+              "originalPosition": 14,
+              "body": "The issue is, we've just gotten through saying that the function in this section outputs something with bias at most 2^-k---so it does not even meet the \"uniformly random\" requirement as stated here!",
+              "createdAt": "2020-06-27T23:39:47Z",
+              "updatedAt": "2020-06-28T13:34:34Z"
+            },
+            {
+              "originalPosition": 5,
+              "body": "```suggestion\r\n## Efficiency considerations in extension fields {#hashtofield-exteff}\r\n\r\nThe hash\\_to\\_field function described in this section is inefficient for certain\r\nextension fields. Specifically, when hashing to an element of the extension\r\n```",
+              "createdAt": "2020-06-27T23:44:35Z",
+              "updatedAt": "2020-06-28T13:34:34Z"
+            },
+            {
+              "originalPosition": 6,
+              "body": "```suggestion\r\nfield GF(p^m), hash\\_to\\_field requires expanding msg into m * L bytes (for L as defined above).\r\n```",
+              "createdAt": "2020-06-27T23:44:56Z",
+              "updatedAt": "2020-06-28T13:34:34Z"
+            },
+            {
+              "originalPosition": 19,
+              "body": "```suggestion\r\n\r\nFor example, Pornin {{P20}} describes a method for hashing to GF(9767^19) that meets\r\nthese requirements while using fewer output bits from expand\\_message than\r\nhash\\_to\\_field would for that field.\r\n```",
+              "createdAt": "2020-06-27T23:50:48Z",
+              "updatedAt": "2020-06-28T13:34:34Z"
+            },
+            {
+              "originalPosition": 19,
+              "body": "P20 is:\r\n\r\n```\r\n  P20:\r\n    title: \"Efficient Elliptic Curve Operations On Microcontrollers With Finite Field Extensions\"\r\n    target: https://eprint.iacr.org/2020/009\r\n    date: 2020\r\n    author:\r\n      -\r\n        ins: T. Pornin\r\n        name: Thomas Pornin\r\n        org: NCC Group\r\n```",
+              "createdAt": "2020-06-27T23:53:00Z",
+              "updatedAt": "2020-06-28T13:34:34Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDM4NzMxOTY2",
+          "commit": {
+            "abbreviatedOid": "1e20b7a"
+          },
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-06-28T00:01:40Z",
+          "updatedAt": "2020-06-28T00:01:40Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "I think it might be better to add a separate subsection because otherwise I worry that this info gets lost...",
+              "createdAt": "2020-06-28T00:01:40Z",
+              "updatedAt": "2020-06-28T13:34:34Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDM4NzgxMDMz",
+          "commit": {
+            "abbreviatedOid": "baacd5a"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-06-28T13:34:55Z",
+          "updatedAt": "2020-06-28T13:34:56Z",
+          "comments": [
+            {
+              "originalPosition": 14,
+              "body": "\ud83d\udc4d thanks -- this precision is better!",
+              "createdAt": "2020-06-28T13:34:55Z",
+              "updatedAt": "2020-06-28T13:34:56Z"
             }
           ]
         }
