@@ -14,7 +14,7 @@
        This document specifies a number of algorithms for encoding or hashing an
 arbitrary string to a point on an elliptic curve. 
     " name="description">
-<meta content="xml2rfc 2.45.2" name="generator">
+<meta content="xml2rfc 2.45.3" name="generator">
 <meta content="Internet-Draft" name="keyword">
 <meta content="draft-irtf-cfrg-hash-to-curve-latest" name="ietf.draft">
 <link href="draft-irtf-cfrg-hash-to-curve.xml" rel="alternate" type="application/rfc+xml">
@@ -820,7 +820,7 @@ table.left {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Faz-Hernandez, et al.</td>
-<td class="center">Expires 18 December 2020</td>
+<td class="center">Expires 31 December 2020</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -833,12 +833,12 @@ table.left {
 <dd class="internet-draft">draft-irtf-cfrg-hash-to-curve-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2020-06-16" class="published">16 June 2020</time>
+<time datetime="2020-06-29" class="published">29 June 2020</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2020-12-18">18 December 2020</time></dd>
+<dd class="expires"><time datetime="2020-12-31">31 December 2020</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -889,7 +889,7 @@ arbitrary string to a point on an elliptic curve.<a href="#section-abstract-1" c
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 18 December 2020.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 31 December 2020.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -977,22 +977,25 @@ arbitrary string to a point on an elliptic curve.<a href="#section-abstract-1" c
                 <p id="section-toc.1-1.5.2.1.1"><a href="#section-5.1" class="xref">5.1</a>.  <a href="#name-security-considerations" class="xref">Security considerations</a><a href="#section-toc.1-1.5.2.1.1" class="pilcrow">¶</a></p>
 </li>
 <li class="compact toc ulEmpty" id="section-toc.1-1.5.2.2">
-                <p id="section-toc.1-1.5.2.2.1"><a href="#section-5.2" class="xref">5.2</a>.  <a href="#name-hash_to_field-implementatio" class="xref">hash_to_field implementation</a><a href="#section-toc.1-1.5.2.2.1" class="pilcrow">¶</a></p>
+                <p id="section-toc.1-1.5.2.2.1"><a href="#section-5.2" class="xref">5.2</a>.  <a href="#name-efficiency-considerations-i" class="xref">Efficiency considerations in extension fields</a><a href="#section-toc.1-1.5.2.2.1" class="pilcrow">¶</a></p>
 </li>
 <li class="compact toc ulEmpty" id="section-toc.1-1.5.2.3">
-                <p id="section-toc.1-1.5.2.3.1"><a href="#section-5.3" class="xref">5.3</a>.  <a href="#name-expand_message" class="xref">expand_message</a><a href="#section-toc.1-1.5.2.3.1" class="pilcrow">¶</a></p>
+                <p id="section-toc.1-1.5.2.3.1"><a href="#section-5.3" class="xref">5.3</a>.  <a href="#name-hash_to_field-implementatio" class="xref">hash_to_field implementation</a><a href="#section-toc.1-1.5.2.3.1" class="pilcrow">¶</a></p>
+</li>
+<li class="compact toc ulEmpty" id="section-toc.1-1.5.2.4">
+                <p id="section-toc.1-1.5.2.4.1"><a href="#section-5.4" class="xref">5.4</a>.  <a href="#name-expand_message" class="xref">expand_message</a><a href="#section-toc.1-1.5.2.4.1" class="pilcrow">¶</a></p>
 <ul class="compact toc ulEmpty">
-<li class="compact toc ulEmpty" id="section-toc.1-1.5.2.3.2.1">
-                    <p id="section-toc.1-1.5.2.3.2.1.1"><a href="#section-5.3.1" class="xref">5.3.1</a>.  <a href="#name-expand_message_xmd" class="xref">expand_message_xmd</a><a href="#section-toc.1-1.5.2.3.2.1.1" class="pilcrow">¶</a></p>
+<li class="compact toc ulEmpty" id="section-toc.1-1.5.2.4.2.1">
+                    <p id="section-toc.1-1.5.2.4.2.1.1"><a href="#section-5.4.1" class="xref">5.4.1</a>.  <a href="#name-expand_message_xmd" class="xref">expand_message_xmd</a><a href="#section-toc.1-1.5.2.4.2.1.1" class="pilcrow">¶</a></p>
 </li>
-<li class="compact toc ulEmpty" id="section-toc.1-1.5.2.3.2.2">
-                    <p id="section-toc.1-1.5.2.3.2.2.1"><a href="#section-5.3.2" class="xref">5.3.2</a>.  <a href="#name-expand_message_xof" class="xref">expand_message_xof</a><a href="#section-toc.1-1.5.2.3.2.2.1" class="pilcrow">¶</a></p>
+<li class="compact toc ulEmpty" id="section-toc.1-1.5.2.4.2.2">
+                    <p id="section-toc.1-1.5.2.4.2.2.1"><a href="#section-5.4.2" class="xref">5.4.2</a>.  <a href="#name-expand_message_xof" class="xref">expand_message_xof</a><a href="#section-toc.1-1.5.2.4.2.2.1" class="pilcrow">¶</a></p>
 </li>
-<li class="compact toc ulEmpty" id="section-toc.1-1.5.2.3.2.3">
-                    <p id="section-toc.1-1.5.2.3.2.3.1"><a href="#section-5.3.3" class="xref">5.3.3</a>.  <a href="#name-using-dsts-longer-than-255-" class="xref">Using DSTs longer than 255 bytes</a><a href="#section-toc.1-1.5.2.3.2.3.1" class="pilcrow">¶</a></p>
+<li class="compact toc ulEmpty" id="section-toc.1-1.5.2.4.2.3">
+                    <p id="section-toc.1-1.5.2.4.2.3.1"><a href="#section-5.4.3" class="xref">5.4.3</a>.  <a href="#name-using-dsts-longer-than-255-" class="xref">Using DSTs longer than 255 bytes</a><a href="#section-toc.1-1.5.2.4.2.3.1" class="pilcrow">¶</a></p>
 </li>
-<li class="compact toc ulEmpty" id="section-toc.1-1.5.2.3.2.4">
-                    <p id="section-toc.1-1.5.2.3.2.4.1"><a href="#section-5.3.4" class="xref">5.3.4</a>.  <a href="#name-defining-other-expand_messa" class="xref">Defining other expand_message variants</a><a href="#section-toc.1-1.5.2.3.2.4.1" class="pilcrow">¶</a></p>
+<li class="compact toc ulEmpty" id="section-toc.1-1.5.2.4.2.4">
+                    <p id="section-toc.1-1.5.2.4.2.4.1"><a href="#section-5.4.4" class="xref">5.4.4</a>.  <a href="#name-defining-other-expand_messa" class="xref">Defining other expand_message variants</a><a href="#section-toc.1-1.5.2.4.2.4.1" class="pilcrow">¶</a></p>
 </li>
 </ul>
 </li>
@@ -1667,7 +1670,7 @@ encoding for each oracle being simulated.
 In the above example, "RO1" and "RO2" have the same length and thus
 satisfy this requirement when used as prefixes.
 The algorithms specified in this document take a different approach to ensuring
-injectivity; see <a href="#hashtofield-expand" class="xref">Section 5.3</a> and <a href="#security-considerations-domain-separation" class="xref">Section 10.3</a>
+injectivity; see <a href="#hashtofield-expand" class="xref">Section 5.4</a> and <a href="#security-considerations-domain-separation" class="xref">Section 10.3</a>
 for more details.<a href="#section-2.2.5-5" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1983,7 +1986,7 @@ This document defines two variants of expand_message: one appropriate
 for hash functions like SHA-2 <span>[<a href="#FIPS180-4" class="xref">FIPS180-4</a>]</span> or SHA-3 <span>[<a href="#FIPS202" class="xref">FIPS202</a>]</span>, and another
 appropriate for extensible-output functions such as SHAKE128 <span>[<a href="#FIPS202" class="xref">FIPS202</a>]</span>.
 Security considerations for each expand_message variant are discussed
-below (<a href="#hashtofield-expand-xmd" class="xref">Section 5.3.1</a>, <a href="#hashtofield-expand-xof" class="xref">Section 5.3.2</a>).<a href="#section-5-2" class="pilcrow">¶</a></p>
+below (<a href="#hashtofield-expand-xmd" class="xref">Section 5.4.1</a>, <a href="#hashtofield-expand-xof" class="xref">Section 5.4.2</a>).<a href="#section-5-2" class="pilcrow">¶</a></p>
 <p id="section-5-3">Implementors MUST NOT use rejection sampling to generate a uniformly random
 element of F, to ensure that the hash_to_field function is amenable to
 constant-time implementation.
@@ -1998,7 +2001,7 @@ would be incompatible with constant-time implementation.<a href="#section-5-3" c
 <a href="#section-5.1" class="section-number selfRef">5.1. </a><a href="#name-security-considerations" class="section-name selfRef">Security considerations</a>
         </h3>
 <p id="section-5.1-1">The hash_to_field function is designed to be indifferentiable from a
-random oracle <span>[<a href="#MRH04" class="xref">MRH04</a>]</span> when expand_message (<a href="#hashtofield-expand" class="xref">Section 5.3</a>)
+random oracle <span>[<a href="#MRH04" class="xref">MRH04</a>]</span> when expand_message (<a href="#hashtofield-expand" class="xref">Section 5.4</a>)
 is modeled as a random oracle (see <a href="#security-considerations-hash-to-field" class="xref">Section 10.1</a>).
 Ensuring indifferentiability requires care; to see why, consider a prime
 p that is close to 3/4 * 2^256.
@@ -2026,16 +2029,43 @@ See <a href="#security-considerations-targets" class="xref">Section 10.4</a> for
 <a href="#new-suite" class="xref">Section 8.9</a> for guidelines on choosing k for a given curve.<a href="#section-5.1-5" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="hashtofield-impl">
+<div id="hashtofield-exteff">
 <section id="section-5.2">
-        <h3 id="name-hash_to_field-implementatio">
-<a href="#section-5.2" class="section-number selfRef">5.2. </a><a href="#name-hash_to_field-implementatio" class="section-name selfRef">hash_to_field implementation</a>
+        <h3 id="name-efficiency-considerations-i">
+<a href="#section-5.2" class="section-number selfRef">5.2. </a><a href="#name-efficiency-considerations-i" class="section-name selfRef">Efficiency considerations in extension fields</a>
         </h3>
-<p id="section-5.2-1">The following procedure implements hash_to_field.<a href="#section-5.2-1" class="pilcrow">¶</a></p>
-<p id="section-5.2-2">The expand_message parameter to this function MUST conform to the requirements
-given in <a href="#hashtofield-expand" class="xref">Section 5.3</a>. <a href="#domain-separation" class="xref">Section 3.1</a> discusses the REQUIRED
-method for constructing DST, the domain separation tag.<a href="#section-5.2-2" class="pilcrow">¶</a></p>
-<div class="artwork art-text alignLeft" id="section-5.2-3">
+<p id="section-5.2-1">The hash_to_field function described in this section is inefficient for certain
+extension fields. Specifically, when hashing to an element of the extension
+field GF(p^m), hash_to_field requires expanding msg into m * L bytes (for L as defined above).
+For extension fields where log2(p) is significantly smaller than the security
+level k, this approach is inefficient: it requires expand_message to output
+roughly m * log2(p) + m * k bits, whereas m * log2(p) + k bytes suffices to
+generate an element of GF(p^m) with bias at most 2^-k. In such cases, an
+applications MAY use an alternative hash_to_field function, provided it
+meets the following security requirements:<a href="#section-5.2-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-5.2-2.1">The function MUST output field element(s) that are uniformly random except with bias at most 2^-k.<a href="#section-5.2-2.1" class="pilcrow">¶</a>
+</li>
+<li class="normal" id="section-5.2-2.2">The function MUST NOT use rejection sampling.<a href="#section-5.2-2.2" class="pilcrow">¶</a>
+</li>
+<li class="normal" id="section-5.2-2.3">The function SHOULD be amenable to straight line implementations.<a href="#section-5.2-2.3" class="pilcrow">¶</a>
+</li>
+</ul>
+<p id="section-5.2-3">For example, Pornin <span>[<a href="#P20" class="xref">P20</a>]</span> describes a method for hashing to GF(9767^19) that meets
+these requirements while using fewer output bits from expand_message than
+hash_to_field would for that field.<a href="#section-5.2-3" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="hashtofield-impl">
+<section id="section-5.3">
+        <h3 id="name-hash_to_field-implementatio">
+<a href="#section-5.3" class="section-number selfRef">5.3. </a><a href="#name-hash_to_field-implementatio" class="section-name selfRef">hash_to_field implementation</a>
+        </h3>
+<p id="section-5.3-1">The following procedure implements hash_to_field.<a href="#section-5.3-1" class="pilcrow">¶</a></p>
+<p id="section-5.3-2">The expand_message parameter to this function MUST conform to the requirements
+given in <a href="#hashtofield-expand" class="xref">Section 5.4</a>. <a href="#domain-separation" class="xref">Section 3.1</a> discusses the REQUIRED
+method for constructing DST, the domain separation tag.<a href="#section-5.3-2" class="pilcrow">¶</a></p>
+<div class="artwork art-text alignLeft" id="section-5.3-3">
 <pre>
 hash_to_field(msg, count)
 
@@ -2067,76 +2097,76 @@ Steps:
 7.     e_j = OS2IP(tv) mod p
 8.   u_i = (e_0, ..., e_(m - 1))
 9. return (u_0, ..., u_(count - 1))
-</pre><a href="#section-5.2-3" class="pilcrow">¶</a>
+</pre><a href="#section-5.3-3" class="pilcrow">¶</a>
 </div>
 </section>
 </div>
 <div id="hashtofield-expand">
-<section id="section-5.3">
+<section id="section-5.4">
         <h3 id="name-expand_message">
-<a href="#section-5.3" class="section-number selfRef">5.3. </a><a href="#name-expand_message" class="section-name selfRef">expand_message</a>
+<a href="#section-5.4" class="section-number selfRef">5.4. </a><a href="#name-expand_message" class="section-name selfRef">expand_message</a>
         </h3>
-<p id="section-5.3-1">expand_message is a function that generates a uniformly random byte string.
-It takes three arguments:<a href="#section-5.3-1" class="pilcrow">¶</a></p>
-<ol start="1" type="1" class="normal type-1" id="section-5.3-2">
-          <li id="section-5.3-2.1">msg, a byte string containing the message to hash,<a href="#section-5.3-2.1" class="pilcrow">¶</a>
+<p id="section-5.4-1">expand_message is a function that generates a uniformly random byte string.
+It takes three arguments:<a href="#section-5.4-1" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="normal type-1" id="section-5.4-2">
+          <li id="section-5.4-2.1">msg, a byte string containing the message to hash,<a href="#section-5.4-2.1" class="pilcrow">¶</a>
 </li>
-<li id="section-5.3-2.2">DST, a byte string that acts as a domain separation tag, and<a href="#section-5.3-2.2" class="pilcrow">¶</a>
+<li id="section-5.4-2.2">DST, a byte string that acts as a domain separation tag, and<a href="#section-5.4-2.2" class="pilcrow">¶</a>
 </li>
-<li id="section-5.3-2.3">len_in_bytes, the number of bytes to be generated.<a href="#section-5.3-2.3" class="pilcrow">¶</a>
+<li id="section-5.4-2.3">len_in_bytes, the number of bytes to be generated.<a href="#section-5.4-2.3" class="pilcrow">¶</a>
 </li>
 </ol>
-<p id="section-5.3-3">This document defines the following two variants of expand_message:<a href="#section-5.3-3" class="pilcrow">¶</a></p>
+<p id="section-5.4-3">This document defines the following two variants of expand_message:<a href="#section-5.4-3" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-5.3-4.1">expand_message_xmd (<a href="#hashtofield-expand-xmd" class="xref">Section 5.3.1</a>) is appropriate for use
+<li class="normal" id="section-5.4-4.1">expand_message_xmd (<a href="#hashtofield-expand-xmd" class="xref">Section 5.4.1</a>) is appropriate for use
 with a wide range of hash functions, including SHA-2 <span>[<a href="#FIPS180-4" class="xref">FIPS180-4</a>]</span>, SHA-3
-<span>[<a href="#FIPS202" class="xref">FIPS202</a>]</span>, BLAKE2 <span>[<a href="#RFC7693" class="xref">RFC7693</a>]</span>, and others.<a href="#section-5.3-4.1" class="pilcrow">¶</a>
+<span>[<a href="#FIPS202" class="xref">FIPS202</a>]</span>, BLAKE2 <span>[<a href="#RFC7693" class="xref">RFC7693</a>]</span>, and others.<a href="#section-5.4-4.1" class="pilcrow">¶</a>
 </li>
-<li class="normal" id="section-5.3-4.2">expand_message_xof (<a href="#hashtofield-expand-xof" class="xref">Section 5.3.2</a>) is appropriate for use
+<li class="normal" id="section-5.4-4.2">expand_message_xof (<a href="#hashtofield-expand-xof" class="xref">Section 5.4.2</a>) is appropriate for use
 with extensible-output functions (XOFs) including functions in the SHAKE
-<span>[<a href="#FIPS202" class="xref">FIPS202</a>]</span> or BLAKE2X <span>[<a href="#BLAKE2X" class="xref">BLAKE2X</a>]</span> families.<a href="#section-5.3-4.2" class="pilcrow">¶</a>
+<span>[<a href="#FIPS202" class="xref">FIPS202</a>]</span> or BLAKE2X <span>[<a href="#BLAKE2X" class="xref">BLAKE2X</a>]</span> families.<a href="#section-5.4-4.2" class="pilcrow">¶</a>
 </li>
 </ul>
-<p id="section-5.3-5">These variants should suffice for the vast majority of use cases, but other
-variants are possible; <a href="#hashtofield-expand-other" class="xref">Section 5.3.4</a> discusses requirements.<a href="#section-5.3-5" class="pilcrow">¶</a></p>
+<p id="section-5.4-5">These variants should suffice for the vast majority of use cases, but other
+variants are possible; <a href="#hashtofield-expand-other" class="xref">Section 5.4.4</a> discusses requirements.<a href="#section-5.4-5" class="pilcrow">¶</a></p>
 <div id="hashtofield-expand-xmd">
-<section id="section-5.3.1">
+<section id="section-5.4.1">
           <h4 id="name-expand_message_xmd">
-<a href="#section-5.3.1" class="section-number selfRef">5.3.1. </a><a href="#name-expand_message_xmd" class="section-name selfRef">expand_message_xmd</a>
+<a href="#section-5.4.1" class="section-number selfRef">5.4.1. </a><a href="#name-expand_message_xmd" class="section-name selfRef">expand_message_xmd</a>
           </h4>
-<p id="section-5.3.1-1">The expand_message_xmd function produces a uniformly random byte string using
+<p id="section-5.4.1-1">The expand_message_xmd function produces a uniformly random byte string using
 a cryptographic hash function H that outputs b bits. For security, H must meet
-the following requirements:<a href="#section-5.3.1-1" class="pilcrow">¶</a></p>
+the following requirements:<a href="#section-5.4.1-1" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-5.3.1-2.1">The number of bits output by H MUST be b &gt;= 2 * k, for k the target
+<li class="normal" id="section-5.4.1-2.1">The number of bits output by H MUST be b &gt;= 2 * k, for k the target
 security level in bits, and b MUST be divisible by 8.
 The first requirement ensures k-bit collision resistance; the second
-ensures uniformity of expand_message_xmd's output.<a href="#section-5.3.1-2.1" class="pilcrow">¶</a>
+ensures uniformity of expand_message_xmd's output.<a href="#section-5.4.1-2.1" class="pilcrow">¶</a>
 </li>
-<li class="normal" id="section-5.3.1-2.2">H MAY be a Merkle-Damgaard hash function like SHA-2.
+<li class="normal" id="section-5.4.1-2.2">H MAY be a Merkle-Damgaard hash function like SHA-2.
 In this case, security holds when the underlying compression function is
 modeled as a random oracle <span>[<a href="#CDMP05" class="xref">CDMP05</a>]</span>.
-(See <a href="#security-considerations-expand-xmd" class="xref">Section 10.2</a> for discussion.)<a href="#section-5.3.1-2.2" class="pilcrow">¶</a>
+(See <a href="#security-considerations-expand-xmd" class="xref">Section 10.2</a> for discussion.)<a href="#section-5.4.1-2.2" class="pilcrow">¶</a>
 </li>
-<li class="normal" id="section-5.3.1-2.3">H MAY be a sponge-based hash function like SHA-3 or BLAKE2.
+<li class="normal" id="section-5.4.1-2.3">H MAY be a sponge-based hash function like SHA-3 or BLAKE2.
 In this case, security holds when the inner function is modeled as a
-random transformation or as a random permutation <span>[<a href="#BDPV08" class="xref">BDPV08</a>]</span>.<a href="#section-5.3.1-2.3" class="pilcrow">¶</a>
+random transformation or as a random permutation <span>[<a href="#BDPV08" class="xref">BDPV08</a>]</span>.<a href="#section-5.4.1-2.3" class="pilcrow">¶</a>
 </li>
-<li class="normal" id="section-5.3.1-2.4">Otherwise, H MUST be a hash function that has been proved indifferentiable
-from a random oracle <span>[<a href="#MRH04" class="xref">MRH04</a>]</span> under a reasonable cryptographic assumption.<a href="#section-5.3.1-2.4" class="pilcrow">¶</a>
+<li class="normal" id="section-5.4.1-2.4">Otherwise, H MUST be a hash function that has been proved indifferentiable
+from a random oracle <span>[<a href="#MRH04" class="xref">MRH04</a>]</span> under a reasonable cryptographic assumption.<a href="#section-5.4.1-2.4" class="pilcrow">¶</a>
 </li>
 </ul>
-<p id="section-5.3.1-3">SHA-2 <span>[<a href="#FIPS180-4" class="xref">FIPS180-4</a>]</span> and SHA-3 <span>[<a href="#FIPS202" class="xref">FIPS202</a>]</span> are typical and RECOMMENDED choices.
+<p id="section-5.4.1-3">SHA-2 <span>[<a href="#FIPS180-4" class="xref">FIPS180-4</a>]</span> and SHA-3 <span>[<a href="#FIPS202" class="xref">FIPS202</a>]</span> are typical and RECOMMENDED choices.
 As an example, for the 128-bit security level, b &gt;= 256 bits and either SHA-256 or
-SHA3-256 would be an appropriate choice.<a href="#section-5.3.1-3" class="pilcrow">¶</a></p>
-<p id="section-5.3.1-4">The hash function H is assumed to work by repeatedly ingesting fixed-length
+SHA3-256 would be an appropriate choice.<a href="#section-5.4.1-3" class="pilcrow">¶</a></p>
+<p id="section-5.4.1-4">The hash function H is assumed to work by repeatedly ingesting fixed-length
 blocks of data.
 The length of these blocks is called the input block size.
 As examples,
 the input block size of SHA-512 <span>[<a href="#FIPS180-4" class="xref">FIPS180-4</a>]</span> is 128 bytes and
-the input block size of SHA3-512 <span>[<a href="#FIPS202" class="xref">FIPS202</a>]</span> is 72 bytes.<a href="#section-5.3.1-4" class="pilcrow">¶</a></p>
-<p id="section-5.3.1-5">The following procedure implements expand_message_xmd.<a href="#section-5.3.1-5" class="pilcrow">¶</a></p>
-<div class="artwork art-text alignLeft" id="section-5.3.1-6">
+the input block size of SHA3-512 <span>[<a href="#FIPS202" class="xref">FIPS202</a>]</span> is 72 bytes.<a href="#section-5.4.1-4" class="pilcrow">¶</a></p>
+<p id="section-5.4.1-5">The following procedure implements expand_message_xmd.<a href="#section-5.4.1-5" class="pilcrow">¶</a></p>
+<div class="artwork art-text alignLeft" id="section-5.4.1-6">
 <pre>
 expand_message_xmd(msg, DST, len_in_bytes)
 
@@ -2169,42 +2199,42 @@ Steps:
 10.    b_i = H(strxor(b_0, b_(i - 1)) || I2OSP(i, 1) || DST_prime)
 11. uniform_bytes = b_1 || ... || b_ell
 12. return substr(uniform_bytes, 0, len_in_bytes)
-</pre><a href="#section-5.3.1-6" class="pilcrow">¶</a>
+</pre><a href="#section-5.4.1-6" class="pilcrow">¶</a>
 </div>
-<p id="section-5.3.1-7">Note that the string Z_pad is prefixed to msg when computing b_0 (step 7).
+<p id="section-5.4.1-7">Note that the string Z_pad is prefixed to msg when computing b_0 (step 7).
 This is necessary for security when H is a Merkle-Damgaard hash, e.g., SHA-2
 (see <a href="#security-considerations-expand-xmd" class="xref">Section 10.2</a>).
 Hashing this additional data means that the cost of computing b_0 is higher
 than the cost of simply computing H(msg).
 In most settings this overhead is negligible, because the cost of evaluating
-H is much less than the other costs involved in hashing to a curve.<a href="#section-5.3.1-7" class="pilcrow">¶</a></p>
-<p id="section-5.3.1-8">It is possible, however, to entirely avoid this overhead by taking advantage
+H is much less than the other costs involved in hashing to a curve.<a href="#section-5.4.1-7" class="pilcrow">¶</a></p>
+<p id="section-5.4.1-8">It is possible, however, to entirely avoid this overhead by taking advantage
 of the fact that Z_pad depends only on H, and not on the arguments to
 expand_message_xmd.
 To do so, first precompute and save the internal state of H after ingesting
 Z_pad. Then, when computing b_0, initialize H using the saved state.
-Further details are implementation dependent, and beyond the scope of this document.<a href="#section-5.3.1-8" class="pilcrow">¶</a></p>
+Further details are implementation dependent, and beyond the scope of this document.<a href="#section-5.4.1-8" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="hashtofield-expand-xof">
-<section id="section-5.3.2">
+<section id="section-5.4.2">
           <h4 id="name-expand_message_xof">
-<a href="#section-5.3.2" class="section-number selfRef">5.3.2. </a><a href="#name-expand_message_xof" class="section-name selfRef">expand_message_xof</a>
+<a href="#section-5.4.2" class="section-number selfRef">5.4.2. </a><a href="#name-expand_message_xof" class="section-name selfRef">expand_message_xof</a>
           </h4>
-<p id="section-5.3.2-1">The expand_message_xof function produces a uniformly random byte string
+<p id="section-5.4.2-1">The expand_message_xof function produces a uniformly random byte string
 using an extensible-output function (XOF) H.
-For security, H must meet the following criteria:<a href="#section-5.3.2-1" class="pilcrow">¶</a></p>
+For security, H must meet the following criteria:<a href="#section-5.4.2-1" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-5.3.2-2.1">The collision resistance of H MUST be at least k bits.<a href="#section-5.3.2-2.1" class="pilcrow">¶</a>
+<li class="normal" id="section-5.4.2-2.1">The collision resistance of H MUST be at least k bits.<a href="#section-5.4.2-2.1" class="pilcrow">¶</a>
 </li>
-<li class="normal" id="section-5.3.2-2.2">H MUST be an XOF that has been proved indifferentiable from a random oracle
-under a reasonable cryptographic assumption.<a href="#section-5.3.2-2.2" class="pilcrow">¶</a>
+<li class="normal" id="section-5.4.2-2.2">H MUST be an XOF that has been proved indifferentiable from a random oracle
+under a reasonable cryptographic assumption.<a href="#section-5.4.2-2.2" class="pilcrow">¶</a>
 </li>
 </ul>
-<p id="section-5.3.2-3">The SHAKE <span>[<a href="#FIPS202" class="xref">FIPS202</a>]</span> XOF family is a typical and RECOMMENDED choice.
-As an example, for 128-bit security, SHAKE128 would be an appropriate choice.<a href="#section-5.3.2-3" class="pilcrow">¶</a></p>
-<p id="section-5.3.2-4">The following procedure implements expand_message_xof.<a href="#section-5.3.2-4" class="pilcrow">¶</a></p>
-<div class="artwork art-text alignLeft" id="section-5.3.2-5">
+<p id="section-5.4.2-3">The SHAKE <span>[<a href="#FIPS202" class="xref">FIPS202</a>]</span> XOF family is a typical and RECOMMENDED choice.
+As an example, for 128-bit security, SHAKE128 would be an appropriate choice.<a href="#section-5.4.2-3" class="pilcrow">¶</a></p>
+<p id="section-5.4.2-4">The following procedure implements expand_message_xof.<a href="#section-5.4.2-4" class="pilcrow">¶</a></p>
+<div class="artwork art-text alignLeft" id="section-5.4.2-5">
 <pre>
 expand_message_xof(msg, DST, len_in_bytes)
 
@@ -2226,84 +2256,84 @@ Steps:
 2. msg_prime = msg || I2OSP(len_in_bytes, 2) || DST_prime
 3. uniform_bytes = H(msg_prime, len_in_bytes)
 4. return uniform_bytes
-</pre><a href="#section-5.3.2-5" class="pilcrow">¶</a>
+</pre><a href="#section-5.4.2-5" class="pilcrow">¶</a>
 </div>
 </section>
 </div>
 <div id="hashtofield-expand-dst">
-<section id="section-5.3.3">
+<section id="section-5.4.3">
           <h4 id="name-using-dsts-longer-than-255-">
-<a href="#section-5.3.3" class="section-number selfRef">5.3.3. </a><a href="#name-using-dsts-longer-than-255-" class="section-name selfRef">Using DSTs longer than 255 bytes</a>
+<a href="#section-5.4.3" class="section-number selfRef">5.4.3. </a><a href="#name-using-dsts-longer-than-255-" class="section-name selfRef">Using DSTs longer than 255 bytes</a>
           </h4>
-<p id="section-5.3.3-1">The expand_message variants defined in this section accept domain separation
+<p id="section-5.4.3-1">The expand_message variants defined in this section accept domain separation
 tags of at most 255 bytes.
 If applications require a domain separation tag longer than 255 bytes, e.g., because
 of requirements imposed by an invoking protocol, implementors MUST compute a short
-domain separation tag by hashing, as follows:<a href="#section-5.3.3-1" class="pilcrow">¶</a></p>
+domain separation tag by hashing, as follows:<a href="#section-5.4.3-1" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-5.3.3-2.1">For expand_message_xmd using hash function H, DST is computed as<a href="#section-5.3.3-2.1" class="pilcrow">¶</a>
+<li class="normal" id="section-5.4.3-2.1">For expand_message_xmd using hash function H, DST is computed as<a href="#section-5.4.3-2.1" class="pilcrow">¶</a>
 </li>
 </ul>
-<div class="artwork art-text alignLeft" id="section-5.3.3-3">
+<div class="artwork art-text alignLeft" id="section-5.4.3-3">
 <pre>
 DST = H("H2C-OVERSIZE-DST-" || a_very_long_DST)
-</pre><a href="#section-5.3.3-3" class="pilcrow">¶</a>
+</pre><a href="#section-5.4.3-3" class="pilcrow">¶</a>
 </div>
 <ul class="normal">
-<li class="normal" id="section-5.3.3-4.1">For expand_message_xof using extensible-output function H, DST is computed as<a href="#section-5.3.3-4.1" class="pilcrow">¶</a>
+<li class="normal" id="section-5.4.3-4.1">For expand_message_xof using extensible-output function H, DST is computed as<a href="#section-5.4.3-4.1" class="pilcrow">¶</a>
 </li>
 </ul>
-<div class="artwork art-text alignLeft" id="section-5.3.3-5">
+<div class="artwork art-text alignLeft" id="section-5.4.3-5">
 <pre>
 DST = H("H2C-OVERSIZE-DST-" || a_very_long_DST, ceil(2 * k / 8))
-</pre><a href="#section-5.3.3-5" class="pilcrow">¶</a>
+</pre><a href="#section-5.4.3-5" class="pilcrow">¶</a>
 </div>
-<p id="section-5.3.3-6">Here, a_very_long_DST is the DST whose length is greater than 255 bytes,
+<p id="section-5.4.3-6">Here, a_very_long_DST is the DST whose length is greater than 255 bytes,
 "H2C-OVERSIZE-DST-" is a 17-byte ASCII string literal, and
-k is the target security level in bits.<a href="#section-5.3.3-6" class="pilcrow">¶</a></p>
+k is the target security level in bits.<a href="#section-5.4.3-6" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="hashtofield-expand-other">
-<section id="section-5.3.4">
+<section id="section-5.4.4">
           <h4 id="name-defining-other-expand_messa">
-<a href="#section-5.3.4" class="section-number selfRef">5.3.4. </a><a href="#name-defining-other-expand_messa" class="section-name selfRef">Defining other expand_message variants</a>
+<a href="#section-5.4.4" class="section-number selfRef">5.4.4. </a><a href="#name-defining-other-expand_messa" class="section-name selfRef">Defining other expand_message variants</a>
           </h4>
-<p id="section-5.3.4-1">When defining a new expand_message variant, the most important consideration
+<p id="section-5.4.4-1">When defining a new expand_message variant, the most important consideration
 is that hash_to_field models expand_message as a random oracle.
 Thus, implementors SHOULD prove indifferentiability from a random oracle
 under an appropriate assumption about the underlying cryptographic primitives;
-see <a href="#security-considerations-hash-to-field" class="xref">Section 10.1</a> for more information.<a href="#section-5.3.4-1" class="pilcrow">¶</a></p>
-<p id="section-5.3.4-2">In addition, expand_message variants:<a href="#section-5.3.4-2" class="pilcrow">¶</a></p>
+see <a href="#security-considerations-hash-to-field" class="xref">Section 10.1</a> for more information.<a href="#section-5.4.4-1" class="pilcrow">¶</a></p>
+<p id="section-5.4.4-2">In addition, expand_message variants:<a href="#section-5.4.4-2" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-5.3.4-3.1">MUST give collision resistance commensurate with the security level of
-the target elliptic curve.<a href="#section-5.3.4-3.1" class="pilcrow">¶</a>
+<li class="normal" id="section-5.4.4-3.1">MUST give collision resistance commensurate with the security level of
+the target elliptic curve.<a href="#section-5.4.4-3.1" class="pilcrow">¶</a>
 </li>
-<li class="normal" id="section-5.3.4-3.2">MUST be built on primitives designed for use in applications requiring
+<li class="normal" id="section-5.4.4-3.2">MUST be built on primitives designed for use in applications requiring
 cryptographic randomness. As examples, a secure stream cipher is an appropriate
-primitive, whereas a Mersenne twister pseudorandom number generator <span>[<a href="#MT98" class="xref">MT98</a>]</span> is not.<a href="#section-5.3.4-3.2" class="pilcrow">¶</a>
+primitive, whereas a Mersenne twister pseudorandom number generator <span>[<a href="#MT98" class="xref">MT98</a>]</span> is not.<a href="#section-5.4.4-3.2" class="pilcrow">¶</a>
 </li>
-<li class="normal" id="section-5.3.4-3.3">MUST NOT use rejection sampling.<a href="#section-5.3.4-3.3" class="pilcrow">¶</a>
+<li class="normal" id="section-5.4.4-3.3">MUST NOT use rejection sampling.<a href="#section-5.4.4-3.3" class="pilcrow">¶</a>
 </li>
-<li class="normal" id="section-5.3.4-3.4">MUST give independent values for distinct (msg, DST, length) inputs.
+<li class="normal" id="section-5.4.4-3.4">MUST give independent values for distinct (msg, DST, length) inputs.
 Meeting this requirement is subtle.
 As a simplified example, hashing msg || DST does not work,
 because in this case distinct (msg, DST) pairs whose concatenations are equal
 will return the same output (e.g., ("AB", "CDEF") and ("ABC", "DEF")).
 The variants defined in this document use a suffix-free encoding of DST
-to avoid this issue.<a href="#section-5.3.4-3.4" class="pilcrow">¶</a>
+to avoid this issue.<a href="#section-5.4.4-3.4" class="pilcrow">¶</a>
 </li>
-<li class="normal" id="section-5.3.4-3.5">MUST use the domain separation tag DST to ensure that invocations of
+<li class="normal" id="section-5.4.4-3.5">MUST use the domain separation tag DST to ensure that invocations of
 cryptographic primitives inside of expand_message are domain separated
 from invocations outside of expand_message.
 For example, if the expand_message variant uses a hash function H, an encoding
 of DST MUST be added either as a prefix or a suffix of the input to each invocation
-of H. Adding DST as a suffix is the RECOMMENDED approach.<a href="#section-5.3.4-3.5" class="pilcrow">¶</a>
+of H. Adding DST as a suffix is the RECOMMENDED approach.<a href="#section-5.4.4-3.5" class="pilcrow">¶</a>
 </li>
-<li class="normal" id="section-5.3.4-3.6">SHOULD read msg exactly once, for efficiency when msg is long.<a href="#section-5.3.4-3.6" class="pilcrow">¶</a>
+<li class="normal" id="section-5.4.4-3.6">SHOULD read msg exactly once, for efficiency when msg is long.<a href="#section-5.4.4-3.6" class="pilcrow">¶</a>
 </li>
 </ul>
-<p id="section-5.3.4-4">In addition, each expand_message variant MUST specify a unique EXP_TAG
-that identifies that variant in a Suite ID. See <a href="#suiteIDformat" class="xref">Section 8.10</a> for more information.<a href="#section-5.3.4-4" class="pilcrow">¶</a></p>
+<p id="section-5.4.4-4">In addition, each expand_message variant MUST specify a unique EXP_TAG
+that identifies that variant in a Suite ID. See <a href="#suiteIDformat" class="xref">Section 8.10</a> for more information.<a href="#section-5.4.4-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -2865,7 +2895,7 @@ See <a href="#roadmap" class="xref">Section 3</a> for definitions of these encod
 </li>
 <li class="normal" id="section-8-5.7">L, the length parameter for hash_to_field (<a href="#hashtofield-sec" class="xref">Section 5.1</a>).<a href="#section-8-5.7" class="pilcrow">¶</a>
 </li>
-<li class="normal" id="section-8-5.8">expand_message, one of the variants specified in <a href="#hashtofield-expand" class="xref">Section 5.3</a>
+<li class="normal" id="section-8-5.8">expand_message, one of the variants specified in <a href="#hashtofield-expand" class="xref">Section 5.4</a>
 plus any parameters required for the specified variant (for example, H,
 the underlying hash function).<a href="#section-8-5.8" class="pilcrow">¶</a>
 </li>
@@ -2982,7 +3012,7 @@ addition, multiplication, and square root.<a href="#section-8.1-2.1" class="pilc
 point addition and scalar multiplication.<a href="#section-8.1-2.2" class="pilcrow">¶</a>
 </li>
 <li id="section-8.1-2.3">The hash_to_field function; see <a href="#hashtofield" class="xref">Section 5</a>. This includes the expand_message
-variant (<a href="#hashtofield-expand" class="xref">Section 5.3</a>) and any constituent hash function or XOF.<a href="#section-8.1-2.3" class="pilcrow">¶</a>
+variant (<a href="#hashtofield-expand" class="xref">Section 5.4</a>) and any constituent hash function or XOF.<a href="#section-8.1-2.3" class="pilcrow">¶</a>
 </li>
 <li id="section-8.1-2.4">The suite-specified mapping function; see the corresponding subsection of <a href="#mappings" class="xref">Section 6</a>.<a href="#section-8.1-2.4" class="pilcrow">¶</a>
 </li>
@@ -3020,7 +3050,7 @@ encode_to_curve.<a href="#section-8.1-2.6" class="pilcrow">¶</a>
 </li>
 <li class="normal" id="section-8.2-3.5">k: 128<a href="#section-8.2-3.5" class="pilcrow">¶</a>
 </li>
-<li class="normal" id="section-8.2-3.6">expand_message: expand_message_xmd (<a href="#hashtofield-expand-xmd" class="xref">Section 5.3.1</a>)<a href="#section-8.2-3.6" class="pilcrow">¶</a>
+<li class="normal" id="section-8.2-3.6">expand_message: expand_message_xmd (<a href="#hashtofield-expand-xmd" class="xref">Section 5.4.1</a>)<a href="#section-8.2-3.6" class="pilcrow">¶</a>
 </li>
 <li class="normal" id="section-8.2-3.7">H: SHA-256<a href="#section-8.2-3.7" class="pilcrow">¶</a>
 </li>
@@ -3064,7 +3094,7 @@ to P-256 is given in <a href="#sswu-map-to-3mod4" class="xref">Appendix E.2.1</a
 </li>
 <li class="normal" id="section-8.3-3.5">k: 192<a href="#section-8.3-3.5" class="pilcrow">¶</a>
 </li>
-<li class="normal" id="section-8.3-3.6">expand_message: expand_message_xmd (<a href="#hashtofield-expand-xmd" class="xref">Section 5.3.1</a>)<a href="#section-8.3-3.6" class="pilcrow">¶</a>
+<li class="normal" id="section-8.3-3.6">expand_message: expand_message_xmd (<a href="#hashtofield-expand-xmd" class="xref">Section 5.4.1</a>)<a href="#section-8.3-3.6" class="pilcrow">¶</a>
 </li>
 <li class="normal" id="section-8.3-3.7">H: SHA-512<a href="#section-8.3-3.7" class="pilcrow">¶</a>
 </li>
@@ -3108,7 +3138,7 @@ to P-384 is given in <a href="#sswu-map-to-3mod4" class="xref">Appendix E.2.1</a
 </li>
 <li class="normal" id="section-8.4-3.5">k: 256<a href="#section-8.4-3.5" class="pilcrow">¶</a>
 </li>
-<li class="normal" id="section-8.4-3.6">expand_message: expand_message_xmd (<a href="#hashtofield-expand-xmd" class="xref">Section 5.3.1</a>)<a href="#section-8.4-3.6" class="pilcrow">¶</a>
+<li class="normal" id="section-8.4-3.6">expand_message: expand_message_xmd (<a href="#hashtofield-expand-xmd" class="xref">Section 5.4.1</a>)<a href="#section-8.4-3.6" class="pilcrow">¶</a>
 </li>
 <li class="normal" id="section-8.4-3.7">H: SHA-512<a href="#section-8.4-3.7" class="pilcrow">¶</a>
 </li>
@@ -3152,7 +3182,7 @@ to P-521 is given in <a href="#sswu-map-to-3mod4" class="xref">Appendix E.2.1</a
 </li>
 <li class="normal" id="section-8.5-3.5">k: 128<a href="#section-8.5-3.5" class="pilcrow">¶</a>
 </li>
-<li class="normal" id="section-8.5-3.6">expand_message: expand_message_xmd (<a href="#hashtofield-expand-xmd" class="xref">Section 5.3.1</a>)<a href="#section-8.5-3.6" class="pilcrow">¶</a>
+<li class="normal" id="section-8.5-3.6">expand_message: expand_message_xmd (<a href="#hashtofield-expand-xmd" class="xref">Section 5.4.1</a>)<a href="#section-8.5-3.6" class="pilcrow">¶</a>
 </li>
 <li class="normal" id="section-8.5-3.7">H: SHA-512<a href="#section-8.5-3.7" class="pilcrow">¶</a>
 </li>
@@ -3217,7 +3247,7 @@ except that the encoding type is encode_to_curve (<a href="#roadmap" class="xref
 </li>
 <li class="normal" id="section-8.6-3.5">k: 224<a href="#section-8.6-3.5" class="pilcrow">¶</a>
 </li>
-<li class="normal" id="section-8.6-3.6">expand_message: expand_message_xmd (<a href="#hashtofield-expand-xmd" class="xref">Section 5.3.1</a>)<a href="#section-8.6-3.6" class="pilcrow">¶</a>
+<li class="normal" id="section-8.6-3.6">expand_message: expand_message_xmd (<a href="#hashtofield-expand-xmd" class="xref">Section 5.4.1</a>)<a href="#section-8.6-3.6" class="pilcrow">¶</a>
 </li>
 <li class="normal" id="section-8.6-3.7">H: SHA-512<a href="#section-8.6-3.7" class="pilcrow">¶</a>
 </li>
@@ -3275,7 +3305,7 @@ except that the encoding type is encode_to_curve (<a href="#roadmap" class="xref
 </li>
 <li class="normal" id="section-8.7-3.5">k: 128<a href="#section-8.7-3.5" class="pilcrow">¶</a>
 </li>
-<li class="normal" id="section-8.7-3.6">expand_message: expand_message_xmd (<a href="#hashtofield-expand-xmd" class="xref">Section 5.3.1</a>)<a href="#section-8.7-3.6" class="pilcrow">¶</a>
+<li class="normal" id="section-8.7-3.6">expand_message: expand_message_xmd (<a href="#hashtofield-expand-xmd" class="xref">Section 5.4.1</a>)<a href="#section-8.7-3.6" class="pilcrow">¶</a>
 </li>
 <li class="normal" id="section-8.7-3.7">H: SHA-256<a href="#section-8.7-3.7" class="pilcrow">¶</a>
 </li>
@@ -3331,7 +3361,7 @@ The curve parameters in this section match the ones listed in
 </li>
 <li class="normal" id="section-8.8.1-2.5">k: 128<a href="#section-8.8.1-2.5" class="pilcrow">¶</a>
 </li>
-<li class="normal" id="section-8.8.1-2.6">expand_message: expand_message_xmd (<a href="#hashtofield-expand-xmd" class="xref">Section 5.3.1</a>)<a href="#section-8.8.1-2.6" class="pilcrow">¶</a>
+<li class="normal" id="section-8.8.1-2.6">expand_message: expand_message_xmd (<a href="#hashtofield-expand-xmd" class="xref">Section 5.4.1</a>)<a href="#section-8.8.1-2.6" class="pilcrow">¶</a>
 </li>
 <li class="normal" id="section-8.8.1-2.7">H: SHA-256<a href="#section-8.8.1-2.7" class="pilcrow">¶</a>
 </li>
@@ -3387,7 +3417,7 @@ to the curve E' isogenous to BLS12-381 G1 is given in <a href="#sswu-map-to-3mod
 </li>
 <li class="normal" id="section-8.8.2-2.4">k: 128<a href="#section-8.8.2-2.4" class="pilcrow">¶</a>
 </li>
-<li class="normal" id="section-8.8.2-2.5">expand_message: expand_message_xmd (<a href="#hashtofield-expand-xmd" class="xref">Section 5.3.1</a>)<a href="#section-8.8.2-2.5" class="pilcrow">¶</a>
+<li class="normal" id="section-8.8.2-2.5">expand_message: expand_message_xmd (<a href="#hashtofield-expand-xmd" class="xref">Section 5.4.1</a>)<a href="#section-8.8.2-2.5" class="pilcrow">¶</a>
 </li>
 <li class="normal" id="section-8.8.2-2.6">H: SHA-256<a href="#section-8.8.2-2.6" class="pilcrow">¶</a>
 </li>
@@ -3440,7 +3470,7 @@ the order of the subgroup G of the curve E (<a href="#bg-curves" class="xref">Se
 </li>
 <li id="section-8.9-2.4">Compute L as described in <a href="#hashtofield-sec" class="xref">Section 5.1</a>.<a href="#section-8.9-2.4" class="pilcrow">¶</a>
 </li>
-<li id="section-8.9-2.5">Choose an expand_message variant from <a href="#hashtofield-expand" class="xref">Section 5.3</a> plus any
+<li id="section-8.9-2.5">Choose an expand_message variant from <a href="#hashtofield-expand" class="xref">Section 5.4</a> plus any
 underlying cryptographic primitives (e.g., a hash function H).<a href="#section-8.9-2.5" class="pilcrow">¶</a>
 </li>
 <li id="section-8.9-2.6">Choose a mapping following the guidelines in <a href="#choosing-mapping" class="xref">Section 6.1</a>,
@@ -3493,22 +3523,26 @@ This field MUST be constructed as follows:<a href="#section-8.10-6.2.1" class="p
 <p id="section-8.10-6.2.3">
 EXP_TAG indicates the expand_message variant:<a href="#section-8.10-6.2.3" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-8.10-6.2.4.1">"XMD" for expand_message_xmd (<a href="#hashtofield-expand-xmd" class="xref">Section 5.3.1</a>).<a href="#section-8.10-6.2.4.1" class="pilcrow">¶</a>
+<li class="normal" id="section-8.10-6.2.4.1">"XMD" for expand_message_xmd (<a href="#hashtofield-expand-xmd" class="xref">Section 5.4.1</a>).<a href="#section-8.10-6.2.4.1" class="pilcrow">¶</a>
 </li>
-<li class="normal" id="section-8.10-6.2.4.2">"XOF" for expand_message_xof (<a href="#hashtofield-expand-xof" class="xref">Section 5.3.2</a>).<a href="#section-8.10-6.2.4.2" class="pilcrow">¶</a>
+<li class="normal" id="section-8.10-6.2.4.2">"XOF" for expand_message_xof (<a href="#hashtofield-expand-xof" class="xref">Section 5.4.2</a>).<a href="#section-8.10-6.2.4.2" class="pilcrow">¶</a>
 </li>
 </ul>
 <p id="section-8.10-6.2.5">
 HASH_NAME is a human-readable name for the underlying hash primitive.
 As examples:<a href="#section-8.10-6.2.5" class="pilcrow">¶</a></p>
 <ol start="1" type="1" class="normal type-1" id="section-8.10-6.2.6">
-              <li id="section-8.10-6.2.6.1">For expand_message_xof (<a href="#hashtofield-expand-xof" class="xref">Section 5.3.2</a>) with SHAKE128,
+              <li id="section-8.10-6.2.6.1">For expand_message_xof (<a href="#hashtofield-expand-xof" class="xref">Section 5.4.2</a>) with SHAKE128,
 HASH_ID is "XOF:SHAKE128".<a href="#section-8.10-6.2.6.1" class="pilcrow">¶</a>
 </li>
-<li id="section-8.10-6.2.6.2">For expand_message_xmd (<a href="#hashtofield-expand-xmd" class="xref">Section 5.3.1</a>) with SHA3-256,
+<li id="section-8.10-6.2.6.2">For expand_message_xmd (<a href="#hashtofield-expand-xmd" class="xref">Section 5.4.1</a>) with SHA3-256,
 HASH_ID is "XMD:SHA3-256".<a href="#section-8.10-6.2.6.2" class="pilcrow">¶</a>
 </li>
 </ol>
+<p id="section-8.10-6.2.7">
+Suites that use an alternative hash_to_field function that meets the requirements
+in <a href="#hashtofield-exteff" class="xref">Section 5.2</a> MUST indicate this by appending a tag identifying that function
+to the HASH_ID field, separated by a colon (":", ASCII 0x3A).<a href="#section-8.10-6.2.7" class="pilcrow">¶</a></p>
 </li>
 <li class="normal" id="section-8.10-6.3">
             <p id="section-8.10-6.3.1">MAP_ID: a human-readable representation of the map_to_curve function
@@ -3597,7 +3631,7 @@ derivation function (e.g., PBKDF2 <span>[<a href="#RFC2898" class="xref">RFC2898
 <span>[<a href="#I-D.irtf-cfrg-argon2" class="xref">I-D.irtf-cfrg-argon2</a>]</span>) on the password, then hash the output of that
 function to the target elliptic curve.
 For collision resistance, the hash underlying the key derivation function
-should be chosen according to the guidelines listed in <a href="#hashtofield-expand-xmd" class="xref">Section 5.3.1</a>.<a href="#section-10-5" class="pilcrow">¶</a></p>
+should be chosen according to the guidelines listed in <a href="#hashtofield-expand-xmd" class="xref">Section 5.4.1</a>.<a href="#section-10-5" class="pilcrow">¶</a></p>
 <p id="section-10-6">Constant-time implementations of all functions in this document are STRONGLY
 RECOMMENDED for all uses, to avoid leaking information via side channels.
 It is especially important to use a constant-time implementation when inputs to
@@ -3616,12 +3650,12 @@ the nature of the leakage and the appropriate defense depend on the application.
 <a href="#section-10.1" class="section-number selfRef">10.1. </a><a href="#name-hash_to_field-security" class="section-name selfRef">hash_to_field security</a>
         </h3>
 <p id="section-10.1-1">The hash_to_field function defined in <a href="#hashtofield" class="xref">Section 5</a> is indifferentiable
-from a random oracle <span>[<a href="#MRH04" class="xref">MRH04</a>]</span> when expand_message (<a href="#hashtofield-expand" class="xref">Section 5.3</a>)
+from a random oracle <span>[<a href="#MRH04" class="xref">MRH04</a>]</span> when expand_message (<a href="#hashtofield-expand" class="xref">Section 5.4</a>)
 is modeled as a random oracle.
 By composability of indifferentiability proofs, this also holds when
 expand_message is proved indifferentiable from a random oracle relative
 to an underlying primitive that is modeled as a random oracle.
-When following the guidelines in <a href="#hashtofield-expand" class="xref">Section 5.3</a>, both variants
+When following the guidelines in <a href="#hashtofield-expand" class="xref">Section 5.4</a>, both variants
 of expand_message defined in that section meet this requirement
 (see also <a href="#security-considerations-expand-xmd" class="xref">Section 10.2</a>).<a href="#section-10.1-1" class="pilcrow">¶</a></p>
 <p id="section-10.1-2">We very briefly sketch the indifferentiability argument for hash_to_field.
@@ -3639,7 +3673,7 @@ returned by I2OSP.
         <h3 id="name-expand_message_xmd-security">
 <a href="#section-10.2" class="section-number selfRef">10.2. </a><a href="#name-expand_message_xmd-security" class="section-name selfRef">expand_message_xmd security</a>
         </h3>
-<p id="section-10.2-1">The expand_message_xmd function defined in <a href="#hashtofield-expand-xmd" class="xref">Section 5.3.1</a> is
+<p id="section-10.2-1">The expand_message_xmd function defined in <a href="#hashtofield-expand-xmd" class="xref">Section 5.4.1</a> is
 indifferentiable from a random oracle <span>[<a href="#MRH04" class="xref">MRH04</a>]</span> when one of the following holds:<a href="#section-10.2-1" class="pilcrow">¶</a></p>
 <ol start="1" type="1" class="normal type-1" id="section-10.2-2">
           <li id="section-10.2-2.1">H is indifferentiable from a random oracle,<a href="#section-10.2-2.1" class="pilcrow">¶</a>
@@ -3685,12 +3719,12 @@ ensure domain separation by picking a distinct value for DST.<a href="#section-1
 is to ensure that security analyses of cryptographic protocols that query
 multiple independent random oracles remain valid even if all of these random
 oracles are instantiated based on one underlying function H.
-The expand_message variants in this document (<a href="#hashtofield-expand" class="xref">Section 5.3</a>) ensure
+The expand_message variants in this document (<a href="#hashtofield-expand" class="xref">Section 5.4</a>) ensure
 domain separation by appending a suffix-free-encoded domain separation tag
 DST_prime to all strings hashed by H, an underlying hash or extensible
 output function.
 (Other expand_message variants that follow the guidelines in
-<a href="#hashtofield-expand-other" class="xref">Section 5.3.4</a> are expected to behave similarly,
+<a href="#hashtofield-expand-other" class="xref">Section 5.4.4</a> are expected to behave similarly,
 but these should be analyzed on a case-by-case basis.)
 For security, applications that use the same function H outside of expand_message
 should enforce domain separation between those uses of H and expand_message,
@@ -3773,7 +3807,7 @@ find distinct (msg, DST_ext) pairs that hash to the same value.<a href="#section
 This method ensures domain separation as follows.
 First, since DST_ext contains at least one nonzero bit among its first b bits,
 it is guaranteed to be distinct from the value Z_pad
-(<a href="#hashtofield-expand-xmd" class="xref">Section 5.3.1</a>, step 4), which ensures that all inputs to H
+(<a href="#hashtofield-expand-xmd" class="xref">Section 5.4.1</a>, step 4), which ensures that all inputs to H
 are distinct from the input used to generate b_0 in expand_message_xmd.
 Second, since DST_ext is at least b bits long, it is almost certainly
 distinct from the values b_0 and strxor(b_0, b_(i - 1)), and therefore
@@ -3909,7 +3943,7 @@ michele.orru@ens.fr<a href="#section-12-1.3.2" class="pilcrow">¶</a></p>
 <dd class="break"></dd>
 <dt id="I-D.irtf-cfrg-pairing-friendly-curves">[I-D.irtf-cfrg-pairing-friendly-curves]</dt>
 <dd>
-<span class="refAuthor">Sakemi, Y.</span><span class="refAuthor">, Kobayashi, T.</span><span class="refAuthor">, Saito, T.</span><span class="refAuthor">, and R. Wahby</span>, <span class="refTitle">"Pairing-Friendly Curves"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-irtf-cfrg-pairing-friendly-curves-06</span>, <time datetime="2020-06-16">16 June 2020</time>, <span>&lt;<a href="http://www.ietf.org/internet-drafts/draft-irtf-cfrg-pairing-friendly-curves-06.txt">http://www.ietf.org/internet-drafts/draft-irtf-cfrg-pairing-friendly-curves-06.txt</a>&gt;</span>. </dd>
+<span class="refAuthor">Sakemi, Y.</span><span class="refAuthor">, Kobayashi, T.</span><span class="refAuthor">, Saito, T.</span><span class="refAuthor">, and R. Wahby</span>, <span class="refTitle">"Pairing-Friendly Curves"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-irtf-cfrg-pairing-friendly-curves-07</span>, <time datetime="2020-06-18">18 June 2020</time>, <span>&lt;<a href="http://www.ietf.org/internet-drafts/draft-irtf-cfrg-pairing-friendly-curves-07.txt">http://www.ietf.org/internet-drafts/draft-irtf-cfrg-pairing-friendly-curves-07.txt</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC2119">[RFC2119]</dt>
 <dd>
@@ -4076,7 +4110,7 @@ michele.orru@ens.fr<a href="#section-12-1.3.2" class="pilcrow">¶</a></p>
 <dd class="break"></dd>
 <dt id="I-D.irtf-cfrg-vrf">[I-D.irtf-cfrg-vrf]</dt>
 <dd>
-<span class="refAuthor">Goldberg, S.</span><span class="refAuthor">, Reyzin, L.</span><span class="refAuthor">, Papadopoulos, D.</span><span class="refAuthor">, and J. Vcelak</span>, <span class="refTitle">"Verifiable Random Functions (VRFs)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-irtf-cfrg-vrf-06</span>, <time datetime="2020-02-11">11 February 2020</time>, <span>&lt;<a href="http://www.ietf.org/internet-drafts/draft-irtf-cfrg-vrf-06.txt">http://www.ietf.org/internet-drafts/draft-irtf-cfrg-vrf-06.txt</a>&gt;</span>. </dd>
+<span class="refAuthor">Goldberg, S.</span><span class="refAuthor">, Reyzin, L.</span><span class="refAuthor">, Papadopoulos, D.</span><span class="refAuthor">, and J. Vcelak</span>, <span class="refTitle">"Verifiable Random Functions (VRFs)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-irtf-cfrg-vrf-07</span>, <time datetime="2020-06-18">18 June 2020</time>, <span>&lt;<a href="http://www.ietf.org/internet-drafts/draft-irtf-cfrg-vrf-07.txt">http://www.ietf.org/internet-drafts/draft-irtf-cfrg-vrf-07.txt</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="Icart09">[Icart09]</dt>
 <dd>
@@ -4129,6 +4163,10 @@ michele.orru@ens.fr<a href="#section-12-1.3.2" class="pilcrow">¶</a></p>
 <dt id="p1363a">[p1363a]</dt>
 <dd>
 <span class="refAuthor">IEEE Computer Society</span>, <span class="refTitle">"IEEE Standard Specifications for Public-Key Cryptography---Amendment 1: Additional Techniques"</span>, <time datetime="2004-03">March 2004</time>, <span>&lt;<a href="https://standards.ieee.org/standard/1363a-2004.html">https://standards.ieee.org/standard/1363a-2004.html</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="P20">[P20]</dt>
+<dd>
+<span class="refAuthor">Pornin, T.</span>, <span class="refTitle">"Efficient Elliptic Curve Operations On Microcontrollers With Finite Field Extensions"</span>, <time datetime="2020">2020</time>, <span>&lt;<a href="https://eprint.iacr.org/2020/009">https://eprint.iacr.org/2020/009</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RCB16">[RCB16]</dt>
 <dd>
@@ -8382,7 +8420,7 @@ Q.y     = 1260d6e0987eae96af9ebe551e08de22b37791d53f4db9e0d59da7
       <h2 id="name-expand-test-vectors">
 <a href="#section-appendix.i" class="section-number selfRef">Appendix I. </a><a href="#name-expand-test-vectors" class="section-name selfRef">Expand test vectors</a>
       </h2>
-<p id="section-appendix.i-1">This section gives test vectors for expand_message variants specified in <a href="#hashtofield-expand" class="xref">Section 5.3</a>.
+<p id="section-appendix.i-1">This section gives test vectors for expand_message variants specified in <a href="#hashtofield-expand" class="xref">Section 5.4</a>.
 The test vectors in this section were generated using code that is
 available from <span>[<a href="#hash2curve-repo" class="xref">hash2curve-repo</a>]</span>.<a href="#section-appendix.i-1" class="pilcrow">¶</a></p>
 <p id="section-appendix.i-2">Each test vector in this section lists the expand_message name, hash function, and DST,
