@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2020-06-28T13:35:07.940973+00:00",
+  "timestamp": "2020-06-29T22:11:41.409640+00:00",
   "repo": "cfrg/draft-irtf-cfrg-hash-to-curve",
   "labels": [
     {
@@ -6270,15 +6270,15 @@
       "id": "MDU6SXNzdWU2MzkyOTY3NDE=",
       "title": "Unify hash_to_field for small primes modulus.",
       "url": "https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/issues/284",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "armfazh",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "I consider we can do only a slight modification on hash_to_field to support prime modulus.\r\nNamely modifying the amount of bytes requested to the `expand_message` function.\r\nSo we can avoid the use of an alternate method.\r\n\r\n\r\n",
       "createdAt": "2020-06-16T01:13:56Z",
-      "updatedAt": "2020-06-16T19:24:42Z",
-      "closedAt": null,
+      "updatedAt": "2020-06-29T16:55:54Z",
+      "closedAt": "2020-06-29T16:55:54Z",
       "comments": [
         {
           "author": "kwantam",
@@ -6293,6 +6293,13 @@
           "body": "I opened #286 to make the proposed alternative method concrete. We can continue discussing here or discuss there as you like! @chris-wood @armfazh ",
           "createdAt": "2020-06-16T19:24:42Z",
           "updatedAt": "2020-06-16T19:24:42Z"
+        },
+        {
+          "author": "armfazh",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Resolved in #287 ",
+          "createdAt": "2020-06-29T16:55:54Z",
+          "updatedAt": "2020-06-29T16:55:54Z"
         }
       ]
     }
@@ -29914,18 +29921,26 @@
       "labels": [],
       "body": "This pulls some text from #286 (explaining why applications might want alternative hash-to-field functions) but replaces the description of one with some basic requirements. ",
       "createdAt": "2020-06-25T23:05:54Z",
-      "updatedAt": "2020-06-28T13:34:56Z",
+      "updatedAt": "2020-06-29T22:11:12Z",
       "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
       "baseRefName": "master",
       "baseRefOid": "f028204795218e1c9bc14356957b5562062b84c9",
       "headRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
       "headRefName": "caw/h2f-reqs",
-      "headRefOid": "baacd5a92682b1045022f109464fcb95759f6f5f",
+      "headRefOid": "a3f3cb767688162856af683b01cbcb16f9b6dcf4",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
-      "comments": [],
+      "comments": [
+        {
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> The only thing we don't do here is require suites using alternative hash_to_field functions to indicate that in the suite ID string. Do we want to ask them to include that information? Probably it would just take one sentence.\r\n\r\nGood point -- I added a sentence to the suites section. @kwantam, please merge if you think this is good to go!",
+          "createdAt": "2020-06-28T13:44:31Z",
+          "updatedAt": "2020-06-28T13:44:31Z"
+        }
+      ],
       "reviews": [
         {
           "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDM3OTIwMDUx",
@@ -29956,37 +29971,37 @@
               "originalPosition": 14,
               "body": "```suggestion\r\n- The function MUST output field element(s) that are uniformly random except with bias at most 2^-k.\r\n```",
               "createdAt": "2020-06-27T23:38:19Z",
-              "updatedAt": "2020-06-28T13:34:34Z"
+              "updatedAt": "2020-06-29T22:11:12Z"
             },
             {
               "originalPosition": 14,
               "body": "The issue is, we've just gotten through saying that the function in this section outputs something with bias at most 2^-k---so it does not even meet the \"uniformly random\" requirement as stated here!",
               "createdAt": "2020-06-27T23:39:47Z",
-              "updatedAt": "2020-06-28T13:34:34Z"
+              "updatedAt": "2020-06-29T22:11:12Z"
             },
             {
               "originalPosition": 5,
               "body": "```suggestion\r\n## Efficiency considerations in extension fields {#hashtofield-exteff}\r\n\r\nThe hash\\_to\\_field function described in this section is inefficient for certain\r\nextension fields. Specifically, when hashing to an element of the extension\r\n```",
               "createdAt": "2020-06-27T23:44:35Z",
-              "updatedAt": "2020-06-28T13:34:34Z"
+              "updatedAt": "2020-06-29T22:11:12Z"
             },
             {
               "originalPosition": 6,
               "body": "```suggestion\r\nfield GF(p^m), hash\\_to\\_field requires expanding msg into m * L bytes (for L as defined above).\r\n```",
               "createdAt": "2020-06-27T23:44:56Z",
-              "updatedAt": "2020-06-28T13:34:34Z"
+              "updatedAt": "2020-06-29T22:11:12Z"
             },
             {
               "originalPosition": 19,
               "body": "```suggestion\r\n\r\nFor example, Pornin {{P20}} describes a method for hashing to GF(9767^19) that meets\r\nthese requirements while using fewer output bits from expand\\_message than\r\nhash\\_to\\_field would for that field.\r\n```",
               "createdAt": "2020-06-27T23:50:48Z",
-              "updatedAt": "2020-06-28T13:34:34Z"
+              "updatedAt": "2020-06-29T22:11:12Z"
             },
             {
               "originalPosition": 19,
               "body": "P20 is:\r\n\r\n```\r\n  P20:\r\n    title: \"Efficient Elliptic Curve Operations On Microcontrollers With Finite Field Extensions\"\r\n    target: https://eprint.iacr.org/2020/009\r\n    date: 2020\r\n    author:\r\n      -\r\n        ins: T. Pornin\r\n        name: Thomas Pornin\r\n        org: NCC Group\r\n```",
               "createdAt": "2020-06-27T23:53:00Z",
-              "updatedAt": "2020-06-28T13:34:34Z"
+              "updatedAt": "2020-06-29T22:11:12Z"
             }
           ]
         },
@@ -30006,7 +30021,7 @@
               "originalPosition": 5,
               "body": "I think it might be better to add a separate subsection because otherwise I worry that this info gets lost...",
               "createdAt": "2020-06-28T00:01:40Z",
-              "updatedAt": "2020-06-28T13:34:34Z"
+              "updatedAt": "2020-06-29T22:11:12Z"
             }
           ]
         },
@@ -30026,7 +30041,47 @@
               "originalPosition": 14,
               "body": "\ud83d\udc4d thanks -- this precision is better!",
               "createdAt": "2020-06-28T13:34:55Z",
-              "updatedAt": "2020-06-28T13:34:56Z"
+              "updatedAt": "2020-06-29T22:11:12Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDM4NzgxMDYy",
+          "commit": {
+            "abbreviatedOid": "baacd5a"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-06-28T13:35:14Z",
+          "updatedAt": "2020-06-28T13:35:14Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "That works for me!",
+              "createdAt": "2020-06-28T13:35:14Z",
+              "updatedAt": "2020-06-29T22:11:12Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDM5NTM0Mzg3",
+          "commit": {
+            "abbreviatedOid": "93f50be"
+          },
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "state": "CHANGES_REQUESTED",
+          "body": ":+1: this looks great, with one small comment. What do you think of the suggested edit?\r\n\r\n(And sorry for the continued nitpicking!!!)",
+          "createdAt": "2020-06-29T22:08:06Z",
+          "updatedAt": "2020-06-29T22:08:46Z",
+          "comments": [
+            {
+              "originalPosition": 50,
+              "body": "```suggestion\r\n  Suites that use an alternative hash\\_to\\_field function that meets the requirements\r\n  in {{hashtofield-exteff}} MUST indicate this by appending a tag identifying that function\r\n  to the HASH\\_ID field, separated by a colon (\":\", ASCII 0x3A).\r\n```\r\n\r\nTwo suggestions:\r\n\r\n(1) add indentation to keep this as part of the bulleted list, and\r\n\r\n(2) \"choosing a unique identifier\" is not quite explicit enough, because it's not clear what it needs to be different from.",
+              "createdAt": "2020-06-29T22:08:06Z",
+              "updatedAt": "2020-06-29T22:11:12Z"
             }
           ]
         }
