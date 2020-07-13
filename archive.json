@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2020-06-29T22:11:41.409640+00:00",
+  "timestamp": "2020-07-13T20:51:13.161957+00:00",
   "repo": "cfrg/draft-irtf-cfrg-hash-to-curve",
   "labels": [
     {
@@ -6300,6 +6300,58 @@
           "body": "Resolved in #287 ",
           "createdAt": "2020-06-29T16:55:54Z",
           "updatedAt": "2020-06-29T16:55:54Z"
+        }
+      ]
+    },
+    {
+      "number": 288,
+      "id": "MDU6SXNzdWU2NDg0MjAyNDk=",
+      "title": "feedback from Dan",
+      "url": "https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/issues/288",
+      "state": "CLOSED",
+      "author": "kwantam",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "A couple points of feedback from Dan:\r\n\r\n1. Should include suites for more pairing-friendly curves, since BLS signatures are one of the common use cases. We've also heard this from Michael Scott. Probably makes sense to define suites for all of the curves in the pairing-friendly curves document.\r\n\r\n2. \"Nonuniform encoding\" vs \"random-oracle encoding\" is the wrong terminology. The reason is, the \"nonuniform encoding\" is *also* a random oracle---it's just one that has a nonuniform output distribution. This is important because the current text does not communicate the security properties of the encoding in a way that is useful to people specifying future documents. We've also heard this feedback from Leo Reyzin; we made some tweaks to the text in response, but probably not enough.\r\n\r\nFor the first one, the action is pretty simple: just write down suites for the extra curves!\r\n\r\nFor the second one, the edits will be more extensive but the main change would be to the names we use in Section 3 (most of the edits will be propagating this terminology elsewhere).\r\n\r\nDan proposed \"nonuniform encoding\" and \"uniform encoding\" for NU and RO, respectively. Then we can add text in Section 3 and maybe Section 10 discussing the specific properties we get from each.\r\n\r\nThoughts?",
+      "createdAt": "2020-06-30T18:59:28Z",
+      "updatedAt": "2020-07-13T20:50:21Z",
+      "closedAt": "2020-07-13T20:50:21Z",
+      "comments": [
+        {
+          "author": "armfazh",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Agree, note that adding suites in the pf-draft will exemplify how to create a suite following the recommendations given in the h2c draft.\r\n\r\nFor the second, is there a way to make a conection with the term `hashing`? Both encodings are deterministic hash functions, one of them is indiferentiable from a random oracle. Does the terms proposed are closely related to standard definitions, e.g. https://eprint.iacr.org/2003/161 ? \r\n",
+          "createdAt": "2020-07-01T19:04:53Z",
+          "updatedAt": "2020-07-01T19:05:04Z"
+        },
+        {
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> Agree, note that adding suites in the pf-draft will exemplify how to create a suite following the recommendations given in the h2c draft.\r\n\r\nAh, sorry that my initial statement was ambiguous. I think it would be good to define suites for those curves in h2c, since the pairing-friendly curves draft is nearing completion.\r\n\r\n> For the second, is there a way to make a conection with the term `hashing`? Both encodings are deterministic hash functions, one of them is indiferentiable from a random oracle.\r\n\r\nThe issue is, the term \"hashing\" is not really a well-defined technical term. For example, both of them are resistant to collisions and preimages, but they have other properties, too, e.g., it's infeasible to find inputs s.t. the output points satisfy any algebraic relation. And indeed *both* are indifferentiable from random oracles (as long as hash_to_field works correctly), it's just that one of the oracles has a nonuniform output distribution (but this is still a perfectly valid random oracle!).\r\n\r\nI will take a look at the paper you referenced and post another reply soon.",
+          "createdAt": "2020-07-02T04:32:27Z",
+          "updatedAt": "2020-07-02T04:32:27Z"
+        },
+        {
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Ah, right, I'm familiar with MRH03. So I think what's going on is as stated above---both are indifferentiable.\r\n\r\n----\r\n\r\nSketching the simulator for encode_to_curve (this is nearly the same as the simulator from BCIMRT10): suppose that we have an ideal algorithm H that on input msg in `{0,1}^*` selects a point in the image of map_to_curve with an output distribution matching the one induced by map_to_curve when inputs range uniformly over F. The simulator's job is, roughly, to \"explain\" how this point came from h, the hash_to_field random oracle.\r\n\r\nOn a fresh query msg in `{0,1}^*`, the simulator queries H(msg) and gets a point P that is in the image of map_to_curve. It then computes the preimages of P under map_to_curve---these are elements u of F such that map_to_curve(u) == P---picks one at random, and simulates h(msg) by replying with that value. Since H(msg) chooses P from the distribution induced by map_to_curve, this value of h(msg) is satistically close to uniform as required.\r\n\r\nThe only question remaining is, can the simulator invert map_to_curve efficiently? The answer is yes in all cases: Elligator 2 is easy to invert, and Tibouchi shows in [Elligator Squared](https://eprint.iacr.org/2014/043/) that both SvdW and SWU can be inverted efficiently.\r\n\r\n(Note that I'm implicitly using composition of indifferentiability above: we know that hash_to_field is indifferentiable, so this means the simulated value h(msg) can itself be simulated in terms of the underlying random oracle, e.g., the SHA-2 compression function.)",
+          "createdAt": "2020-07-02T05:09:20Z",
+          "updatedAt": "2020-07-02T05:11:19Z"
+        },
+        {
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> Dan proposed \"nonuniform encoding\" and \"uniform encoding\" for NU and RO, respectively. Then we can add text in Section 3 and maybe Section 10 discussing the specific properties we get from each.\r\n\r\nI like this change, even though it is a bit more invasive. The notion of a uniform distribution is probably easier to understand than Random Oracle, which might make choosing the right encoding less error-prone.",
+          "createdAt": "2020-07-03T00:15:11Z",
+          "updatedAt": "2020-07-03T00:15:11Z"
+        },
+        {
+          "author": "armfazh",
+          "authorAssociation": "COLLABORATOR",
+          "body": "After going through the papers, I think the key point on the distinction betwen encode_to_curve and hash_to_curve is that one of them is constructed using an admissible encoding (under Def 4 of BCIMRT10).\r\nDef 4 augments the previous definition by requiring the `Regular` property. This property ensures that the output distributions are unifom. So, being more technical, we can say that hash_to_curve is constructed with an admissible encoding function. However, just saying that the encoding is uniform, it seems to have the same meaning. So I am in favor to replace the names.\r\n\r\nAlso the important fact is not whether encode_to_curve and hash_to_curve are random-oracles (yes, both are), but instead we must communicate in the draft that the distinction is on whether or not they can be used to replace an ideal primitive of a hash function in the random oracle model.\r\n\r\nFinally, the indifferentiability property seems to follow easily, as it does not take into account the probability distribution of outputs. So this argument is orthogonal, and we might not require an explicit proof of indifferentiability in the document.\r\n\r\nI left some suggestions in the PR too.\r\n\r\n",
+          "createdAt": "2020-07-09T23:02:14Z",
+          "updatedAt": "2020-07-09T23:02:14Z"
         }
       ]
     }
@@ -29678,7 +29730,7 @@
       "labels": [],
       "body": "This issue responds to a comment from Michael Scott and one from Marek Jankowski.\r\n\r\nThe next message in this thread includes all of Marek's review, and some notes. We can discuss further here or in the issues that Chris opened.",
       "createdAt": "2020-06-15T21:57:12Z",
-      "updatedAt": "2020-06-16T03:50:56Z",
+      "updatedAt": "2020-07-08T22:02:35Z",
       "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
       "baseRefName": "master",
       "baseRefOid": "d19b27740c0c7aed45e9d9336786986edb53433b",
@@ -29914,24 +29966,26 @@
       "id": "MDExOlB1bGxSZXF1ZXN0NDQwMjk5Njkz",
       "title": "Specify alternative hash-to-field requirements.",
       "url": "https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/pull/287",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "chris-wood",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "This pulls some text from #286 (explaining why applications might want alternative hash-to-field functions) but replaces the description of one with some basic requirements. ",
       "createdAt": "2020-06-25T23:05:54Z",
-      "updatedAt": "2020-06-29T22:11:12Z",
+      "updatedAt": "2020-06-29T22:31:24Z",
       "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
       "baseRefName": "master",
       "baseRefOid": "f028204795218e1c9bc14356957b5562062b84c9",
       "headRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
       "headRefName": "caw/h2f-reqs",
       "headRefOid": "a3f3cb767688162856af683b01cbcb16f9b6dcf4",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2020-06-29T22:31:24Z",
+      "mergedAt": "2020-06-29T22:31:24Z",
+      "mergedBy": "kwantam",
+      "mergeCommit": {
+        "oid": "33fb61006261a108b76c0bd41e276c76362d3d9e"
+      },
       "comments": [
         {
           "author": "chris-wood",
@@ -29939,6 +29993,13 @@
           "body": "> The only thing we don't do here is require suites using alternative hash_to_field functions to indicate that in the suite ID string. Do we want to ask them to include that information? Probably it would just take one sentence.\r\n\r\nGood point -- I added a sentence to the suites section. @kwantam, please merge if you think this is good to go!",
           "createdAt": "2020-06-28T13:44:31Z",
           "updatedAt": "2020-06-28T13:44:31Z"
+        },
+        {
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@kwantam fixed -- thanks for the careful review!",
+          "createdAt": "2020-06-29T22:13:11Z",
+          "updatedAt": "2020-06-29T22:13:11Z"
         }
       ],
       "reviews": [
@@ -30084,6 +30145,166 @@
               "updatedAt": "2020-06-29T22:11:12Z"
             }
           ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDM5NTM3OTk3",
+          "commit": {
+            "abbreviatedOid": "a3f3cb7"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-06-29T22:11:52Z",
+          "updatedAt": "2020-06-29T22:11:52Z",
+          "comments": [
+            {
+              "originalPosition": 50,
+              "body": "> \ud83d\udc4d this looks great, with one small comment. What do you think of the suggested edit?\r\n\r\nThis works for me!",
+              "createdAt": "2020-06-29T22:11:52Z",
+              "updatedAt": "2020-06-29T22:11:52Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 289,
+      "id": "MDExOlB1bGxSZXF1ZXN0NDQ2NTU1NjQy",
+      "title": "comments from Dan ; hash_to_scalar",
+      "url": "https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/pull/289",
+      "state": "MERGED",
+      "author": "kwantam",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "This PR adjusts the text as discussed in #288, clarifying uniform/nonuniform vs random oracle.\r\n\r\nIt also adds the note we discussed via email regarding hashing to GF(r).",
+      "createdAt": "2020-07-09T00:50:55Z",
+      "updatedAt": "2020-07-13T20:50:20Z",
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "33fb61006261a108b76c0bd41e276c76362d3d9e",
+      "headRepository": "kwantam/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "more_comments",
+      "headRefOid": "7b1734edb27c0bb39ba95231c9dba12f990f93bb",
+      "closedAt": "2020-07-13T20:50:20Z",
+      "mergedAt": "2020-07-13T20:50:20Z",
+      "mergedBy": "chris-wood",
+      "mergeCommit": {
+        "oid": "17b7db9be3193d819d40d875bb7d80c98bc21897"
+      },
+      "comments": [
+        {
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Thanks for the comments! :+1:",
+          "createdAt": "2020-07-13T00:45:22Z",
+          "updatedAt": "2020-07-13T00:45:22Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDQ1OTkwOTY1",
+          "commit": {
+            "abbreviatedOid": "f87f209"
+          },
+          "author": "armfazh",
+          "authorAssociation": "COLLABORATOR",
+          "state": "CHANGES_REQUESTED",
+          "body": "",
+          "createdAt": "2020-07-09T21:45:59Z",
+          "updatedAt": "2020-07-09T23:02:21Z",
+          "comments": [
+            {
+              "originalPosition": 93,
+              "body": "r must be prime, but the elliptic curve group could not. ",
+              "createdAt": "2020-07-09T21:45:59Z",
+              "updatedAt": "2020-07-13T00:44:56Z"
+            },
+            {
+              "originalPosition": 143,
+              "body": "```suggestion\r\nrelies on a random oracle that outputs points with a uniform distribution MUST NOT use a\r\n```",
+              "createdAt": "2020-07-09T21:49:11Z",
+              "updatedAt": "2020-07-13T00:44:56Z"
+            },
+            {
+              "originalPosition": 63,
+              "body": "Stating these bounds at this point is distracting. \r\nI recommend just to mention that 1) the image of `encode_to_curve` reaches only a fraction of the points in G, and 2) some points have different probability to be obtained by `encode_to_curve`. Both of these staments make clear that the distribution is far from uniform. More details are given in  `{{security-considerations-encode}}` .",
+              "createdAt": "2020-07-09T22:13:38Z",
+              "updatedAt": "2020-07-13T00:44:56Z"
+            },
+            {
+              "originalPosition": 23,
+              "body": "```suggestion\r\nA random-oracle encoding is an encoding satisfying a strong property: it can be\r\nproved indifferentiable from a random oracle {{MRH04}} under a suitable assumption.\r\nThis makes random-oracle encodings appropriate for use in many cryptographic\r\nprotocols proven secure in the random oracle model, as long as the output distribution\r\nis uniform in G. See {{security-considerations}} for further discussion.\r\n```",
+              "createdAt": "2020-07-09T22:21:34Z",
+              "updatedAt": "2020-07-13T00:44:56Z"
+            },
+            {
+              "originalPosition": 28,
+              "body": "```suggestion\r\nThe constructions described in {{roadmap}} differ in their output \r\ndistributions: one gives points sampled from a nonuniform \r\ndistribution, and the other gives uniformly random points in G.\r\nThe latter can be used to instantiate a hash function into elliptic \r\ncurves in schemes proved in the random oracle model {{MRH04}}.\r\n```",
+              "createdAt": "2020-07-09T22:29:49Z",
+              "updatedAt": "2020-07-13T00:44:56Z"
+            },
+            {
+              "originalPosition": 199,
+              "body": "I am not sure whether these bounds are still maintained.\r\nFor example  {{FT10}} improved the image size just by altering the choice of the y coordinate. In our case, we have altered the y-coordinate, and the choice of Z to make the encodings complete. \r\nIt's likely that our modifications only modified the bounds by a minor factor. I think there is no need to prove that, nor to include such a proof in the document.\r\nMy recommendation is to point readers to the correspondent papers without including the specific details of the bounds.",
+              "createdAt": "2020-07-09T22:50:12Z",
+              "updatedAt": "2020-07-13T00:44:56Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDQ2OTI1MjUy",
+          "commit": {
+            "abbreviatedOid": "f87f209"
+          },
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-07-13T00:32:52Z",
+          "updatedAt": "2020-07-13T00:32:53Z",
+          "comments": [
+            {
+              "originalPosition": 23,
+              "body": "This edit changes the point of the \"Note, however\"---I was intending to refer to the Ristenpart et al. paper on the limits of indifferentiability, not uniformity issues. But maybe the broader point is that this is all too encoded, and we should simply refer them to security considerations for further discussion. I'll push an edit to this effect and then can we discuss further?",
+              "createdAt": "2020-07-13T00:32:53Z",
+              "updatedAt": "2020-07-13T00:44:56Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDQ2OTI1NTc4",
+          "commit": {
+            "abbreviatedOid": "f87f209"
+          },
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-07-13T00:35:31Z",
+          "updatedAt": "2020-07-13T00:35:31Z",
+          "comments": [
+            {
+              "originalPosition": 28,
+              "body": "Same comment as above. I'll push an edit and then can we discuss further?",
+              "createdAt": "2020-07-13T00:35:31Z",
+              "updatedAt": "2020-07-13T00:44:56Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDQ3NTI5ODUw",
+          "commit": {
+            "abbreviatedOid": "7b1734e"
+          },
+          "author": "armfazh",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2020-07-13T19:16:31Z",
+          "updatedAt": "2020-07-13T19:16:31Z",
+          "comments": []
         }
       ]
     }
