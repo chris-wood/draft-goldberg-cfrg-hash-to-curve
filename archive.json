@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2020-07-13T20:51:13.161957+00:00",
+  "timestamp": "2020-08-08T15:42:33.919631+00:00",
   "repo": "cfrg/draft-irtf-cfrg-hash-to-curve",
   "labels": [
     {
@@ -6352,6 +6352,148 @@
           "body": "After going through the papers, I think the key point on the distinction betwen encode_to_curve and hash_to_curve is that one of them is constructed using an admissible encoding (under Def 4 of BCIMRT10).\r\nDef 4 augments the previous definition by requiring the `Regular` property. This property ensures that the output distributions are unifom. So, being more technical, we can say that hash_to_curve is constructed with an admissible encoding function. However, just saying that the encoding is uniform, it seems to have the same meaning. So I am in favor to replace the names.\r\n\r\nAlso the important fact is not whether encode_to_curve and hash_to_curve are random-oracles (yes, both are), but instead we must communicate in the draft that the distinction is on whether or not they can be used to replace an ideal primitive of a hash function in the random oracle model.\r\n\r\nFinally, the indifferentiability property seems to follow easily, as it does not take into account the probability distribution of outputs. So this argument is orthogonal, and we might not require an explicit proof of indifferentiability in the document.\r\n\r\nI left some suggestions in the PR too.\r\n\r\n",
           "createdAt": "2020-07-09T23:02:14Z",
           "updatedAt": "2020-07-09T23:02:14Z"
+        }
+      ]
+    },
+    {
+      "number": 290,
+      "id": "MDU6SXNzdWU2NTYxNjkzNzI=",
+      "title": "suites for pairing-friendly curves",
+      "url": "https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/issues/290",
+      "state": "OPEN",
+      "author": "kwantam",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Per recent discussion on the CFRG mailing list, either this draft or pairing-friendly curves will want to add suites for all of the curves in the p-f-c document.\r\n\r\nProbably BLS12-381 should live wherever the other suites do.\r\n\r\nI'm happy adding them all here, but I'm curious what @armfazh and @chris-wood think.",
+      "createdAt": "2020-07-13T21:52:04Z",
+      "updatedAt": "2020-07-14T16:56:39Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "armfazh",
+          "authorAssociation": "COLLABORATOR",
+          "body": "It would be good to have the suites in h2c, however it seems to me that the pfc-draft still needs more work to be done until reaching to a final set of curves.\r\nWe probably do not want the pfc be a dependency of the h2c draft.\r\nI am ok with having the bls12-381 suite in h2c, as serves as an example on how to specify suite for future specifications of pairing friendly curves.\r\nThe suites for the remainder pf curves can be included in the pfc draft. \r\n",
+          "createdAt": "2020-07-13T22:09:49Z",
+          "updatedAt": "2020-07-13T22:09:49Z"
+        },
+        {
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> I am ok with having the bls12-381 suite in h2c, as serves as an example on how to specify suite for future specifications of pairing friendly curves. The suites for the remainder pf curves can be included in the pfc draft.\r\n\r\nAgreed.",
+          "createdAt": "2020-07-14T16:56:39Z",
+          "updatedAt": "2020-07-14T16:56:39Z"
+        }
+      ]
+    },
+    {
+      "number": 291,
+      "id": "MDU6SXNzdWU2NzIyNTE5MzY=",
+      "title": "suggest way of composing expand_message with ristretto's FROM_UNIFORM_BYTES?",
+      "url": "https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/issues/291",
+      "state": "OPEN",
+      "author": "kwantam",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "I know this is something we've discussed before (certainly @chris-wood and I have), but:\r\n\r\nWould it make sense for us to add (say, in an appendix) a suggested way of composing the h2c primitives with the Ristretto FROM_UNIFORM_BYTES API? I've gotten a few questions about this from folks implementing VOPRFs on ristretto255, and my impression is that the Ristretto authors are adamant about wanting no mention of hash functions in their document.\r\n\r\nThe obvious suggestion for ristretto255 is to pick a DST and call `FROM_UNIFORM_BYTES(expand_message_XXX(msg, DST, 64))`. Honestly, I'd even be OK mentioning this in the Suites section...",
+      "createdAt": "2020-08-03T18:07:37Z",
+      "updatedAt": "2020-08-06T22:40:17Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "body": "cc @armfazh @grittygrease @chris-wood",
+          "createdAt": "2020-08-03T18:08:06Z",
+          "updatedAt": "2020-08-03T18:08:06Z"
+        },
+        {
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Yeah, I think this makes sense. It likely needs to be written down somewhere, and I really don't have a strong feeling as to where it goes. The only oddity about making this a suite is that the document's title is \"hash to curve,\" whereas Ristretto isn't \"really\" a curve. ",
+          "createdAt": "2020-08-03T23:36:25Z",
+          "updatedAt": "2020-08-03T23:36:45Z"
+        },
+        {
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Hot take: Ristretto really *is* a curve, it's just dressed up in a funny way :smile:\r\n\r\nI can write something down later today or tomorrow. I think it'll be in an appx since it won't follow the required format of a suite, but we can play around with it and see what works best once we have some text.",
+          "createdAt": "2020-08-04T19:07:46Z",
+          "updatedAt": "2020-08-04T19:08:04Z"
+        },
+        {
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> Hot take: Ristretto really is a curve, it's just dressed up in a funny way \ud83d\ude04\r\n\r\nHah, okay, fine. I was speaking in terms of the API. ",
+          "createdAt": "2020-08-04T19:44:50Z",
+          "updatedAt": "2020-08-04T19:44:50Z"
+        },
+        {
+          "author": "armfazh",
+          "authorAssociation": "COLLABORATOR",
+          "body": "An alternative way is to describe how the output of one of the h2c ciphersuites can actually be used to generate a ristretto element.\r\nFor example:\r\n\r\n```python\r\ndef h2c_ristretto(msg,dst):\r\n    P = edwards25519_XMD:SHA-512_ELL2_RO_(msg, DST)\r\n    return P as ristrettoPoint\r\n```",
+          "createdAt": "2020-08-06T18:27:21Z",
+          "updatedAt": "2020-08-06T18:27:36Z"
+        },
+        {
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "body": "This seems completely possible. I worry that the Ristretto authors would get annoyed by this since it completely sidesteps the \"this is not a curve\" abstraction they're trying to build. (And in fact when I've spoken with them about ~exactly~ something like this proposal in the past they were explicitly not happy about it for that reason.)",
+          "createdAt": "2020-08-06T19:19:07Z",
+          "updatedAt": "2020-08-06T19:19:25Z"
+        },
+        {
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "body": "By the way, apologies that I have not yet written this down---trying to push something else towards completion. I will aim to have it done in the next couple days, and certainly before the end of the weekend.",
+          "createdAt": "2020-08-06T19:20:36Z",
+          "updatedAt": "2020-08-06T19:20:36Z"
+        },
+        {
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Agreed. I think we should not break that abstraction, even if it may be correct. ",
+          "createdAt": "2020-08-06T19:20:49Z",
+          "updatedAt": "2020-08-06T19:20:49Z"
+        },
+        {
+          "author": "grittygrease",
+          "authorAssociation": "COLLABORATOR",
+          "body": "This is a contentious enough point that it should be discussed on-list.\n\nOn Thu, Aug 6, 2020 at 12:21 PM Christopher Wood <notifications@github.com>\nwrote:\n\n> Agreed. I think we should not break that abstraction, even if it may be\n> correct.\n>\n> \u2014\n> You are receiving this because you were mentioned.\n> Reply to this email directly, view it on GitHub\n> <https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/issues/291#issuecomment-670145784>,\n> or unsubscribe\n> <https://github.com/notifications/unsubscribe-auth/ABHDHZ2MPXRYW6UEHJRQ2IDR7L7B7ANCNFSM4PTSWOCA>\n> .\n>\n",
+          "createdAt": "2020-08-06T22:40:17Z",
+          "updatedAt": "2020-08-06T22:40:17Z"
+        }
+      ]
+    },
+    {
+      "number": 292,
+      "id": "MDU6SXNzdWU2NzI5Mjc4ODY=",
+      "title": "Thomas' nits",
+      "url": "https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/issues/292",
+      "state": "OPEN",
+      "author": "chris-wood",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": " * In section 4 (page 12): \"all arithmetic, comparisons, and assignments MUST...\" -> I think it lacks a word after \"arithmetic\". Maybe \"all arithmetic operations\"?\r\n * In section I.3, the renaming \"SHAKE-128\" -> \"SHAKE128\" has been applied, but the section still contains \"hash = SHAKE_128\" (I suppose that the underscore character evaded the search&replace).\r\n \r\nAlso, some pseudocode blocks have been moved left by three characters (i.e. the three-space margin was removed). This is not systematic; e.g. sgn0() was moved left (section 4.1), but not sgn0_m_eq_1() (in the same section!). Pseudocode blocks that lost their margin are:\r\n\r\n * sgn0() (4.1)\r\n * sgn0_m_eq_2() (4.1)\r\n * map_to_curve_svdw() (D.1)\r\n * map_to_curve_simple_swu() (D.2)\r\n * map_to_curve_elligator2() (D.3)\r\n * map_to_curve_simple_swu_3mod4() (E.2.1)\r\n * map_to_curve_elligator2_curve25519() (E.3.1)\r\n * map_to_curve_elligator2_edwards25519() (E.3.2)\r\n * map_to_curve_elligator2_3mod4() (E.3.5)\r\n * map_to_curve_elligator2_5mod8() (E.3.6)\r\nAdditionally, the map_to_curve_elligator2_curve448() pseudocode (E.3.3) has a reduced margin with a single space instead of three.",
+      "createdAt": "2020-08-04T16:38:33Z",
+      "updatedAt": "2020-08-04T19:04:50Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@kwantam after we land these, we can spin a new version for RGLC (per instruction from the chairs). Do we also want to land the ristretto255 change, too?",
+          "createdAt": "2020-08-04T16:43:32Z",
+          "updatedAt": "2020-08-04T16:43:32Z"
+        },
+        {
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@chris-wood yes, let's land both.\r\n\r\nSome responses:\r\n\r\n- \"all arithmetic\" seems fine to me---it's a noun in this context.\r\n- oh sorry, must have missed the SHAKE_128 last time around\r\n- agreed that we should make the margins consistent where possible.",
+          "createdAt": "2020-08-04T19:04:16Z",
+          "updatedAt": "2020-08-04T19:04:50Z"
         }
       ]
     }
