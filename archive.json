@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2020-08-08T15:42:33.919631+00:00",
+  "timestamp": "2020-08-23T17:12:51.146332+00:00",
   "repo": "cfrg/draft-irtf-cfrg-hash-to-curve",
   "labels": [
     {
@@ -6391,15 +6391,15 @@
       "id": "MDU6SXNzdWU2NzIyNTE5MzY=",
       "title": "suggest way of composing expand_message with ristretto's FROM_UNIFORM_BYTES?",
       "url": "https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/issues/291",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "kwantam",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "I know this is something we've discussed before (certainly @chris-wood and I have), but:\r\n\r\nWould it make sense for us to add (say, in an appendix) a suggested way of composing the h2c primitives with the Ristretto FROM_UNIFORM_BYTES API? I've gotten a few questions about this from folks implementing VOPRFs on ristretto255, and my impression is that the Ristretto authors are adamant about wanting no mention of hash functions in their document.\r\n\r\nThe obvious suggestion for ristretto255 is to pick a DST and call `FROM_UNIFORM_BYTES(expand_message_XXX(msg, DST, 64))`. Honestly, I'd even be OK mentioning this in the Suites section...",
       "createdAt": "2020-08-03T18:07:37Z",
-      "updatedAt": "2020-08-06T22:40:17Z",
-      "closedAt": null,
+      "updatedAt": "2020-08-23T17:12:02Z",
+      "closedAt": "2020-08-23T17:12:02Z",
       "comments": [
         {
           "author": "kwantam",
@@ -6471,15 +6471,15 @@
       "id": "MDU6SXNzdWU2NzI5Mjc4ODY=",
       "title": "Thomas' nits",
       "url": "https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/issues/292",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "chris-wood",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": " * In section 4 (page 12): \"all arithmetic, comparisons, and assignments MUST...\" -> I think it lacks a word after \"arithmetic\". Maybe \"all arithmetic operations\"?\r\n * In section I.3, the renaming \"SHAKE-128\" -> \"SHAKE128\" has been applied, but the section still contains \"hash = SHAKE_128\" (I suppose that the underscore character evaded the search&replace).\r\n \r\nAlso, some pseudocode blocks have been moved left by three characters (i.e. the three-space margin was removed). This is not systematic; e.g. sgn0() was moved left (section 4.1), but not sgn0_m_eq_1() (in the same section!). Pseudocode blocks that lost their margin are:\r\n\r\n * sgn0() (4.1)\r\n * sgn0_m_eq_2() (4.1)\r\n * map_to_curve_svdw() (D.1)\r\n * map_to_curve_simple_swu() (D.2)\r\n * map_to_curve_elligator2() (D.3)\r\n * map_to_curve_simple_swu_3mod4() (E.2.1)\r\n * map_to_curve_elligator2_curve25519() (E.3.1)\r\n * map_to_curve_elligator2_edwards25519() (E.3.2)\r\n * map_to_curve_elligator2_3mod4() (E.3.5)\r\n * map_to_curve_elligator2_5mod8() (E.3.6)\r\nAdditionally, the map_to_curve_elligator2_curve448() pseudocode (E.3.3) has a reduced margin with a single space instead of three.",
       "createdAt": "2020-08-04T16:38:33Z",
-      "updatedAt": "2020-08-04T19:04:50Z",
-      "closedAt": null,
+      "updatedAt": "2020-08-08T19:11:20Z",
+      "closedAt": "2020-08-08T19:11:20Z",
       "comments": [
         {
           "author": "chris-wood",
@@ -30322,7 +30322,7 @@
       "labels": [],
       "body": "This PR adjusts the text as discussed in #288, clarifying uniform/nonuniform vs random oracle.\r\n\r\nIt also adds the note we discussed via email regarding hashing to GF(r).",
       "createdAt": "2020-07-09T00:50:55Z",
-      "updatedAt": "2020-07-13T20:50:20Z",
+      "updatedAt": "2020-08-08T19:08:10Z",
       "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
       "baseRefName": "master",
       "baseRefOid": "33fb61006261a108b76c0bd41e276c76362d3d9e",
@@ -30446,6 +30446,155 @@
           "body": "",
           "createdAt": "2020-07-13T19:16:31Z",
           "updatedAt": "2020-07-13T19:16:31Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 293,
+      "id": "MDExOlB1bGxSZXF1ZXN0NDY1MDQ0NjUw",
+      "title": "Address Thomas' nits.",
+      "url": "https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/pull/293",
+      "state": "MERGED",
+      "author": "chris-wood",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Closes #292.\r\n\r\nI think we should leave indentation nonsense to the RFC editor. We didn't change any of the pseudocode blocks, so it seems to be a tooling issue that (in my opinion) is not worth our time debugging.",
+      "createdAt": "2020-08-08T15:42:43Z",
+      "updatedAt": "2020-08-08T19:11:21Z",
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "17b7db9be3193d819d40d875bb7d80c98bc21897",
+      "headRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "caw/thomas-nits",
+      "headRefOid": "54b371c1ad623cfb04c4b864b2fafa0cb664dada",
+      "closedAt": "2020-08-08T19:11:20Z",
+      "mergedAt": "2020-08-08T19:11:20Z",
+      "mergedBy": "chris-wood",
+      "mergeCommit": {
+        "oid": "4f2de2f80d055d5a7ce1f3244b8c5b119d22eae7"
+      },
+      "comments": [
+        {
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@kwantam please merge if you agree!",
+          "createdAt": "2020-08-08T15:45:01Z",
+          "updatedAt": "2020-08-08T15:45:01Z"
+        },
+        {
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@chris-wood :+1: looks good to me. I modified the vector generation scripts to generate \"SHAKE128\" instead of \"SHAKE_128\" and double checked that the auto-generated results match the change you made. If my changes look good to you, go ahead and merge.",
+          "createdAt": "2020-08-08T19:10:34Z",
+          "updatedAt": "2020-08-08T19:10:34Z"
+        }
+      ],
+      "reviews": []
+    },
+    {
+      "number": 294,
+      "id": "MDExOlB1bGxSZXF1ZXN0NDY1MjAyNjM5",
+      "title": "recommendation on how to hash to ristretto255",
+      "url": "https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/pull/294",
+      "state": "MERGED",
+      "author": "kwantam",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "This PR adds a short appendix that defines a hash_to_curve--like function for ristretto255.\r\n\r\nCloses #291 ",
+      "createdAt": "2020-08-09T21:05:26Z",
+      "updatedAt": "2020-08-23T17:12:02Z",
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "4f2de2f80d055d5a7ce1f3244b8c5b119d22eae7",
+      "headRepository": "kwantam/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "ristretto_advice",
+      "headRefOid": "2cd66aaa6958fa7b87d03086a9ffd4d7f0394b84",
+      "closedAt": "2020-08-23T17:12:02Z",
+      "mergedAt": "2020-08-23T17:12:02Z",
+      "mergedBy": "chris-wood",
+      "mergeCommit": {
+        "oid": "4fc19e5b38d0ed25d3c11d32f54a10bf214cdb35"
+      },
+      "comments": [
+        {
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Per @grittygrease's statement in #291, I think once we're happy with this text we should push an updated draft and request feedback on the cfrg list about this.",
+          "createdAt": "2020-08-09T21:06:50Z",
+          "updatedAt": "2020-08-09T21:06:50Z"
+        },
+        {
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Thanks @chris-wood! I pushed a very small edit that refs to the domain separation recommendations from the appendix, but now I'll stop messing around with it :)",
+          "createdAt": "2020-08-09T22:11:56Z",
+          "updatedAt": "2020-08-09T22:11:56Z"
+        },
+        {
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "body": "The edits still look good :-) I suggest we take this to the list now. (@armfazh is out this week and won't be able to review for a while.)",
+          "createdAt": "2020-08-10T14:49:17Z",
+          "updatedAt": "2020-08-10T14:49:17Z"
+        },
+        {
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "body": "What's the best way to do this? Ref the list to this PR?",
+          "createdAt": "2020-08-11T01:30:40Z",
+          "updatedAt": "2020-08-11T01:30:40Z"
+        },
+        {
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> What's the best way to do this? Ref the list to this PR?\r\n\r\nYep, that\u2019ll do!",
+          "createdAt": "2020-08-11T01:48:30Z",
+          "updatedAt": "2020-08-11T01:48:30Z"
+        },
+        {
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@kwantam shall we merge this? There's been no pushback, and it seems like the best option (in my opinion).",
+          "createdAt": "2020-08-23T14:24:47Z",
+          "updatedAt": "2020-08-23T14:24:47Z"
+        },
+        {
+          "author": "jedisct1",
+          "authorAssociation": "NONE",
+          "body": "Looks good to me. ",
+          "createdAt": "2020-08-23T14:29:33Z",
+          "updatedAt": "2020-08-23T14:29:33Z"
+        },
+        {
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Feedback has been more positive than negative, so I think it passes the bar for inclusion :+1:\r\n\r\nThere is a small remaining question that we can decide not to address now: if the ristretto draft adds decaf for edwards448 we might also want to give a recommendation for that. Happy to merge this and update later if that becomes necessary.",
+          "createdAt": "2020-08-23T17:07:40Z",
+          "updatedAt": "2020-08-23T17:07:40Z"
+        },
+        {
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> There is a small remaining question that we can decide not to address now: if the ristretto draft adds decaf for edwards448 we might also want to give a recommendation for that. Happy to merge this and update later if that becomes necessary.\r\n\r\nI heard that Mike might join the ristretto255 draft and add decaf448 in the process. When that happens, we can that method in a followup PR.",
+          "createdAt": "2020-08-23T17:11:38Z",
+          "updatedAt": "2020-08-23T17:11:54Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDYzOTA0MTc1",
+          "commit": {
+            "abbreviatedOid": "68bd991"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "The content LGTM \u2014 thanks!",
+          "createdAt": "2020-08-09T21:19:49Z",
+          "updatedAt": "2020-08-09T21:19:49Z",
           "comments": []
         }
       ]
