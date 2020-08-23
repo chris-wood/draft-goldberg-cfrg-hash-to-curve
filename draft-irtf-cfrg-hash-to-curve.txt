@@ -5,14 +5,14 @@
 CFRG                                                    A. Faz-Hernandez
 Internet-Draft                                                Cloudflare
 Intended status: Informational                                  S. Scott
-Expires: 9 February 2021                                    Cornell Tech
+Expires: 24 February 2021                                   Cornell Tech
                                                              N. Sullivan
                                                               Cloudflare
                                                               R.S. Wahby
                                                      Stanford University
                                                                C.A. Wood
                                                               Cloudflare
-                                                           8 August 2020
+                                                          23 August 2020
 
 
                        Hashing to Elliptic Curves
@@ -38,7 +38,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 9 February 2021.
+   This Internet-Draft will expire on 24 February 2021.
 
 Copyright Notice
 
@@ -53,7 +53,7 @@ Copyright Notice
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021                [Page 1]
+Faz-Hernandez, et al.   Expires 24 February 2021                [Page 1]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021                [Page 2]
+Faz-Hernandez, et al.   Expires 24 February 2021                [Page 2]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -134,99 +134,100 @@ Internet-Draft                hash-to-curve                  August 2020
      10.4.  Domain separation recommendations  . . . . . . . . . . .  50
      10.5.  Target security levels . . . . . . . . . . . . . . . . .  53
    11. Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .  53
-   12. Contributors  . . . . . . . . . . . . . . . . . . . . . . . .  53
+   12. Contributors  . . . . . . . . . . . . . . . . . . . . . . . .  54
    13. References  . . . . . . . . . . . . . . . . . . . . . . . . .  54
      13.1.  Normative References . . . . . . . . . . . . . . . . . .  54
-     13.2.  Informative References . . . . . . . . . . . . . . . . .  54
+     13.2.  Informative References . . . . . . . . . . . . . . . . .  55
    Appendix A.  Related work . . . . . . . . . . . . . . . . . . . .  63
-   Appendix B.  Rational maps  . . . . . . . . . . . . . . . . . . .  65
-     B.1.  Generic Montgomery to twisted Edwards map . . . . . . . .  66
-     B.2.  Weierstrass to Montgomery map . . . . . . . . . . . . . .  67
-   Appendix C.  Isogeny maps for suites  . . . . . . . . . . . . . .  68
-     C.1.  3-isogeny map for secp256k1 . . . . . . . . . . . . . . .  68
-     C.2.  11-isogeny map for BLS12-381 G1 . . . . . . . . . . . . .  70
-     C.3.  3-isogeny map for BLS12-381 G2  . . . . . . . . . . . . .  74
-   Appendix D.  Straight-line implementations of deterministic
-           mappings  . . . . . . . . . . . . . . . . . . . . . . . .  75
-     D.1.  Shallue-van de Woestijne method . . . . . . . . . . . . .  75
-     D.2.  Simplified SWU method . . . . . . . . . . . . . . . . . .  77
-     D.3.  Elligator 2 method  . . . . . . . . . . . . . . . . . . .  78
-   Appendix E.  Optimized sample code  . . . . . . . . . . . . . . .  79
-     E.1.  Interface and projective coordinate systems . . . . . . .  79
-     E.2.  Simplified SWU  . . . . . . . . . . . . . . . . . . . . .  80
-       E.2.1.  q = 3 (mod 4) . . . . . . . . . . . . . . . . . . . .  80
-       E.2.2.  q = 5 (mod 8) . . . . . . . . . . . . . . . . . . . .  82
-       E.2.3.  q = 9 (mod 16)  . . . . . . . . . . . . . . . . . . .  83
-     E.3.  Elligator 2 . . . . . . . . . . . . . . . . . . . . . . .  85
-       E.3.1.  curve25519 (q = 5 (mod 8), K = 1) . . . . . . . . . .  85
-       E.3.2.  edwards25519  . . . . . . . . . . . . . . . . . . . .  86
-       E.3.3.  curve448 (q = 3 (mod 4), K = 1) . . . . . . . . . . .  87
-       E.3.4.  edwards448  . . . . . . . . . . . . . . . . . . . . .  88
+   Appendix B.  Hashing to ristretto255  . . . . . . . . . . . . . .  65
+   Appendix C.  Rational maps  . . . . . . . . . . . . . . . . . . .  66
+     C.1.  Generic Montgomery to twisted Edwards map . . . . . . . .  67
+     C.2.  Weierstrass to Montgomery map . . . . . . . . . . . . . .  69
+   Appendix D.  Isogeny maps for suites  . . . . . . . . . . . . . .  69
+     D.1.  3-isogeny map for secp256k1 . . . . . . . . . . . . . . .  69
+     D.2.  11-isogeny map for BLS12-381 G1 . . . . . . . . . . . . .  71
+     D.3.  3-isogeny map for BLS12-381 G2  . . . . . . . . . . . . .  75
+   Appendix E.  Straight-line implementations of deterministic
+           mappings  . . . . . . . . . . . . . . . . . . . . . . . .  76
+     E.1.  Shallue-van de Woestijne method . . . . . . . . . . . . .  77
+     E.2.  Simplified SWU method . . . . . . . . . . . . . . . . . .  78
+     E.3.  Elligator 2 method  . . . . . . . . . . . . . . . . . . .  79
+   Appendix F.  Optimized sample code  . . . . . . . . . . . . . . .  80
+     F.1.  Interface and projective coordinate systems . . . . . . .  80
+     F.2.  Simplified SWU  . . . . . . . . . . . . . . . . . . . . .  81
+       F.2.1.  q = 3 (mod 4) . . . . . . . . . . . . . . . . . . . .  81
+       F.2.2.  q = 5 (mod 8) . . . . . . . . . . . . . . . . . . . .  84
+       F.2.3.  q = 9 (mod 16)  . . . . . . . . . . . . . . . . . . .  85
+     F.3.  Elligator 2 . . . . . . . . . . . . . . . . . . . . . . .  87
+       F.3.1.  curve25519 (q = 5 (mod 8), K = 1) . . . . . . . . . .  87
+       F.3.2.  edwards25519  . . . . . . . . . . . . . . . . . . . .  88
+       F.3.3.  curve448 (q = 3 (mod 4), K = 1) . . . . . . . . . . .  89
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021                [Page 3]
+Faz-Hernandez, et al.   Expires 24 February 2021                [Page 3]
 
 Internet-Draft                hash-to-curve                  August 2020
 
 
-       E.3.5.  q = 3 (mod 4) . . . . . . . . . . . . . . . . . . . .  90
-       E.3.6.  q = 5 (mod 8) . . . . . . . . . . . . . . . . . . . .  92
-     E.4.  Cofactor clearing for BLS12-381 G2  . . . . . . . . . . .  93
-   Appendix F.  Scripts for parameter generation . . . . . . . . . .  95
-     F.1.  Finding Z for the Shallue-van de Woestijne map  . . . . .  95
-     F.2.  Finding Z for Simplified SWU  . . . . . . . . . . . . . .  96
-     F.3.  Finding Z for Elligator 2 . . . . . . . . . . . . . . . .  97
-   Appendix G.  sqrt and is_square functions . . . . . . . . . . . .  97
-     G.1.  q = 3 (mod 4) . . . . . . . . . . . . . . . . . . . . . .  98
-     G.2.  q = 5 (mod 8) . . . . . . . . . . . . . . . . . . . . . .  98
-     G.3.  q = 9 (mod 16)  . . . . . . . . . . . . . . . . . . . . .  98
-     G.4.  Constant-time Tonelli-Shanks algorithm  . . . . . . . . .  99
-     G.5.  is_square for F = GF(p^2) . . . . . . . . . . . . . . . . 100
-   Appendix H.  Suite test vectors . . . . . . . . . . . . . . . . . 101
-     H.1.  NIST P-256  . . . . . . . . . . . . . . . . . . . . . . . 101
-       H.1.1.  P256_XMD:SHA-256_SSWU_RO_ . . . . . . . . . . . . . . 101
-       H.1.2.  P256_XMD:SHA-256_SSWU_NU_ . . . . . . . . . . . . . . 103
-     H.2.  NIST P-384  . . . . . . . . . . . . . . . . . . . . . . . 105
-       H.2.1.  P384_XMD:SHA-512_SSWU_RO_ . . . . . . . . . . . . . . 105
-       H.2.2.  P384_XMD:SHA-512_SSWU_NU_ . . . . . . . . . . . . . . 107
-     H.3.  NIST P-521  . . . . . . . . . . . . . . . . . . . . . . . 109
-       H.3.1.  P521_XMD:SHA-512_SSWU_RO_ . . . . . . . . . . . . . . 109
-       H.3.2.  P521_XMD:SHA-512_SSWU_NU_ . . . . . . . . . . . . . . 112
-     H.4.  curve25519  . . . . . . . . . . . . . . . . . . . . . . . 114
-       H.4.1.  curve25519_XMD:SHA-512_ELL2_RO_ . . . . . . . . . . . 114
-       H.4.2.  curve25519_XMD:SHA-512_ELL2_NU_ . . . . . . . . . . . 116
-     H.5.  edwards25519  . . . . . . . . . . . . . . . . . . . . . . 118
-       H.5.1.  edwards25519_XMD:SHA-512_ELL2_RO_ . . . . . . . . . . 118
-       H.5.2.  edwards25519_XMD:SHA-512_ELL2_NU_ . . . . . . . . . . 120
-     H.6.  curve448  . . . . . . . . . . . . . . . . . . . . . . . . 122
-       H.6.1.  curve448_XMD:SHA-512_ELL2_RO_ . . . . . . . . . . . . 122
-       H.6.2.  curve448_XMD:SHA-512_ELL2_NU_ . . . . . . . . . . . . 125
-     H.7.  edwards448  . . . . . . . . . . . . . . . . . . . . . . . 127
-       H.7.1.  edwards448_XMD:SHA-512_ELL2_RO_ . . . . . . . . . . . 127
-       H.7.2.  edwards448_XMD:SHA-512_ELL2_NU_ . . . . . . . . . . . 130
-     H.8.  secp256k1 . . . . . . . . . . . . . . . . . . . . . . . . 132
-       H.8.1.  secp256k1_XMD:SHA-256_SSWU_RO_  . . . . . . . . . . . 132
-       H.8.2.  secp256k1_XMD:SHA-256_SSWU_NU_  . . . . . . . . . . . 134
-     H.9.  BLS12-381 G1  . . . . . . . . . . . . . . . . . . . . . . 136
-       H.9.1.  BLS12381G1_XMD:SHA-256_SSWU_RO_ . . . . . . . . . . . 136
-       H.9.2.  BLS12381G1_XMD:SHA-256_SSWU_NU_ . . . . . . . . . . . 138
-     H.10. BLS12-381 G2  . . . . . . . . . . . . . . . . . . . . . . 140
-       H.10.1.  BLS12381G2_XMD:SHA-256_SSWU_RO_  . . . . . . . . . . 140
-       H.10.2.  BLS12381G2_XMD:SHA-256_SSWU_NU_  . . . . . . . . . . 144
-   Appendix I.  Expand test vectors  . . . . . . . . . . . . . . . . 146
-     I.1.  expand_message_xmd(SHA-256) . . . . . . . . . . . . . . . 147
-     I.2.  expand_message_xmd(SHA-512) . . . . . . . . . . . . . . . 151
-     I.3.  expand_message_xof(SHAKE128)  . . . . . . . . . . . . . . 156
+       F.3.4.  edwards448  . . . . . . . . . . . . . . . . . . . . .  90
+       F.3.5.  q = 3 (mod 4) . . . . . . . . . . . . . . . . . . . .  92
+       F.3.6.  q = 5 (mod 8) . . . . . . . . . . . . . . . . . . . .  94
+     F.4.  Cofactor clearing for BLS12-381 G2  . . . . . . . . . . .  95
+   Appendix G.  Scripts for parameter generation . . . . . . . . . .  97
+     G.1.  Finding Z for the Shallue-van de Woestijne map  . . . . .  97
+     G.2.  Finding Z for Simplified SWU  . . . . . . . . . . . . . .  98
+     G.3.  Finding Z for Elligator 2 . . . . . . . . . . . . . . . .  99
+   Appendix H.  sqrt and is_square functions . . . . . . . . . . . .  99
+     H.1.  q = 3 (mod 4) . . . . . . . . . . . . . . . . . . . . . . 100
+     H.2.  q = 5 (mod 8) . . . . . . . . . . . . . . . . . . . . . . 100
+     H.3.  q = 9 (mod 16)  . . . . . . . . . . . . . . . . . . . . . 100
+     H.4.  Constant-time Tonelli-Shanks algorithm  . . . . . . . . . 101
+     H.5.  is_square for F = GF(p^2) . . . . . . . . . . . . . . . . 102
+   Appendix I.  Suite test vectors . . . . . . . . . . . . . . . . . 103
+     I.1.  NIST P-256  . . . . . . . . . . . . . . . . . . . . . . . 103
+       I.1.1.  P256_XMD:SHA-256_SSWU_RO_ . . . . . . . . . . . . . . 103
+       I.1.2.  P256_XMD:SHA-256_SSWU_NU_ . . . . . . . . . . . . . . 105
+     I.2.  NIST P-384  . . . . . . . . . . . . . . . . . . . . . . . 107
+       I.2.1.  P384_XMD:SHA-512_SSWU_RO_ . . . . . . . . . . . . . . 107
+       I.2.2.  P384_XMD:SHA-512_SSWU_NU_ . . . . . . . . . . . . . . 109
+     I.3.  NIST P-521  . . . . . . . . . . . . . . . . . . . . . . . 111
+       I.3.1.  P521_XMD:SHA-512_SSWU_RO_ . . . . . . . . . . . . . . 111
+       I.3.2.  P521_XMD:SHA-512_SSWU_NU_ . . . . . . . . . . . . . . 114
+     I.4.  curve25519  . . . . . . . . . . . . . . . . . . . . . . . 116
+       I.4.1.  curve25519_XMD:SHA-512_ELL2_RO_ . . . . . . . . . . . 116
+       I.4.2.  curve25519_XMD:SHA-512_ELL2_NU_ . . . . . . . . . . . 118
+     I.5.  edwards25519  . . . . . . . . . . . . . . . . . . . . . . 120
+       I.5.1.  edwards25519_XMD:SHA-512_ELL2_RO_ . . . . . . . . . . 120
+       I.5.2.  edwards25519_XMD:SHA-512_ELL2_NU_ . . . . . . . . . . 122
+     I.6.  curve448  . . . . . . . . . . . . . . . . . . . . . . . . 124
+       I.6.1.  curve448_XMD:SHA-512_ELL2_RO_ . . . . . . . . . . . . 124
+       I.6.2.  curve448_XMD:SHA-512_ELL2_NU_ . . . . . . . . . . . . 127
+     I.7.  edwards448  . . . . . . . . . . . . . . . . . . . . . . . 129
+       I.7.1.  edwards448_XMD:SHA-512_ELL2_RO_ . . . . . . . . . . . 129
+       I.7.2.  edwards448_XMD:SHA-512_ELL2_NU_ . . . . . . . . . . . 132
+     I.8.  secp256k1 . . . . . . . . . . . . . . . . . . . . . . . . 134
+       I.8.1.  secp256k1_XMD:SHA-256_SSWU_RO_  . . . . . . . . . . . 134
+       I.8.2.  secp256k1_XMD:SHA-256_SSWU_NU_  . . . . . . . . . . . 136
+     I.9.  BLS12-381 G1  . . . . . . . . . . . . . . . . . . . . . . 138
+       I.9.1.  BLS12381G1_XMD:SHA-256_SSWU_RO_ . . . . . . . . . . . 138
+       I.9.2.  BLS12381G1_XMD:SHA-256_SSWU_NU_ . . . . . . . . . . . 140
+     I.10. BLS12-381 G2  . . . . . . . . . . . . . . . . . . . . . . 142
+       I.10.1.  BLS12381G2_XMD:SHA-256_SSWU_RO_  . . . . . . . . . . 142
+       I.10.2.  BLS12381G2_XMD:SHA-256_SSWU_NU_  . . . . . . . . . . 146
+   Appendix J.  Expand test vectors  . . . . . . . . . . . . . . . . 148
+     J.1.  expand_message_xmd(SHA-256) . . . . . . . . . . . . . . . 149
+     J.2.  expand_message_xmd(SHA-512) . . . . . . . . . . . . . . . 153
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021                [Page 4]
+Faz-Hernandez, et al.   Expires 24 February 2021                [Page 4]
 
 Internet-Draft                hash-to-curve                  August 2020
 
 
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . . 159
+     J.3.  expand_message_xof(SHAKE128)  . . . . . . . . . . . . . . 158
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . . 161
 
 1.  Introduction
 
@@ -276,8 +277,7 @@ Internet-Draft                hash-to-curve                  August 2020
 
 
 
-
-Faz-Hernandez, et al.    Expires 9 February 2021                [Page 5]
+Faz-Hernandez, et al.   Expires 24 February 2021                [Page 5]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -333,7 +333,7 @@ Internet-Draft                hash-to-curve                  August 2020
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021                [Page 6]
+Faz-Hernandez, et al.   Expires 24 February 2021                [Page 6]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -389,7 +389,7 @@ Internet-Draft                hash-to-curve                  August 2020
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021                [Page 7]
+Faz-Hernandez, et al.   Expires 24 February 2021                [Page 7]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -445,7 +445,7 @@ Internet-Draft                hash-to-curve                  August 2020
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021                [Page 8]
+Faz-Hernandez, et al.   Expires 24 February 2021                [Page 8]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -501,7 +501,7 @@ Internet-Draft                hash-to-curve                  August 2020
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021                [Page 9]
+Faz-Hernandez, et al.   Expires 24 February 2021                [Page 9]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -557,7 +557,7 @@ Internet-Draft                hash-to-curve                  August 2020
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021               [Page 10]
+Faz-Hernandez, et al.   Expires 24 February 2021               [Page 10]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -613,7 +613,7 @@ Internet-Draft                hash-to-curve                  August 2020
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021               [Page 11]
+Faz-Hernandez, et al.   Expires 24 February 2021               [Page 11]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -669,7 +669,7 @@ Internet-Draft                hash-to-curve                  August 2020
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021               [Page 12]
+Faz-Hernandez, et al.   Expires 24 February 2021               [Page 12]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -725,7 +725,7 @@ Internet-Draft                hash-to-curve                  August 2020
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021               [Page 13]
+Faz-Hernandez, et al.   Expires 24 February 2021               [Page 13]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -733,7 +733,7 @@ Internet-Draft                hash-to-curve                  August 2020
       In certain extension fields, is_square can be computed in constant
       time more quickly than by the above exponentiation.  [AR13] and
       [S85] describe optimized methods for extension fields.
-      Appendix G.5 gives an optimized straight-line method for GF(p^2).
+      Appendix H.5 gives an optimized straight-line method for GF(p^2).
 
    *  sqrt(x): The sqrt operation is a multi-valued function, i.e.,
       there exist two roots of x in the field F whenever x is square
@@ -746,7 +746,7 @@ Internet-Draft                hash-to-curve                  August 2020
 
       The preferred way of computing square roots is to fix a
       deterministic algorithm particular to F.  We give several
-      algorithms in Appendix G.
+      algorithms in Appendix H.
 
    *  sgn0(x): This function returns either 0 or 1 indicating the "sign"
       of x, where sgn0(x) == 1 just when x is "negative".  (In other
@@ -781,7 +781,7 @@ Internet-Draft                hash-to-curve                  August 2020
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021               [Page 14]
+Faz-Hernandez, et al.   Expires 24 February 2021               [Page 14]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -837,7 +837,7 @@ Steps:
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021               [Page 15]
+Faz-Hernandez, et al.   Expires 24 February 2021               [Page 15]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -893,7 +893,7 @@ Steps:
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021               [Page 16]
+Faz-Hernandez, et al.   Expires 24 February 2021               [Page 16]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -949,7 +949,7 @@ Internet-Draft                hash-to-curve                  August 2020
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021               [Page 17]
+Faz-Hernandez, et al.   Expires 24 February 2021               [Page 17]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -1005,7 +1005,7 @@ Internet-Draft                hash-to-curve                  August 2020
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021               [Page 18]
+Faz-Hernandez, et al.   Expires 24 February 2021               [Page 18]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -1061,7 +1061,7 @@ Internet-Draft                hash-to-curve                  August 2020
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021               [Page 19]
+Faz-Hernandez, et al.   Expires 24 February 2021               [Page 19]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -1117,7 +1117,7 @@ Internet-Draft                hash-to-curve                  August 2020
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021               [Page 20]
+Faz-Hernandez, et al.   Expires 24 February 2021               [Page 20]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -1173,7 +1173,7 @@ Internet-Draft                hash-to-curve                  August 2020
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021               [Page 21]
+Faz-Hernandez, et al.   Expires 24 February 2021               [Page 21]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -1229,7 +1229,7 @@ Internet-Draft                hash-to-curve                  August 2020
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021               [Page 22]
+Faz-Hernandez, et al.   Expires 24 February 2021               [Page 22]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -1285,7 +1285,7 @@ Internet-Draft                hash-to-curve                  August 2020
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021               [Page 23]
+Faz-Hernandez, et al.   Expires 24 February 2021               [Page 23]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -1341,7 +1341,7 @@ Internet-Draft                hash-to-curve                  August 2020
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021               [Page 24]
+Faz-Hernandez, et al.   Expires 24 February 2021               [Page 24]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -1397,7 +1397,7 @@ Internet-Draft                hash-to-curve                  August 2020
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021               [Page 25]
+Faz-Hernandez, et al.   Expires 24 February 2021               [Page 25]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -1427,7 +1427,7 @@ Internet-Draft                hash-to-curve                  August 2020
    The parameterization given below is for Weierstrass curves; its
    derivation is detailed in [W19].  This parameterization also works
    for Montgomery (Section 6.7) and twisted Edwards (Section 6.8) curves
-   via the rational maps given in Appendix B: first evaluate the
+   via the rational maps given in Appendix C: first evaluate the
    Shallue-van de Woestijne mapping to an equivalent Weierstrass curve,
    then map that point to the target Montgomery or twisted Edwards curve
    using the corresponding rational map.
@@ -1439,7 +1439,7 @@ Internet-Draft                hash-to-curve                  August 2020
    *  A and B, the parameter of the Weierstrass curve.
 
    *  Z, a non-zero element of F meeting the below criteria.
-      Appendix F.1 gives a Sage [SAGE] script that outputs the
+      Appendix G.1 gives a Sage [SAGE] script that outputs the
       RECOMMENDED Z.
 
       1.  g(Z) != 0 in F.
@@ -1453,7 +1453,7 @@ Internet-Draft                hash-to-curve                  August 2020
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021               [Page 26]
+Faz-Hernandez, et al.   Expires 24 February 2021               [Page 26]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -1485,7 +1485,7 @@ Internet-Draft                hash-to-curve                  August 2020
    15. If sgn0(u) != sgn0(y), set y = -y
    16. return (x, y)
 
-   Appendix D.1 gives an example straight-line implementation of this
+   Appendix E.1 gives an example straight-line implementation of this
    mapping.
 
 6.6.2.  Simplified Shallue-van de Woestijne-Ulas method
@@ -1502,14 +1502,14 @@ Internet-Draft                hash-to-curve                  August 2020
 
    *  A and B, the parameters of the Weierstrass curve.
 
-   *  Z, an element of F meeting the below criteria.  Appendix F.2 gives
+   *  Z, an element of F meeting the below criteria.  Appendix G.2 gives
       a Sage [SAGE] script that outputs the RECOMMENDED Z.  The criteria
       are:
 
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021               [Page 27]
+Faz-Hernandez, et al.   Expires 24 February 2021               [Page 27]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -1544,8 +1544,8 @@ Internet-Draft                hash-to-curve                  August 2020
    9.  If sgn0(u) != sgn0(y), set y = -y
    10. return (x, y)
 
-   Appendix D.2 gives an example straight-line implementation of this
-   mapping.  Appendix E.2 gives optimized straight-line procedures that
+   Appendix E.2 gives an example straight-line implementation of this
+   mapping.  Appendix F.2 gives optimized straight-line procedures that
    apply to specific classes of curves and base fields.  For more
    information on optimizing this mapping, see [WB19] Section 4 or the
    example code found at [hash2curve-repo].
@@ -1565,7 +1565,7 @@ Internet-Draft                hash-to-curve                  August 2020
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021               [Page 28]
+Faz-Hernandez, et al.   Expires 24 February 2021               [Page 28]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -1621,7 +1621,7 @@ Internet-Draft                hash-to-curve                  August 2020
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021               [Page 29]
+Faz-Hernandez, et al.   Expires 24 February 2021               [Page 29]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -1646,7 +1646,7 @@ Internet-Draft                hash-to-curve                  August 2020
 
    *  J and K, the parameters of the elliptic curve.
 
-   *  Z, a non-square element of F.  Appendix F.3 gives a Sage [SAGE]
+   *  Z, a non-square element of F.  Appendix G.3 gives a Sage [SAGE]
       script that outputs the RECOMMENDED Z.
 
    Sign of t: this mapping fixes the sign of t as specified in [BHKL13].
@@ -1669,15 +1669,15 @@ Internet-Draft                hash-to-curve                  August 2020
    9.   t = y * K
    10. return (s, t)
 
-   Appendix D.3 gives an example straight-line implementation of this
-   mapping.  Appendix E.3 gives optimized straight-line procedures that
+   Appendix E.3 gives an example straight-line implementation of this
+   mapping.  Appendix F.3 gives optimized straight-line procedures that
    apply to specific classes of curves and base fields.
 
 
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021               [Page 30]
+Faz-Hernandez, et al.   Expires 24 February 2021               [Page 30]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -1727,13 +1727,13 @@ Internet-Draft                hash-to-curve                  August 2020
 
    2.  When hashing to a twisted Edwards curve that does not have a
        standardized Montgomery form or rational map, the map given in
-       Appendix B SHOULD be used.
+       Appendix C SHOULD be used.
 
 
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021               [Page 31]
+Faz-Hernandez, et al.   Expires 24 February 2021               [Page 31]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -1789,7 +1789,7 @@ Internet-Draft                hash-to-curve                  August 2020
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021               [Page 32]
+Faz-Hernandez, et al.   Expires 24 February 2021               [Page 32]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -1807,7 +1807,7 @@ Internet-Draft                hash-to-curve                  August 2020
       alternative method that is sometimes more efficient.  Budroni and
       Pintore [BP17] give concrete instantiations of these methods for
       Barreto-Lynn-Scott pairing-friendly curves [BLS03].  This method
-      is described for the specific case of BLS12-381 in Appendix E.4.
+      is described for the specific case of BLS12-381 in Appendix F.4.
 
    *  Wahby and Boneh ([WB19], Section 5) describe a trick due to Scott
       for fast cofactor clearing on any elliptic curve for which the
@@ -1845,7 +1845,7 @@ Internet-Draft                hash-to-curve                  August 2020
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021               [Page 33]
+Faz-Hernandez, et al.   Expires 24 February 2021               [Page 33]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -1901,7 +1901,7 @@ Internet-Draft                hash-to-curve                  August 2020
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021               [Page 34]
+Faz-Hernandez, et al.   Expires 24 February 2021               [Page 34]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -1957,7 +1957,7 @@ Internet-Draft                hash-to-curve                  August 2020
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021               [Page 35]
+Faz-Hernandez, et al.   Expires 24 February 2021               [Page 35]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -2013,7 +2013,7 @@ Internet-Draft                hash-to-curve                  August 2020
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021               [Page 36]
+Faz-Hernandez, et al.   Expires 24 February 2021               [Page 36]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -2022,7 +2022,7 @@ Internet-Draft                hash-to-curve                  August 2020
    except that the encoding type is encode_to_curve (Section 3).
 
    An optimized example implementation of the Simplified SWU mapping to
-   P-256 is given in Appendix E.2.1.
+   P-256 is given in Appendix F.2.1.
 
 8.3.  Suites for NIST P-384
 
@@ -2062,14 +2062,14 @@ Internet-Draft                hash-to-curve                  August 2020
    except that the encoding type is encode_to_curve (Section 3).
 
    An optimized example implementation of the Simplified SWU mapping to
-   P-384 is given in Appendix E.2.1.
+   P-384 is given in Appendix F.2.1.
 
 
 
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021               [Page 37]
+Faz-Hernandez, et al.   Expires 24 February 2021               [Page 37]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -2113,22 +2113,24 @@ Internet-Draft                hash-to-curve                  August 2020
    except that the encoding type is encode_to_curve (Section 3).
 
    An optimized example implementation of the Simplified SWU mapping to
-   P-521 is given in Appendix E.2.1.
+   P-521 is given in Appendix F.2.1.
 
 8.5.  Suites for curve25519 and edwards25519
 
    This section defines ciphersuites for curve25519 and edwards25519
-   [RFC7748].
-
-   curve25519_XMD:SHA-512_ELL2_RO_ is defined as follows:
-
-
+   [RFC7748].  Note that these ciphersuites SHOULD NOT be used when
+   hashing to ristretto255 [I-D.irtf-cfrg-ristretto255].  See Appendix B
+   for information on how to hash to that group.
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021               [Page 38]
+
+
+Faz-Hernandez, et al.   Expires 24 February 2021               [Page 38]
 
 Internet-Draft                hash-to-curve                  August 2020
 
+
+   curve25519_XMD:SHA-512_ELL2_RO_ is defined as follows:
 
    *  encoding type: hash_to_curve (Section 3)
 
@@ -2179,9 +2181,7 @@ Internet-Draft                hash-to-curve                  August 2020
 
 
 
-
-
-Faz-Hernandez, et al.    Expires 9 February 2021               [Page 39]
+Faz-Hernandez, et al.   Expires 24 February 2021               [Page 39]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -2191,7 +2191,7 @@ Internet-Draft                hash-to-curve                  August 2020
    encode_to_curve (Section 3).
 
    Optimized example implementations of the above mappings are given in
-   Appendix E.3.1 and Appendix E.3.2.
+   Appendix F.3.1 and Appendix F.3.2.
 
 8.6.  Suites for curve448 and edwards448
 
@@ -2237,7 +2237,7 @@ Internet-Draft                hash-to-curve                  August 2020
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021               [Page 40]
+Faz-Hernandez, et al.   Expires 24 February 2021               [Page 40]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -2257,7 +2257,7 @@ Internet-Draft                hash-to-curve                  August 2020
    (Section 3).
 
    Optimized example implementations of the above mappings are given in
-   Appendix E.3.3 and Appendix E.3.4.
+   Appendix F.3.3 and Appendix F.3.4.
 
 8.7.  Suites for secp256k1
 
@@ -2293,14 +2293,14 @@ Internet-Draft                hash-to-curve                  August 2020
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021               [Page 41]
+Faz-Hernandez, et al.   Expires 24 February 2021               [Page 41]
 
 Internet-Draft                hash-to-curve                  August 2020
 
 
       -  B': 1771
 
-   *  iso_map: the 3-isogeny map from E' to E given in Appendix C.1
+   *  iso_map: the 3-isogeny map from E' to E given in Appendix D.1
 
    *  h_eff: 1
 
@@ -2309,7 +2309,7 @@ Internet-Draft                hash-to-curve                  August 2020
    (Section 3).
 
    An optimized example implementation of the Simplified SWU mapping to
-   the curve E' isogenous to secp256k1 is given in Appendix E.2.1.
+   the curve E' isogenous to secp256k1 is given in Appendix F.2.1.
 
 8.8.  Suites for BLS12-381
 
@@ -2349,7 +2349,7 @@ Internet-Draft                hash-to-curve                  August 2020
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021               [Page 42]
+Faz-Hernandez, et al.   Expires 24 February 2021               [Page 42]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -2360,7 +2360,7 @@ Internet-Draft                hash-to-curve                  August 2020
       -  B' = 0x12e2908d11688030018b12e8753eee3b2016c1f0f24f4070a0b9c14f
          cef35ef55a23215a316ceaa5d1cc48e98e172be0
 
-   *  iso_map: the 11-isogeny map from E' to E given in Appendix C.2
+   *  iso_map: the 11-isogeny map from E' to E given in Appendix D.2
 
    *  h_eff: 0xd201000000010001
 
@@ -2373,7 +2373,7 @@ Internet-Draft                hash-to-curve                  August 2020
    Scott ([WB19] Section 5).
 
    An optimized example implementation of the Simplified SWU mapping to
-   the curve E' isogenous to BLS12-381 G1 is given in Appendix E.2.1.
+   the curve E' isogenous to BLS12-381 G1 is given in Appendix F.2.1.
 
 8.8.2.  BLS12-381 G2
 
@@ -2405,7 +2405,7 @@ Internet-Draft                hash-to-curve                  August 2020
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021               [Page 43]
+Faz-Hernandez, et al.   Expires 24 February 2021               [Page 43]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -2418,7 +2418,7 @@ Internet-Draft                hash-to-curve                  August 2020
 
       -  B' = 1012 * (1 + I)
 
-   *  iso_map: the isogeny map from E' to E given in Appendix C.3
+   *  iso_map: the isogeny map from E' to E given in Appendix D.3
 
    *  h_eff: 0xbc69f08f2ee75b3584c6a0ea91b352888e2a8e9145ad7689986ff0315
       08ffe1329c2f178731db956d82bf015d1212b02ec0ec69d7477c1ae954cbc06689
@@ -2431,10 +2431,10 @@ Internet-Draft                hash-to-curve                  August 2020
    Note that the h_eff values for these suites are chosen for
    compatibility with the fast cofactor clearing method described by
    Budroni and Pintore ([BP17], Section 4.1), and summarized in
-   Appendix E.4.
+   Appendix F.4.
 
    An optimized example implementation of the Simplified SWU mapping to
-   the curve E' isogenous to BLS12-381 G2 is given in Appendix E.2.3.
+   the curve E' isogenous to BLS12-381 G2 is given in Appendix F.2.3.
 
 8.9.  Defining a new hash-to-curve suite
 
@@ -2461,7 +2461,7 @@ Internet-Draft                hash-to-curve                  August 2020
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021               [Page 44]
+Faz-Hernandez, et al.   Expires 24 February 2021               [Page 44]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -2517,7 +2517,7 @@ Internet-Draft                hash-to-curve                  August 2020
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021               [Page 45]
+Faz-Hernandez, et al.   Expires 24 February 2021               [Page 45]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -2573,7 +2573,7 @@ Internet-Draft                hash-to-curve                  August 2020
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021               [Page 46]
+Faz-Hernandez, et al.   Expires 24 February 2021               [Page 46]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -2629,7 +2629,7 @@ Internet-Draft                hash-to-curve                  August 2020
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021               [Page 47]
+Faz-Hernandez, et al.   Expires 24 February 2021               [Page 47]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -2685,7 +2685,7 @@ Internet-Draft                hash-to-curve                  August 2020
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021               [Page 48]
+Faz-Hernandez, et al.   Expires 24 February 2021               [Page 48]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -2741,7 +2741,7 @@ Internet-Draft                hash-to-curve                  August 2020
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021               [Page 49]
+Faz-Hernandez, et al.   Expires 24 February 2021               [Page 49]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -2797,7 +2797,7 @@ Internet-Draft                hash-to-curve                  August 2020
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021               [Page 50]
+Faz-Hernandez, et al.   Expires 24 February 2021               [Page 50]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -2853,7 +2853,7 @@ Internet-Draft                hash-to-curve                  August 2020
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021               [Page 51]
+Faz-Hernandez, et al.   Expires 24 February 2021               [Page 51]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -2909,7 +2909,7 @@ Internet-Draft                hash-to-curve                  August 2020
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021               [Page 52]
+Faz-Hernandez, et al.   Expires 24 February 2021               [Page 52]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -2954,21 +2954,25 @@ Internet-Draft                hash-to-curve                  August 2020
    The authors would like to thank Adam Langley for his detailed writeup
    of Elligator 2 with Curve25519 [L13]; Dan Boneh, Christopher Patton,
    Benjamin Lipp, and Leonid Reyzin for educational discussions; and
-   David Benjamin, Frank Denis, Sean Devlin, Justin Drake, Bjoern Haase,
-   Mike Hamburg, Dan Harkins, Thomas Icart, Andy Polyakov, Mamy
-   Ratsimbazafy, Michael Scott, and Mathy Vanhoef for helpful feedback.
+   David Benjamin, Daniel Bourdrez, Frank Denis, Sean Devlin, Justin
+   Drake, Bjoern Haase, Mike Hamburg, Dan Harkins, Thomas Icart, Andy
+   Polyakov, Mamy Ratsimbazafy, Michael Scott, Filippo Valsorda, and
+   Mathy Vanhoef for helpful feedback.
+
+
+
+
+
+
+
+Faz-Hernandez, et al.   Expires 24 February 2021               [Page 53]
+
+Internet-Draft                hash-to-curve                  August 2020
+
 
 12.  Contributors
 
    *  Sharon Goldberg
-
-
-
-
-Faz-Hernandez, et al.    Expires 9 February 2021               [Page 53]
-
-Internet-Draft                hash-to-curve                  August 2020
-
 
       Boston University
 
@@ -2998,6 +3002,13 @@ Internet-Draft                hash-to-curve                  August 2020
               2020, <http://www.ietf.org/internet-drafts/draft-irtf-
               cfrg-pairing-friendly-curves-07.txt>.
 
+   [I-D.irtf-cfrg-ristretto255]
+              Valence, H., Grigg, J., Tankersley, G., Valsorda, F., and
+              I. Lovecruft, "The ristretto255 Group", Work in Progress,
+              Internet-Draft, draft-irtf-cfrg-ristretto255-00, 4 May
+              2020, <http://www.ietf.org/internet-drafts/draft-irtf-
+              cfrg-ristretto255-00.txt>.
+
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
               DOI 10.17487/RFC2119, March 1997,
@@ -3006,6 +3017,14 @@ Internet-Draft                hash-to-curve                  August 2020
    [RFC7748]  Langley, A., Hamburg, M., and S. Turner, "Elliptic Curves
               for Security", RFC 7748, DOI 10.17487/RFC7748, January
               2016, <https://www.rfc-editor.org/info/rfc7748>.
+
+
+
+
+Faz-Hernandez, et al.   Expires 24 February 2021               [Page 54]
+
+Internet-Draft                hash-to-curve                  August 2020
+
 
    [RFC8017]  Moriarty, K., Ed., Kaliski, B., Jonsson, J., and A. Rusch,
               "PKCS #1: RSA Cryptography Specifications Version 2.2",
@@ -3017,14 +3036,6 @@ Internet-Draft                hash-to-curve                  August 2020
               May 2017, <https://www.rfc-editor.org/info/rfc8174>.
 
 13.2.  Informative References
-
-
-
-
-Faz-Hernandez, et al.    Expires 9 February 2021               [Page 54]
-
-Internet-Draft                hash-to-curve                  August 2020
-
 
    [AFQTZ14]  Aranha, D.F., Fouque, P.A., Qian, C., Tibouchi, M., and
               J.C. Zapalowicz, "Binary Elligator squared",
@@ -3062,6 +3073,15 @@ Internet-Draft                hash-to-curve                  August 2020
               pages 213-229, In Advances in Cryptology - CRYPTO 2001,
               August 2001, <https://doi.org/10.1007/3-540-44647-8_13>.
 
+
+
+
+
+Faz-Hernandez, et al.   Expires 24 February 2021               [Page 55]
+
+Internet-Draft                hash-to-curve                  August 2020
+
+
    [BHKL13]   Bernstein, D.J., Hamburg, M., Krasnova, A., and T. Lange,
               "Elligator: elliptic-curve points indistinguishable from
               uniform random strings", DOI 10.1145/2508859.2516734,
@@ -3072,15 +3092,6 @@ Internet-Draft                hash-to-curve                  August 2020
    [BLAKE2X]  Aumasson, J-P., Neves, S., Wilcox-O'Hearn, Z., and C.
               Winnerlein, "BLAKE2X", December 2016,
               <https://blake2.net/blake2x.pdf>.
-
-
-
-
-
-Faz-Hernandez, et al.    Expires 9 February 2021               [Page 55]
-
-Internet-Draft                hash-to-curve                  August 2020
-
 
    [BLMP19]   Bernstein, D.J., Lange, T., Martindale, C., and L. Panny,
               "Quantum circuits for the CSIDH: optimizing quantum
@@ -3116,6 +3127,17 @@ Internet-Draft                hash-to-curve                  August 2020
               in Cryptology - EUROCRYPT 2000, May 2000,
               <https://doi.org/10.1007/3-540-45539-6_12>.
 
+
+
+
+
+
+
+Faz-Hernandez, et al.   Expires 24 February 2021               [Page 56]
+
+Internet-Draft                hash-to-curve                  August 2020
+
+
    [BN05]     Barreto, P. and M. Naehrig, "Pairing-Friendly Elliptic
               Curves of Prime Order", DOI 10.1007/11693383_22,
               pages 319-331, In Selected Areas in Cryptography 2005,
@@ -3124,19 +3146,6 @@ Internet-Draft                hash-to-curve                  August 2020
    [BP17]     Budroni, A. and F. Pintore, "Efficient hash maps to G2 on
               BLS curves", ePrint 2017/419, May 2017,
               <https://eprint.iacr.org/2017/419>.
-
-
-
-
-
-
-
-
-
-Faz-Hernandez, et al.    Expires 9 February 2021               [Page 56]
-
-Internet-Draft                hash-to-curve                  August 2020
-
 
    [BR93]     Bellare, M. and P. Rogaway, "Random oracles are practical:
               a paradigm for designing efficient protocols",
@@ -3173,6 +3182,18 @@ Internet-Draft                hash-to-curve                  August 2020
               In AFRICACRYPT 2011, 2011,
               <https://doi.org/10.1007/978-3-642-21969-6_17>.
 
+
+
+
+
+
+
+
+Faz-Hernandez, et al.   Expires 24 February 2021               [Page 57]
+
+Internet-Draft                hash-to-curve                  August 2020
+
+
    [FFSTV13]  Farashahi, R.R., Fouque, P.A., Shparlinski, I.E.,
               Tibouchi, M., and J.F. Voloch, "Indifferentiable
               deterministic hashing to elliptic and hyperelliptic
@@ -3185,14 +3206,6 @@ Internet-Draft                hash-to-curve                  August 2020
               "Secure Hash Standard (SHS)", August 2015,
               <https://nvlpubs.nist.gov/nistpubs/FIPS/
               NIST.FIPS.180-4.pdf>.
-
-
-
-
-Faz-Hernandez, et al.    Expires 9 February 2021               [Page 57]
-
-Internet-Draft                hash-to-curve                  August 2020
-
 
    [FIPS186-4]
               National Institute of Standards and Technology (NIST),
@@ -3229,6 +3242,14 @@ Internet-Draft                hash-to-curve                  August 2020
               In Progress in Cryptology - LATINCRYPT 2010, 2010,
               <https://doi.org/10.1007/978-3-642-14712-8_5>.
 
+
+
+
+Faz-Hernandez, et al.   Expires 24 February 2021               [Page 58]
+
+Internet-Draft                hash-to-curve                  August 2020
+
+
    [FT12]     Fouque, P-A. and M. Tibouchi, "Indifferentiable Hashing to
               Barreto-Naehrig Curves", DOI 10.1007/978-3-642-33481-8_1,
               pages 1-7, In Progress in Cryptology - LATINCRYPT 2012,
@@ -3242,14 +3263,6 @@ Internet-Draft                hash-to-curve                  August 2020
               Biryukov, A., Dinu, D., Khovratovich, D., and S.
               Josefsson, "The memory-hard Argon2 password hash and
               proof-of-work function", Work in Progress, Internet-Draft,
-
-
-
-Faz-Hernandez, et al.    Expires 9 February 2021               [Page 58]
-
-Internet-Draft                hash-to-curve                  August 2020
-
-
               draft-irtf-cfrg-argon2-11, 9 July 2020,
               <http://www.ietf.org/internet-drafts/draft-irtf-cfrg-
               argon2-11.txt>.
@@ -3285,6 +3298,14 @@ Internet-Draft                hash-to-curve                  August 2020
               In SIGCOMM Computer Communication Review, vol 26 issue 5,
               1996, <https://doi.org/10.1145/242896.242897>.
 
+
+
+
+Faz-Hernandez, et al.   Expires 24 February 2021               [Page 59]
+
+Internet-Draft                hash-to-curve                  August 2020
+
+
    [jubjub-fq]
               "zkcrypto/jubjub - fq.rs", 2019,
               <https://github.com/zkcrypto/jubjub/blob/master/src/
@@ -3296,15 +3317,6 @@ Internet-Draft                hash-to-curve                  August 2020
               DOI 10.1007/978-3-642-17455-1_18, pages 278-297,
               In PAIRING 2010, 2010,
               <https://doi.org/10.1007/978-3-642-17455-1_18>.
-
-
-
-
-
-Faz-Hernandez, et al.    Expires 9 February 2021               [Page 59]
-
-Internet-Draft                hash-to-curve                  August 2020
-
 
    [L13]      Langley, A., "Implementing Elligator for Curve25519",
               2013, <https://www.imperialviolet.org/2013/12/25/
@@ -3339,6 +3351,17 @@ Internet-Draft                hash-to-curve                  August 2020
               (TOMACS), Volume 8, Issue 1, January 1998,
               <https://doi.org/10.1145/272991.272995>.
 
+
+
+
+
+
+
+Faz-Hernandez, et al.   Expires 24 February 2021               [Page 60]
+
+Internet-Draft                hash-to-curve                  August 2020
+
+
    [NR97]     Naor, M. and O. Reingold, "Number-theoretic constructions
               of efficient pseudo-random functions",
               DOI 10.1109/SFCS.1997.646134, In Symposium on the
@@ -3354,13 +3377,6 @@ Internet-Draft                hash-to-curve                  August 2020
               Public-Key Cryptography---Amendment 1: Additional
               Techniques", March 2004,
               <https://standards.ieee.org/standard/1363a-2004.html>.
-
-
-
-Faz-Hernandez, et al.    Expires 9 February 2021               [Page 60]
-
-Internet-Draft                hash-to-curve                  August 2020
-
 
    [P20]      Pornin, T., "Efficient Elliptic Curve Operations On
               Microcontrollers With Finite Field Extensions", 2020,
@@ -3392,6 +3408,16 @@ Internet-Draft                hash-to-curve                  August 2020
               RFC 7693, DOI 10.17487/RFC7693, November 2015,
               <https://www.rfc-editor.org/info/rfc7693>.
 
+
+
+
+
+
+Faz-Hernandez, et al.   Expires 24 February 2021               [Page 61]
+
+Internet-Draft                hash-to-curve                  August 2020
+
+
    [RFC7914]  Percival, C. and S. Josefsson, "The scrypt Password-Based
               Key Derivation Function", RFC 7914, DOI 10.17487/RFC7914,
               August 2016, <https://www.rfc-editor.org/info/rfc7914>.
@@ -3406,17 +3432,6 @@ Internet-Draft                hash-to-curve                  August 2020
               fields", DOI 10.4064/aa117-3-7, pages 293-301, In Acta
               Arithmetica, vol 117 no 3, 2005,
               <https://doi.org/10.4064/aa117-3-7>.
-
-
-
-
-
-
-
-Faz-Hernandez, et al.    Expires 9 February 2021               [Page 61]
-
-Internet-Draft                hash-to-curve                  August 2020
-
 
    [S85]      Schoof, R., "Elliptic Curves Over Finite Fields and the
               Computation of Square Roots mod p",
@@ -3452,6 +3467,13 @@ Internet-Draft                hash-to-curve                  August 2020
               Number Theory. ANTS 2006., 2006,
               <https://doi.org/10.1007/11792086_36>.
 
+
+
+Faz-Hernandez, et al.   Expires 24 February 2021               [Page 62]
+
+Internet-Draft                hash-to-curve                  August 2020
+
+
    [T14]      Tibouchi, M., "Elligator squared: Uniform points on
               elliptic curves of prime order as uniform random strings",
               DOI 10.1007/978-3-662-45472-5_10, pages 139-156,
@@ -3462,17 +3484,6 @@ Internet-Draft                hash-to-curve                  August 2020
               and point representation", DOI 10.1007/s10623-016-0288-2,
               pages 161-177, In Designs, Codes, and Cryptography, vol
               82, 2017, <https://doi.org/10.1007/s10623-016-0288-2>.
-
-
-
-
-
-
-
-Faz-Hernandez, et al.    Expires 9 February 2021               [Page 62]
-
-Internet-Draft                hash-to-curve                  August 2020
-
 
    [U07]      Ulas, M., "Rational points on certain hyperelliptic curves
               over finite fields", DOI 10.4064/ba55-2-1, pages 97-104,
@@ -3511,6 +3522,14 @@ Appendix A.  Related work
    A naive but generally insecure method of mapping a string msg to a
    point on an elliptic curve E having n points is to first fix a point
    P that generates the elliptic curve group, and a hash function Hn
+
+
+
+Faz-Hernandez, et al.   Expires 24 February 2021               [Page 63]
+
+Internet-Draft                hash-to-curve                  August 2020
+
+
    from bit strings to integers less than n; then compute Hn(msg) * P,
    where the * operator represents scalar multiplication.  The reason
    this approach is insecure is that the resulting point has a known
@@ -3522,14 +3541,6 @@ Appendix A.  Related work
    MapToGroup, which works roughly as follows: first, use the input
    string to initialize a pseudorandom number generator, then use the
    generator to produce a value x in F.  If x is the x-coordinate of a
-
-
-
-Faz-Hernandez, et al.    Expires 9 February 2021               [Page 63]
-
-Internet-Draft                hash-to-curve                  August 2020
-
-
    point on the elliptic curve, output that point.  Otherwise, generate
    a new value x in F and try again.  Since a random value x in F has
    probability about 1/2 of corresponding to a point on the curve, the
@@ -3567,6 +3578,14 @@ Internet-Draft                hash-to-curve                  August 2020
    [BHKL13] optimize this mapping and describe a related mapping that
    they call "Elligator 2," which applies to any curve over a field of
    odd characteristic having a point of order 2.  This includes
+
+
+
+Faz-Hernandez, et al.   Expires 24 February 2021               [Page 64]
+
+Internet-Draft                hash-to-curve                  August 2020
+
+
    Curve25519 and Curve448, both of which are CFRG-recommended curves
    [RFC7748].  Bernstein et al.  [BLMP19] extend the Elligator 2 map to
    a class of supersingular curves over fields of characteristic p = 3
@@ -3577,14 +3596,6 @@ Internet-Draft                hash-to-curve                  August 2020
    some fraction of the points.  This means that they cannot be used
    directly to construct a random oracle that outputs points on the
    curve.
-
-
-
-
-Faz-Hernandez, et al.    Expires 9 February 2021               [Page 64]
-
-Internet-Draft                hash-to-curve                  August 2020
-
 
    Brier et al.  [BCIMRT10] give two solutions to this problem.  The
    first, which Brier et al. prove applies to Icart's method, computes
@@ -3607,17 +3618,87 @@ Internet-Draft                hash-to-curve                  August 2020
    generalize these results.  This document does not deal with this
    complementary problem.
 
-Appendix B.  Rational maps
+Appendix B.  Hashing to ristretto255
+
+   ristretto255 [I-D.irtf-cfrg-ristretto255] provides an abstract prime-
+   order group based on Curve25519 [RFC7748].  This section describes
+   hash_to_ristretto255, which implements a random-oracle encoding to
+   this group that has a uniform output distribution (Section 2.2.3) and
+   the same security properties and interface as the hash_to_curve
+   function (Section 3).
+
+   The ristretto255 API defines a one-way map
+   ([I-D.irtf-cfrg-ristretto255], Section 4.2.4); this section refers to
+   that map as ristretto255_map.
+
+   The hash_to_ristretto function MUST be instantiated with an
+   expand_message function that conforms to the requirements given in
+   Section 5.4.  In addition, it MUST use a domain separation tag
+
+
+
+Faz-Hernandez, et al.   Expires 24 February 2021               [Page 65]
+
+Internet-Draft                hash-to-curve                  August 2020
+
+
+   constructed as described in Section 3.1, and all domain separation
+   recommendations given in Section 10.4 apply when implementing
+   protocols that use hash_to_ristretto255.
+
+   hash_to_ristretto255(msg)
+
+   Parameters:
+   - DST, a domain separation tag (see discussion above).
+   - expand_message, a function that expands a byte string and
+     domain separation tag into a uniformly random byte string
+     (see discussion above).
+   - ristretto255_map, the one-way map from the ristretto255 API.
+
+   Input: msg, an arbitrary-length byte string.
+   Output: P, an element of the ristretto255 group.
+
+   Steps:
+   1. uniform_bytes = expand_message(msg, DST, 64)
+   2. P = ristretto255_map(uniform_bytes)
+   3. return P
+
+   Since hash_to_ristretto255 is not a hash-to-curve suite, it does not
+   have a Suite ID.  If a similar identifier is needed, it MUST be
+   constructed following the guidelines in Section 8.10, with the
+   following parameters:
+
+   *  CURVE_ID: "ristretto255"
+
+   *  HASH_ID: as described in Section 8.10
+
+   *  MAP_ID: "R255MAP"
+
+   *  ENC_VAR: "RO"
+
+   For example, if expand_message is expand_message_xmd using SHA-512,
+   the REQUIRED identifier is:
+
+   ristretto255_XMD:SHA-512_R255MAP_RO_
+
+Appendix C.  Rational maps
 
    This section gives rational maps that can be used when hashing to
    twisted Edwards or Montgomery curves.
 
-   Given a twisted Edwards curve, Appendix B.1 shows how to derive a
+   Given a twisted Edwards curve, Appendix C.1 shows how to derive a
    corresponding Montgomery curve and how to map from that curve to the
    twisted Edwards curve.  This mapping may be used when hashing to
    twisted Edwards curves as described in Section 6.8.
 
-   Given a Montgomery curve, Appendix B.2 shows how to derive a
+
+
+Faz-Hernandez, et al.   Expires 24 February 2021               [Page 66]
+
+Internet-Draft                hash-to-curve                  August 2020
+
+
+   Given a Montgomery curve, Appendix C.2 shows how to derive a
    corresponding Weierstrass curve and how to map from that curve to the
    Montgomery curve.  This mapping can be used to hash to Montgomery or
    twisted Edwards curves via the Shallue-van de Woestijne
@@ -3628,21 +3709,11 @@ Appendix B.  Rational maps
 
    *  For twisted Edwards curves, compose the Weierstrass to Montgomery
       mapping with the Montgomery to twisted Edwards mapping
-      (Appendix B.1) to obtain a Weierstrass curve and a mapping to the
+      (Appendix C.1) to obtain a Weierstrass curve and a mapping to the
       target twisted Edwards curve.  Map to this Weierstrass curve, then
       convert to Edwards coordinates via the mapping.
 
-
-
-
-
-
-Faz-Hernandez, et al.    Expires 9 February 2021               [Page 65]
-
-Internet-Draft                hash-to-curve                  August 2020
-
-
-B.1.  Generic Montgomery to twisted Edwards map
+C.1.  Generic Montgomery to twisted Edwards map
 
    This section gives a generic birational map between twisted Edwards
    and Montgomery curves.
@@ -3674,6 +3745,15 @@ B.1.  Generic Montgomery to twisted Edwards map
 
    *  w = (s - 1) / (s + 1)
 
+
+
+
+
+Faz-Hernandez, et al.   Expires 24 February 2021               [Page 67]
+
+Internet-Draft                hash-to-curve                  August 2020
+
+
    This mapping is undefined when t == 0 or s == -1, i.e., when the
    denominator of either of the above rational functions is zero.
    Implementations MUST detect exceptional cases and return the value
@@ -3682,21 +3762,6 @@ B.1.  Generic Montgomery to twisted Edwards map
 
    The following straight-line implementation of the above rational map
    handles the exceptional cases.
-
-
-
-
-
-
-
-
-
-
-
-Faz-Hernandez, et al.    Expires 9 February 2021               [Page 66]
-
-Internet-Draft                hash-to-curve                  August 2020
-
 
    edw_to_monty_generic(s, t)
 
@@ -3736,7 +3801,16 @@ Internet-Draft                hash-to-curve                  August 2020
    suffices to return the identity point on the Montgomery curve in the
    exceptional cases.
 
-B.2.  Weierstrass to Montgomery map
+
+
+
+
+Faz-Hernandez, et al.   Expires 24 February 2021               [Page 68]
+
+Internet-Draft                hash-to-curve                  August 2020
+
+
+C.2.  Weierstrass to Montgomery map
 
    The rational map from the point (s, t) on the Montgomery curve
 
@@ -3745,14 +3819,6 @@ B.2.  Weierstrass to Montgomery map
    to the point (x, y) on the equivalent Weierstrass curve
 
        y^2 = x^3 + A * x + B
-
-
-
-
-Faz-Hernandez, et al.    Expires 9 February 2021               [Page 67]
-
-Internet-Draft                hash-to-curve                  August 2020
-
 
    is given by:
 
@@ -3775,22 +3841,30 @@ Internet-Draft                hash-to-curve                  August 2020
    (Section 6.6.1) or Simplified SWU (Section 6.6.2) method to
    Montgomery curves.
 
-Appendix C.  Isogeny maps for suites
+Appendix D.  Isogeny maps for suites
 
    This section specifies the isogeny maps for the secp256k1 and
    BLS12-381 suites listed in Section 8.
 
    These maps are given in terms of affine coordinates.  Wahby and Boneh
    ([WB19], Section 4.3) show how to evaluate these maps in a projective
-   coordinate system (Appendix E.1), which avoids modular inversions.
+   coordinate system (Appendix F.1), which avoids modular inversions.
 
    Refer to the draft repository [hash2curve-repo] for a Sage [SAGE]
    script that constructs these isogenies.
 
-C.1.  3-isogeny map for secp256k1
+D.1.  3-isogeny map for secp256k1
 
    This section specifies the isogeny map for the secp256k1 suite listed
    in Section 8.7.
+
+
+
+
+Faz-Hernandez, et al.   Expires 24 February 2021               [Page 69]
+
+Internet-Draft                hash-to-curve                  August 2020
+
 
    The 3-isogeny map from (x', y') on E' to (x, y) on E is given by the
    following rational functions:
@@ -3801,14 +3875,6 @@ C.1.  3-isogeny map for secp256k1
          k_(1,0)
 
       -  x_den = x'^2 + k_(2,1) * x' + k_(2,0)
-
-
-
-
-Faz-Hernandez, et al.    Expires 9 February 2021               [Page 68]
-
-Internet-Draft                hash-to-curve                  August 2020
-
 
    *  y = y' * y_num / y_den, where
 
@@ -3847,6 +3913,15 @@ Internet-Draft                hash-to-curve                  August 2020
    *  k_(3,1) =
       0xc75e0c32d5cb7c0fa9d0a54b12a0a6d5647ab046d686da6fdffc90fc201d71a3
 
+
+
+
+
+Faz-Hernandez, et al.   Expires 24 February 2021               [Page 70]
+
+Internet-Draft                hash-to-curve                  August 2020
+
+
    *  k_(3,2) =
       0x29a6194691f91a73715209ef6512e576722830a201be2018a765e85a9ecee931
 
@@ -3858,21 +3933,13 @@ Internet-Draft                hash-to-curve                  August 2020
    *  k_(4,0) =
       0xfffffffffffffffffffffffffffffffffffffffffffffffffffffffefffff93b
 
-
-
-
-Faz-Hernandez, et al.    Expires 9 February 2021               [Page 69]
-
-Internet-Draft                hash-to-curve                  August 2020
-
-
    *  k_(4,1) =
       0x7a06534bb8bdb49fd5e9e6632722c2989467c1bfc8e8d978dfb425d2685c2573
 
    *  k_(4,2) =
       0x6484aa716545ca2cf3a70c3fa8fe337e0a3d21162f0d6299a7bf8192bfd2a76f
 
-C.2.  11-isogeny map for BLS12-381 G1
+D.2.  11-isogeny map for BLS12-381 G1
 
    The 11-isogeny map from (x', y') on E' to (x, y) on E is given by the
    following rational functions:
@@ -3903,6 +3970,14 @@ C.2.  11-isogeny map for BLS12-381 G1
    *  k_(1,2) = 0xd54005db97678ec1d1048c5d10a9a1bce032473295983e56878e50
       1ec68e25c958c3e3d2a09729fe0179f9dac9edcb0
 
+
+
+
+Faz-Hernandez, et al.   Expires 24 February 2021               [Page 71]
+
+Internet-Draft                hash-to-curve                  August 2020
+
+
    *  k_(1,3) = 0x1778e7166fcc6db74e0609d307e55412d7f5e4656a8dbf25f1b332
       89f1b330835336e25ce3107193c5b388641d9b6861
 
@@ -3914,13 +3989,6 @@ C.2.  11-isogeny map for BLS12-381 G1
 
    *  k_(1,6) = 0xd6ed6553fe44d296a3726c38ae652bfb11586264f0f8ce19008e21
       8f9c86b2a8da25128c1052ecaddd7f225a139ed84
-
-
-
-Faz-Hernandez, et al.    Expires 9 February 2021               [Page 70]
-
-Internet-Draft                hash-to-curve                  August 2020
-
 
    *  k_(1,7) = 0x17b81e7701abdbe2e8743884d1117e53356de5ab275b4db1a682c6
       2ef0f2753339b7c8f8c8f475af9ccb5618e3f0c88e
@@ -3957,6 +4025,15 @@ Internet-Draft                hash-to-curve                  August 2020
    *  k_(2,5) = 0xe7355f8e4e667b955390f7f0506c6e9395735e9ce9cad4d0a43bce
       f24b8982f7400d24bc4228f11c02df9a29f6304a5
 
+
+
+
+
+Faz-Hernandez, et al.   Expires 24 February 2021               [Page 72]
+
+Internet-Draft                hash-to-curve                  August 2020
+
+
    *  k_(2,6) = 0x772caacf16936190f3e0c63e0596721570f5799af53a1894e2e073
       062aede9cea73b3538f0de06cec2574496ee84a3a
 
@@ -3970,13 +4047,6 @@ Internet-Draft                hash-to-curve                  August 2020
       978f31c1593174e4b4b7865002d6384d168ecdd0a
 
    The constants used to compute y_num are as follows:
-
-
-
-Faz-Hernandez, et al.    Expires 9 February 2021               [Page 71]
-
-Internet-Draft                hash-to-curve                  August 2020
-
 
    *  k_(3,0) = 0x90d97c81ba24ee0259d1f094980dcfa11ad138e48a869522b52af6
       c956543d3cd0c7aee9b3ba3c2be9845719707bb33
@@ -4011,6 +4081,15 @@ Internet-Draft                hash-to-curve                  August 2020
    *  k_(3,10) = 0x19713e47937cd1be0dfd0b8f1d43fb93cd2fcbcb6caf493fd1183
       e416389e61031bf3a5cce3fbafce813711ad011c132
 
+
+
+
+
+Faz-Hernandez, et al.   Expires 24 February 2021               [Page 73]
+
+Internet-Draft                hash-to-curve                  August 2020
+
+
    *  k_(3,11) = 0x18b46a908f36f6deb918c143fed2edcc523559b8aaf0c2462e6bf
       e7f911f643249d9cdf41b44d606ce07c8a4d0074d8e
 
@@ -4025,14 +4104,6 @@ Internet-Draft                hash-to-curve                  August 2020
 
    *  k_(3,15) = 0x15e6be4e990f03ce4ea50b3b42df2eb5cb181d8f84965a3957add
       4fa95af01b2b665027efec01c7704b456be69c8b604
-
-
-
-
-Faz-Hernandez, et al.    Expires 9 February 2021               [Page 72]
-
-Internet-Draft                hash-to-curve                  August 2020
-
 
    The constants used to compute y_den are as follows:
 
@@ -4066,6 +4137,15 @@ Internet-Draft                hash-to-curve                  August 2020
    *  k_(4,9) = 0x167a55cda70a6e1cea820597d94a84903216f763e13d87bb530859
       2e7ea7d4fbc7385ea3d529b35e346ef48bb8913f55
 
+
+
+
+
+Faz-Hernandez, et al.   Expires 24 February 2021               [Page 74]
+
+Internet-Draft                hash-to-curve                  August 2020
+
+
    *  k_(4,10) = 0x4d2f259eea405bd48f010a01ad2911d9c6dd039bb61a6290e591b
       36e636a5c871a5c29f4f83060400f8b49cba8f6aa8
 
@@ -4081,16 +4161,7 @@ Internet-Draft                hash-to-curve                  August 2020
    *  k_(4,14) = 0xe0fa1d816ddc03e6b24255e0d7819c171c40f65e273b853324efc
       d6356caa205ca2f570f13497804415473a1d634b8f
 
-
-
-
-
-Faz-Hernandez, et al.    Expires 9 February 2021               [Page 73]
-
-Internet-Draft                hash-to-curve                  August 2020
-
-
-C.3.  3-isogeny map for BLS12-381 G2
+D.3.  3-isogeny map for BLS12-381 G2
 
    The 3-isogeny map from (x', y') on E' to (x, y) on E is given by the
    following rational functions:
@@ -4124,6 +4195,13 @@ C.3.  3-isogeny map for BLS12-381 G2
       37e76bc3e447cc27c3d6fbd7063fcd104635a790520c0a395554e5c6aaaa9354ff
       ffffffe38d * I
 
+
+
+Faz-Hernandez, et al.   Expires 24 February 2021               [Page 75]
+
+Internet-Draft                hash-to-curve                  August 2020
+
+
    *  k_(1,3) = 0x171d6541fa38ccfaed6dea691f5fb614cb14b4e7f4e810aa22d610
       8f142b85757098e38d0f671c7188e2aaaaaaaa5ed1
 
@@ -4136,15 +4214,6 @@ C.3.  3-isogeny map for BLS12-381 G2
       6730d2a0f6b0f6241eabfffeb153ffffb9feffffffffaa9f * I
 
    The constants used to compute y_num are as follows:
-
-
-
-
-
-Faz-Hernandez, et al.    Expires 9 February 2021               [Page 74]
-
-Internet-Draft                hash-to-curve                  August 2020
-
 
    *  k_(3,0) = 0x1530477c7ab4113b59a4c18b076d11930f7da5d4a07f649bf54439
       d87d27e500fc8c25ebf8c92f6812cfc71c71c6d706 + 0x1530477c7ab4113b59a
@@ -4175,32 +4244,26 @@ Internet-Draft                hash-to-curve                  August 2020
    *  k_(4,2) = 0x12 + 0x1a0111ea397fe69a4b1ba7b6434bacd764774b84f38512b
       f6730d2a0f6b0f6241eabfffeb153ffffb9feffffffffaa99 * I
 
-Appendix D.  Straight-line implementations of deterministic mappings
+Appendix E.  Straight-line implementations of deterministic mappings
 
    This section gives straight-line implementations of the mappings of
    Section 6.  These implementations are generic, i.e., they are defined
-   for any curve and field.  Appendix E gives example implementations
+   for any curve and field.  Appendix F gives example implementations
    that are optimized for specific classes of curves and fields.
 
-D.1.  Shallue-van de Woestijne method
+
+
+Faz-Hernandez, et al.   Expires 24 February 2021               [Page 76]
+
+Internet-Draft                hash-to-curve                  August 2020
+
+
+E.1.  Shallue-van de Woestijne method
 
    This section gives a straight-line implementation of the Shallue and
    van de Woestijne method for any Weierstrass curve of the form given
    in Section 6.6.  See Section 6.6.1 for information on the constants
    used in this mapping.
-
-
-
-
-
-
-
-
-
-Faz-Hernandez, et al.    Expires 9 February 2021               [Page 75]
-
-Internet-Draft                hash-to-curve                  August 2020
-
 
 map_to_curve_svdw(u)
 
@@ -4243,6 +4306,14 @@ Steps:
 27.   x = CMOV(x3, x1, e1)      # x = x1 if gx1 is square, else x = x3
 28.   x = CMOV(x, x2, e2)       # x = x2 if gx2 is square and gx1 is not
 29.  gx = x^2
+
+
+
+Faz-Hernandez, et al.   Expires 24 February 2021               [Page 77]
+
+Internet-Draft                hash-to-curve                  August 2020
+
+
 30.  gx = gx + A
 31.  gx = gx * x
 32.  gx = gx + B
@@ -4251,22 +4322,53 @@ Steps:
 35.   y = CMOV(-y, y, e3)       # Select correct sign of y
 36. return (x, y)
 
-
-
-Faz-Hernandez, et al.    Expires 9 February 2021               [Page 76]
-
-Internet-Draft                hash-to-curve                  August 2020
-
-
-D.2.  Simplified SWU method
+E.2.  Simplified SWU method
 
    This section gives a straight-line implementation of the simplified
    SWU method for any Weierstrass curve of the form given in
    Section 6.6.  See Section 6.6.2 for information on the constants used
    in this mapping.
 
-   Appendix E.2 gives optimized straight-line procedures that apply to
+   Appendix F.2 gives optimized straight-line procedures that apply to
    specific classes of curves and base fields.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Faz-Hernandez, et al.   Expires 24 February 2021               [Page 78]
+
+Internet-Draft                hash-to-curve                  August 2020
+
 
 map_to_curve_simple_swu(u)
 
@@ -4301,29 +4403,28 @@ Steps:
 21.   y = CMOV(-y, y, e3)
 22. return (x, y)
 
-
-
-
-
-
-
-
-
-Faz-Hernandez, et al.    Expires 9 February 2021               [Page 77]
-
-Internet-Draft                hash-to-curve                  August 2020
-
-
-D.3.  Elligator 2 method
+E.3.  Elligator 2 method
 
    This section gives a straight-line implementation of the Elligator 2
    method for any Montgomery curve of the form given in Section 6.7.
    See Section 6.7.1 for information on the constants used in this
    mapping.
 
-   Appendix E.3 gives optimized straight-line procedures that apply to
+   Appendix F.3 gives optimized straight-line procedures that apply to
    specific classes of curves and base fields, including curve25519 and
    curve448 [RFC7748].
+
+
+
+
+
+
+
+
+Faz-Hernandez, et al.   Expires 24 February 2021               [Page 79]
+
+Internet-Draft                hash-to-curve                  August 2020
+
 
 map_to_curve_elligator2(u)
 
@@ -4358,32 +4459,28 @@ Steps:
 21.   t = y * K
 22. return (s, t)
 
-
-
-
-
-
-
-
-Faz-Hernandez, et al.    Expires 9 February 2021               [Page 78]
-
-Internet-Draft                hash-to-curve                  August 2020
-
-
-Appendix E.  Optimized sample code
+Appendix F.  Optimized sample code
 
    This section gives sample implementations optimized for some of the
    elliptic curves listed in Section 8.  Sample Sage [SAGE] code for
    each algorithm can also be found in the draft repository
    [hash2curve-repo].
 
-E.1.  Interface and projective coordinate systems
+F.1.  Interface and projective coordinate systems
 
    The sample code in this section uses a different interface than the
    mappings of Section 6.  Specifically, each mapping function in this
    section has the following signature:
 
        (xn, xd, yn, yd) = map_to_curve(u)
+
+
+
+
+Faz-Hernandez, et al.   Expires 24 February 2021               [Page 80]
+
+Internet-Draft                hash-to-curve                  August 2020
+
 
    The resulting affine point (x, y) is given by (xn / xd, yn / yd).
 
@@ -4418,17 +4515,9 @@ E.1.  Interface and projective coordinate systems
       compute (X', Y', Z') = (xn * xd * yd^2, yn * yd^2 * xd^3, xd *
       yd).
 
+F.2.  Simplified SWU
 
-
-
-Faz-Hernandez, et al.    Expires 9 February 2021               [Page 79]
-
-Internet-Draft                hash-to-curve                  August 2020
-
-
-E.2.  Simplified SWU
-
-E.2.1.  q = 3 (mod 4)
+F.2.1.  q = 3 (mod 4)
 
    The following is a straight-line implementation of the Simplified SWU
    mapping that applies to any curve over GF(q) where q = 3 (mod 4).
@@ -4436,6 +4525,18 @@ E.2.1.  q = 3 (mod 4)
    P-521 [FIPS186-4] given in Section 8.  It also includes the curves
    isogenous to secp256k1 (Section 8.7) and BLS12-381 G1
    (Section 8.8.1).
+
+
+
+
+
+
+
+
+Faz-Hernandez, et al.   Expires 24 February 2021               [Page 81]
+
+Internet-Draft                hash-to-curve                  August 2020
+
 
    The implementations for these curves differ only in the constants and
    the base field.  The constant definitions below are given in terms of
@@ -4477,7 +4578,18 @@ E.2.1.  q = 3 (mod 4)
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021               [Page 80]
+
+
+
+
+
+
+
+
+
+
+
+Faz-Hernandez, et al.   Expires 24 February 2021               [Page 82]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -4533,12 +4645,12 @@ Steps:
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021               [Page 81]
+Faz-Hernandez, et al.   Expires 24 February 2021               [Page 83]
 
 Internet-Draft                hash-to-curve                  August 2020
 
 
-E.2.2.  q = 5 (mod 8)
+F.2.2.  q = 5 (mod 8)
 
    The following is a straight-line implementation of the Simplified SWU
    mapping that applied to any curve over GF(q) where q = 5 (mod 8).
@@ -4589,7 +4701,7 @@ E.2.2.  q = 5 (mod 8)
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021               [Page 82]
+Faz-Hernandez, et al.   Expires 24 February 2021               [Page 84]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -4612,7 +4724,7 @@ Internet-Draft                hash-to-curve                  August 2020
    47.   y = CMOV(-y, y, e5)
    48. return (xn, xd, y, 1)
 
-E.2.3.  q = 9 (mod 16)
+F.2.3.  q = 9 (mod 16)
 
    The following is a straight-line implementation of the Simplified SWU
    mapping that applies to any curve over GF(q) where q = 9 (mod 16).
@@ -4645,7 +4757,7 @@ E.2.3.  q = 9 (mod 16)
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021               [Page 83]
+Faz-Hernandez, et al.   Expires 24 February 2021               [Page 85]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -4701,7 +4813,7 @@ Internet-Draft                hash-to-curve                  August 2020
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021               [Page 84]
+Faz-Hernandez, et al.   Expires 24 February 2021               [Page 86]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -4719,9 +4831,9 @@ Internet-Draft                hash-to-curve                  August 2020
    69.   y = CMOV(-y, y, e9)
    70. return (xn, xd, y, 1)
 
-E.3.  Elligator 2
+F.3.  Elligator 2
 
-E.3.1.  curve25519 (q = 5 (mod 8), K = 1)
+F.3.1.  curve25519 (q = 5 (mod 8), K = 1)
 
    The following is a straight-line implementation of Elligator 2 for
    curve25519 [RFC7748] as specified in Section 8.5.
@@ -4757,7 +4869,7 @@ Steps:
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021               [Page 85]
+Faz-Hernandez, et al.   Expires 24 February 2021               [Page 87]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -4790,11 +4902,11 @@ Internet-Draft                hash-to-curve                  August 2020
 38.   y = CMOV(y, -y, e3 XOR e4)
 39. return (xn, xd, y, 1)
 
-E.3.2.  edwards25519
+F.3.2.  edwards25519
 
    The following is a straight-line implementation of Elligator 2 for
    edwards25519 [RFC7748] as specified in Section 8.5.  The subroutine
-   map_to_curve_elligator2_curve25519 is defined in Appendix E.3.1.
+   map_to_curve_elligator2_curve25519 is defined in Appendix F.3.1.
 
    Note that the sign of the constant c1 below is chosen as specified in
    Section 6.8.1, i.e., applying the rational map to the edwards25519
@@ -4813,7 +4925,7 @@ E.3.2.  edwards25519
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021               [Page 86]
+Faz-Hernandez, et al.   Expires 24 February 2021               [Page 88]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -4842,7 +4954,7 @@ Steps:
 12. yd = CMOV(yd, 1, e)
 13. return (xn, xd, yn, yd)
 
-E.3.3.  curve448 (q = 3 (mod 4), K = 1)
+F.3.3.  curve448 (q = 3 (mod 4), K = 1)
 
    The following is a straight-line implementation of Elligator 2 for
    curve448 [RFC7748] as specified in Section 8.6.
@@ -4869,7 +4981,7 @@ E.3.3.  curve448 (q = 3 (mod 4), K = 1)
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021               [Page 87]
+Faz-Hernandez, et al.   Expires 24 February 2021               [Page 89]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -4912,11 +5024,11 @@ Internet-Draft                hash-to-curve                  August 2020
  26.   y = CMOV(y, -y, e2 XOR e3)
  27. return (xn, xd, y, 1)
 
-E.3.4.  edwards448
+F.3.4.  edwards448
 
    The following is a straight-line implementation of Elligator 2 for
    edwards448 [RFC7748] as specified in Section 8.6.  The subroutine
-   map_to_curve_elligator2_curve448 is defined in Appendix E.3.3.
+   map_to_curve_elligator2_curve448 is defined in Appendix F.3.3.
 
 
 
@@ -4925,7 +5037,7 @@ E.3.4.  edwards448
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021               [Page 88]
+Faz-Hernandez, et al.   Expires 24 February 2021               [Page 90]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -4981,17 +5093,17 @@ Internet-Draft                hash-to-curve                  August 2020
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021               [Page 89]
+Faz-Hernandez, et al.   Expires 24 February 2021               [Page 91]
 
 Internet-Draft                hash-to-curve                  August 2020
 
 
-E.3.5.  q = 3 (mod 4)
+F.3.5.  q = 3 (mod 4)
 
    The following is a straight-line implementation of Elligator 2 that
    applies to any curve over GF(q) where q = 3 (mod 4).
 
-   For curves where K = 1, the implementation given in Appendix E.3.3
+   For curves where K = 1, the implementation given in Appendix F.3.3
    gives identical results with slightly reduced cost.
 
 
@@ -5037,7 +5149,7 @@ E.3.5.  q = 3 (mod 4)
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021               [Page 90]
+Faz-Hernandez, et al.   Expires 24 February 2021               [Page 92]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -5093,17 +5205,17 @@ Steps:
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021               [Page 91]
+Faz-Hernandez, et al.   Expires 24 February 2021               [Page 93]
 
 Internet-Draft                hash-to-curve                  August 2020
 
 
-E.3.6.  q = 5 (mod 8)
+F.3.6.  q = 5 (mod 8)
 
    The following is a straight-line implementation of Elligator 2 that
    applies to any curve over GF(q) where q = 5 (mod 8).
 
-   For curves where K = 1, the implementation given in Appendix E.3.1
+   For curves where K = 1, the implementation given in Appendix F.3.1
    gives identical results with slightly reduced cost.
 
 map_to_curve_elligator2_5mod8(u)
@@ -5149,7 +5261,7 @@ Steps:
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021               [Page 92]
+Faz-Hernandez, et al.   Expires 24 February 2021               [Page 94]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -5174,7 +5286,7 @@ Internet-Draft                hash-to-curve                  August 2020
 44.   y = y * K
 45. return (xn, xd, y, 1)
 
-E.4.  Cofactor clearing for BLS12-381 G2
+F.4.  Cofactor clearing for BLS12-381 G2
 
    The curve BLS12-381, whose parameters are defined in Section 8.8.2,
    admits an efficiently-computable endomorphism psi that can be used to
@@ -5184,7 +5296,7 @@ E.4.  Cofactor clearing for BLS12-381 G2
 
    The functions in this section operate on points whose coordinates are
    represented as ratios, i.e., (xn, xd, yn, yd) corresponds to the
-   point (xn / xd, yn / yd); see Appendix E.1 for further discussion of
+   point (xn / xd, yn / yd); see Appendix F.1 for further discussion of
    projective coordinates.  When points are represented in affine
    coordinates, one can simply ignore the denominators (xd == 1 and yd
    == 1).
@@ -5205,7 +5317,7 @@ E.4.  Cofactor clearing for BLS12-381 G2
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021               [Page 93]
+Faz-Hernandez, et al.   Expires 24 February 2021               [Page 95]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -5261,7 +5373,7 @@ Internet-Draft                hash-to-curve                  August 2020
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021               [Page 94]
+Faz-Hernandez, et al.   Expires 24 February 2021               [Page 96]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -5297,12 +5409,12 @@ Internet-Draft                hash-to-curve                  August 2020
    10.  Q = t3 - P
    11. return Q
 
-Appendix F.  Scripts for parameter generation
+Appendix G.  Scripts for parameter generation
 
    This section gives Sage [SAGE] scripts used to generate parameters
    for the mappings of Section 6.
 
-F.1.  Finding Z for the Shallue-van de Woestijne map
+G.1.  Finding Z for the Shallue-van de Woestijne map
 
    The below function outputs an appropriate Z for the Shallue and van
    de Woestijne map (Section 6.6.1).
@@ -5317,7 +5429,7 @@ F.1.  Finding Z for the Shallue-van de Woestijne map
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021               [Page 95]
+Faz-Hernandez, et al.   Expires 24 February 2021               [Page 97]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -5346,7 +5458,7 @@ def find_z_svdw(F, A, B, init_ctr=1):
                 return Z_cand
         ctr += 1
 
-F.2.  Finding Z for Simplified SWU
+G.2.  Finding Z for Simplified SWU
 
    The below function outputs an appropriate Z for the Simplified SWU
    map (Section 6.6.2).
@@ -5373,7 +5485,7 @@ F.2.  Finding Z for Simplified SWU
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021               [Page 96]
+Faz-Hernandez, et al.   Expires 24 February 2021               [Page 98]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -5401,7 +5513,7 @@ def find_z_sswu(F, A, B):
                 return Z_cand
         ctr += 1
 
-F.3.  Finding Z for Elligator 2
+G.3.  Finding Z for Elligator 2
 
    The below function outputs an appropriate Z for the Elligator 2 map
    (Section 6.7.1).
@@ -5418,7 +5530,7 @@ F.3.  Finding Z for Elligator 2
                return Z_cand
            ctr += 1
 
-Appendix G.  sqrt and is_square functions
+Appendix H.  sqrt and is_square functions
 
    This section defines special-purpose sqrt functions for the three
    most common cases, q = 3 (mod 4), q = 5 (mod 8), and q = 9 (mod 16),
@@ -5429,12 +5541,12 @@ Appendix G.  sqrt and is_square functions
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021               [Page 97]
+Faz-Hernandez, et al.   Expires 24 February 2021               [Page 99]
 
 Internet-Draft                hash-to-curve                  August 2020
 
 
-G.1.  q = 3 (mod 4)
+H.1.  q = 3 (mod 4)
 
    sqrt_3mod4(x)
 
@@ -5450,7 +5562,7 @@ G.1.  q = 3 (mod 4)
    Procedure:
    1. return x^c1
 
-G.2.  q = 5 (mod 8)
+H.2.  q = 5 (mod 8)
 
    sqrt_5mod8(x)
 
@@ -5471,7 +5583,7 @@ G.2.  q = 5 (mod 8)
    4.   z = CMOV(tv2, tv1, e)
    5. return z
 
-G.3.  q = 9 (mod 16)
+H.3.  q = 9 (mod 16)
 
 
 
@@ -5485,7 +5597,7 @@ G.3.  q = 9 (mod 16)
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021               [Page 98]
+Faz-Hernandez, et al.   Expires 24 February 2021              [Page 100]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -5517,7 +5629,7 @@ Internet-Draft                hash-to-curve                  August 2020
    10.  z = CMOV(tv1, tv2, e3)  # Select the sqrt from tv1 and tv2
    11. return z
 
-G.4.  Constant-time Tonelli-Shanks algorithm
+H.4.  Constant-time Tonelli-Shanks algorithm
 
    This algorithm is a constant-time version of the classic Tonelli-
    Shanks algorithm ([C93], Algorithm 1.5.1) due to Sean Bowe, Jack
@@ -5541,7 +5653,7 @@ G.4.  Constant-time Tonelli-Shanks algorithm
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021               [Page 99]
+Faz-Hernandez, et al.   Expires 24 February 2021              [Page 101]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -5576,7 +5688,7 @@ Internet-Draft                hash-to-curve                  August 2020
    12.     b = t
    13. return z
 
-G.5.  is_square for F = GF(p^2)
+H.5.  is_square for F = GF(p^2)
 
    The following is_square method applies to any field F = GF(p^2) with
    basis (1, I) represented as described in Section 2.1, i.e., an
@@ -5597,7 +5709,7 @@ G.5.  is_square for F = GF(p^2)
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021              [Page 100]
+Faz-Hernandez, et al.   Expires 24 February 2021              [Page 102]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -5623,7 +5735,7 @@ Internet-Draft                hash-to-curve                  August 2020
    6.  e1 = tv1 != -1          # Note: -1 in F
    7. return e1
 
-Appendix H.  Suite test vectors
+Appendix I.  Suite test vectors
 
    This section gives test vectors for each suite defined in Section 8.
    The test vectors in this section were generated using code that is
@@ -5635,9 +5747,9 @@ Appendix H.  Suite test vectors
    oracle, the test vector gives the value for msg, u, Q0, Q1, and the
    output point P.
 
-H.1.  NIST P-256
+I.1.  NIST P-256
 
-H.1.1.  P256_XMD:SHA-256_SSWU_RO_
+I.1.1.  P256_XMD:SHA-256_SSWU_RO_
 
    suite   = P256_XMD:SHA-256_SSWU_RO_
    dst     = QUUX-V01-CS02-with-P256_XMD:SHA-256_SSWU_RO_
@@ -5653,7 +5765,7 @@ H.1.1.  P256_XMD:SHA-256_SSWU_RO_
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021              [Page 101]
+Faz-Hernandez, et al.   Expires 24 February 2021              [Page 103]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -5709,7 +5821,7 @@ Internet-Draft                hash-to-curve                  August 2020
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021              [Page 102]
+Faz-Hernandez, et al.   Expires 24 February 2021              [Page 104]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -5759,13 +5871,13 @@ Internet-Draft                hash-to-curve                  August 2020
    Q1.y    = f6ed88a7aab56a488100e6f1174fa9810b47db13e86be999644922
              961206e184
 
-H.1.2.  P256_XMD:SHA-256_SSWU_NU_
+I.1.2.  P256_XMD:SHA-256_SSWU_NU_
 
 
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021              [Page 103]
+Faz-Hernandez, et al.   Expires 24 February 2021              [Page 105]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -5821,7 +5933,7 @@ Internet-Draft                hash-to-curve                  August 2020
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021              [Page 104]
+Faz-Hernandez, et al.   Expires 24 February 2021              [Page 106]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -5852,9 +5964,9 @@ Internet-Draft                hash-to-curve                  August 2020
    Q.y     = c801e7c0782af1f74f24fc385a8555da0582032a3ce038de637ccd
              cb16f7ef7b
 
-H.2.  NIST P-384
+I.2.  NIST P-384
 
-H.2.1.  P384_XMD:SHA-512_SSWU_RO_
+I.2.1.  P384_XMD:SHA-512_SSWU_RO_
 
    suite   = P384_XMD:SHA-512_SSWU_RO_
    dst     = QUUX-V01-CS02-with-P384_XMD:SHA-512_SSWU_RO_
@@ -5877,7 +5989,7 @@ H.2.1.  P384_XMD:SHA-512_SSWU_RO_
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021              [Page 105]
+Faz-Hernandez, et al.   Expires 24 February 2021              [Page 107]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -5933,7 +6045,7 @@ Internet-Draft                hash-to-curve                  August 2020
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021              [Page 106]
+Faz-Hernandez, et al.   Expires 24 February 2021              [Page 108]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -5976,7 +6088,7 @@ Internet-Draft                hash-to-curve                  August 2020
    Q1.y    = b34a05bce9b77fdfde16568356f987a8d26438b6ad9a05bfe0d5bb
              2aea36173316df7191ba40acdf476f778f0ffdef7e
 
-H.2.2.  P384_XMD:SHA-512_SSWU_NU_
+I.2.2.  P384_XMD:SHA-512_SSWU_NU_
 
    suite   = P384_XMD:SHA-512_SSWU_NU_
    dst     = QUUX-V01-CS02-with-P384_XMD:SHA-512_SSWU_NU_
@@ -5989,7 +6101,7 @@ H.2.2.  P384_XMD:SHA-512_SSWU_NU_
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021              [Page 107]
+Faz-Hernandez, et al.   Expires 24 February 2021              [Page 109]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -6045,7 +6157,7 @@ Internet-Draft                hash-to-curve                  August 2020
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021              [Page 108]
+Faz-Hernandez, et al.   Expires 24 February 2021              [Page 110]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -6068,9 +6180,9 @@ Internet-Draft                hash-to-curve                  August 2020
    Q.y     = 5106450163d90d99d3191bc92f8a3d116f15b18b23eff8e9996481
              c6878bd16c8e202f44abc3d09325c2016b5dacc8f0
 
-H.3.  NIST P-521
+I.3.  NIST P-521
 
-H.3.1.  P521_XMD:SHA-512_SSWU_RO_
+I.3.1.  P521_XMD:SHA-512_SSWU_RO_
 
    suite   = P521_XMD:SHA-512_SSWU_RO_
    dst     = QUUX-V01-CS02-with-P521_XMD:SHA-512_SSWU_RO_
@@ -6101,7 +6213,7 @@ H.3.1.  P521_XMD:SHA-512_SSWU_RO_
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021              [Page 109]
+Faz-Hernandez, et al.   Expires 24 February 2021              [Page 111]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -6157,7 +6269,7 @@ Internet-Draft                hash-to-curve                  August 2020
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021              [Page 110]
+Faz-Hernandez, et al.   Expires 24 February 2021              [Page 112]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -6213,7 +6325,7 @@ Internet-Draft                hash-to-curve                  August 2020
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021              [Page 111]
+Faz-Hernandez, et al.   Expires 24 February 2021              [Page 113]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -6240,7 +6352,7 @@ Internet-Draft                hash-to-curve                  August 2020
              172919899317fb6ac1d6903a432d967d14e0f80af63e7035aaae0c
              123e56862ce969456f99f102
 
-H.3.2.  P521_XMD:SHA-512_SSWU_NU_
+I.3.2.  P521_XMD:SHA-512_SSWU_NU_
 
    suite   = P521_XMD:SHA-512_SSWU_NU_
    dst     = QUUX-V01-CS02-with-P521_XMD:SHA-512_SSWU_NU_
@@ -6269,7 +6381,7 @@ H.3.2.  P521_XMD:SHA-512_SSWU_NU_
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021              [Page 112]
+Faz-Hernandez, et al.   Expires 24 February 2021              [Page 114]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -6325,7 +6437,7 @@ Internet-Draft                hash-to-curve                  August 2020
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021              [Page 113]
+Faz-Hernandez, et al.   Expires 24 February 2021              [Page 115]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -6356,9 +6468,9 @@ Internet-Draft                hash-to-curve                  August 2020
              3358330f3bb84443fcb54fcd53a1d097fccbe310489b74ee143fc2
              938959a83a1f7dd4a6fd395b
 
-H.4.  curve25519
+I.4.  curve25519
 
-H.4.1.  curve25519_XMD:SHA-512_ELL2_RO_
+I.4.1.  curve25519_XMD:SHA-512_ELL2_RO_
 
    suite   = curve25519_XMD:SHA-512_ELL2_RO_
    dst     = QUUX-V01-CS02-with-curve25519_XMD:SHA-512_ELL2_RO_
@@ -6381,7 +6493,7 @@ H.4.1.  curve25519_XMD:SHA-512_ELL2_RO_
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021              [Page 114]
+Faz-Hernandez, et al.   Expires 24 February 2021              [Page 116]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -6437,7 +6549,7 @@ Internet-Draft                hash-to-curve                  August 2020
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021              [Page 115]
+Faz-Hernandez, et al.   Expires 24 February 2021              [Page 117]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -6480,7 +6592,7 @@ Internet-Draft                hash-to-curve                  August 2020
    Q1.y    = 24dcc1be7c4d591d307e89049fd2ed30aae8911245a9d8554bf603
              2e5aa40d3d
 
-H.4.2.  curve25519_XMD:SHA-512_ELL2_NU_
+I.4.2.  curve25519_XMD:SHA-512_ELL2_NU_
 
    suite   = curve25519_XMD:SHA-512_ELL2_NU_
    dst     = QUUX-V01-CS02-with-curve25519_XMD:SHA-512_ELL2_NU_
@@ -6493,7 +6605,7 @@ H.4.2.  curve25519_XMD:SHA-512_ELL2_NU_
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021              [Page 116]
+Faz-Hernandez, et al.   Expires 24 February 2021              [Page 118]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -6549,7 +6661,7 @@ Internet-Draft                hash-to-curve                  August 2020
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021              [Page 117]
+Faz-Hernandez, et al.   Expires 24 February 2021              [Page 119]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -6572,9 +6684,9 @@ Internet-Draft                hash-to-curve                  August 2020
    Q.y     = 1bb36ad9197299f111b4ef21271c41f4b7ecf5543db8bb5931307e
              bdb2eaa465
 
-H.5.  edwards25519
+I.5.  edwards25519
 
-H.5.1.  edwards25519_XMD:SHA-512_ELL2_RO_
+I.5.1.  edwards25519_XMD:SHA-512_ELL2_RO_
 
    suite   = edwards25519_XMD:SHA-512_ELL2_RO_
    dst     = QUUX-V01-CS02-with-edwards25519_XMD:SHA-512_ELL2_RO_
@@ -6605,7 +6717,7 @@ H.5.1.  edwards25519_XMD:SHA-512_ELL2_RO_
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021              [Page 118]
+Faz-Hernandez, et al.   Expires 24 February 2021              [Page 120]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -6661,7 +6773,7 @@ Internet-Draft                hash-to-curve                  August 2020
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021              [Page 119]
+Faz-Hernandez, et al.   Expires 24 February 2021              [Page 121]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -6696,7 +6808,7 @@ Internet-Draft                hash-to-curve                  August 2020
    Q1.y    = 67ccac7c3cb8d1381242d8d6585c57eabaddbb5dca5243a68a8aeb
              5477d94b3a
 
-H.5.2.  edwards25519_XMD:SHA-512_ELL2_NU_
+I.5.2.  edwards25519_XMD:SHA-512_ELL2_NU_
 
    suite   = edwards25519_XMD:SHA-512_ELL2_NU_
    dst     = QUUX-V01-CS02-with-edwards25519_XMD:SHA-512_ELL2_NU_
@@ -6717,7 +6829,7 @@ H.5.2.  edwards25519_XMD:SHA-512_ELL2_NU_
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021              [Page 120]
+Faz-Hernandez, et al.   Expires 24 February 2021              [Page 122]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -6773,7 +6885,7 @@ Internet-Draft                hash-to-curve                  August 2020
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021              [Page 121]
+Faz-Hernandez, et al.   Expires 24 February 2021              [Page 123]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -6788,9 +6900,9 @@ Internet-Draft                hash-to-curve                  August 2020
    Q.y     = 38fb39f1566ca118ae6c7af42810c0bb9767ae5960abb5a8ca7925
              30bfb9447d
 
-H.6.  curve448
+I.6.  curve448
 
-H.6.1.  curve448_XMD:SHA-512_ELL2_RO_
+I.6.1.  curve448_XMD:SHA-512_ELL2_RO_
 
    suite   = curve448_XMD:SHA-512_ELL2_RO_
    dst     = QUUX-V01-CS02-with-curve448_XMD:SHA-512_ELL2_RO_
@@ -6829,7 +6941,7 @@ H.6.1.  curve448_XMD:SHA-512_ELL2_RO_
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021              [Page 122]
+Faz-Hernandez, et al.   Expires 24 February 2021              [Page 124]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -6885,7 +6997,7 @@ Internet-Draft                hash-to-curve                  August 2020
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021              [Page 123]
+Faz-Hernandez, et al.   Expires 24 February 2021              [Page 125]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -6941,7 +7053,7 @@ Internet-Draft                hash-to-curve                  August 2020
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021              [Page 124]
+Faz-Hernandez, et al.   Expires 24 February 2021              [Page 126]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -6960,7 +7072,7 @@ Internet-Draft                hash-to-curve                  August 2020
              75812282336699de18e4b239e7c5e95797154b8cd00aa51b830993
              9abc
 
-H.6.2.  curve448_XMD:SHA-512_ELL2_NU_
+I.6.2.  curve448_XMD:SHA-512_ELL2_NU_
 
    suite   = curve448_XMD:SHA-512_ELL2_NU_
    dst     = QUUX-V01-CS02-with-curve448_XMD:SHA-512_ELL2_NU_
@@ -6997,7 +7109,7 @@ H.6.2.  curve448_XMD:SHA-512_ELL2_NU_
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021              [Page 125]
+Faz-Hernandez, et al.   Expires 24 February 2021              [Page 127]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -7053,7 +7165,7 @@ Internet-Draft                hash-to-curve                  August 2020
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021              [Page 126]
+Faz-Hernandez, et al.   Expires 24 February 2021              [Page 128]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -7077,9 +7189,9 @@ Internet-Draft                hash-to-curve                  August 2020
              4a31d7a35c02e15f357aebf0178b7b8525074b2400ec3d1bb8eda1
              b9ee
 
-H.7.  edwards448
+I.7.  edwards448
 
-H.7.1.  edwards448_XMD:SHA-512_ELL2_RO_
+I.7.1.  edwards448_XMD:SHA-512_ELL2_RO_
 
    suite   = edwards448_XMD:SHA-512_ELL2_RO_
    dst     = QUUX-V01-CS02-with-edwards448_XMD:SHA-512_ELL2_RO_
@@ -7109,7 +7221,7 @@ H.7.1.  edwards448_XMD:SHA-512_ELL2_RO_
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021              [Page 127]
+Faz-Hernandez, et al.   Expires 24 February 2021              [Page 129]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -7165,7 +7277,7 @@ Internet-Draft                hash-to-curve                  August 2020
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021              [Page 128]
+Faz-Hernandez, et al.   Expires 24 February 2021              [Page 130]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -7221,7 +7333,7 @@ Internet-Draft                hash-to-curve                  August 2020
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021              [Page 129]
+Faz-Hernandez, et al.   Expires 24 February 2021              [Page 131]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -7249,7 +7361,7 @@ Internet-Draft                hash-to-curve                  August 2020
              939c69581ecaee71a5f656fcd091688391f41ca1b23b3fad4876e6
              8e01
 
-H.7.2.  edwards448_XMD:SHA-512_ELL2_NU_
+I.7.2.  edwards448_XMD:SHA-512_ELL2_NU_
 
    suite   = edwards448_XMD:SHA-512_ELL2_NU_
    dst     = QUUX-V01-CS02-with-edwards448_XMD:SHA-512_ELL2_NU_
@@ -7277,7 +7389,7 @@ H.7.2.  edwards448_XMD:SHA-512_ELL2_NU_
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021              [Page 130]
+Faz-Hernandez, et al.   Expires 24 February 2021              [Page 132]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -7333,7 +7445,7 @@ Internet-Draft                hash-to-curve                  August 2020
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021              [Page 131]
+Faz-Hernandez, et al.   Expires 24 February 2021              [Page 133]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -7366,9 +7478,9 @@ Internet-Draft                hash-to-curve                  August 2020
              33c872ca56e6545ca0b851eba4b1b05cf9a710b15c94de700a6d6d
              d1c8
 
-H.8.  secp256k1
+I.8.  secp256k1
 
-H.8.1.  secp256k1_XMD:SHA-256_SSWU_RO_
+I.8.1.  secp256k1_XMD:SHA-256_SSWU_RO_
 
    suite   = secp256k1_XMD:SHA-256_SSWU_RO_
    dst     = QUUX-V01-CS02-with-secp256k1_XMD:SHA-256_SSWU_RO_
@@ -7389,7 +7501,7 @@ H.8.1.  secp256k1_XMD:SHA-256_SSWU_RO_
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021              [Page 132]
+Faz-Hernandez, et al.   Expires 24 February 2021              [Page 134]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -7445,7 +7557,7 @@ Internet-Draft                hash-to-curve                  August 2020
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021              [Page 133]
+Faz-Hernandez, et al.   Expires 24 February 2021              [Page 135]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -7490,7 +7602,7 @@ Internet-Draft                hash-to-curve                  August 2020
    Q1.y    = 3989645d83a433bc0c001f3dac29af861f33a6fd1e04f4b36873f5
              bff497298a
 
-H.8.2.  secp256k1_XMD:SHA-256_SSWU_NU_
+I.8.2.  secp256k1_XMD:SHA-256_SSWU_NU_
 
    suite   = secp256k1_XMD:SHA-256_SSWU_NU_
    dst     = QUUX-V01-CS02-with-secp256k1_XMD:SHA-256_SSWU_NU_
@@ -7501,7 +7613,7 @@ H.8.2.  secp256k1_XMD:SHA-256_SSWU_NU_
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021              [Page 134]
+Faz-Hernandez, et al.   Expires 24 February 2021              [Page 136]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -7557,7 +7669,7 @@ Internet-Draft                hash-to-curve                  August 2020
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021              [Page 135]
+Faz-Hernandez, et al.   Expires 24 February 2021              [Page 137]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -7582,9 +7694,9 @@ Internet-Draft                hash-to-curve                  August 2020
    Q.y     = e9178ff02f4dab73480f8dd590328aea99856a7b6cc8e5a6cdf289
              ecc2a51718
 
-H.9.  BLS12-381 G1
+I.9.  BLS12-381 G1
 
-H.9.1.  BLS12381G1_XMD:SHA-256_SSWU_RO_
+I.9.1.  BLS12381G1_XMD:SHA-256_SSWU_RO_
 
    suite   = BLS12381G1_XMD:SHA-256_SSWU_RO_
    dst     = QUUX-V01-CS02-with-BLS12381G1_XMD:SHA-256_SSWU_RO_
@@ -7613,7 +7725,7 @@ H.9.1.  BLS12381G1_XMD:SHA-256_SSWU_RO_
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021              [Page 136]
+Faz-Hernandez, et al.   Expires 24 February 2021              [Page 138]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -7669,7 +7781,7 @@ Internet-Draft                hash-to-curve                  August 2020
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021              [Page 137]
+Faz-Hernandez, et al.   Expires 24 February 2021              [Page 139]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -7706,7 +7818,7 @@ Internet-Draft                hash-to-curve                  August 2020
    Q1.y    = 028e6d0169a72cfedb737be45db6c401d3adfb12c58c619c82b93a
              5dfcccef12290de530b0480575ddc8397cda0bbebf
 
-H.9.2.  BLS12381G1_XMD:SHA-256_SSWU_NU_
+I.9.2.  BLS12381G1_XMD:SHA-256_SSWU_NU_
 
    suite   = BLS12381G1_XMD:SHA-256_SSWU_NU_
    dst     = QUUX-V01-CS02-with-BLS12381G1_XMD:SHA-256_SSWU_NU_
@@ -7725,7 +7837,7 @@ H.9.2.  BLS12381G1_XMD:SHA-256_SSWU_NU_
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021              [Page 138]
+Faz-Hernandez, et al.   Expires 24 February 2021              [Page 140]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -7781,7 +7893,7 @@ Internet-Draft                hash-to-curve                  August 2020
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021              [Page 139]
+Faz-Hernandez, et al.   Expires 24 February 2021              [Page 141]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -7797,9 +7909,9 @@ Internet-Draft                hash-to-curve                  August 2020
    Q.y     = 1109b5d59f65964315de65a7a143e86eabc053104ed289cf480949
              317a5685fad7254ff8e7fe6d24d3104e5d55ad6370
 
-H.10.  BLS12-381 G2
+I.10.  BLS12-381 G2
 
-H.10.1.  BLS12381G2_XMD:SHA-256_SSWU_RO_
+I.10.1.  BLS12381G2_XMD:SHA-256_SSWU_RO_
 
    suite   = BLS12381G2_XMD:SHA-256_SSWU_RO_
    dst     = QUUX-V01-CS02-with-BLS12381G2_XMD:SHA-256_SSWU_RO_
@@ -7837,7 +7949,7 @@ H.10.1.  BLS12381G2_XMD:SHA-256_SSWU_RO_
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021              [Page 140]
+Faz-Hernandez, et al.   Expires 24 February 2021              [Page 142]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -7893,7 +8005,7 @@ Internet-Draft                hash-to-curve                  August 2020
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021              [Page 141]
+Faz-Hernandez, et al.   Expires 24 February 2021              [Page 143]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -7949,7 +8061,7 @@ Internet-Draft                hash-to-curve                  August 2020
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021              [Page 142]
+Faz-Hernandez, et al.   Expires 24 February 2021              [Page 144]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -8005,7 +8117,7 @@ Internet-Draft                hash-to-curve                  August 2020
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021              [Page 143]
+Faz-Hernandez, et al.   Expires 24 February 2021              [Page 145]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -8017,7 +8129,7 @@ Internet-Draft                hash-to-curve                  August 2020
        + I * 0ccb594ed8bd14ca64ed9cb4e0aba221be540f25dd0d6ba15a4a4b
              e5d67bcf35df7853b2d8dad3ba245f1ea3697f66aa
 
-H.10.2.  BLS12381G2_XMD:SHA-256_SSWU_NU_
+I.10.2.  BLS12381G2_XMD:SHA-256_SSWU_NU_
 
    suite   = BLS12381G2_XMD:SHA-256_SSWU_NU_
    dst     = QUUX-V01-CS02-with-BLS12381G2_XMD:SHA-256_SSWU_NU_
@@ -8061,7 +8173,7 @@ H.10.2.  BLS12381G2_XMD:SHA-256_SSWU_NU_
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021              [Page 144]
+Faz-Hernandez, et al.   Expires 24 February 2021              [Page 146]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -8117,7 +8229,7 @@ Internet-Draft                hash-to-curve                  August 2020
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021              [Page 145]
+Faz-Hernandez, et al.   Expires 24 February 2021              [Page 147]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -8159,7 +8271,7 @@ Internet-Draft                hash-to-curve                  August 2020
        + I * 0dbace5df0a4ac4ac2f45d8fdf8aee45484576fdd6efc4f98ab9b9
              f4112309e628255e183022d98ea5ed6e47ca00306c
 
-Appendix I.  Expand test vectors
+Appendix J.  Expand test vectors
 
    This section gives test vectors for expand_message variants specified
    in Section 5.4.  The test vectors in this section were generated
@@ -8173,7 +8285,7 @@ Appendix I.  Expand test vectors
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021              [Page 146]
+Faz-Hernandez, et al.   Expires 24 February 2021              [Page 148]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -8185,7 +8297,7 @@ Internet-Draft                hash-to-curve                  August 2020
    represented as ASCII strings.  Intermediate and output values are
    represented as byte strings in hexadecimal.
 
-I.1.  expand_message_xmd(SHA-256)
+J.1.  expand_message_xmd(SHA-256)
 
    name    = expand_message_xmd
    DST     = QUUX-V01-CS02-with-expander
@@ -8229,7 +8341,7 @@ I.1.  expand_message_xmd(SHA-256)
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021              [Page 147]
+Faz-Hernandez, et al.   Expires 24 February 2021              [Page 149]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -8285,7 +8397,7 @@ Internet-Draft                hash-to-curve                  August 2020
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021              [Page 148]
+Faz-Hernandez, et al.   Expires 24 February 2021              [Page 150]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -8341,7 +8453,7 @@ Internet-Draft                hash-to-curve                  August 2020
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021              [Page 149]
+Faz-Hernandez, et al.   Expires 24 February 2021              [Page 151]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -8397,7 +8509,7 @@ Internet-Draft                hash-to-curve                  August 2020
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021              [Page 150]
+Faz-Hernandez, et al.   Expires 24 February 2021              [Page 152]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -8420,7 +8532,7 @@ Internet-Draft                hash-to-curve                  August 2020
              42a0807bb148b77c2ef82ed4b6c9f7fcb732e7f94466c8b51e52bf
              378fba044a31f5cb44583a892f5969dcd73b3fa128816e
 
-I.2.  expand_message_xmd(SHA-512)
+J.2.  expand_message_xmd(SHA-512)
 
    name    = expand_message_xmd
    DST     = QUUX-V01-CS02-with-expander
@@ -8453,7 +8565,7 @@ I.2.  expand_message_xmd(SHA-512)
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021              [Page 151]
+Faz-Hernandez, et al.   Expires 24 February 2021              [Page 153]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -8509,7 +8621,7 @@ Internet-Draft                hash-to-curve                  August 2020
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021              [Page 152]
+Faz-Hernandez, et al.   Expires 24 February 2021              [Page 154]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -8565,7 +8677,7 @@ Internet-Draft                hash-to-curve                  August 2020
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021              [Page 153]
+Faz-Hernandez, et al.   Expires 24 February 2021              [Page 155]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -8621,7 +8733,7 @@ Internet-Draft                hash-to-curve                  August 2020
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021              [Page 154]
+Faz-Hernandez, et al.   Expires 24 February 2021              [Page 156]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -8677,7 +8789,7 @@ Internet-Draft                hash-to-curve                  August 2020
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021              [Page 155]
+Faz-Hernandez, et al.   Expires 24 February 2021              [Page 157]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -8687,7 +8799,7 @@ Internet-Draft                hash-to-curve                  August 2020
              69a13325549abab54f4ac907b712bdd3567f38c4554c51902b735b
              81f43a7ef6f938c7690d107c052c7e7b795ac635b3200a
 
-I.3.  expand_message_xof(SHAKE128)
+J.3.  expand_message_xof(SHAKE128)
 
    name    = expand_message_xof
    DST     = QUUX-V01-CS02-with-expander
@@ -8733,7 +8845,7 @@ I.3.  expand_message_xof(SHAKE128)
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021              [Page 156]
+Faz-Hernandez, et al.   Expires 24 February 2021              [Page 158]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -8789,7 +8901,7 @@ Internet-Draft                hash-to-curve                  August 2020
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021              [Page 157]
+Faz-Hernandez, et al.   Expires 24 February 2021              [Page 159]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -8845,7 +8957,7 @@ Internet-Draft                hash-to-curve                  August 2020
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021              [Page 158]
+Faz-Hernandez, et al.   Expires 24 February 2021              [Page 160]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -8901,7 +9013,7 @@ Authors' Addresses
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021              [Page 159]
+Faz-Hernandez, et al.   Expires 24 February 2021              [Page 161]
 
 Internet-Draft                hash-to-curve                  August 2020
 
@@ -8957,4 +9069,4 @@ Internet-Draft                hash-to-curve                  August 2020
 
 
 
-Faz-Hernandez, et al.    Expires 9 February 2021              [Page 160]
+Faz-Hernandez, et al.   Expires 24 February 2021              [Page 162]
