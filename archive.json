@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2020-08-23T17:12:51.146332+00:00",
+  "timestamp": "2020-10-05T16:40:41.340131+00:00",
   "repo": "cfrg/draft-irtf-cfrg-hash-to-curve",
   "labels": [
     {
@@ -30598,6 +30598,40 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 295,
+      "id": "MDExOlB1bGxSZXF1ZXN0NDk3OTIxMDI5",
+      "title": "Add hash-to-decaf448.",
+      "url": "https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/pull/295",
+      "state": "OPEN",
+      "author": "chris-wood",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Based on the latest and greatest new document: https://www.ietf.org/staging/draft-irtf-cfrg-ristretto255-decaf448-00.html :-)",
+      "createdAt": "2020-10-05T15:04:45Z",
+      "updatedAt": "2020-10-05T16:40:00Z",
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "4fc19e5b38d0ed25d3c11d32f54a10bf214cdb35",
+      "headRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "caw/add-decaf448",
+      "headRefOid": "0a5f4dc00929792467df8752caf70bf0a42634c0",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "body": "CI's broken because the new document hasn't officially landed in the tracker, as far as I can tell. Once that's done, I'll kick the CI to fix it.",
+          "createdAt": "2020-10-05T15:16:53Z",
+          "updatedAt": "2020-10-05T15:16:53Z"
+        }
+      ],
+      "reviews": []
     }
   ]
 }
