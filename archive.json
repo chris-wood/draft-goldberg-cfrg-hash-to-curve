@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2020-10-05T16:40:41.340131+00:00",
+  "timestamp": "2020-10-10T18:51:05.105477+00:00",
   "repo": "cfrg/draft-irtf-cfrg-hash-to-curve",
   "labels": [
     {
@@ -30611,13 +30611,13 @@
       "labels": [],
       "body": "Based on the latest and greatest new document: https://www.ietf.org/staging/draft-irtf-cfrg-ristretto255-decaf448-00.html :-)",
       "createdAt": "2020-10-05T15:04:45Z",
-      "updatedAt": "2020-10-05T16:40:00Z",
+      "updatedAt": "2020-10-10T18:50:25Z",
       "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
       "baseRefName": "master",
       "baseRefOid": "4fc19e5b38d0ed25d3c11d32f54a10bf214cdb35",
       "headRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
       "headRefName": "caw/add-decaf448",
-      "headRefOid": "0a5f4dc00929792467df8752caf70bf0a42634c0",
+      "headRefOid": "af46bf3f91615b7209a9ac8ec4bb4afff754c68c",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -30629,9 +30629,123 @@
           "body": "CI's broken because the new document hasn't officially landed in the tracker, as far as I can tell. Once that's done, I'll kick the CI to fix it.",
           "createdAt": "2020-10-05T15:16:53Z",
           "updatedAt": "2020-10-05T15:16:53Z"
+        },
+        {
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "body": "very nice! I will make time to review in the next few days :)",
+          "createdAt": "2020-10-05T16:50:59Z",
+          "updatedAt": "2020-10-05T16:50:59Z"
+        },
+        {
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Thanks, @kwantam!",
+          "createdAt": "2020-10-05T16:56:48Z",
+          "updatedAt": "2020-10-05T16:56:48Z"
         }
       ],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NTA0Mjk4OTg0",
+          "commit": {
+            "abbreviatedOid": "0a5f4dc"
+          },
+          "author": "FiloSottile",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "Thanks Chris, LGTM!",
+          "createdAt": "2020-10-07T22:02:11Z",
+          "updatedAt": "2020-10-07T22:02:11Z",
+          "comments": []
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NTA2MTA5NTA3",
+          "commit": {
+            "abbreviatedOid": "0a5f4dc"
+          },
+          "author": "armfazh",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2020-10-10T16:26:01Z",
+          "updatedAt": "2020-10-10T16:33:24Z",
+          "comments": [
+            {
+              "originalPosition": 79,
+              "body": "```suggestion\r\na prime-order group based on Curve448 {{!RFC7748}}.\r\n```",
+              "createdAt": "2020-10-10T16:26:01Z",
+              "updatedAt": "2020-10-10T18:50:25Z"
+            },
+            {
+              "originalPosition": 55,
+              "body": "```suggestion\r\nristretto255 {{I-D.irtf-cfrg-ristretto255-decaf448}} provides a prime-order\r\n```",
+              "createdAt": "2020-10-10T16:31:21Z",
+              "updatedAt": "2020-10-10T18:50:25Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NTA2MTE3NjE1",
+          "commit": {
+            "abbreviatedOid": "0a5f4dc"
+          },
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Looks great! Just one small question.",
+          "createdAt": "2020-10-10T18:31:51Z",
+          "updatedAt": "2020-10-10T18:37:29Z",
+          "comments": [
+            {
+              "originalPosition": 36,
+              "body": "```suggestion\r\n{{?I-D.irtf-cfrg-ristretto255-decaf448}}.\r\n```\r\n\r\nShouldn't we use the \"auto\" reffing if possible? (Or is that broken because this document is too new?)",
+              "createdAt": "2020-10-10T18:31:51Z",
+              "updatedAt": "2020-10-10T18:50:25Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NTA2MTE4NzI2",
+          "commit": {
+            "abbreviatedOid": "0a5f4dc"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-10-10T18:49:07Z",
+          "updatedAt": "2020-10-10T18:49:08Z",
+          "comments": [
+            {
+              "originalPosition": 36,
+              "body": "It was broken at the time. It might be working now? I'll try to build without it and remove the manual entry if so.",
+              "createdAt": "2020-10-10T18:49:07Z",
+              "updatedAt": "2020-10-10T18:50:25Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NTA2MTE4Nzgz",
+          "commit": {
+            "abbreviatedOid": "0a5f4dc"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2020-10-10T18:50:10Z",
+          "updatedAt": "2020-10-10T18:50:10Z",
+          "comments": [
+            {
+              "originalPosition": 36,
+              "body": "It works now!",
+              "createdAt": "2020-10-10T18:50:10Z",
+              "updatedAt": "2020-10-10T18:50:25Z"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
