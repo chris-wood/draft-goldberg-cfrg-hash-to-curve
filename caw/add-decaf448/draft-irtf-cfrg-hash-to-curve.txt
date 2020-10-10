@@ -3701,8 +3701,8 @@ Internet-Draft                hash-to-curve                 October 2020
 Appendix C.  Hashing to decaf448
 
    Similar to ristretto255, decaf448
-   [I-D.irtf-cfrg-ristretto255-decaf448] provides a prime-order group
-   based on Curve448 [RFC7748].  This section describes
+   [I-D.irtf-cfrg-ristretto255-decaf448] provides an abstract prime-
+   order group based on Curve448 [RFC7748].  This section describes
    hash_to_decaf448, which implements a random-oracle encoding to this
    group that has a uniform output distribution (Section 2.2.3) and the
    same security properties and interface as the hash_to_curve function
