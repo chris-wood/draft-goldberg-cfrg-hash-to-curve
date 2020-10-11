@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2020-10-10T18:51:05.105477+00:00",
+  "timestamp": "2020-10-11T11:13:41.759242+00:00",
   "repo": "cfrg/draft-irtf-cfrg-hash-to-curve",
   "labels": [
     {
@@ -30604,24 +30604,26 @@
       "id": "MDExOlB1bGxSZXF1ZXN0NDk3OTIxMDI5",
       "title": "Add hash-to-decaf448.",
       "url": "https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/pull/295",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "chris-wood",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Based on the latest and greatest new document: https://www.ietf.org/staging/draft-irtf-cfrg-ristretto255-decaf448-00.html :-)",
       "createdAt": "2020-10-05T15:04:45Z",
-      "updatedAt": "2020-10-10T18:50:25Z",
+      "updatedAt": "2020-10-10T19:04:35Z",
       "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
       "baseRefName": "master",
       "baseRefOid": "4fc19e5b38d0ed25d3c11d32f54a10bf214cdb35",
       "headRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
       "headRefName": "caw/add-decaf448",
       "headRefOid": "af46bf3f91615b7209a9ac8ec4bb4afff754c68c",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2020-10-10T19:02:30Z",
+      "mergedAt": "2020-10-10T19:02:30Z",
+      "mergedBy": "kwantam",
+      "mergeCommit": {
+        "oid": "fb8cc83f2062b293777c81c73521265136258e03"
+      },
       "comments": [
         {
           "author": "chris-wood",
@@ -30643,6 +30645,13 @@
           "body": "Thanks, @kwantam!",
           "createdAt": "2020-10-05T16:56:48Z",
           "updatedAt": "2020-10-05T16:56:48Z"
+        },
+        {
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Oh, oops... did I merge too quickly?",
+          "createdAt": "2020-10-10T19:04:34Z",
+          "updatedAt": "2020-10-10T19:04:34Z"
         }
       ],
       "reviews": [
