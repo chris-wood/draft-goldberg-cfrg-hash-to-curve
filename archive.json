@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2020-10-11T11:13:41.759242+00:00",
+  "timestamp": "2020-11-18T03:54:35.924620+00:00",
   "repo": "cfrg/draft-irtf-cfrg-hash-to-curve",
   "labels": [
     {
@@ -6367,7 +6367,7 @@
       "labels": [],
       "body": "Per recent discussion on the CFRG mailing list, either this draft or pairing-friendly curves will want to add suites for all of the curves in the p-f-c document.\r\n\r\nProbably BLS12-381 should live wherever the other suites do.\r\n\r\nI'm happy adding them all here, but I'm curious what @armfazh and @chris-wood think.",
       "createdAt": "2020-07-13T21:52:04Z",
-      "updatedAt": "2020-07-14T16:56:39Z",
+      "updatedAt": "2020-10-21T17:24:17Z",
       "closedAt": null,
       "comments": [
         {
@@ -6383,6 +6383,27 @@
           "body": "> I am ok with having the bls12-381 suite in h2c, as serves as an example on how to specify suite for future specifications of pairing friendly curves. The suites for the remainder pf curves can be included in the pfc draft.\r\n\r\nAgreed.",
           "createdAt": "2020-07-14T16:56:39Z",
           "updatedAt": "2020-07-14T16:56:39Z"
+        },
+        {
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@kwantam do we still need this, or should we close this out?",
+          "createdAt": "2020-10-17T23:09:52Z",
+          "updatedAt": "2020-10-17T23:09:52Z"
+        },
+        {
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I think both documents are at or near RGLC, so maybe the question of where to put the suites is a good one to pose on the mailing list. Maybe close this issue after it's decided for sure?",
+          "createdAt": "2020-10-18T18:44:06Z",
+          "updatedAt": "2020-10-18T18:44:06Z"
+        },
+        {
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "body": "That sounds good! Do you want to pose this question to the list (in the context of the BLS draft)?",
+          "createdAt": "2020-10-21T17:24:17Z",
+          "updatedAt": "2020-10-21T17:24:17Z"
         }
       ]
     },
@@ -6496,6 +6517,22 @@
           "updatedAt": "2020-08-04T19:04:50Z"
         }
       ]
+    },
+    {
+      "number": 296,
+      "id": "MDU6SXNzdWU3MjQwNzEwMDg=",
+      "title": "collecting rglc comments",
+      "url": "https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/issues/296",
+      "state": "OPEN",
+      "author": "kwantam",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Greg Hudson: https://mailarchive.ietf.org/arch/msg/cfrg/o1y2Ue3wY_w2_IQEUEtPi92wifg/\r\n\r\nWatson Ladd: https://mailarchive.ietf.org/arch/msg/cfrg/x14oafwcQ26rM_XJVzgMFLeSRsM/\r\n(see also Hal Murray's followup) ",
+      "createdAt": "2020-10-18T18:43:08Z",
+      "updatedAt": "2020-10-18T18:43:08Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
@@ -30611,7 +30648,7 @@
       "labels": [],
       "body": "Based on the latest and greatest new document: https://www.ietf.org/staging/draft-irtf-cfrg-ristretto255-decaf448-00.html :-)",
       "createdAt": "2020-10-05T15:04:45Z",
-      "updatedAt": "2020-10-10T19:04:35Z",
+      "updatedAt": "2020-10-11T11:14:34Z",
       "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
       "baseRefName": "master",
       "baseRefOid": "4fc19e5b38d0ed25d3c11d32f54a10bf214cdb35",
@@ -30652,6 +30689,13 @@
           "body": "Oh, oops... did I merge too quickly?",
           "createdAt": "2020-10-10T19:04:34Z",
           "updatedAt": "2020-10-10T19:04:34Z"
+        },
+        {
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> Oh, oops... did I merge too quickly?\r\n\r\nYeah, but I'll fix directly on master. No problem. :)",
+          "createdAt": "2020-10-11T11:14:34Z",
+          "updatedAt": "2020-10-11T11:14:34Z"
         }
       ],
       "reviews": [
@@ -30755,6 +30799,42 @@
           ]
         }
       ]
+    },
+    {
+      "number": 297,
+      "id": "MDExOlB1bGxSZXF1ZXN0NTIyODIyMzgx",
+      "title": "Add Zig's standard library to the list of implementations",
+      "url": "https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/pull/297",
+      "state": "MERGED",
+      "author": "jedisct1",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "The Zig programming language includes hash-to-curve support in its standard library.",
+      "createdAt": "2020-11-18T01:34:46Z",
+      "updatedAt": "2020-11-18T03:53:55Z",
+      "baseRepository": "cfrg/draft-irtf-cfrg-hash-to-curve",
+      "baseRefName": "master",
+      "baseRefOid": "5999997b269f2eb4ad5cb3d6a3dd4297b7cd68e6",
+      "headRepository": "jedisct1/draft-irtf-cfrg-hash-to-curve",
+      "headRefName": "patch-1",
+      "headRefOid": "295f65584d04b7dcfba8be8c65b1fb6b2a1b5c82",
+      "closedAt": "2020-11-18T03:53:55Z",
+      "mergedAt": "2020-11-18T03:53:55Z",
+      "mergedBy": "kwantam",
+      "mergeCommit": {
+        "oid": "eac6f7d11909f8ff776294595dde4f52df8e3a8a"
+      },
+      "comments": [
+        {
+          "author": "kwantam",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Very cool --- thank you!!!",
+          "createdAt": "2020-11-18T03:53:49Z",
+          "updatedAt": "2020-11-18T03:53:49Z"
+        }
+      ],
+      "reviews": []
     }
   ]
 }
